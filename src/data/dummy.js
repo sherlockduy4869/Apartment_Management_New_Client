@@ -33,6 +33,16 @@ export const gridOrderImage = (props) => (
   </div>
 );
 
+export const gridSlider = (props) => (
+  <div>
+    <img
+      className="rounded-xl h-20 md:ml-3"
+      src={props.SliderImage}
+      alt="slider-item"
+    />
+  </div>
+);
+
 export const gridOrderStatus = (props) => (
   <button
     type="button"
@@ -42,6 +52,17 @@ export const gridOrderStatus = (props) => (
     {props.Status}
   </button>
 );
+
+export const gridSliderStatus = (props) => (
+  <button
+    type="button"
+    style={{ background: props.StatusBg }}
+    className="text-white py-1 px-2 capitalize rounded-2xl text-md"
+  >
+    {props.Status}
+  </button>
+);
+
 
 export const kanbanGrid = [
   { headerText: 'To Do',
@@ -484,7 +505,7 @@ export const links = [
     title: 'Pages',
     links: [
       {
-        name: 'orders',
+        name: 'slider',
         icon: <AiOutlineShoppingCart />,
       },
       {
@@ -828,6 +849,47 @@ export const userProfileData = [
   },
 ];
 
+export const sliderGrid = [
+  {
+    field: 'SliderID',
+    headerText: 'Slider ID',
+    width: '120',
+    textAlign: 'Center',
+  },
+  {
+    headerText: 'Image',
+    template: gridSlider,
+    textAlign: 'Center',
+    width: '120',
+  },
+  {
+    field: 'SLiderNote',
+    headerText: 'Note',
+    width: '150',
+    editType: 'dropdownedit',
+    textAlign: 'Center',
+  },
+  {
+    headerText: 'Status',
+    template: gridSliderStatus,
+    field: 'OrderItems',
+    textAlign: 'Center',
+    width: '120',
+  },
+];
+
+export const sliderData = [
+  {
+    SliderID: 1,
+    SLiderNote: 'This slider is used in X-mas',
+    Status: 'Pending',
+    StatusBg: '#FB9678',
+    SliderImage:
+      product6,
+  }
+];
+
+
 export const ordersGrid = [
   {
     headerText: 'Image',
@@ -1048,6 +1110,9 @@ export const ordersData = [
       product6,
   }
 ];
+
+
+
 
 export const scheduleData = [
   {
