@@ -56,10 +56,20 @@ export const gridOrderStatus = (props) => (
 export const gridSliderStatus = (props) => (
   <button
     type="button"
-    style={{ background: props.StatusBg }}
+    style={{ background: props.StatusSlider }}
     className="text-white py-1 px-2 capitalize rounded-2xl text-md"
   >
-    {props.Status}
+    {props.SliderStatus}
+  </button>
+);
+
+export const gridSliderDelete = (props) => (
+  <button
+    type="button"
+    style={{ background: props.DeleteBtn }}
+    className="text-white py-1 px-2 capitalize rounded-2xl text-md"
+  >
+    {props.SliderCustomize}
   </button>
 );
 
@@ -872,20 +882,29 @@ export const sliderGrid = [
   {
     headerText: 'Status',
     template: gridSliderStatus,
-    field: 'OrderItems',
+    field: 'SliderStatus',
     textAlign: 'Center',
     width: '120',
   },
+  {
+    headerText: 'Customize',
+    template: gridSliderDelete,
+    field: 'SliderCustomize',
+    textAlign: 'Center',
+    width: '120',
+  }
 ];
 
 export const sliderData = [
   {
     SliderID: 1,
     SLiderNote: 'This slider is used in X-mas',
-    Status: 'Pending',
-    StatusBg: '#FB9678',
+    SliderStatus: 'Pending',
+    StatusSlider: '#FB9678',
     SliderImage:
       product6,
+    SliderCustomize: 'Delete',
+    DeleteBtn:'#ee5e68'
   }
 ];
 
