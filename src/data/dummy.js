@@ -895,20 +895,6 @@ export const sliderGrid = [
   }
 ];
 
-export const sliderData = [
-  {
-    SliderID: 1,
-    SLiderNote: 'This slider is used in X-mas',
-    SliderStatus: 'Pending',
-    StatusSlider: '#FB9678',
-    SliderImage:
-      product6,
-    SliderCustomize: 'Delete',
-    DeleteBtn:'#ee5e68'
-  }
-];
-
-
 export const ordersGrid = [
   {
     headerText: 'Image',
@@ -956,6 +942,19 @@ export const ordersGrid = [
     width: '150',
     textAlign: 'Center',
   },
+];
+
+export const sliderData = [
+  {
+    SliderID: 1,
+    SLiderNote: 'This slider is used in X-mas',
+    SliderStatus: 'Showing',
+    StatusSlider: '#FB9678',
+    SliderImage:
+      product6,
+    SliderCustomize: 'Delete',
+    DeleteBtn:'#ee5e68'
+  }
 ];
 
 export const customersData = [

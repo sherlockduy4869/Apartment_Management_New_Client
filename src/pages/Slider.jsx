@@ -9,15 +9,22 @@ const Slider = () => {
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="Page" title="Slider" />
+      <button
+      type='button'
+      style={{backgroundColor:'green', borderRadius:"10px", color:'white', marginBottom:'20px'}}
+      className={`p-2`}>
+
+      ADD SLIDER
+      </button>
       <GridComponent
         id="gridcomp"
+        contextMenuItems={contextMenuItems}
+        toolbar={toolbarOptions}
         dataSource={sliderData}
         allowPaging
         allowSorting
         allowExcelExport
         allowPdfExport
-        contextMenuItems={contextMenuItems}
-        toolbar={toolbarOptions}
       >
         <ColumnsDirective>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
