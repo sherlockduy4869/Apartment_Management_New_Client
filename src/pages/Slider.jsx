@@ -3,9 +3,33 @@ import { GridComponent, ColumnsDirective, ColumnDirective, Search, Resize, Sort,
 
 import { sliderData, contextMenuItems, sliderGrid } from '../data/dummy';
 import { Header } from '../components';
+import {useState, useEffect} from 'react';
 
 const Slider = () => {
   const toolbarOptions = ['Search'];
+
+  // useEffect(()=>{
+  //   
+  //   fetchSlider()
+  // },[])
+
+  
+  const [slider,setSlider] = useState([])
+
+  useEffect(()=>{
+    const getSlider = async () => {
+      const sliderFromServer = await fetchSlider()
+      setSlider(sliderFromServer)
+    }
+    getSlider()
+  },[])
+
+    const fetchSlider = async () =>{
+          const res = await fetch('http://midternapi.atwebpages.com/public/api/v1/sliders')
+          const data = await res.json()
+          return data['data']
+      }
+
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="Page" title="Slider" />
@@ -17,7 +41,7 @@ const Slider = () => {
       </button>
       <GridComponent
         id="gridcomp"
-        dataSource={sliderData}
+        dataSource={slider}
         contextMenuItems={contextMenuItems}
         toolbar={toolbarOptions}
         allowPaging

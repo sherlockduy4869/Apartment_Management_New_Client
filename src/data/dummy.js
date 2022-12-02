@@ -1,27 +1,22 @@
 import React from 'react';
-import { AiOutlineCalendar, AiOutlineShoppingCart, AiOutlineAreaChart, AiOutlineBarChart, AiOutlineStock } from 'react-icons/ai';
-import { FiShoppingBag, FiEdit, FiPieChart, FiBarChart, FiCreditCard, FiStar, FiShoppingCart } from 'react-icons/fi';
-import { BsKanban, BsBarChart, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
-import { BiColorFill } from 'react-icons/bi';
+import { AiOutlineCalendar, AiOutlineShoppingCart } from 'react-icons/ai';
+import { FiShoppingBag, FiEdit, FiBarChart, FiCreditCard, FiStar, FiShoppingCart } from 'react-icons/fi';
+import { BsKanban, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
 import { IoMdContacts } from 'react-icons/io';
 import { RiContactsLine, RiStockLine } from 'react-icons/ri';
 import { MdOutlineSupervisorAccount } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { TiTick } from 'react-icons/ti';
-import { GiLouvrePyramid } from 'react-icons/gi';
 import { GrLocation } from 'react-icons/gr';
 import avatar from './avatar.jpg';
 import avatar2 from './avatar2.jpg';
 import avatar3 from './avatar3.png';
 import avatar4 from './avatar4.jpg';
-import product1 from './product1.jpg';
-import product2 from './product2.jpg';
-import product3 from './product3.jpg';
 import product4 from './product4.jpg';
 import product5 from './product5.jpg';
 import product6 from './product6.jpg';
 import product7 from './product7.jpg';
-import product8 from './product8.jpg';
+
 
 export const gridOrderImage = (props) => (
   <div>
@@ -37,7 +32,7 @@ export const gridSlider = (props) => (
   <div>
     <img
       className="rounded-xl h-20 md:ml-3"
-      src={props.SliderImage}
+      src={props.image}
       alt="slider-item"
     />
   </div>
@@ -56,20 +51,20 @@ export const gridOrderStatus = (props) => (
 export const gridSliderStatus = (props) => (
   <button
     type="button"
-    style={{ background: props.StatusSlider }}
+    style={{ background: '#FB9678' }}
     className="text-white py-1 px-2 capitalize rounded-2xl text-md"
   >
-    {props.SliderStatus}
+    {props.status}
   </button>
 );
 
 export const gridSliderDelete = (props) => (
   <button
     type="button"
-    style={{ background: props.DeleteBtn }}
+    style={{ background: '#ee5e68' }}
     className="text-white py-1 px-2 capitalize rounded-2xl text-md"
   >
-    {props.SliderCustomize}
+    Delete
   </button>
 );
 
@@ -861,7 +856,7 @@ export const userProfileData = [
 
 export const sliderGrid = [
   {
-    field: 'SliderID',
+    field: 'slider_id',
     headerText: 'Slider ID',
     width: '120',
     textAlign: 'Center',
@@ -873,27 +868,39 @@ export const sliderGrid = [
     width: '120',
   },
   {
-    field: 'SLiderNote',
+    field: 'note',
     headerText: 'Note',
     width: '150',
     editType: 'dropdownedit',
     textAlign: 'Center',
   },
   {
+    field: 'status',
     headerText: 'Status',
     template: gridSliderStatus,
-    field: 'SliderStatus',
     textAlign: 'Center',
     width: '120',
   },
   {
     headerText: 'Customize',
     template: gridSliderDelete,
-    field: 'SliderCustomize',
     textAlign: 'Center',
     width: '120',
   }
 ];
+
+// export const sliderData = [
+//   {
+//     SliderID: 1,
+//     SLiderNote: 'This slider is used in X-mas',
+//     SliderStatus: 'Showing',
+//     StatusSlider: '#FB9678',
+//     SliderImage:
+//       product6,
+//     SliderCustomize: 'Delete',
+//     DeleteBtn:'#ee5e68'
+//   }
+// ];
 
 export const ordersGrid = [
   {
@@ -944,18 +951,7 @@ export const ordersGrid = [
   },
 ];
 
-export const sliderData = [
-  {
-    SliderID: 1,
-    SLiderNote: 'This slider is used in X-mas',
-    SliderStatus: 'Showing',
-    StatusSlider: '#FB9678',
-    SliderImage:
-      product6,
-    SliderCustomize: 'Delete',
-    DeleteBtn:'#ee5e68'
-  }
-];
+
 
 export const customersData = [
   {
