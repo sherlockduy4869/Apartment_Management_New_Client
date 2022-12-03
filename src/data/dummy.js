@@ -32,7 +32,7 @@ export const gridSlider = (props) => (
   <div>
     <img
       className="rounded-xl h-20 md:ml-3"
-      src={props.image}
+      src={props.image_slider}
       alt="slider-item"
     />
   </div>
@@ -54,7 +54,7 @@ export const gridSliderStatus = (props) => (
     style={{ background: '#FB9678' }}
     className="text-white py-1 px-2 capitalize rounded-2xl text-md"
   >
-    {props.status}
+    {props.status_slider}
   </button>
 );
 
@@ -856,8 +856,8 @@ export const userProfileData = [
 
 export const sliderGrid = [
   {
-    field: 'slider_id',
-    headerText: 'Slider ID',
+    field: 'id_slider',
+    headerText: 'ID Slider',
     width: '120',
     textAlign: 'Center',
   },
@@ -868,14 +868,14 @@ export const sliderGrid = [
     width: '120',
   },
   {
-    field: 'note',
+    field: 'note_slider',
     headerText: 'Note',
     width: '150',
     editType: 'dropdownedit',
     textAlign: 'Center',
   },
   {
-    field: 'status',
+    field: 'status_slider',
     headerText: 'Status',
     template: gridSliderStatus,
     textAlign: 'Center',
