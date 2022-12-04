@@ -1,50 +1,21 @@
 import React from 'react';
 import { Header } from '../components';
 import {useState, useEffect} from 'react';
-import _ from "lodash"
+import DataTable from 'react-data-table-component'
+
 
 const Slider = () => {
 
   const [slider,setSlider] = useState([])
-  const [order, setOrder] = useState("ASC")
-  const [search, setSearch] = useState("")
-  const [paginateSlider, setPaginateSlider] = useState()
-  const [currentPage, setCurrentPage] = useState()
-  const pageSize = 2
+  const [search,setSearch] = useState("")
+  const [filterSlider, setFilterSlider] = useState([])
 
-  const sorting = (col) => {
-    if(order === "ASC"){
-      const sorted = [...paginateSlider].sort((a,b)=>
-      a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1)
-      setPaginateSlider(sorted)
-      setOrder("DSC")
-    }
-
-    if(order === "DSC"){
-      const sorted = [...paginateSlider].sort((a,b)=>
-      a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1)
-      setPaginateSlider(sorted)
-      setOrder("ASC")
-    }
-    //alert(col)
-  }
-
-  const pageCount = slider? Math.ceil(slider.length/pageSize) : 0
-
-  const pages = _.range(1, pageCount+1)
-
-  const pagination = (page) => {
-    setCurrentPage(page)
-    const startIndex = (page - 1) * pageSize
-    const paginateSlider = _(slider).slice(startIndex).take(pageSize).value()
-    setPaginateSlider(paginateSlider)
-  }
 
   useEffect(()=>{
     const getSlider = async () => {
       const sliderFromServer = await fetchSlider()
       setSlider(sliderFromServer)
-      setPaginateSlider(_(sliderFromServer).slice(0).take(pageSize).value())
+      setFilterSlider(sliderFromServer)
     }
     getSlider()
   },[])
@@ -58,148 +29,134 @@ const Slider = () => {
   const deleteSlider = async (id) =>{
     await fetch(`http://midternapi.atwebpages.com/public/api/v1/sliders/${id}`, {method: `DELETE`})
     setSlider(slider.filter((slider) => slider.id_slider !== id))
+    setFilterSlider(filterSlider.filter((filterSlider) => filterSlider.id_slider !== id))
+    //alert(id)
   }
+
+  useEffect(() => {
+    const result = slider.filter(slider => {
+      return slider.note_slider.toLowerCase().match(search.toLowerCase()) 
+            || slider.status_slider.toLowerCase().match(search.toLowerCase())
+
+    })
+
+    setFilterSlider(result)
+  },[search])
+
+  const columns = [
+    {
+      name: "ID",
+      selector: (row, index) => index + 1,
+      width: "10%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent:"center"
+      }
+    },
+    {
+      name: "Image",
+      selector: (row) => <img src={row.image_slider} alt="slider-item" />,
+      width: "30%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent:"center"
+      }
+    },
+    {
+      name: "Note",
+      selector: 'note_slider',
+      cell: (row) => <div>{row.note_slider}</div>,
+      width: "20%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent:"center"
+      }
+    },
+    {
+      name: "Status",
+      sortable: true,
+      selector: 'status_slider',
+      cell: (row) => <div style={{ background: '#FB9678' }} 
+                    className="text-white py-1 px-2 capitalize rounded-2xl text-md"
+                    >{row.status_slider}</div>,
+      width: "20%",
+      style: {
+        padding: "10px 15px",
+        justifyContent:"center",
+      }
+    },
+    {
+      name: "Customize",
+      cell:(row) => <button style={{ background: '#ee5e68' }} className="text-white py-1 px-2 capitalize rounded-2xl text-md"
+                    onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) 
+      deleteSlider(row.id_slider) } } >Delete</button>,
+      width: "20%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent:"center"
+      }
+    }
+  ]
+
+  const customStyles = {
+    table: {
+      style: {
+
+      }
+    },
+    rows: {
+      style: {
+
+      }
+    },
+    cells: {
+      style: {
+        padding: "10px 15px",
+        justifyContent:"center", 
+        borderRight: '1px solid #e0e1e1',
+        borderLeft: '1px solid #e0e1e1'
+      }
+    },
+    headCells: {
+      style: {
+        justifyContent:"center",
+        border: '1px solid #e0e1e1'
+      },
+    }
+  };
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="Page" title="Slider" />
-      <button
-      type='button'
-      style={{backgroundColor:'green', borderRadius:"10px", color:'white', marginBottom:'20px'}}
-      className={`p-2`}>
-      Add Slider
-      </button>
-      <input
-      type= "text"
-      placeholder="Search..."
-      onChange={(e) => {
-        setSearch(e.target.value)
-      }}
-      />
 
-      <div>
-        {
-          !paginateSlider ? ("No data found") : (
-
-          <table id='tbl_data' width="100%" >
-            <thead>
-                    <th
-                    style={{fontSize:'14px', background:'#f9fafb', cursor:"pointer"}}
-                    className='text-center uppercase font-[400] p-4'>ID</th>
-    
-                    <th 
-                    style={{fontSize:'14px', background:'#f9fafb', cursor:"pointer"}}
-                    className='text-center uppercase font-[400] p-4'>Image</th>
-    
-                    <th onClick={() => sorting("note_slider")}  
-                    style={{fontSize:'14px', background:'#f9fafb', cursor:"pointer"}}
-                    className='text-center uppercase font-[400] p-4'>Note</th>
-    
-                    <th onClick={() => sorting("status_slider")}  
-                    style={{fontSize:'14px', background:'#f9fafb', cursor:"pointer"}}
-                    className='text-center uppercase font-[400] p-4'>Status</th>
-    
-                    <th 
-                    style={{fontSize:'14px', background:'#f9fafb', cursor:"pointer"}}
-                    className='text-center uppercase font-[400] p-4'>Customize</th>
-            </thead>
-            <tbody>
-                {paginateSlider.filter((val)=>{
-                  if(search === ""){
-                    return val;
-                  }else if(val.note_slider.toLowerCase().includes(search.toLowerCase())||
-                          val.status_slider.toLowerCase().includes(search.toLowerCase())){
-                    return val
-                  }
-    
-                }).map((sld, index) =>(
-                    
-                    <tr style={{borderBottom: "1px solid #eef0f3"}}>
-    
-                        <td 
-                        style={{padding:"10px 15px"}}
-                        class="people text-center">
-                            <div class="people-de">
-                                <p>{index+1}</p>
-                            </div>
-                        </td>
-    
-                        <td 
-                        style={{padding:"10px 15px"}}
-                        class="people-de text-center">
-                            <img 
-                            className="rounded-xl h-20 md:ml-3" 
-                            src={sld.image_slider} 
-                            alt="slider-item" />
-                        </td>
-    
-                        <td 
-                        style={{padding:"10px 15px"}}
-                        class="role text-center">
-                            <p>{sld.note_slider}</p>
-                        </td>
-    
-                        <td 
-                        style={{padding:"10px 15px"}}
-                        class="role text-center">
-                            <p 
-                            style={{ background: '#FB9678' }}
-                            className="text-white py-1 px-2 capitalize rounded-2xl text-md">
-                                {sld.status_slider}
-                            </p>
-                        </td>
-    
-                        <td
-                        style={{padding:"10px 15px"}}
-                        class="edit text-center">
-                            <button type="button"
-                            onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) 
-                            deleteSlider(sld.id_slider) } }
-                            style={{ background: '#ee5e68' }}
-                            className="text-white py-1 px-2 capitalize rounded-2xl text-md">
-                                Delete
-                            </button>
-                        </td>
-    
-                    </tr>
-                ))}
-            </tbody>
-          </table>
-          ) 
+      <div
+      >
+        <DataTable
+        title = "LIST OF SLIDER"
+        columns={columns}
+        data = {filterSlider}
+        pagination
+        fixedHeader
+        fixedHeaderScrollHeight='900px'
+        highlightOnHover
+        actions={<button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded'>
+                  ADD SLIDER</button>}
+        subHeader
+        subHeaderComponent={
+          <input 
+          value={search}
+          onChange = {(e) => setSearch(e.target.value)}
+          type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" required></input>
         }
-
-        <nav aria-label="Page navigation example">
-          <ul class="inline-flex items-center -space-x-px">
-            <li>
-              <a href="#" class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <span class="sr-only">Previous</span>
-                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-              </a>
-            </li>
-                {
-                  pages.map((page)=>(
-                    <li>
-                    <a onClick={() => pagination(page)} 
-                    href="#" class={
-                      page === currentPage ? "z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white" 
-                      : "px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                    }>
-                    {page}
-                    </a>
-                    </li>
-                  ))
-                }
-                
-            <li>
-              <a href="#" class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <span class="sr-only">Next</span>
-                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-              </a>
-            </li>
-          </ul>
-        </nav>
-
+        subHeaderAlign = 'right'
+        customStyles={customStyles}
+        />
       </div>
+
     </div>
   );
 };
