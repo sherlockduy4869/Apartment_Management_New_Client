@@ -6,7 +6,7 @@ import { Header } from '../components';
 
 const Customers = () => {
   const selectionsettings = { persistSelection: true };
-  const toolbarOptions = ['Search'];
+  const toolbarOptions = ['Delete'];
   const editing = { allowDeleting: true, allowEditing: true };
 
   return (
