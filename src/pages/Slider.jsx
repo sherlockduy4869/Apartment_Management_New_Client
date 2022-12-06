@@ -2,6 +2,7 @@ import React from 'react';
 import { Header } from '../components';
 import {useState, useEffect} from 'react';
 import DataTable from 'react-data-table-component'
+import { Link } from 'react-router-dom';
 
 
 const Slider = () => {
@@ -26,13 +27,6 @@ const Slider = () => {
     return data['data']
   }
 
-  const deleteSlider = async (id) =>{
-    await fetch(`http://midternapi.atwebpages.com/public/api/v1/sliders/${id}`, {method: `DELETE`})
-    setSlider(slider.filter((slider) => slider.id_slider !== id))
-    setFilterSlider(filterSlider.filter((filterSlider) => filterSlider.id_slider !== id))
-    //alert(id)
-  }
-
   useEffect(() => {
     const result = slider.filter(slider => {
       return slider.note_slider.toLowerCase().match(search.toLowerCase()) 
@@ -42,6 +36,12 @@ const Slider = () => {
 
     setFilterSlider(result)
   },[search])
+
+  const deleteSlider = async (id) =>{
+    await fetch(`http://midternapi.atwebpages.com/public/api/v1/sliders/${id}`, {method: `DELETE`})
+    setSlider(slider.filter((slider) => slider.id_slider !== id))
+    setFilterSlider(filterSlider.filter((filterSlider) => filterSlider.id_slider !== id))
+  }
 
   const columns = [
     {
@@ -90,9 +90,16 @@ const Slider = () => {
     },
     {
       name: "Customize",
-      cell:(row) => <button style={{ background: '#ee5e68' }} className="text-white py-1 px-2 capitalize rounded-2xl text-md"
-                    onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) 
-      deleteSlider(row.id_slider) } } >Delete</button>,
+      cell:(row) => 
+      <span>
+        <button style={{ background: '#ee5e68' }} className="text-white py-1 px-2 capitalize rounded-2xl text-md mr-1"
+      onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) 
+      deleteSlider(row.id_slider) } } >Delete</button>
+      <Link to={`/slider/edit/${row.id_slider}`}>
+        <button className="text-white py-1 px-2 capitalize rounded-2xl text-md bg-indigo-500" 
+        >Editing</button>
+      </Link>
+      </span>,
       width: "20%",
       sortable: true,
       style: {
@@ -143,8 +150,11 @@ const Slider = () => {
         fixedHeader
         fixedHeaderScrollHeight='900px'
         highlightOnHover
-        actions={<button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded'>
-                  ADD SLIDER</button>}
+        actions={
+        <Link to={`/slider/add`}>
+        <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded'>
+                  ADD SLIDER</button>
+        </Link>}
         subHeader
         subHeaderComponent={
           <input 
