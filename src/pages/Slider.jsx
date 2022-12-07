@@ -74,13 +74,13 @@ const Slider = () => {
         padding: "10px 15px",
         justifyContent:"center"
       }
-    },
+    },//{ color: '#FB9678' }
     {
       name: "Status",
       sortable: true,
       selector: 'status_slider',
-      cell: (row) => <div style={{ background: '#FB9678' }} 
-                    className="text-white py-1 px-2 capitalize rounded-2xl text-md"
+      cell: (row) => <div style={row.status_slider == 'showing' ? { color: '#22c55e'}:{color: '#404040'}} 
+                    className="text-white py-1 px-2 capitalize font-medium text-md"
                     >{row.status_slider}</div>,
       width: "20%",
       style: {
@@ -134,7 +134,8 @@ const Slider = () => {
         justifyContent:"center",
         border: '1px solid #e0e1e1',
         fontSize: '15px',
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        fontWeight : '600'
       },
     }
   };

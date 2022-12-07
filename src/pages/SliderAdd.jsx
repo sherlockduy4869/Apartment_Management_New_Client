@@ -2,6 +2,7 @@ import React from 'react'
 import {useState, useEffect} from 'react';
 import axios from "axios";
 import { Header } from '../components';
+import { Link } from 'react-router-dom';
 
 const SliderAdd = () => {
 
@@ -38,8 +39,12 @@ const SliderAdd = () => {
       <Header category="Page" title="Slider" />
 
       
-      <div className='text-2xl mb-10'>ADDING SLIDER</div>
-
+      <div className='text-2xl mb-2'>ADDING SLIDER</div>
+      <Link to={'/slider'}>
+      <button class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+        Back to Slider list
+      </button>
+      </Link>
       <form class="w-full max-w-sm">
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
