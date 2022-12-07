@@ -22,7 +22,7 @@ const Slider = () => {
   },[])
 
   const fetchSlider = async () =>{
-    const res = await fetch('http://midternapi.atwebpages.com/public/api/v1/sliders')
+    const res = await fetch('http://localhost/admin_api/public/api/v1/sliders')
     const data = await res.json()
     return data['data']
   }
@@ -38,7 +38,7 @@ const Slider = () => {
   },[search])
 
   const deleteSlider = async (id) =>{
-    await fetch(`http://midternapi.atwebpages.com/public/api/v1/sliders/${id}`, {method: `DELETE`})
+    await fetch(`http://localhost/admin_api/public/api/v1/sliders/${id}`, {method: `DELETE`})
     setSlider(slider.filter((slider) => slider.id_slider !== id))
     setFilterSlider(filterSlider.filter((filterSlider) => filterSlider.id_slider !== id))
   }
@@ -56,7 +56,7 @@ const Slider = () => {
     },
     {
       name: "Image",
-      selector: (row) => <img src={row.image_slider} alt="slider-item" />,
+      selector: (row) => <img src= {row.image_slider} alt="slider-item" />,
       width: "30%",
       sortable: true,
       style: {
