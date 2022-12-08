@@ -547,6 +547,10 @@ export const links = [
         icon: <AiOutlineShoppingCart />,
       },
       {
+        name: 'news',
+        icon: <AiOutlineShoppingCart />,
+      },
+      {
         name: 'employees',
         icon: <IoMdContacts />,
       },
