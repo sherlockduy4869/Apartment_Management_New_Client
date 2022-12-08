@@ -1,9 +1,9 @@
 import React from 'react';
-import { Header } from '../components';
+import { Header } from '../../components';
 import {useState, useEffect} from 'react';
 import DataTable from 'react-data-table-component'
 import { Link } from 'react-router-dom';
-import { customStyles} from '../data/dummy';
+import { customStyles} from '../../data/dummy';
 
 const Slider = () => {
 
@@ -146,7 +146,6 @@ const Slider = () => {
         customStyles={customStyles}
         />
       </div>
-
     </div>
   );
 };
