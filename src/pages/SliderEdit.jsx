@@ -5,7 +5,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
-const SliderEdit = (props) => {
+const SliderEdit = () => {
 
   const {id} = useParams()
   const url = 'http://localhost/admin_api/public/api/v1/sliders/'+id;
@@ -20,6 +20,7 @@ const SliderEdit = (props) => {
 
   const[editSuccess, setEditSuccess] = useState("")
   const[errorImage, setErrorImage] = useState("")
+  const[corlorMessage, setColorMessage] = useState("")
 
   /*get slider by id*/
   useEffect(()=>{
@@ -41,17 +42,32 @@ const SliderEdit = (props) => {
 
   const editingSlider = () => {
 
-      const formData = new FormData();
+      let methodEdit = "patch"
+      let dataSend = {
+        note_slider: note,
+        status_slider: status
+      }
 
-      formData.append("image_slider", image)
-      formData.append('note_slider', note);
-      formData.append('status_slider', status);
-      formData.append('_method', 'PATCH');
+      if(image !== ""){
+        const formData = new FormData();
+        formData.append("image_slider", image)
+        formData.append('_method', 'PATCH')
+        formData.append('note_slider', note)
+        formData.append('status_slider', status)
+        methodEdit = "post"
+        dataSend = formData
+      }
 
-      axios.post(url, formData)
+      axios({method: methodEdit, url: url, data: dataSend})
           .then(res => {
+              if(!res["data"]["status"]){
+                setColorMessage("#f43f5e")
+              }
+              else{
+                setColorMessage("#22c55e")
+              }
               setErrorImage("")
-              setEditSuccess(res["data"]["status"])
+              setEditSuccess(res["data"]["message"])
           })
           .catch(error => {
             if(error['response']['data']['errors']['image_slider']){
@@ -143,7 +159,7 @@ const SliderEdit = (props) => {
           <div class="md:w-1/3">
           </div>
           <div class="md:w-2/3">
-            <div className='mb-4' style={{color: "#22c55e"}}>
+            <div className='mb-4' style={{color: corlorMessage}}>
               {editSuccess}
             </div>
             <button type="button" onClick={() => editingSlider()}

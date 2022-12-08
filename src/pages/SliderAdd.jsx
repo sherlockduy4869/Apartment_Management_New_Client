@@ -14,6 +14,7 @@ const SliderAdd = () => {
 
   const[addSuccess, setAddSuccess] = useState("")
   const[errorImage, setErrorImage] = useState("")
+  const[corlorMessage, setColorMessage] = useState("")
 
   const addingSlider = () => {
 
@@ -23,10 +24,14 @@ const SliderAdd = () => {
       formData.append("note_slider", note)
       formData.append("status_slider", status)
 
-      axios.post(url, )
+      axios.post(url, formData)
             .then(res => {
+                if(!res["data"]["status"]){
+                  setColorMessage("#f43f5e")
+                }
+                setColorMessage("#22c55e")
                 setErrorImage("")
-                setAddSuccess(res["data"]["status"])
+                setAddSuccess(res["data"]["message"])
             })
             .catch(error => {
               if(error['response']['data']['errors']['image_slider']){
@@ -105,7 +110,7 @@ const SliderAdd = () => {
           <div class="md:flex md:items-center">
             <div class="md:w-1/3"></div>
             <div class="md:w-2/3">
-              <div className='mb-4' style={{color: "#22c55e"}}>
+              <div className='mb-4' style={{color: corlorMessage}}>
                 {addSuccess}
               </div>
               <button type="button" onClick={() => addingSlider()}
