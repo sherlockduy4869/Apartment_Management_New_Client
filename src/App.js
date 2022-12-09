@@ -50,7 +50,7 @@ const App = () => {
               <Sidebar />
             </div>
           )}
-          <div
+          <div style={{overflowX : "hidden"}}
             className={
               activeMenu
                 ? 'dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  '
