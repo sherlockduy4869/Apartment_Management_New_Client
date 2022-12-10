@@ -12,6 +12,7 @@ export { default as NewsEdit } from './News/NewsEdit';
 export { default as ApartForRent } from './ApartForRent/ApartForRent';
 
 export { default as Project } from './Project/Project';
+export { default as ProjectAdd } from './Project/ProjectAdd';
 
 export { default as Calendar } from './Calendar';
 
