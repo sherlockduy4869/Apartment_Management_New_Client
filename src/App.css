@@ -49,3 +49,12 @@
 .ck-editor__editable_inline {
   min-height: 300px;
 }
+
+.currency{
+  width: 100%;
+}
+
+.inputDate{
+  width: 100%;
+  padding: 10px;
+}

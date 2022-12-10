@@ -1,83 +1,110 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from "axios";
 import { Header } from '../../components';
 import { Link } from 'react-router-dom';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { NumericFormat } from 'react-number-format';
+import { TextField } from '@mui/material';
+import Select from 'react-select';
+
+import ReactDOM from 'react-dom';
+import Cleave from 'cleave.js/react';
 
 const ApartForRentAdd = () => {
 
   const url = "http://localhost/admin_api/public/api/v1/news";
 
-  const [title, setTitle] = useState("")
+  const [projectList, setProjectList] = useState([])
+
+  /*all property of apart for rent*/
+  const [apartCode, setApartCode] = useState("")
+  const [projectName, setProjectName] = useState("")
+  const [price, setPrice] = useState("")
+  const [address, setAddress] = useState("")
   const [image, setImage] = useState("")
-  const [author, setAuthor] = useState("")
   const [description, setDescription] = useState("")
+  const [status, setStatus] = useState("")
+  const [availableFrom, setAvailableFrom] = useState("")
+  const [note, setNote] = useState("")
+  /*------------------------------*/
 
   const [addStatus, setAddStatus] = useState("")
   const [corlorMessage, setColorMessage] = useState("")
 
+  /*error area*/
   const [errorTitle, setErrorTitle] = useState("")
   const [errorImage, setErrorImage] = useState("")
   const [errorAuthor, setErrorAuthor] = useState("")
   const [errorDescription, setErrorDescription] = useState("")
+  /*---------*/
 
   const addingNews = (e) => {
 
     e.preventDefault()
 
-    const formData = new FormData()
+    // const formData = new FormData()
 
-    formData.append("title_news", title)
-    formData.append("image_news", image)
-    formData.append("author_news", author)
-    formData.append("description_news", description)
+    // formData.append("title_news", title)
+    // formData.append("image_news", image)
+    // formData.append("author_news", author)
+    // formData.append("description_news", description)
 
-    axios.post(url, formData)
-      .then(res => {
-        if (!res["data"]["status"]) {
-          setColorMessage("#f43f5e")
-        }
-        setColorMessage("#22c55e")
-        setErrorTitle("")
-        setErrorImage("")
-        setErrorAuthor("")
-        setErrorDescription("")
-        setAddStatus(res["data"]["message"])
-      })
-      .catch(error => {
+    // axios.post(url, formData)
+    //   .then(res => {
+    //     if (!res["data"]["status"]) {
+    //       setColorMessage("#f43f5e")
+    //     }
+    //     setColorMessage("#22c55e")
+    //     setErrorTitle("")
+    //     setErrorImage("")
+    //     setErrorAuthor("")
+    //     setErrorDescription("")
+    //     setAddStatus(res["data"]["message"])
+    //   })
+    //   .catch(error => {
 
-        if (error['response']['data']['errors']['title_news']) {
-          setErrorTitle(error['response']['data']['errors']['title_news'][0])
-        }
-        else {
-          setErrorTitle("")
-        }
+    //     if (error['response']['data']['errors']['title_news']) {
+    //       setErrorTitle(error['response']['data']['errors']['title_news'][0])
+    //     }
+    //     else {
+    //       setErrorTitle("")
+    //     }
 
-        if (error['response']['data']['errors']['image_news']) {
-          setErrorImage(error['response']['data']['errors']['image_news'][0])
-        }
-        else {
-          setErrorImage("")
-        }
-
-        if (error['response']['data']['errors']['author_news']) {
-          setErrorAuthor(error['response']['data']['errors']['author_news'][0])
-        }
-        else {
-          setErrorAuthor("")
-        }
-
-        if (error['response']['data']['errors']['description_news']) {
-          setErrorDescription(error['response']['data']['errors']['description_news'][0])
-        }
-        else {
-          setErrorDescription("")
-        }
-
-      });
+    //   });
   }
+
+  /*get project list*/
+  useEffect(() => {
+    const getProject = async () => {
+      const projectFromServer = await fetchProject()
+      setProjectList(projectFromServer)
+    }
+    getProject()
+  }, [])
+
+  const fetchProject = async () => {
+    const res = await fetch('http://localhost/admin_api/public/api/v1/project')
+    const data = await res.json()
+    return data['data']
+  }
+  /*--------------*/
+
+  /*set selection data*/
+  const dataProject = []
+
+  for (let i = 0; i < projectList.length; i++) {
+    dataProject.push({
+      label: projectList[i].project_name,
+      value: projectList[i].id_project
+    })
+  }
+
+  const dataStatus = [
+    { label: "Normal", value: "Normal" },
+    { label: "Noticable", value: "Noticable" }
+  ]
+  /*----------------*/
+
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
 
@@ -96,9 +123,9 @@ const ApartForRentAdd = () => {
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Author
+              Apart Code
             </label>
-            <input type="text" onChange={(e) => setAuthor(e.target.value)} placeholder="Author name"
+            <input type="text" onChange={(e) => setAuthor(e.target.value)} placeholder="Apartment Code"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
@@ -123,20 +150,107 @@ const ApartForRentAdd = () => {
         </div>
 
         <div class="flex flex-wrap -mx-3 mb-6">
-          <div class="w-full px-3">
+
+          <div class="w-full md:w-1/2 px-3">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Title
+              Note
             </label>
-            <input type="text" onChange={(e) => setTitle(e.target.value)} placeholder="Title of news"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
-              rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white 
-              focus:border-gray-500"/>
+            <input type="text" onChange={(e) => setAuthor(e.target.value)} placeholder="Note"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
             <div style={{ color: "#f43f5e" }}>
-              {errorTitle}
+              {errorImage}
             </div>
 
           </div>
+
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Project
+            </label>
+            <Select
+              options={dataProject}
+            />
+
+            <div style={{ color: "#f43f5e" }}>
+              {errorAuthor}
+            </div>
+
+          </div>
+        </div>
+
+        <div class="flex flex-wrap -mx-3 mb-6">
+
+          <div class="w-full md:w-1/2 px-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Address
+            </label>
+            <input type="text" onChange={(e) => setAuthor(e.target.value)} placeholder="Address"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
+
+            <div style={{ color: "#f43f5e" }}>
+              {errorImage}
+            </div>
+
+          </div>
+
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Price
+            </label>
+
+            <NumericFormat
+              value={12323}
+              className="currency"
+              customInput={TextField}
+              thousandSeparator="," />
+
+            <div style={{ color: "#f43f5e" }}>
+              {errorAuthor}
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="flex flex-wrap -mx-3 mb-6">
+
+          <div class="w-full md:w-1/2 px-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Available From
+            </label>
+            <Cleave
+              options={{
+                date: true,
+                delimiter: '-',
+                datePattern: ['d', 'm', 'Y']
+              }}
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
+
+            <div style={{ color: "#f43f5e" }}>
+              {errorImage}
+            </div>
+
+          </div>
+
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Status
+            </label>
+            <Select
+              options={dataStatus}
+
+            />
+
+            <div style={{ color: "#f43f5e" }}>
+              {errorAuthor}
+            </div>
+
+          </div>
+
         </div>
 
         <div class="flex flex-wrap -mx-3 mb-4">
@@ -146,14 +260,13 @@ const ApartForRentAdd = () => {
               Description
             </label>
 
-            <CKEditor
-              editor={ClassicEditor}
-              data={description}
-              onChange={(event, editor) => {
-                const data_description = editor.getData();
-                setDescription(data_description)
-              }}
-            />
+            <textarea rows="4" placeholder="Write description here..."
+              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
+            border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
+            dark:bg-gray-700 dark:border-gray-6 dark:placeholder-gray-400 
+            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+
+            </textarea>
 
             <div style={{ color: "#f43f5e" }}>
               {errorDescription}

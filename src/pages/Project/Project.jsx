@@ -69,7 +69,7 @@ const Project = () => {
       name: "Customize",
       cell: (row) =>
         <button style={{ background: '#ee5e68' }} className="text-white py-1 px-2 capitalize rounded-2xl text-md mr-1"
-          onClick={() => { if (window.confirm('Are you sure to delete this item?')) deleteProject(row.id_slider) }}>
+          onClick={() => { if (window.confirm('Are you sure to delete this item?')) deleteProject(row.id_project) }}>
           Delete
         </button>,
       width: "40%",
