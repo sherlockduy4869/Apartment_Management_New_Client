@@ -7,47 +7,66 @@ import { customStyles} from '../../data/dummy';
 
 const ApartForRent = () => {
 
-  const [newsList, setNewsList] = useState([])
+  const [apartForRentList, setApartForRentList] = useState([])
   const [search, setSearch] = useState("")
-  const [filterNews, setFilterNews] = useState([])
+  const [filterApartForRent, setFilterApartForRent] = useState([])
 
-  /*get news list*/
+  /*get apartment for rent list*/
   useEffect(()=>{
     const getNews = async () => {
-      const newsFromServer = await fetchSlider()
-      setNewsList(newsFromServer)
-      setFilterNews(newsFromServer)
+      const apartForRentFromServer = await fetchApartForRent()
+      setApartForRentList(apartForRentFromServer)
+      setFilterApartForRent(apartForRentFromServer)
     }
     getNews()
   },[])
 
-  const fetchSlider = async () =>{
-    const res = await fetch('http://localhost/admin_api/public/api/v1/news')
+  const fetchApartForRent = async () =>{
+    const res = await fetch('http://localhost/admin_api/public/api/v1/apartforrent')
     const data = await res.json()
     return data['data']
   }
   /*--------------*/
 
-  /*sorting news list*/
+  /*sorting apartment for rent list*/
   useEffect(() => {
-    const result = newsList.filter(newsList => {
-      return newsList.title_news.toLowerCase().match(search.toLowerCase()) 
-            || newsList.author_news.toLowerCase().match(search.toLowerCase())
+    const result = apartForRentList.filter(apartForRentList => {
+      return apartForRentList.apartment_code.toLowerCase().match(search.toLowerCase()) 
+            || apartForRentList.project_name.toLowerCase().match(search.toLowerCase())
+            || apartForRentList.status.toLowerCase().match(search.toLowerCase())
+            || apartForRentList.available_from.match(search)
+            || apartForRentList.note.toLowerCase().match(search.toLowerCase())
+            || apartForRentList.project_name.toLowerCase().match(search.toLowerCase())
     })
-    setFilterNews(result)
+    setFilterApartForRent(result)
   },[search])
   /*------------------*/
 
-  const deleteNews = async (id) =>{
-    await fetch(`http://localhost/admin_api/public/api/v1/news/${id}`, {method: `DELETE`})
-    setNewsList(newsList.filter((newsList) => newsList.id_news !== id))
-    setFilterNews(filterNews.filter((filterNews) => filterNews.id_news !== id))
+  const deleteApartForRent = async (id) =>{
+    await fetch(`http://localhost/admin_api/public/api/v1/apartforrent/${id}`, {method: `DELETE`})
+    setApartForRentList(
+    apartForRentList.filter((apartForRentList) => apartForRentList.id_apart_for_rent !== id)
+    )
+    setFilterApartForRent(
+      filterApartForRent.filter((filterApartForRent) => filterApartForRent.id_apart_for_rent !== id)
+    )
   }
 
   const columns = [
     {
       name: "ID",
       selector: (row, index) => index + 1,
+      width: "5%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent:"center"
+      }
+    },
+    {
+      name: "Date Available",
+      selector: 'status',
+      cell: (row) => <div>{row.available_from}</div>,
       width: "10%",
       sortable: true,
       style: {
@@ -56,10 +75,21 @@ const ApartForRent = () => {
       }
     },
     {
-      name: "Title",
-      selector: 'title_news',
-      cell: (row) => <div>{row.title_news}</div>,
-      width: "20%",
+      name: "Apartment Code",
+      selector: 'apartment_code',
+      cell: (row) => <div>{row.apartment_code}</div>,
+      width: "10%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent:"center"
+      }
+    },
+    {
+      name: "Project",
+      selector: 'project_name',
+      cell: (row) => <div>{row.project_name}</div>,
+      width: "10%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -68,8 +98,8 @@ const ApartForRent = () => {
     },
     {
       name: "Image",
-      selector: (row) => <img style={{width:"70%"}} src= {row.image_news} alt="news-item" />,
-      width: "30%",
+      selector: (row) => <img style={{width:"70%"}} src= {row.image} alt="news-item" />,
+      width: "20%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -77,13 +107,37 @@ const ApartForRent = () => {
       }
     },
     {
-      name: "Author",
+      name: "Status",
+      selector: 'status',
+      cell: (row) => <div>{row.status}</div>,
+      width: "10%",
       sortable: true,
-      selector: 'author_news',
-      cell: (row) => <div className="py-1 px-2 capitalize font-medium text-md">
-                        {row.author_news}
+      style: {
+        padding: "10px 15px",
+        justifyContent:"center"
+      }
+    },
+    {
+      name: "Price",
+      sortable: true,
+      selector: 'price',
+      cell: (row) => <div className="py-1 px-2 font-medium text-md">
+                        {row.price}
                       </div>,
-      width: "20%",
+      width: "10%",
+      style: {
+        padding: "10px 15px",
+        justifyContent:"center",
+      }
+    },
+    {
+      name: "Note",
+      sortable: true,
+      selector: 'note',
+      cell: (row) => <div className="py-1 px-2 font-medium text-md">
+                        {row.note}
+                      </div>,
+      width: "10%",
       style: {
         padding: "10px 15px",
         justifyContent:"center",
@@ -94,7 +148,7 @@ const ApartForRent = () => {
       cell:(row) => 
       <span>
         <button style={{ background: '#ee5e68' }} className="text-white py-1 px-2 capitalize rounded-2xl text-md mr-1"
-        onClick={() => {if (window.confirm('Are you sure to delete this item?')) deleteNews(row.id_news)} }>
+        onClick={() => {if (window.confirm('Are you sure to delete this item?')) deleteApartForRent(row.id_news)} }>
           Delete
         </button>
         <Link to={`/news/edit/${row.id_news}`}>
@@ -103,7 +157,7 @@ const ApartForRent = () => {
           </button>
         </Link>
       </span>,
-      width: "20%",
+      width: "15%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -114,13 +168,13 @@ const ApartForRent = () => {
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="News" />
+      <Header category="Page" title="Apartment For Rent" />
 
       <div>
         <DataTable
-        title = "LIST OF NEWS"
+        title = "LIST OF APARTMENT FOR RENT"
         columns={columns}
-        data = {filterNews}
+        data = {filterApartForRent}
         pagination
         fixedHeader
         fixedHeaderScrollHeight='900px'
@@ -129,7 +183,7 @@ const ApartForRent = () => {
         {<Link to={`/news/add`}>
           <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
           hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded'>
-            ADD NEWS
+            ADD APART
           </button>
         </Link>}
         subHeader
