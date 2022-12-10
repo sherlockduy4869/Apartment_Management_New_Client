@@ -12,11 +12,13 @@ const SliderAdd = () => {
   const[note, setNote] = useState("")
   const[status, setStatus] = useState("showing")
 
-  const[addSuccess, setAddSuccess] = useState("")
+  const[addStatus, setAddStatus] = useState("")
   const[errorImage, setErrorImage] = useState("")
   const[corlorMessage, setColorMessage] = useState("")
 
-  const addingSlider = () => {
+  const addingSlider = (e) => {
+
+      e.preventDefault()
 
       const formData = new FormData()
 
@@ -31,7 +33,7 @@ const SliderAdd = () => {
                 }
                 setColorMessage("#22c55e")
                 setErrorImage("")
-                setAddSuccess(res["data"]["message"])
+                setAddStatus(res["data"]["message"])
             })
             .catch(error => {
               if(error['response']['data']['errors']['image_slider']){
@@ -111,9 +113,9 @@ const SliderAdd = () => {
             <div class="md:w-1/3"></div>
             <div class="md:w-2/3">
               <div className='mb-4' style={{color: corlorMessage}}>
-                {addSuccess}
+                {addStatus}
               </div>
-              <button type="button" onClick={() => addingSlider()}
+              <button type="button" onClick={(e) => addingSlider(e)}
               class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline 
               focus:outline-none text-white font-bold py-2 px-4 rounded">
                 ADDING

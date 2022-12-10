@@ -18,7 +18,7 @@ const SliderEdit = () => {
   const[note, setNote] = useState("")
   const[status, setStatus] = useState("")
 
-  const[editSuccess, setEditSuccess] = useState("")
+  const[editStatus, setEditStatus] = useState("")
   const[errorImage, setErrorImage] = useState("")
   const[corlorMessage, setColorMessage] = useState("")
 
@@ -67,7 +67,7 @@ const SliderEdit = () => {
                 setColorMessage("#22c55e")
               }
               setErrorImage("")
-              setEditSuccess(res["data"]["message"])
+              setEditStatus(res["data"]["message"])
           })
           .catch(error => {
             if(error['response']['data']['errors']['image_slider']){
@@ -160,7 +160,7 @@ const SliderEdit = () => {
           </div>
           <div class="md:w-2/3">
             <div className='mb-4' style={{color: corlorMessage}}>
-              {editSuccess}
+              {editStatus}
             </div>
             <button type="button" onClick={() => editingSlider()}
             class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline 

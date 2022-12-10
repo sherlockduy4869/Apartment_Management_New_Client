@@ -3,10 +3,12 @@ import {useState} from 'react';
 import axios from "axios";
 import { Header } from '../../components';
 import { Link } from 'react-router-dom';
-
-
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import './Ckeditor.css';
 
 const NewsAdd = () => {
+
   const url = "http://localhost/admin_api/public/api/v1/news";
   
   const[title, setTitle] = useState("")
@@ -14,40 +16,72 @@ const NewsAdd = () => {
   const[author, setAuthor] = useState("")
   const[description, setDescription] = useState("")
 
-  const[addSuccess, setAddSuccess] = useState("")
-  const[errorImage, setErrorImage] = useState("")
+  const[addStatus, setAddStatus] = useState("")
   const[corlorMessage, setColorMessage] = useState("")
+
+  const[errorTitle, setErrorTitle] = useState("")
+  const[errorImage, setErrorImage] = useState("")
+  const[errorAuthor, setErrorAuthor] = useState("")
+  const[errorDescription, setErrorDescription] = useState("")
 
   const addingNews = (e) => {
 
-    e.preventDefault()
+      e.preventDefault()
 
-      // const formData = new FormData()
+      const formData = new FormData()
 
-      // formData.append("title_news", title)
-      // formData.append("image_news", image)
-      // formData.append("author_news", author)
-      // formData.append("description_news", description)
+      formData.append("title_news", title)
+      formData.append("image_news", image)
+      formData.append("author_news", author)
+      formData.append("description_news", description)
 
-      // axios.post(url, formData)
-      //       .then(res => {
-      //           if(!res["data"]["status"]){
-      //             setColorMessage("#f43f5e")
-      //           }
-      //           setColorMessage("#22c55e")
-      //           setErrorImage("")
-      //           setAddSuccess(res["data"]["message"])
-      //       })
-      //       .catch(error => {
-              // if(error['response']['data']['errors']['image_slider']){
-              //   setErrorImage(error['response']['data']['errors']['image_slider'][0])
-              // }
-            // });
-            console.log(title, author, description, image)
+      axios.post(url, formData)
+            .then(res => {
+                if(!res["data"]["status"]){
+                  setColorMessage("#f43f5e")
+                }
+                setColorMessage("#22c55e")
+                setErrorTitle("")
+                setErrorImage("")
+                setErrorAuthor("")
+                setErrorDescription("")
+                setAddStatus(res["data"]["message"])
+            })
+            .catch(error => {
+
+              if(error['response']['data']['errors']['title_news']){
+                setErrorTitle(error['response']['data']['errors']['title_news'][0])
+              }
+              else{
+                setErrorTitle("")
+              }
+
+              if(error['response']['data']['errors']['image_news']){
+                setErrorImage(error['response']['data']['errors']['image_news'][0])
+              }
+              else{
+                setErrorImage("")
+              }
+              
+              if(error['response']['data']['errors']['author_news']){
+                setErrorAuthor(error['response']['data']['errors']['author_news'][0])
+              }
+              else{
+                setErrorAuthor("")
+              }
+              
+              if(error['response']['data']['errors']['description_news']){
+                setErrorDescription(error['response']['data']['errors']['description_news'][0])
+              }
+              else{
+                setErrorDescription("")
+              }
+
+            });
   }
-  console.log(title, author, description, image)
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+
       <Header category="Page" title="News" />
 
       <div className='text-2xl mb-2'>ADDING NEWS</div>
@@ -68,6 +102,11 @@ const NewsAdd = () => {
               <input type="text" onChange={(e) => setAuthor(e.target.value)} placeholder="Author name" 
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
+
+              <div style={{color: "#f43f5e"}}>
+                {errorAuthor}
+              </div>
+
             </div>
             <div class="w-full md:w-1/2 px-3">
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -76,6 +115,11 @@ const NewsAdd = () => {
               <input type="file" onChange={(e) => setImage(e.target.files[0])}
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
               rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+              
+              <div style={{color: "#f43f5e"}}>
+                {errorImage}
+              </div>
+
             </div>
           </div>
 
@@ -86,24 +130,44 @@ const NewsAdd = () => {
               </label>
               <input type="text" onChange={(e) => setTitle(e.target.value)} placeholder="Title of news" 
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
-              rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+              rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white 
+              focus:border-gray-500"/>
+
+              <div style={{color: "#f43f5e"}}>
+                {errorTitle}
+              </div>
+
             </div>
           </div>
 
           <div class="flex flex-wrap -mx-3 mb-4">
             <div class="w-full md:w-full px-3 mb-6 md:mb-0">
-              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs 
+              font-bold mb-2" for="grid-city">
                 Description
               </label>
-              <input type="text" onChange={(e) => setDescription(e.target.value)} placeholder="Link description of news" 
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
-              rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
-        
+
+              <CKEditor
+                editor={ ClassicEditor }
+                data={description}
+                onChange={ ( event, editor ) => {
+                    const data_description = editor.getData();
+                    setDescription(data_description)
+                } }
+              />
+
+              <div style={{color: "#f43f5e"}}>
+                {errorDescription}
+              </div>
+              
             </div>
           </div>
 
           <div class="flex flex-wrap -mx-3 mb-2">
             <div class="w-full md:w-full px-3 mb-6 md:mb-0 text-center">
+              <div className='mb-2' style={{color: corlorMessage}}>
+                  {addStatus}
+              </div>
               <button onClick={(e) => addingNews(e)}
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 ADDING NEWS
