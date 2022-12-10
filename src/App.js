@@ -5,7 +5,7 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
 import { Ecommerce, Slider, SliderAdd, SliderEdit, News, NewsAdd, 
-        NewsEdit, Project, ProjectAdd, ApartForRent, Calendar, Kanban } from './pages';
+        NewsEdit, Project, ProjectAdd, ApartForRent, ApartForRentAdd, Calendar, Kanban } from './pages';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
@@ -89,6 +89,7 @@ const App = () => {
 
                   {/* Apart For Rent  */}
                     <Route path="/apartforrent" element={<ApartForRent />} />
+                    <Route path="/apartforrent/add" element={<ApartForRentAdd />} />
                   {/*----------*/}
 
                 {/*---------*/}
