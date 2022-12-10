@@ -1,47 +1,47 @@
-import React from 'react';
+import React from 'react'
 import { Header } from '../../components';
 import {useState, useEffect} from 'react';
 import DataTable from 'react-data-table-component'
 import { Link } from 'react-router-dom';
 import { customStyles} from '../../data/dummy';
 
-const Slider = () => {
+const ApartForRent = () => {
 
-  const [sliderList, setSliderList] = useState([])
+  const [newsList, setNewsList] = useState([])
   const [search, setSearch] = useState("")
-  const [filterSlider, setFilterSlider] = useState([])
+  const [filterNews, setFilterNews] = useState([])
 
-  /*get slider list*/
+  /*get news list*/
   useEffect(()=>{
-    const getSlider = async () => {
-      const sliderFromServer = await fetchSlider()
-      setSliderList(sliderFromServer)
-      setFilterSlider(sliderFromServer)
+    const getNews = async () => {
+      const newsFromServer = await fetchSlider()
+      setNewsList(newsFromServer)
+      setFilterNews(newsFromServer)
     }
-    getSlider()
+    getNews()
   },[])
 
   const fetchSlider = async () =>{
-    const res = await fetch('http://localhost/admin_api/public/api/v1/sliders')
+    const res = await fetch('http://localhost/admin_api/public/api/v1/news')
     const data = await res.json()
     return data['data']
   }
   /*--------------*/
 
-  /*sorting slider list*/
+  /*sorting news list*/
   useEffect(() => {
-    const result = sliderList.filter(sliderList => {
-      return sliderList.note_slider.toLowerCase().match(search.toLowerCase()) 
-            || sliderList.status_slider.toLowerCase().match(search.toLowerCase())
+    const result = newsList.filter(newsList => {
+      return newsList.title_news.toLowerCase().match(search.toLowerCase()) 
+            || newsList.author_news.toLowerCase().match(search.toLowerCase())
     })
-    setFilterSlider(result)
+    setFilterNews(result)
   },[search])
   /*------------------*/
 
-  const deleteSlider = async (id) =>{
-    await fetch(`http://localhost/admin_api/public/api/v1/sliders/${id}`, {method: `DELETE`})
-    setSliderList(sliderList.filter((sliderList) => sliderList.id_slider !== id))
-    setFilterSlider(filterSlider.filter((filterSlider) => filterSlider.id_slider !== id))
+  const deleteNews = async (id) =>{
+    await fetch(`http://localhost/admin_api/public/api/v1/news/${id}`, {method: `DELETE`})
+    setNewsList(newsList.filter((newsList) => newsList.id_news !== id))
+    setFilterNews(filterNews.filter((filterNews) => filterNews.id_news !== id))
   }
 
   const columns = [
@@ -56,19 +56,9 @@ const Slider = () => {
       }
     },
     {
-      name: "Image",
-      selector: (row) => <img style={{width:"70%"}} src= {row.image_slider} alt="slider-item" />,
-      width: "30%",
-      sortable: true,
-      style: {
-        padding: "10px 15px",
-        justifyContent:"center"
-      }
-    },
-    {
-      name: "Note",
-      selector: 'note_slider',
-      cell: (row) => <div>{row.note_slider}</div>,
+      name: "Title",
+      selector: 'title_news',
+      cell: (row) => <div>{row.title_news}</div>,
       width: "20%",
       sortable: true,
       style: {
@@ -77,12 +67,21 @@ const Slider = () => {
       }
     },
     {
-      name: "Status",
+      name: "Image",
+      selector: (row) => <img style={{width:"70%"}} src= {row.image_news} alt="news-item" />,
+      width: "30%",
       sortable: true,
-      selector: 'status_slider',
-      cell: (row) => <div style={row.status_slider == 'showing' ? { color: '#22c55e'}:{color: '#404040'}} 
-                      className="text-white py-1 px-2 capitalize font-medium text-md">
-                        {row.status_slider}
+      style: {
+        padding: "10px 15px",
+        justifyContent:"center"
+      }
+    },
+    {
+      name: "Author",
+      sortable: true,
+      selector: 'author_news',
+      cell: (row) => <div className="py-1 px-2 capitalize font-medium text-md">
+                        {row.author_news}
                       </div>,
       width: "20%",
       style: {
@@ -95,10 +94,10 @@ const Slider = () => {
       cell:(row) => 
       <span>
         <button style={{ background: '#ee5e68' }} className="text-white py-1 px-2 capitalize rounded-2xl text-md mr-1"
-        onClick={() => {if (window.confirm('Are you sure to delete this item?')) deleteSlider(row.id_slider)} }>
+        onClick={() => {if (window.confirm('Are you sure to delete this item?')) deleteNews(row.id_news)} }>
           Delete
         </button>
-        <Link to={`/slider/edit/${row.id_slider}`}>
+        <Link to={`/news/edit/${row.id_news}`}>
           <button className="text-white py-1 px-2 capitalize rounded-2xl text-md bg-indigo-500">
             Editing
           </button>
@@ -115,22 +114,22 @@ const Slider = () => {
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Slider" />
+      <Header category="Page" title="News" />
 
       <div>
         <DataTable
-        title = "LIST OF SLIDER"
+        title = "LIST OF NEWS"
         columns={columns}
-        data = {filterSlider}
+        data = {filterNews}
         pagination
         fixedHeader
         fixedHeaderScrollHeight='900px'
         highlightOnHover
         actions=
-        {<Link to={`/slider/add`}>
+        {<Link to={`/news/add`}>
           <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
           hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded'>
-            ADD SLIDER
+            ADD NEWS
           </button>
         </Link>}
         subHeader
@@ -148,5 +147,6 @@ const Slider = () => {
       </div>
     </div>
   );
-};
-export default Slider;
+}
+
+export default ApartForRent

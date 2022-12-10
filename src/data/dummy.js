@@ -2,8 +2,6 @@ import React from 'react';
 import { AiOutlineCalendar, AiOutlineShoppingCart } from 'react-icons/ai';
 import { FiShoppingBag, FiEdit, FiBarChart, FiCreditCard, FiStar, FiShoppingCart } from 'react-icons/fi';
 import { BsKanban, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
-import { IoMdContacts } from 'react-icons/io';
-import { RiContactsLine, RiStockLine } from 'react-icons/ri';
 import { MdOutlineSupervisorAccount } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { TiTick } from 'react-icons/ti';
@@ -551,13 +549,13 @@ export const links = [
         icon: <AiOutlineShoppingCart />,
       },
       {
-        name: 'employees',
-        icon: <IoMdContacts />,
+        name: 'project',
+        icon: <AiOutlineShoppingCart />,
       },
       {
-        name: 'customers',
-        icon: <RiContactsLine />,
-      },
+        name: 'Apart For Rent',
+        icon: <AiOutlineShoppingCart />,
+      }
     ],
   },
   {

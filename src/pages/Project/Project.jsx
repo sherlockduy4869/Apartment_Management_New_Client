@@ -5,43 +5,43 @@ import DataTable from 'react-data-table-component'
 import { Link } from 'react-router-dom';
 import { customStyles} from '../../data/dummy';
 
-const News = () => {
+const Project = () => {
 
-    const [newsList, setNewsList] = useState([])
+    const [projectList, setProjectList] = useState([])
     const [search, setSearch] = useState("")
-    const [filterNews, setFilterNews] = useState([])
+    const [filterSlider, setFilterSlider] = useState([])
   
-    /*get news list*/
+    /*get slider list*/
     useEffect(()=>{
-      const getNews = async () => {
-        const newsFromServer = await fetchSlider()
-        setNewsList(newsFromServer)
-        setFilterNews(newsFromServer)
+      const getSlider = async () => {
+        const sliderFromServer = await fetchSlider()
+        setSliderList(sliderFromServer)
+        setFilterSlider(sliderFromServer)
       }
-      getNews()
+      getSlider()
     },[])
   
     const fetchSlider = async () =>{
-      const res = await fetch('http://localhost/admin_api/public/api/v1/news')
+      const res = await fetch('http://localhost/admin_api/public/api/v1/sliders')
       const data = await res.json()
       return data['data']
     }
     /*--------------*/
   
-    /*sorting news list*/
+    /*sorting slider list*/
     useEffect(() => {
-      const result = newsList.filter(newsList => {
-        return newsList.title_news.toLowerCase().match(search.toLowerCase()) 
-              || newsList.author_news.toLowerCase().match(search.toLowerCase())
+      const result = sliderList.filter(sliderList => {
+        return sliderList.note_slider.toLowerCase().match(search.toLowerCase()) 
+              || sliderList.status_slider.toLowerCase().match(search.toLowerCase())
       })
-      setFilterNews(result)
+      setFilterSlider(result)
     },[search])
     /*------------------*/
   
-    const deleteNews = async (id) =>{
-      await fetch(`http://localhost/admin_api/public/api/v1/news/${id}`, {method: `DELETE`})
-      setNewsList(newsList.filter((newsList) => newsList.id_news !== id))
-      setFilterNews(filterNews.filter((filterNews) => filterNews.id_news !== id))
+    const deleteSlider = async (id) =>{
+      await fetch(`http://localhost/admin_api/public/api/v1/sliders/${id}`, {method: `DELETE`})
+      setSliderList(sliderList.filter((sliderList) => sliderList.id_slider !== id))
+      setFilterSlider(filterSlider.filter((filterSlider) => filterSlider.id_slider !== id))
     }
   
     const columns = [
@@ -56,19 +56,8 @@ const News = () => {
         }
       },
       {
-        name: "Title",
-        selector: 'title_news',
-        cell: (row) => <div>{row.title_news}</div>,
-        width: "20%",
-        sortable: true,
-        style: {
-          padding: "10px 15px",
-          justifyContent:"center"
-        }
-      },
-      {
         name: "Image",
-        selector: (row) => <img style={{width:"70%"}} src= {row.image_news} alt="news-item" />,
+        selector: (row) => <img style={{width:"70%"}} src= {row.image_slider} alt="slider-item" />,
         width: "30%",
         sortable: true,
         style: {
@@ -77,11 +66,23 @@ const News = () => {
         }
       },
       {
-        name: "Author",
+        name: "Note",
+        selector: 'note_slider',
+        cell: (row) => <div>{row.note_slider}</div>,
+        width: "20%",
         sortable: true,
-        selector: 'author_news',
-        cell: (row) => <div className="py-1 px-2 capitalize font-medium text-md">
-                          {row.author_news}
+        style: {
+          padding: "10px 15px",
+          justifyContent:"center"
+        }
+      },
+      {
+        name: "Status",
+        sortable: true,
+        selector: 'status_slider',
+        cell: (row) => <div style={row.status_slider == 'showing' ? { color: '#22c55e'}:{color: '#404040'}} 
+                        className="text-white py-1 px-2 capitalize font-medium text-md">
+                          {row.status_slider}
                         </div>,
         width: "20%",
         style: {
@@ -94,10 +95,10 @@ const News = () => {
         cell:(row) => 
         <span>
           <button style={{ background: '#ee5e68' }} className="text-white py-1 px-2 capitalize rounded-2xl text-md mr-1"
-          onClick={() => {if (window.confirm('Are you sure to delete this item?')) deleteNews(row.id_news)} }>
+          onClick={() => {if (window.confirm('Are you sure to delete this item?')) deleteSlider(row.id_slider)} }>
             Delete
           </button>
-          <Link to={`/news/edit/${row.id_news}`}>
+          <Link to={`/slider/edit/${row.id_slider}`}>
             <button className="text-white py-1 px-2 capitalize rounded-2xl text-md bg-indigo-500">
               Editing
             </button>
@@ -114,22 +115,22 @@ const News = () => {
   
     return (
       <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-        <Header category="Page" title="News" />
+        <Header category="Page" title="Project" />
   
         <div>
           <DataTable
-          title = "LIST OF NEWS"
+          title = "LIST OF PROJECT"
           columns={columns}
-          data = {filterNews}
+          data = {filterSlider}
           pagination
           fixedHeader
           fixedHeaderScrollHeight='900px'
           highlightOnHover
           actions=
-          {<Link to={`/news/add`}>
+          {<Link to={`/slider/add`}>
             <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
             hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded'>
-              ADD NEWS
+              ADD SLIDER
             </button>
           </Link>}
           subHeader
@@ -147,5 +148,6 @@ const News = () => {
         </div>
       </div>
     );
-}
-export default News
+  };
+
+export default Project

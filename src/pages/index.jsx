@@ -9,8 +9,10 @@ export { default as News } from './News/News';
 export { default as NewsAdd } from './News/NewsAdd';
 export { default as NewsEdit } from './News/NewsEdit';
 
-export { default as Employees } from './Employees';
-export { default as Customers } from './Customers';
+export { default as ApartForRent } from './ApartForRent/ApartForRent';
+
+export { default as Project } from './Project/Project';
+
 export { default as Calendar } from './Calendar';
 
 
