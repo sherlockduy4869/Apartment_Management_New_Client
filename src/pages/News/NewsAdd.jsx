@@ -112,10 +112,10 @@ const NewsAdd = () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Image
             </label>
-            <input type="file" onChange={(e) => setImage(e.target.files[0])}
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
-              rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
-
+            <input type="text" onChange={(e) => setImage(e.target.value)} placeholder="Image name"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
+            
             <div style={{ color: "#f43f5e" }}>
               {errorImage}
             </div>

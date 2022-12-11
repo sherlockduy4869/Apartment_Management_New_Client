@@ -62,10 +62,10 @@ const SliderAdd = () => {
             </label>
           </div>
           <div class="md:w-2/3">
-            <input onChange={(e) => setImage(e.target.value)}
+            <input onChange={(e) => setImage(e.target.value)} placeholder="Image name"
               type="text" class="bg-gray-200 appearance-none border-2 border-gray-200 
               rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none 
-              focus:bg-white focus:border-purple-500"/>   
+              focus:bg-white focus:border-purple-500"/>
             <div style={{ color: "#f43f5e" }}>
               {errorImage}
             </div>
@@ -79,7 +79,7 @@ const SliderAdd = () => {
             </label>
           </div>
           <div class="md:w-2/3">
-            <input onChange={(e) => setNote(e.target.value)}
+            <input onChange={(e) => setNote(e.target.value)} placeholder="Note here"
               type="text" class="bg-gray-200 appearance-none border-2 border-gray-200 
               rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none 
               focus:bg-white focus:border-purple-500"/>

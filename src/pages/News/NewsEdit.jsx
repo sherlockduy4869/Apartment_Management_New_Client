@@ -34,6 +34,7 @@ const NewsEdit = () => {
       const newsFromServer = await fetchNews()
       setNews(newsFromServer)
       setTitle(newsFromServer["title_news"])
+      setImage(newsFromServer["image_news"])
       setAuthor(newsFromServer["author_news"])
       setDescription(newsFromServer["description_news"])
     }
@@ -54,21 +55,13 @@ const NewsEdit = () => {
 
     let methodEdit = "patch"
     let dataSend = {
+      image_news: image,
       title_news: title,
       author_news: author,
       description_news: description
     }
 
-    if (image !== "") {
-      const formData = new FormData();
-      formData.append("image_news", image)
-      formData.append('_method', 'PATCH')
-      formData.append('title_news', title)
-      formData.append('author_news', author)
-      formData.append('description_news', description)
-      methodEdit = "post"
-      dataSend = formData
-    }
+    console.log(dataSend)
 
     axios({ method: methodEdit, url: url, data: dataSend })
       .then(res => {
@@ -149,9 +142,9 @@ const NewsEdit = () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Image
             </label>
-            <input type="file" onChange={(e) => setImage(e.target.files[0])}
-              class="mb-4 appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
-              rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+            <input value={image} type="text" onChange={(e) => setImage(e.target.value)} placeholder="Image name"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
             <div style={{ color: "#f43f5e" }}>
               {errorImage}
