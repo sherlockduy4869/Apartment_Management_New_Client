@@ -12,7 +12,7 @@ import Cleave from 'cleave.js/react';
 
 const ApartForRentAdd = () => {
 
-  const url = "http://localhost/admin_api/public/api/v1/news";
+  const url = "http://localhost/admin_api/public/api/v1/apartforrent";
 
   const [projectList, setProjectList] = useState([])
 
@@ -31,7 +31,6 @@ const ApartForRentAdd = () => {
     label: "",
     value: ""
   })
-  // console.log(typeof(parseInt(price.replaceAll(',',''))))
   const [description, setDescription] = useState("")
   /*------------------------------*/
 
@@ -39,45 +38,82 @@ const ApartForRentAdd = () => {
   const [corlorMessage, setColorMessage] = useState("")
 
   /*error area*/
-  const [errorTitle, setErrorTitle] = useState("")
+  const [errorApartCode, setErrorApartCode] = useState("")
   const [errorImage, setErrorImage] = useState("")
-  const [errorAuthor, setErrorAuthor] = useState("")
-  const [errorDescription, setErrorDescription] = useState("")
+  const [errorProject, setErrorProject] = useState("")
+  const [errorAddress, setErrorAddress] = useState("")
+  const [errorStatus, setErrorStatus] = useState("")
   /*---------*/
 
   const addingNews = (e) => {
 
     e.preventDefault()
 
-    // const formData = new FormData()
+    const formData = new FormData()
 
-    // formData.append("title_news", title)
-    // formData.append("image_news", image)
-    // formData.append("author_news", author)
-    // formData.append("description_news", description)
+    let price_add = parseInt(price.replaceAll(',',''));
 
-    // axios.post(url, formData)
-    //   .then(res => {
-    //     if (!res["data"]["status"]) {
-    //       setColorMessage("#f43f5e")
-    //     }
-    //     setColorMessage("#22c55e")
-    //     setErrorTitle("")
-    //     setErrorImage("")
-    //     setErrorAuthor("")
-    //     setErrorDescription("")
-    //     setAddStatus(res["data"]["message"])
-    //   })
-    //   .catch(error => {
+    formData.append("id_project", projectName.value)
+    formData.append("apartment_code", apartCode)
+    formData.append("price", price_add)
+    formData.append("address", address)
+    formData.append("image", image)
+    formData.append("description", description)
+    formData.append("status", status.value)
+    formData.append("available_from", availableFrom)
+    formData.append("note", note)
 
-    //     if (error['response']['data']['errors']['title_news']) {
-    //       setErrorTitle(error['response']['data']['errors']['title_news'][0])
-    //     }
-    //     else {
-    //       setErrorTitle("")
-    //     }
+    axios.post(url, formData)
+      .then(res => {
+        if (!res["data"]["status"]) {
+          setColorMessage("#f43f5e")
+        }
+        setColorMessage("#22c55e")
+        setErrorApartCode("") 
+        setErrorImage("")
+        setErrorProject("")
+        setErrorAddress("")
+        setErrorStatus("")
+        setAddStatus(res["data"]["message"])
+      })
+      .catch(error => {
 
-    //   });
+        if (error['response']['data']['errors']['apartment_code']) {
+          setErrorApartCode(error['response']['data']['errors']['apartment_code'][0])
+        }
+        else {
+          setErrorApartCode("")
+        }
+
+        if (error['response']['data']['errors']['image']) {
+          setErrorImage(error['response']['data']['errors']['image'][0])
+        }
+        else {
+          setErrorImage("")
+        }
+
+        if (error['response']['data']['errors']['id_project']) {
+          setErrorProject(error['response']['data']['errors']['id_project'][0])
+        }
+        else {
+          setErrorProject("")
+        }
+
+        if (error['response']['data']['errors']['address']) {
+          setErrorAddress(error['response']['data']['errors']['address'][0])
+        }
+        else {
+          setErrorAddress("")
+        }
+
+        if (error['response']['data']['errors']['status']) {
+          setErrorStatus(error['response']['data']['errors']['status'][0])
+        }
+        else {
+          setErrorStatus("")
+        }
+
+      });
   }
 
   /*get project list*/
@@ -98,7 +134,6 @@ const ApartForRentAdd = () => {
 
   /*set selection data*/
   const dataProject = []
-
   for (let i = 0; i < projectList.length; i++) {
     dataProject.push({
       label: projectList[i].project_name,
@@ -137,7 +172,7 @@ const ApartForRentAdd = () => {
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
             <div style={{ color: "#f43f5e" }}>
-              {errorAuthor}
+              {errorApartCode}
             </div>
 
           </div>
@@ -145,9 +180,9 @@ const ApartForRentAdd = () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Image
             </label>
-            <input type="file" onChange={(e) => setImage(e.target.files[0])}
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
-              rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+            <input type="text" onChange={(e) => setImage(e.target.value)} placeholder="Image"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
             <div style={{ color: "#f43f5e" }}>
               {errorImage}
@@ -166,10 +201,6 @@ const ApartForRentAdd = () => {
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
-            <div style={{ color: "#f43f5e" }}>
-              {errorImage}
-            </div>
-
           </div>
 
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -182,7 +213,7 @@ const ApartForRentAdd = () => {
             />
 
             <div style={{ color: "#f43f5e" }}>
-              {errorAuthor}
+              {errorProject}
             </div>
 
           </div>
@@ -197,9 +228,8 @@ const ApartForRentAdd = () => {
             <input type="text" onChange={(e) => setAddress(e.target.value)} placeholder="Address"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
-
             <div style={{ color: "#f43f5e" }}>
-              {errorImage}
+              {errorAddress}
             </div>
 
           </div>
@@ -211,14 +241,12 @@ const ApartForRentAdd = () => {
 
             <NumericFormat
               className="currency"
-              customInput={TextField}
+              placeholder='Price'
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
               thousandSeparator="," 
               onChange={(e) => setPrice(e.target.value)}
               />
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorAuthor}
-            </div>
 
           </div>
 
@@ -231,6 +259,7 @@ const ApartForRentAdd = () => {
               Available From
             </label>
             <Cleave
+              placeholder='Available from'
               onChange={(e) => setAvailableFrom(e.target.value)}
               options={{
                 date: true,
@@ -239,10 +268,6 @@ const ApartForRentAdd = () => {
               }}
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorImage}
-            </div>
 
           </div>
 
@@ -256,7 +281,7 @@ const ApartForRentAdd = () => {
             />
 
             <div style={{ color: "#f43f5e" }}>
-              {errorAuthor}
+              {errorStatus}
             </div>
 
           </div>
@@ -278,10 +303,6 @@ const ApartForRentAdd = () => {
             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
 
             </textarea>
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorDescription}
-            </div>
 
           </div>
         </div>

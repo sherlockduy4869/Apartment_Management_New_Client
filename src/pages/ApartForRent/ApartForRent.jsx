@@ -43,6 +43,21 @@ const ApartForRent = () => {
   }, [search])
   /*------------------*/
 
+  /*formating data*/
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function formatDate(inputDate) {
+
+    const dateArray = inputDate.split('-')
+
+    const formatedDate = dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]
+
+    return formatedDate
+  }
+  /*------------------*/
+
   const deleteApartForRent = async (id) => {
     await fetch(`http://localhost/admin_api/public/api/v1/apartforrent/${id}`, { method: `DELETE` })
     setApartForRentList(
@@ -65,10 +80,10 @@ const ApartForRent = () => {
       }
     },
     {
-      name: "Date Available",
-      selector: 'status',
-      cell: (row) => <div>{row.available_from}</div>,
-      width: "10%",
+      name: "Available",
+      selector: 'available_from',
+      cell: (row) => <div>{formatDate(row.available_from)}</div>,
+      width: "12%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -76,7 +91,7 @@ const ApartForRent = () => {
       }
     },
     {
-      name: "Apartment Code",
+      name: "Code",
       selector: 'apartment_code',
       cell: (row) => <div>{row.apartment_code}</div>,
       width: "10%",
@@ -90,7 +105,7 @@ const ApartForRent = () => {
       name: "Project",
       selector: 'project_name',
       cell: (row) => <div>{row.project_name}</div>,
-      width: "10%",
+      width: "12%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -99,8 +114,8 @@ const ApartForRent = () => {
     },
     {
       name: "Image",
-      selector: (row) => <img style={{ width: "70%" }} src={row.image} alt="news-item" />,
-      width: "15%",
+      selector: (row) => <img style={{ width: "100%" }} src={row.image} alt="news-item" />,
+      width: "10%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -123,7 +138,7 @@ const ApartForRent = () => {
       sortable: true,
       selector: 'price',
       cell: (row) => <div className="py-1 px-2 font-medium text-md">
-        {row.price}
+        {numberWithCommas(row.price)}
       </div>,
       width: "10%",
       style: {
@@ -147,7 +162,7 @@ const ApartForRent = () => {
     {
       name: "More",
       cell: (row) =>
-        <span>
+        <span className='text-center'>
 
           <Link to={`/news/edit/${row.id_news}`}>
             <button style={{ background: '#4ade80' }}
@@ -172,7 +187,7 @@ const ApartForRent = () => {
     {
       name: "Customize",
       cell: (row) =>
-        <span>
+        <span className='text-center'>
           <button style={{ background: '#ee5e68' }}
             className="text-white py-1 px-2 mb-2 capitalize rounded-2xl text-md mr-1"
             onClick={() => {
@@ -187,7 +202,7 @@ const ApartForRent = () => {
             </button>
           </Link>
         </span>,
-      width: "10%",
+      width: "11%",
       sortable: true,
       style: {
         padding: "10px 15px",
