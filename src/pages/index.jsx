@@ -3,7 +3,6 @@ export { default as Kanban } from './Kanban';
 
 export { default as Slider } from './Slider/Slider';
 export { default as SliderAdd } from './Slider/SliderAdd';
-export { default as SliderEdit } from './Slider/SliderEdit';
 
 export { default as News } from './News/News';
 export { default as NewsAdd } from './News/NewsAdd';

@@ -4,7 +4,7 @@ import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
-import { Ecommerce, Slider, SliderAdd, SliderEdit, News, NewsAdd, 
+import { Ecommerce, Slider, SliderAdd, News, NewsAdd, 
         NewsEdit, Project, ProjectAdd, ApartForRent, ApartForRentAdd, Calendar, Kanban } from './pages';
 import './App.css';
 
@@ -73,7 +73,6 @@ const App = () => {
                   {/* Slider  */}
                     <Route path="/slider" element={<Slider />} />
                     <Route path="/slider/add" element={<SliderAdd />} />
-                    <Route path="/slider/edit/:id" element={<SliderEdit />} />
                   {/*----------*/}
 
                   {/* News  */}

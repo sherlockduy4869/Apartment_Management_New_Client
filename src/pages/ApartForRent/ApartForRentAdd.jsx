@@ -18,14 +18,21 @@ const ApartForRentAdd = () => {
 
   /*all property of apart for rent*/
   const [apartCode, setApartCode] = useState("")
-  const [projectName, setProjectName] = useState("")
-  const [price, setPrice] = useState("")
-  const [address, setAddress] = useState("")
   const [image, setImage] = useState("")
-  const [description, setDescription] = useState("")
-  const [status, setStatus] = useState("")
-  const [availableFrom, setAvailableFrom] = useState("")
   const [note, setNote] = useState("")
+  const [projectName, setProjectName] = useState({
+    label: "",
+    value: ""
+  })
+  const [address, setAddress] = useState("")
+  const [price, setPrice] = useState("")
+  const [availableFrom, setAvailableFrom] = useState("")
+  const [status, setStatus] = useState({
+    label: "",
+    value: ""
+  })
+  // console.log(typeof(parseInt(price.replaceAll(',',''))))
+  const [description, setDescription] = useState("")
   /*------------------------------*/
 
   const [addStatus, setAddStatus] = useState("")
@@ -125,7 +132,7 @@ const ApartForRentAdd = () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Apart Code
             </label>
-            <input type="text" onChange={(e) => setAuthor(e.target.value)} placeholder="Apartment Code"
+            <input type="text" onChange={(e) => setApartCode(e.target.value)} placeholder="Apartment Code"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
@@ -155,7 +162,7 @@ const ApartForRentAdd = () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Note
             </label>
-            <input type="text" onChange={(e) => setAuthor(e.target.value)} placeholder="Note"
+            <input type="text" onChange={(e) => setNote(e.target.value)} placeholder="Note"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
@@ -171,6 +178,7 @@ const ApartForRentAdd = () => {
             </label>
             <Select
               options={dataProject}
+              onChange={setProjectName}
             />
 
             <div style={{ color: "#f43f5e" }}>
@@ -186,7 +194,7 @@ const ApartForRentAdd = () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Address
             </label>
-            <input type="text" onChange={(e) => setAuthor(e.target.value)} placeholder="Address"
+            <input type="text" onChange={(e) => setAddress(e.target.value)} placeholder="Address"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
@@ -202,10 +210,11 @@ const ApartForRentAdd = () => {
             </label>
 
             <NumericFormat
-              value={12323}
               className="currency"
               customInput={TextField}
-              thousandSeparator="," />
+              thousandSeparator="," 
+              onChange={(e) => setPrice(e.target.value)}
+              />
 
             <div style={{ color: "#f43f5e" }}>
               {errorAuthor}
@@ -222,6 +231,7 @@ const ApartForRentAdd = () => {
               Available From
             </label>
             <Cleave
+              onChange={(e) => setAvailableFrom(e.target.value)}
               options={{
                 date: true,
                 delimiter: '-',
@@ -242,7 +252,7 @@ const ApartForRentAdd = () => {
             </label>
             <Select
               options={dataStatus}
-
+              onChange={setStatus}
             />
 
             <div style={{ color: "#f43f5e" }}>
@@ -260,8 +270,9 @@ const ApartForRentAdd = () => {
               Description
             </label>
 
-            <textarea rows="4" placeholder="Write description here..."
-              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
+            <textarea onChange={(e) => setDescription(e.target.value)}
+            rows="4" placeholder="Write description here..."
+            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
             border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
             dark:bg-gray-700 dark:border-gray-6 dark:placeholder-gray-400 
             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
