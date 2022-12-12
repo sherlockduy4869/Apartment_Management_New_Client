@@ -184,7 +184,8 @@ const ApartForRentEdit = () => {
 
       <div className='text-2xl mb-2'>ADDING APARTMENT FOR RENT</div>
       <Link to={'/apartforrent'}>
-        <button class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
+        <button
+          class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
           hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
           Back To Apart For Rent list
         </button>
@@ -199,7 +200,9 @@ const ApartForRentEdit = () => {
             </label>
             <input
               value={apartCode}
-              type="text" onChange={(e) => setApartCode(e.target.value)} placeholder="Apartment Code"
+              type="text"
+              onChange={(e) => setApartCode(e.target.value)}
+              placeholder="Apartment Code"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
@@ -214,7 +217,9 @@ const ApartForRentEdit = () => {
             </label>
             <input
               value={image}
-              type="text" onChange={(e) => setImage(e.target.value)} placeholder="Image"
+              type="text"
+              onChange={(e) => setImage(e.target.value)}
+              placeholder="Image"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
@@ -234,7 +239,9 @@ const ApartForRentEdit = () => {
             </label>
             <input
               value={note}
-              type="text" onChange={(e) => setNote(e.target.value)} placeholder="Note"
+              type="text"
+              onChange={(e) => setNote(e.target.value)}
+              placeholder="Note"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
@@ -261,7 +268,8 @@ const ApartForRentEdit = () => {
             </label>
             <input
               value={address}
-              type="text" onChange={(e) => setAddress(e.target.value)} placeholder="Address"
+              type="text" onChange={(e) => setAddress(e.target.value)}
+              placeholder="Address"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
             <div style={{ color: "#f43f5e" }}>
@@ -333,7 +341,8 @@ const ApartForRentEdit = () => {
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              rows="4" placeholder="Write description here..."
+              rows="4"
+              placeholder="Write description here..."
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
               border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
             dark:bg-gray-700 dark:border-gray-6 dark:placeholder-gray-400 

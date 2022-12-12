@@ -85,7 +85,8 @@ const NewsAdd = () => {
 
       <div className='text-2xl mb-2'>ADDING NEWS</div>
       <Link to={'/news'}>
-        <button class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
+        <button
+          class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
           hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
           Back To News list
         </button>
@@ -98,7 +99,10 @@ const NewsAdd = () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Author
             </label>
-            <input type="text" onChange={(e) => setAuthor(e.target.value)} placeholder="Author name"
+            <input
+              type="text"
+              onChange={(e) => setAuthor(e.target.value)}
+              placeholder="Author name"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
@@ -111,10 +115,13 @@ const NewsAdd = () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Image
             </label>
-            <input type="text" onChange={(e) => setImage(e.target.value)} placeholder="Image name"
+            <input
+              type="text"
+              onChange={(e) => setImage(e.target.value)}
+              placeholder="Image name"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
-            
+
             <div style={{ color: "#f43f5e" }}>
               {errorImage}
             </div>
@@ -127,7 +134,10 @@ const NewsAdd = () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Title
             </label>
-            <input type="text" onChange={(e) => setTitle(e.target.value)} placeholder="Title of news"
+            <input
+              type="text"
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Title of news"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
               rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white 
               focus:border-gray-500"/>

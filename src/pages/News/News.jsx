@@ -95,7 +95,9 @@ const News = () => {
       name: "Customize",
       cell: (row) =>
         <span>
-          <button style={{ background: '#ee5e68' }} className="text-white py-1 px-2 capitalize rounded-2xl text-md mr-1"
+          <button
+            style={{ background: '#ee5e68' }}
+            className="text-white py-1 px-2 capitalize rounded-2xl text-md mr-1"
             onClick={() => { if (window.confirm('Are you sure to delete this item?')) deleteNews(row.id_news) }}>
             Delete
           </button>
@@ -129,19 +131,22 @@ const News = () => {
           highlightOnHover
           actions=
           {<Link to={`/news/add`}>
-            <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
+            <button
+              className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
             hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded'>
               ADD NEWS
             </button>
           </Link>}
           subHeader
           subHeaderComponent=
-          {<input value={search} placeholder="Search"
+          {<input
+            value={search}
+            placeholder="Search"
             onChange={(e) => setSearch(e.target.value)}
-            type="text" id="simple-search" class="bg-gray-50 border border-gray-300 
-            text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
-            block w-64 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
-            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+            rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 pl-10 p-2.5  
+          dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+          dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           </input>}
           subHeaderAlign='right'
           customStyles={customStyles}
