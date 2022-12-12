@@ -4,8 +4,13 @@ import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
-import { Ecommerce, Slider, SliderAdd, News, NewsAdd, 
-        NewsEdit, Project, ProjectAdd, ApartForRent, ApartForRentAdd, Calendar, Kanban } from './pages';
+import {
+  Slider, SliderAdd, 
+  News, NewsAdd, NewsEdit, 
+  Project, ProjectAdd, 
+  ApartForRent, ApartForRentAdd, ApartForRentEdit,
+  Ecommerce, Calendar, Kanban
+} from './pages';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
@@ -51,7 +56,7 @@ const App = () => {
               <Sidebar />
             </div>
           )}
-          <div style={{overflowX : "hidden"}}
+          <div style={{ overflowX: "hidden" }}
             className={
               activeMenu
                 ? 'dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  '
@@ -70,26 +75,27 @@ const App = () => {
                 <Route path="/ecommerce" element={(<Ecommerce />)} />
 
                 {/* pages  */}
-                  {/* Slider  */}
-                    <Route path="/slider" element={<Slider />} />
-                    <Route path="/slider/add" element={<SliderAdd />} />
-                  {/*----------*/}
+                {/* Slider  */}
+                <Route path="/slider" element={<Slider />} />
+                <Route path="/slider/add" element={<SliderAdd />} />
+                {/*----------*/}
 
-                  {/* News  */}
-                    <Route path="/news" element={<News />} />
-                    <Route path="/news/add" element={<NewsAdd />} />
-                    <Route path="/news/edit/:id" element={<NewsEdit />} />
-                  {/*----------*/}
+                {/* News  */}
+                <Route path="/news" element={<News />} />
+                <Route path="/news/add" element={<NewsAdd />} />
+                <Route path="/news/edit/:id" element={<NewsEdit />} />
+                {/*----------*/}
 
-                  {/* Project */}
-                    <Route path="/project" element={<Project />} />
-                    <Route path="/project/add" element={<ProjectAdd />} />
-                  {/*----------*/}
+                {/* Project */}
+                <Route path="/project" element={<Project />} />
+                <Route path="/project/add" element={<ProjectAdd />} />
+                {/*----------*/}
 
-                  {/* Apart For Rent  */}
-                    <Route path="/apartforrent" element={<ApartForRent />} />
-                    <Route path="/apartforrent/add" element={<ApartForRentAdd />} />
-                  {/*----------*/}
+                {/* Apart For Rent  */}
+                <Route path="/apartforrent" element={<ApartForRent />} />
+                <Route path="/apartforrent/add" element={<ApartForRentAdd />} />
+                <Route path="/apartforrent/edit/:id" element={<ApartForRentEdit />} />
+                {/*----------*/}
 
                 {/*---------*/}
 

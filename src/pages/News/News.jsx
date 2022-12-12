@@ -14,15 +14,16 @@ const News = () => {
   /*get news list*/
   useEffect(() => {
     const getNews = async () => {
-      const newsFromServer = await fetchSlider()
+      const newsFromServer = await fetchNews()
       setNewsList(newsFromServer)
       setFilterNews(newsFromServer)
     }
     getNews()
   }, [])
 
-  const fetchSlider = async () => {
-    const res = await fetch('http://localhost/admin_api/public/api/v1/news')
+  const fetchNews = async () => {
+    const url_news_list = "http://localhost/admin_api/public/api/v1/news"
+    const res = await fetch(url_news_list)
     const data = await res.json()
     return data['data']
   }
@@ -39,7 +40,8 @@ const News = () => {
   /*------------------*/
 
   const deleteNews = async (id) => {
-    await fetch(`http://localhost/admin_api/public/api/v1/news/${id}`, { method: `DELETE` })
+    const url_delete = "http://localhost/admin_api/public/api/v1/news/" + id
+    await fetch(url_delete, { method: `DELETE` })
     setNewsList(newsList.filter((newsList) => newsList.id_news !== id))
     setFilterNews(filterNews.filter((filterNews) => filterNews.id_news !== id))
   }

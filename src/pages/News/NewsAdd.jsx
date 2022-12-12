@@ -9,8 +9,6 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const NewsAdd = () => {
 
-  const url = "http://localhost/admin_api/public/api/v1/news";
-
   const [title, setTitle] = useState("")
   const [image, setImage] = useState("")
   const [author, setAuthor] = useState("")
@@ -29,13 +27,14 @@ const NewsAdd = () => {
     e.preventDefault()
 
     const formData = new FormData()
+    const url_add = "http://localhost/admin_api/public/api/v1/news"
 
     formData.append("title_news", title)
     formData.append("image_news", image)
     formData.append("author_news", author)
     formData.append("description_news", description)
 
-    axios.post(url, formData)
+    axios.post(url_add, formData)
       .then(res => {
         if (!res["data"]["status"]) {
           setColorMessage("#f43f5e")

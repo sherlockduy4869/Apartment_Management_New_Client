@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 
 const SliderAdd = () => {
 
-  const url = "http://localhost/admin_api/public/api/v1/sliders";
-
   const [image, setImage] = useState("")
   const [note, setNote] = useState("")
   const [status, setStatus] = useState("showing")
@@ -21,12 +19,13 @@ const SliderAdd = () => {
     e.preventDefault()
 
     const formData = new FormData()
+    const url_add = "http://localhost/admin_api/public/api/v1/sliders"
 
     formData.append("image_slider", image)
     formData.append("note_slider", note)
     formData.append("status_slider", status)
 
-    axios.post(url, formData)
+    axios.post(url_add, formData)
       .then(res => {
         if (!res["data"]["status"]) {
           setColorMessage("#f43f5e")

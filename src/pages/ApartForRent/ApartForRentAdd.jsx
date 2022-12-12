@@ -4,15 +4,11 @@ import axios from "axios";
 import { Header } from '../../components';
 import { Link } from 'react-router-dom';
 import { NumericFormat } from 'react-number-format';
-import { TextField } from '@mui/material';
 import Select from 'react-select';
 
-import ReactDOM from 'react-dom';
 import Cleave from 'cleave.js/react';
 
 const ApartForRentAdd = () => {
-
-  const url = "http://localhost/admin_api/public/api/v1/apartforrent";
 
   const [projectList, setProjectList] = useState([])
 
@@ -50,6 +46,7 @@ const ApartForRentAdd = () => {
     e.preventDefault()
 
     const formData = new FormData()
+    const url_add = "http://localhost/admin_api/public/api/v1/apartforrent"
 
     let price_add = parseInt(price.replaceAll(',',''));
 
@@ -63,7 +60,7 @@ const ApartForRentAdd = () => {
     formData.append("available_from", availableFrom)
     formData.append("note", note)
 
-    axios.post(url, formData)
+    axios.post(url_add, formData)
       .then(res => {
         if (!res["data"]["status"]) {
           setColorMessage("#f43f5e")
@@ -126,7 +123,8 @@ const ApartForRentAdd = () => {
   }, [])
 
   const fetchProject = async () => {
-    const res = await fetch('http://localhost/admin_api/public/api/v1/project')
+    const url_project_list = "http://localhost/admin_api/public/api/v1/project"
+    const res = await fetch(url_project_list)
     const data = await res.json()
     return data['data']
   }

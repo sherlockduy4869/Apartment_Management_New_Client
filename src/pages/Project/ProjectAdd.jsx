@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 
 const ProjectAdd = () => {
 
-  const url = "http://localhost/admin_api/public/api/v1/project";
-
   const [projectName, setProjectName] = useState("")
 
   const [addStatus, setAddStatus] = useState("")
@@ -19,10 +17,11 @@ const ProjectAdd = () => {
     e.preventDefault()
 
     const formData = new FormData()
+    const url_add = "http://localhost/admin_api/public/api/v1/project"
 
     formData.append("project_name", projectName)
 
-    axios.post(url, formData)
+    axios.post(url_add, formData)
       .then(res => {
         if (!res["data"]["status"]) {
           setColorMessage("#f43f5e")

@@ -22,7 +22,8 @@ const Slider = () => {
   }, [])
 
   const fetchSlider = async () => {
-    const res = await fetch('http://localhost/admin_api/public/api/v1/sliders')
+    const url_slider_list = "http://localhost/admin_api/public/api/v1/sliders"
+    const res = await fetch(url_slider_list)
     const data = await res.json()
     return data['data']
   }
@@ -39,7 +40,8 @@ const Slider = () => {
   /*------------------*/
 
   const deleteSlider = async (id) => {
-    await fetch(`http://localhost/admin_api/public/api/v1/sliders/${id}`, { method: `DELETE` })
+    const url_delete = "http://localhost/admin_api/public/api/v1/sliders/" + id
+    await fetch(url_delete, { method: `DELETE` })
     setSliderList(sliderList.filter((sliderList) => sliderList.id_slider !== id))
     setFilterSlider(filterSlider.filter((filterSlider) => filterSlider.id_slider !== id))
   }

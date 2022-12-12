@@ -10,9 +10,6 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const NewsEdit = () => {
 
-  const { id } = useParams()
-  const url = 'http://localhost/admin_api/public/api/v1/news/' + id;
-
   const [news, setNews] = useState([])
 
   const [title, setTitle] = useState("")
@@ -61,9 +58,10 @@ const NewsEdit = () => {
       description_news: description
     }
 
-    console.log(dataSend)
+    const { id } = useParams()
+    const url_edit = "http://localhost/admin_api/public/api/v1/news/" + id;
 
-    axios({ method: methodEdit, url: url, data: dataSend })
+    axios({ method: methodEdit, url: url_edit, data: dataSend })
       .then(res => {
         if (!res["data"]["status"]) {
           setColorMessage("#f43f5e")
