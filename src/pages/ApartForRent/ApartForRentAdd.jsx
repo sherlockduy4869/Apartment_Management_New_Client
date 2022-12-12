@@ -76,7 +76,7 @@ const ApartForRentAdd = () => {
     e.preventDefault()
 
     const formData = new FormData()
-    const url_add = "http://localhost/admin_api/public/api/v1/apartinfor"
+    const url_add = "http://localhost/admin_api/public/api/v1/apartforrent"
 
     let price_add = parseInt(price.replaceAll(',',''));
 

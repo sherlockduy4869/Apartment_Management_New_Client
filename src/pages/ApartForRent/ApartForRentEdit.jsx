@@ -13,7 +13,7 @@ import Cleave from 'cleave.js/react';
 const ApartForRentEdit = () => {
 
   const { id } = useParams()
-  const url_apart_by_id = "http://localhost/admin_api/public/api/v1/apartinfor/" + id
+  const url_apart_by_id = "http://localhost/admin_api/public/api/v1/apartforrent/" + id
 
   const [projectList, setProjectList] = useState([])
 
