@@ -22,7 +22,7 @@ const ApartForRent = () => {
   }, [])
 
   const fetchApartForRent = async () => {
-    const url_apart_for_rent_list = "http://localhost/admin_api/public/api/v1/apartforrent"
+    const url_apart_for_rent_list = "http://localhost/admin_api/public/api/v1/apartinfor"
     const res = await fetch(url_apart_for_rent_list)
     const data = await res.json()
     return data['data']
@@ -60,13 +60,13 @@ const ApartForRent = () => {
   /*------------------*/
 
   const deleteApartForRent = async (id) => {
-    const url_delete = "http://localhost/admin_api/public/api/v1/apartforrent/" + id
+    const url_delete = "http://localhost/admin_api/public/api/v1/apartinfor/" + id
     await fetch(url_delete, { method: `DELETE` })
     setApartForRentList(
-      apartForRentList.filter((apartForRentList) => apartForRentList.id_apart_for_rent !== id)
+      apartForRentList.filter((apartForRentList) => apartForRentList.id_apartment !== id)
     )
     setFilterApartForRent(
-      filterApartForRent.filter((filterApartForRent) => filterApartForRent.id_apart_for_rent !== id)
+      filterApartForRent.filter((filterApartForRent) => filterApartForRent.id_apartment !== id)
     )
   }
 
@@ -194,11 +194,11 @@ const ApartForRent = () => {
             className="text-white py-1 px-2 mb-2 capitalize rounded-2xl text-md mr-1"
             onClick={() => {
               if (window.confirm('Are you sure to delete this item?'))
-                deleteApartForRent(row.id_apart_for_rent)
+                deleteApartForRent(row.id_apartment)
             }}>
             Delete
           </button>
-          <Link to={`/apartforrent/edit/${row.id_apart_for_rent}`}>
+          <Link to={`/apartforrent/edit/${row.id_apartment}`}>
             <button className="text-white py-1 px-2 capitalize rounded-2xl text-md bg-indigo-500">
               Editing
             </button>

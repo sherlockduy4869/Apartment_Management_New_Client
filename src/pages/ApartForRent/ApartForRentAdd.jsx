@@ -76,7 +76,7 @@ const ApartForRentAdd = () => {
     e.preventDefault()
 
     const formData = new FormData()
-    const url_add = "http://localhost/admin_api/public/api/v1/apartforrent"
+    const url_add = "http://localhost/admin_api/public/api/v1/apartinfor"
 
     let price_add = parseInt(price.replaceAll(',',''));
 
@@ -89,6 +89,7 @@ const ApartForRentAdd = () => {
     formData.append("status", status.value)
     formData.append("available_from", availableFrom)
     formData.append("note", note)
+    formData.append("purpose", "for_rent")
 
     axios.post(url_add, formData)
       .then(res => {

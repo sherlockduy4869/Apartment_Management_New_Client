@@ -13,7 +13,7 @@ import Cleave from 'cleave.js/react';
 const ApartForRentEdit = () => {
 
   const { id } = useParams()
-  const url_apart_by_id = "http://localhost/admin_api/public/api/v1/apartforrent/" + id
+  const url_apart_by_id = "http://localhost/admin_api/public/api/v1/apartinfor/" + id
 
   const [projectList, setProjectList] = useState([])
 
@@ -57,7 +57,7 @@ const ApartForRentEdit = () => {
     }
     getApartForRentByID()
   }, [])
-  
+
   const fetchApartForRent = async () => {
     const res = await fetch(url_apart_by_id)
     const data = await res.json()
@@ -106,6 +106,7 @@ const ApartForRentEdit = () => {
       available_from: availableFrom,
       note: note,
       address: address,
+      purpose: "for_rent"
     }
 
     axios.patch(url_apart_by_id, dataSend)
@@ -220,7 +221,7 @@ const ApartForRentEdit = () => {
             <div style={{ color: "#f43f5e" }}>
               {errorImage}
             </div>
-            
+
             <img style={{ width: "15%" }} src={image} alt="news-image-item" />
           </div>
         </div>
