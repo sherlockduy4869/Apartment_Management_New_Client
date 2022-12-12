@@ -47,7 +47,10 @@ const ApartForRentAdd = () => {
   const [apartCode, setApartCode] = useState("")
   const [image, setImage] = useState("")
   const [note, setNote] = useState("")
-  const [projectName, setProjectName] = useState(dataProject[0])
+  const [projectName, setProjectName] = useState({
+    label: "",
+    value: ""
+  })
   const [address, setAddress] = useState("")
   const [price, setPrice] = useState("")
   const [availableFrom, setAvailableFrom] = useState("")

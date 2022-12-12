@@ -47,7 +47,7 @@ const ApartForRentEdit = () => {
         value: apartForRentFromServer["id_project"]
       })
       setAddress(apartForRentFromServer["address"])
-      setPrice(apartForRentFromServer["price"])
+      setPrice(numberWithCommas(apartForRentFromServer["price"]))
       setAvailableFrom(formatDate(apartForRentFromServer["available_from"]))
       setStatus({
         label: apartForRentFromServer["status"],
@@ -71,12 +71,14 @@ const ApartForRentEdit = () => {
   /*error area*/
   const [errorApartCode, setErrorApartCode] = useState("")
   const [errorImage, setErrorImage] = useState("")
-  const [errorProject, setErrorProject] = useState("")
   const [errorAddress, setErrorAddress] = useState("")
-  const [errorStatus, setErrorStatus] = useState("")
   /*---------*/
 
   /*formating data*/
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   function formatDate(inputDate) {
 
     const dateArray = inputDate.split('-')
@@ -89,73 +91,58 @@ const ApartForRentEdit = () => {
 
   const editingApart = (e) => {
 
-    // e.preventDefault()
+    e.preventDefault()
 
-    // const formData = new FormData()
+    let price_add = parseInt(price.replaceAll(',', ''));
 
-    // let price_add = parseInt(price.replaceAll(',', ''));
+    let dataSend = {
+      id_project: projectName.value,
+      apartment_code: apartCode,
+      price: price_add,
+      address: address,
+      image: image,
+      description: description,
+      status: status.value,
+      available_from: availableFrom,
+      note: note,
+      address: address,
+    }
 
-    // formData.append("id_project", projectName.value)
-    // formData.append("apartment_code", apartCode)
-    // formData.append("price", price_add)
-    // formData.append("address", address)
-    // formData.append("image", image)
-    // formData.append("description", description)
-    // formData.append("status", status.value)
-    // formData.append("available_from", availableFrom)
-    // formData.append("note", note)
+    axios.patch(url_apart_by_id, dataSend)
+      .then(res => {
+        if (!res["data"]["status"]) {
+          setColorMessage("#f43f5e")
+        }
+        setColorMessage("#22c55e")
+        setErrorApartCode("")
+        setErrorImage("")
+        setErrorAddress("")
+        setAddStatus(res["data"]["message"])
+      })
+      .catch(error => {
 
-    // axios.post(url_apart_by_id, formData)
-    //   .then(res => {
-    //     if (!res["data"]["status"]) {
-    //       setColorMessage("#f43f5e")
-    //     }
-    //     setColorMessage("#22c55e")
-    //     setErrorApartCode("")
-    //     setErrorImage("")
-    //     setErrorProject("")
-    //     setErrorAddress("")
-    //     setErrorStatus("")
-    //     setAddStatus(res["data"]["message"])
-    //   })
-    //   .catch(error => {
+        if (error['response']['data']['errors']['apartment_code']) {
+          setErrorApartCode(error['response']['data']['errors']['apartment_code'][0])
+        }
+        else {
+          setErrorApartCode("")
+        }
 
-    //     if (error['response']['data']['errors']['apartment_code']) {
-    //       setErrorApartCode(error['response']['data']['errors']['apartment_code'][0])
-    //     }
-    //     else {
-    //       setErrorApartCode("")
-    //     }
+        if (error['response']['data']['errors']['image']) {
+          setErrorImage(error['response']['data']['errors']['image'][0])
+        }
+        else {
+          setErrorImage("")
+        }
 
-    //     if (error['response']['data']['errors']['image']) {
-    //       setErrorImage(error['response']['data']['errors']['image'][0])
-    //     }
-    //     else {
-    //       setErrorImage("")
-    //     }
+        if (error['response']['data']['errors']['address']) {
+          setErrorAddress(error['response']['data']['errors']['address'][0])
+        }
+        else {
+          setErrorAddress("")
+        }
 
-    //     if (error['response']['data']['errors']['id_project']) {
-    //       setErrorProject(error['response']['data']['errors']['id_project'][0])
-    //     }
-    //     else {
-    //       setErrorProject("")
-    //     }
-
-    //     if (error['response']['data']['errors']['address']) {
-    //       setErrorAddress(error['response']['data']['errors']['address'][0])
-    //     }
-    //     else {
-    //       setErrorAddress("")
-    //     }
-
-    //     if (error['response']['data']['errors']['status']) {
-    //       setErrorStatus(error['response']['data']['errors']['status'][0])
-    //     }
-    //     else {
-    //       setErrorStatus("")
-    //     }
-
-    //   });
+      });
   }
 
   /*get project list*/
@@ -233,7 +220,8 @@ const ApartForRentEdit = () => {
             <div style={{ color: "#f43f5e" }}>
               {errorImage}
             </div>
-
+            
+            <img style={{ width: "15%" }} src={image} alt="news-image-item" />
           </div>
         </div>
 
@@ -260,10 +248,6 @@ const ApartForRentEdit = () => {
               value={projectName}
               onChange={setProjectName}
             />
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorProject}
-            </div>
 
           </div>
         </div>
@@ -333,10 +317,6 @@ const ApartForRentEdit = () => {
               value={status}
               onChange={setStatus}
             />
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorStatus}
-            </div>
 
           </div>
 

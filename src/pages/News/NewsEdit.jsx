@@ -10,7 +10,8 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const NewsEdit = () => {
 
-  const [news, setNews] = useState([])
+  const { id } = useParams()
+  const url_edit = "http://localhost/admin_api/public/api/v1/news/" + id;
 
   const [title, setTitle] = useState("")
   const [image, setImage] = useState("")
@@ -29,7 +30,6 @@ const NewsEdit = () => {
   useEffect(() => {
     const getNews = async () => {
       const newsFromServer = await fetchNews()
-      setNews(newsFromServer)
       setTitle(newsFromServer["title_news"])
       setImage(newsFromServer["image_news"])
       setAuthor(newsFromServer["author_news"])
@@ -39,7 +39,7 @@ const NewsEdit = () => {
   }, [])
 
   const fetchNews = async () => {
-    const res = await fetch(url)
+    const res = await fetch(url_edit)
     const data = await res.json()
     return data['data']
   }
@@ -57,9 +57,6 @@ const NewsEdit = () => {
       author_news: author,
       description_news: description
     }
-
-    const { id } = useParams()
-    const url_edit = "http://localhost/admin_api/public/api/v1/news/" + id;
 
     axios({ method: methodEdit, url: url_edit, data: dataSend })
       .then(res => {
@@ -148,7 +145,7 @@ const NewsEdit = () => {
               {errorImage}
             </div>
 
-            <img style={{ width: "15%" }} src={news["image_news"]} alt="news-image-item" />
+            <img style={{ width: "15%" }} src={image} alt="news-image-item" />
           </div>
         </div>
 
