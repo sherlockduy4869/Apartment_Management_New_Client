@@ -166,13 +166,13 @@ const ApartForRent = () => {
       cell: (row) =>
         <span className='text-center'>
 
-          <Link to={`/news/edit/${row.id_news}`}>
+          <Link to={`/further/${row.id_apartment}`}>
             <button style={{ background: '#4ade80' }}
               className="text-white py-1 px-2 mb-2 capitalize rounded-2xl text-md mr-1">
               Further
             </button>
           </Link>
-          <Link to={`/news/edit/${row.id_news}`}>
+          <Link to={`/utilities/${row.id_apartment}`}>
             <button style={{ background: '#3b82f6' }}
               className="text-white py-1 px-2 capitalize rounded-2xl text-md ">
               Utilities

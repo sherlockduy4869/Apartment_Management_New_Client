@@ -12,6 +12,8 @@ export { default as ApartForRent } from './ApartForRent/ApartForRent';
 export { default as ApartForRentAdd } from './ApartForRent/ApartForRentAdd';
 export { default as ApartForRentEdit } from './ApartForRent/ApartForRentEdit';
 
+export { default as Further } from './Further/Further';
+
 export { default as Project } from './Project/Project';
 export { default as ProjectAdd } from './Project/ProjectAdd';
 

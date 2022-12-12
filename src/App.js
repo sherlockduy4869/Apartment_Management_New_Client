@@ -9,6 +9,7 @@ import {
   News, NewsAdd, NewsEdit, 
   Project, ProjectAdd, 
   ApartForRent, ApartForRentAdd, ApartForRentEdit,
+  Further,
   Ecommerce, Calendar, Kanban
 } from './pages';
 import './App.css';
@@ -95,6 +96,10 @@ const App = () => {
                 <Route path="/apartforrent" element={<ApartForRent />} />
                 <Route path="/apartforrent/add" element={<ApartForRentAdd />} />
                 <Route path="/apartforrent/edit/:id" element={<ApartForRentEdit />} />
+                {/*----------*/}
+
+                {/* Further  */}
+                <Route path="/further/:id" element={<Further />} />
                 {/*----------*/}
 
                 {/*---------*/}
