@@ -13,12 +13,12 @@ const ApartForRent = () => {
 
   /*get apartment for rent list*/
   useEffect(() => {
-    const getNews = async () => {
+    const getApartForRent = async () => {
       const apartForRentFromServer = await fetchApartForRent()
       setApartForRentList(apartForRentFromServer)
       setFilterApartForRent(apartForRentFromServer)
     }
-    getNews()
+    getApartForRent()
   }, [])
 
   const fetchApartForRent = async () => {

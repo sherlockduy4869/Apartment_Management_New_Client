@@ -12,20 +12,48 @@ const ApartForRentAdd = () => {
 
   const [projectList, setProjectList] = useState([])
 
+  /*get project list*/
+  useEffect(() => {
+    const getProject = async () => {
+      const projectFromServer = await fetchProject()
+      setProjectList(projectFromServer)
+    }
+    getProject()
+  }, [])
+
+  const fetchProject = async () => {
+    const url_project_list = "http://localhost/admin_api/public/api/v1/project"
+    const res = await fetch(url_project_list)
+    const data = await res.json()
+    return data['data']
+  }
+  /*--------------*/
+
+  /*set selection data*/
+  const dataProject = []
+  for (let i = 0; i < projectList.length; i++) {
+    dataProject.push({
+      label: projectList[i].project_name,
+      value: projectList[i].id_project
+    })
+  }
+  const dataStatus = [
+    { label: "Normal", value: "Normal" },
+    { label: "Noticable", value: "Noticable" }
+  ]
+  /*----------------*/
+
   /*all property of apart for rent*/
   const [apartCode, setApartCode] = useState("")
   const [image, setImage] = useState("")
   const [note, setNote] = useState("")
-  const [projectName, setProjectName] = useState({
-    label: "",
-    value: ""
-  })
+  const [projectName, setProjectName] = useState(dataProject[0])
   const [address, setAddress] = useState("")
   const [price, setPrice] = useState("")
   const [availableFrom, setAvailableFrom] = useState("")
   const [status, setStatus] = useState({
-    label: "",
-    value: ""
+    label: "Normal",
+    value: "Normal"
   })
   const [description, setDescription] = useState("")
   /*------------------------------*/
@@ -38,10 +66,9 @@ const ApartForRentAdd = () => {
   const [errorImage, setErrorImage] = useState("")
   const [errorProject, setErrorProject] = useState("")
   const [errorAddress, setErrorAddress] = useState("")
-  const [errorStatus, setErrorStatus] = useState("")
   /*---------*/
 
-  const addingNews = (e) => {
+  const addingApart = (e) => {
 
     e.preventDefault()
 
@@ -70,7 +97,6 @@ const ApartForRentAdd = () => {
         setErrorImage("")
         setErrorProject("")
         setErrorAddress("")
-        setErrorStatus("")
         setAddStatus(res["data"]["message"])
       })
       .catch(error => {
@@ -103,48 +129,8 @@ const ApartForRentAdd = () => {
           setErrorAddress("")
         }
 
-        if (error['response']['data']['errors']['status']) {
-          setErrorStatus(error['response']['data']['errors']['status'][0])
-        }
-        else {
-          setErrorStatus("")
-        }
-
       });
   }
-
-  /*get project list*/
-  useEffect(() => {
-    const getProject = async () => {
-      const projectFromServer = await fetchProject()
-      setProjectList(projectFromServer)
-    }
-    getProject()
-  }, [])
-
-  const fetchProject = async () => {
-    const url_project_list = "http://localhost/admin_api/public/api/v1/project"
-    const res = await fetch(url_project_list)
-    const data = await res.json()
-    return data['data']
-  }
-  /*--------------*/
-
-  /*set selection data*/
-  const dataProject = []
-  for (let i = 0; i < projectList.length; i++) {
-    dataProject.push({
-      label: projectList[i].project_name,
-      value: projectList[i].id_project
-    })
-  }
-
-  const dataStatus = [
-    { label: "Normal", value: "Normal" },
-    { label: "Noticable", value: "Noticable" }
-  ]
-  /*----------------*/
-
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
 
@@ -275,12 +261,9 @@ const ApartForRentAdd = () => {
             </label>
             <Select
               options={dataStatus}
+              defaultValue={dataStatus[0]}
               onChange={setStatus}
             />
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorStatus}
-            </div>
 
           </div>
 
@@ -310,7 +293,7 @@ const ApartForRentAdd = () => {
             <div className='mb-2' style={{ color: corlorMessage }}>
               {addStatus}
             </div>
-            <button onClick={(e) => addingNews(e)}
+            <button onClick={(e) => addingApart(e)}
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               ADDING APART
             </button>

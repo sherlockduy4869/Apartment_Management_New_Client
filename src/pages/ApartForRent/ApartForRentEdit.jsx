@@ -9,12 +9,11 @@ import Select from 'react-select';
 
 import Cleave from 'cleave.js/react';
 
+
 const ApartForRentEdit = () => {
 
   const { id } = useParams()
-
-  const url_project_list = "http://localhost/admin_api/public/api/v1/project"
-  const url_edit = "http://localhost/admin_api/public/api/v1/apartforrent" + id
+  const url_apart_by_id = "http://localhost/admin_api/public/api/v1/apartforrent/" + id
 
   const [projectList, setProjectList] = useState([])
 
@@ -36,6 +35,36 @@ const ApartForRentEdit = () => {
   const [description, setDescription] = useState("")
   /*------------------------------*/
 
+  /*get apartment for rent by id*/
+  useEffect(() => {
+    const getApartForRentByID = async () => {
+      const apartForRentFromServer = await fetchApartForRent()
+      setApartCode(apartForRentFromServer["apartment_code"])
+      setImage(apartForRentFromServer["image"])
+      setNote(apartForRentFromServer["note"])
+      setProjectName({
+        label: apartForRentFromServer["project_name"],
+        value: apartForRentFromServer["id_project"]
+      })
+      setAddress(apartForRentFromServer["address"])
+      setPrice(apartForRentFromServer["price"])
+      setAvailableFrom(formatDate(apartForRentFromServer["available_from"]))
+      setStatus({
+        label: apartForRentFromServer["status"],
+        value: apartForRentFromServer["status"]
+      })
+      setDescription(apartForRentFromServer["description"])
+    }
+    getApartForRentByID()
+  }, [])
+  
+  const fetchApartForRent = async () => {
+    const res = await fetch(url_apart_by_id)
+    const data = await res.json()
+    return data['data']
+  }
+  /*--------------*/
+
   const [addStatus, setAddStatus] = useState("")
   const [corlorMessage, setColorMessage] = useState("")
 
@@ -47,75 +76,86 @@ const ApartForRentEdit = () => {
   const [errorStatus, setErrorStatus] = useState("")
   /*---------*/
 
-  const addingNews = (e) => {
+  /*formating data*/
+  function formatDate(inputDate) {
 
-    e.preventDefault()
+    const dateArray = inputDate.split('-')
 
-    const formData = new FormData()
+    const formatedDate = dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]
 
-    let price_add = parseInt(price.replaceAll(',',''));
+    return formatedDate
+  }
+  /*------------------*/
 
-    formData.append("id_project", projectName.value)
-    formData.append("apartment_code", apartCode)
-    formData.append("price", price_add)
-    formData.append("address", address)
-    formData.append("image", image)
-    formData.append("description", description)
-    formData.append("status", status.value)
-    formData.append("available_from", availableFrom)
-    formData.append("note", note)
+  const editingApart = (e) => {
 
-    axios.post(url_edit, formData)
-      .then(res => {
-        if (!res["data"]["status"]) {
-          setColorMessage("#f43f5e")
-        }
-        setColorMessage("#22c55e")
-        setErrorApartCode("") 
-        setErrorImage("")
-        setErrorProject("")
-        setErrorAddress("")
-        setErrorStatus("")
-        setAddStatus(res["data"]["message"])
-      })
-      .catch(error => {
+    // e.preventDefault()
 
-        if (error['response']['data']['errors']['apartment_code']) {
-          setErrorApartCode(error['response']['data']['errors']['apartment_code'][0])
-        }
-        else {
-          setErrorApartCode("")
-        }
+    // const formData = new FormData()
 
-        if (error['response']['data']['errors']['image']) {
-          setErrorImage(error['response']['data']['errors']['image'][0])
-        }
-        else {
-          setErrorImage("")
-        }
+    // let price_add = parseInt(price.replaceAll(',', ''));
 
-        if (error['response']['data']['errors']['id_project']) {
-          setErrorProject(error['response']['data']['errors']['id_project'][0])
-        }
-        else {
-          setErrorProject("")
-        }
+    // formData.append("id_project", projectName.value)
+    // formData.append("apartment_code", apartCode)
+    // formData.append("price", price_add)
+    // formData.append("address", address)
+    // formData.append("image", image)
+    // formData.append("description", description)
+    // formData.append("status", status.value)
+    // formData.append("available_from", availableFrom)
+    // formData.append("note", note)
 
-        if (error['response']['data']['errors']['address']) {
-          setErrorAddress(error['response']['data']['errors']['address'][0])
-        }
-        else {
-          setErrorAddress("")
-        }
+    // axios.post(url_apart_by_id, formData)
+    //   .then(res => {
+    //     if (!res["data"]["status"]) {
+    //       setColorMessage("#f43f5e")
+    //     }
+    //     setColorMessage("#22c55e")
+    //     setErrorApartCode("")
+    //     setErrorImage("")
+    //     setErrorProject("")
+    //     setErrorAddress("")
+    //     setErrorStatus("")
+    //     setAddStatus(res["data"]["message"])
+    //   })
+    //   .catch(error => {
 
-        if (error['response']['data']['errors']['status']) {
-          setErrorStatus(error['response']['data']['errors']['status'][0])
-        }
-        else {
-          setErrorStatus("")
-        }
+    //     if (error['response']['data']['errors']['apartment_code']) {
+    //       setErrorApartCode(error['response']['data']['errors']['apartment_code'][0])
+    //     }
+    //     else {
+    //       setErrorApartCode("")
+    //     }
 
-      });
+    //     if (error['response']['data']['errors']['image']) {
+    //       setErrorImage(error['response']['data']['errors']['image'][0])
+    //     }
+    //     else {
+    //       setErrorImage("")
+    //     }
+
+    //     if (error['response']['data']['errors']['id_project']) {
+    //       setErrorProject(error['response']['data']['errors']['id_project'][0])
+    //     }
+    //     else {
+    //       setErrorProject("")
+    //     }
+
+    //     if (error['response']['data']['errors']['address']) {
+    //       setErrorAddress(error['response']['data']['errors']['address'][0])
+    //     }
+    //     else {
+    //       setErrorAddress("")
+    //     }
+
+    //     if (error['response']['data']['errors']['status']) {
+    //       setErrorStatus(error['response']['data']['errors']['status'][0])
+    //     }
+    //     else {
+    //       setErrorStatus("")
+    //     }
+
+    //   });
   }
 
   /*get project list*/
@@ -128,6 +168,7 @@ const ApartForRentEdit = () => {
   }, [])
 
   const fetchProject = async () => {
+    const url_project_list = "http://localhost/admin_api/public/api/v1/project"
     const res = await fetch(url_project_list)
     const data = await res.json()
     return data['data']
@@ -148,7 +189,6 @@ const ApartForRentEdit = () => {
     { label: "Noticable", value: "Noticable" }
   ]
   /*----------------*/
-
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
 
@@ -169,7 +209,9 @@ const ApartForRentEdit = () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Apart Code
             </label>
-            <input type="text" onChange={(e) => setApartCode(e.target.value)} placeholder="Apartment Code"
+            <input
+              value={apartCode}
+              type="text" onChange={(e) => setApartCode(e.target.value)} placeholder="Apartment Code"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
@@ -182,7 +224,9 @@ const ApartForRentEdit = () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Image
             </label>
-            <input type="text" onChange={(e) => setImage(e.target.value)} placeholder="Image"
+            <input
+              value={image}
+              type="text" onChange={(e) => setImage(e.target.value)} placeholder="Image"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
@@ -199,7 +243,9 @@ const ApartForRentEdit = () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Note
             </label>
-            <input type="text" onChange={(e) => setNote(e.target.value)} placeholder="Note"
+            <input
+              value={note}
+              type="text" onChange={(e) => setNote(e.target.value)} placeholder="Note"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
 
@@ -211,6 +257,7 @@ const ApartForRentEdit = () => {
             </label>
             <Select
               options={dataProject}
+              value={projectName}
               onChange={setProjectName}
             />
 
@@ -227,7 +274,9 @@ const ApartForRentEdit = () => {
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Address
             </label>
-            <input type="text" onChange={(e) => setAddress(e.target.value)} placeholder="Address"
+            <input
+              value={address}
+              type="text" onChange={(e) => setAddress(e.target.value)} placeholder="Address"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
             <div style={{ color: "#f43f5e" }}>
@@ -242,13 +291,14 @@ const ApartForRentEdit = () => {
             </label>
 
             <NumericFormat
+              value={price}
               className="currency"
               placeholder='Price'
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
-              thousandSeparator="," 
+              thousandSeparator=","
               onChange={(e) => setPrice(e.target.value)}
-              />
+            />
 
           </div>
 
@@ -261,6 +311,7 @@ const ApartForRentEdit = () => {
               Available From
             </label>
             <Cleave
+              value={availableFrom}
               placeholder='Available from'
               onChange={(e) => setAvailableFrom(e.target.value)}
               options={{
@@ -279,6 +330,7 @@ const ApartForRentEdit = () => {
             </label>
             <Select
               options={dataStatus}
+              value={status}
               onChange={setStatus}
             />
 
@@ -297,10 +349,12 @@ const ApartForRentEdit = () => {
               Description
             </label>
 
-            <textarea onChange={(e) => setDescription(e.target.value)}
-            rows="4" placeholder="Write description here..."
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
-            border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows="4" placeholder="Write description here..."
+              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
+              border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
             dark:bg-gray-700 dark:border-gray-6 dark:placeholder-gray-400 
             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
 
@@ -314,7 +368,7 @@ const ApartForRentEdit = () => {
             <div className='mb-2' style={{ color: corlorMessage }}>
               {addStatus}
             </div>
-            <button onClick={(e) => addingNews(e)}
+            <button onClick={(e) => editingApart(e)}
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               ADDING APART
             </button>
