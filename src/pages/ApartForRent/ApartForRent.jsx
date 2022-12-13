@@ -165,7 +165,7 @@ const ApartForRent = () => {
       name: "More",
       cell: (row) =>
         <span className='text-center'>
-          <Link to={`/further/${row.id_apartment}`}>
+          <Link to={`/further/${row.id_apartment}`} state={{purpose:"/apartforrent", code: row.apartment_code}}>
             <button
               style={{ background: '#4ade80' }}
               className="text-white py-1 px-2 mb-2 capitalize rounded-2xl text-md mr-1">

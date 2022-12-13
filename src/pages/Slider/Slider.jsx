@@ -97,19 +97,12 @@ const Slider = () => {
     {
       name: "Customize",
       cell: (row) =>
-        <span>
-          <button
-            style={{ background: '#ee5e68' }}
-            className="text-white py-1 px-2 capitalize rounded-2xl text-md mr-1"
-            onClick={() => { if (window.confirm('Are you sure to delete this item?')) deleteSlider(row.id_slider) }}>
-            Delete
-          </button>
-          <Link to={`/slider/edit/${row.id_slider}`}>
-            <button className="text-white py-1 px-2 capitalize rounded-2xl text-md bg-indigo-500">
-              Editing
-            </button>
-          </Link>
-        </span>,
+        <button
+          style={{ background: '#ee5e68' }}
+          className="text-white py-1 px-2 capitalize rounded-2xl text-md mr-1"
+          onClick={() => { if (window.confirm('Are you sure to delete this item?')) deleteSlider(row.id_slider) }}>
+          Delete
+        </button>,
       width: "20%",
       sortable: true,
       style: {
