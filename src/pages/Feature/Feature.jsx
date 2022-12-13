@@ -16,6 +16,7 @@ const Feature = () => {
 
   const titleFeature = "Features Of " + state.code
 
+  const [idFeature, setIdFeature] = useState()
   const [featureList, setFeatureList] = useState([])
   const [search, setSearch] = useState("")
   const [filterFeature, setFilterFeature] = useState([])
@@ -48,10 +49,12 @@ const Feature = () => {
   /*------------------*/
 
   const deleteFeature = async (id) => {
-    // const url_delete = "http://localhost/admin_api/public/api/v1/sliders/" + id
-    // await fetch(url_delete, { method: `DELETE` })
-    // setFeatureList(featureList.filter((featureList) => featureList.id_feature !== id))
-    // setFilterFeature(filterFeature.filter((filterFeature) => filterFeature.id_feature !== id))
+    const url_delete = "http://localhost/admin_api/public/api/v1/feature/" + id
+    await fetch(url_delete, { method: `DELETE` }).then(res => {
+      console.log(res)
+    })
+    setFeatureList(featureList.filter((featureList) => featureList.id_feature !== id))
+    setFilterFeature(filterFeature.filter((filterFeature) => filterFeature.id_feature !== id))
   }
 
   const columns = [
