@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from "axios";
 import { Header } from '../../components';
 import { Link } from 'react-router-dom';
@@ -13,8 +13,6 @@ const FeatureAdd = () => {
   const { state } = useLocation()
   const pathBack = '/feature/' + id
 
-  console.log(pathBack)
-
   const title = "ADDING FEATURE FOR " + state.code
 
   const [featureName, setFeatureName] = useState({
@@ -22,27 +20,62 @@ const FeatureAdd = () => {
     value: ""
   })
 
+  const [featureList, setFeatureList] = useState({
+    label: "",
+    value: ""
+  })
+
   const [addStatus, setAddStatus] = useState("")
-  const [errorFeature, setErrorFeature] = useState("")
   const [corlorMessage, setColorMessage] = useState("")
+
+  /*get features list*/
+  useEffect(() => {
+    const getFeatures = async () => {
+      const featuresFromServer = await fetchFeature()
+      setFeatureList(featuresFromServer)
+    }
+    getFeatures()
+  }, [])
+
+  const fetchFeature = async () => {
+    const url_features_list = "http://localhost/admin_api/public/api/v1/feature/" + id
+    const res = await fetch(url_features_list)
+    const data = await res.json()
+    return data['data']
+  }
 
   const dataFeature = [
     { label: "Internet", value: "Internet" },
     { label: "Refigerator", value: "Refigerator" },
     { label: "Balcony", value: "Balcony" },
     { label: "Parking", value: "Parking" },
-    { label: "Swimming Pool", value: "Swimming_Pool" },
-    { label: "Cable Television", value: "Cable_Television" },
-    { label: "Air Condition", value: "Air_Condition" },
-    { label: "General Power", value: "General_Power" },
-    { label: "Convenient Store 24/24", value: "Convenient_Store_24/24" },
-    { label: "Fully Furnished", value: "Fully_Furnished" },
+    { label: "Swimming Pool", value: "Swimming Pool" },
+    { label: "Cable Television", value: "Cable Television" },
+    { label: "Air Condition", value: "Air Condition" },
+    { label: "General Power", value: "General Power" },
+    { label: "Convenient Store 24/24", value: "Convenient Store 24/24" },
+    { label: "Fully Furnished", value: "Fully Furnished" },
     { label: "Telephone", value: "Telephone" },
-    { label: "Water Heater", value: "Water_Heater" },
-    { label: "Security 24/24", value: "Security_24/24" },
+    { label: "Water Heater", value: "Water Heater" },
+    { label: "Security 24/24", value: "Security 24/24" },
     { label: "Garden", value: "Garden" },
     { label: "Gym", value: "Gym" }
   ]
+
+  /*get current feature*/
+  const dataFeatureFromServer = []
+  for (let i = 0; i < featureList.length; i++) {
+    dataFeatureFromServer.push({
+      label: featureList[i].feature_name,
+      value: featureList[i].feature_name
+    })
+  }
+  /*----------------*/
+
+  //filter current feature with feature selection to get unadded feature 
+  let dataServer = dataFeatureFromServer.map(itemServer => { return itemServer.label; });
+  let dataAvailable = dataFeature.filter(itemAvailable => !dataServer.includes(itemAvailable.label));
+  /*--------------*/
 
   const addingFeature = (e) => {
 
@@ -51,21 +84,20 @@ const FeatureAdd = () => {
     const formData = new FormData()
     const url_add = "http://localhost/admin_api/public/api/v1/feature"
 
-    formData.append("feature_name", featureName)
+    formData.append("id_apartment", id)
+    formData.append("feature_name", featureName.value)
 
     axios.post(url_add, formData)
       .then(res => {
-        // if (!res["data"]["status"]) {
-        //   setColorMessage("#f43f5e")
-        // }
-        // setColorMessage("#22c55e")
-        // setErrorName("")
-        // setAddStatus(res["data"]["message"])
+        if (!res["data"]["status"]) {
+          setColorMessage("#f43f5e")
+        }
+        setColorMessage("#22c55e")
+        setAddStatus(res["data"]["message"])
+        console.log(res)
       })
       .catch(error => {
-        // if (error['response']['data']['errors']['project_name']) {
-        //   setErrorName(error['response']['data']['errors']['project_name'][0])
-        // }
+        console.log(error)
       });
   }
   return (
@@ -93,15 +125,9 @@ const FeatureAdd = () => {
           </div>
           <div class="md:w-2/3">
             <Select
-              options={dataFeature}
-              defaultValue={dataFeature[0]}
+              options={dataAvailable}
               onChange={setFeatureName}
             />
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorFeature}
-            </div>
-
           </div>
         </div>
 
