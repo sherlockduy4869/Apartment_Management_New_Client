@@ -179,8 +179,17 @@ const ApartForRent = () => {
           state={{purpose:"/apartforrent", code: row.apartment_code}}>
             <button
               style={{ background: '#3b82f6' }}
-              className="text-white py-1 px-2 capitalize rounded-2xl text-md ">
+              className="text-white mb-2 py-1 px-2 capitalize rounded-2xl text-md ">
               Feature
+            </button>
+          </Link>
+          <Link 
+          to={`/images/${row.id_apartment}`}
+          state={{purpose:"/apartforrent", code: row.apartment_code}}>
+            <button
+              style={{ background: '#8b5cf6' }}
+              className="text-white py-1 px-2 capitalize rounded-2xl text-md ">
+              Images
             </button>
           </Link>
         </span>,
