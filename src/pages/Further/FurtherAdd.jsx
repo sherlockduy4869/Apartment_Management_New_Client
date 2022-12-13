@@ -12,6 +12,8 @@ const FurtherAdd = () => {
   const { state } = useLocation()
   const pathBack = '/further/' + id
 
+  const title = "ADDING FURTHER FOR " + state.code
+
   const [numBed, setNumBed] = useState("")
   const [numPath, setNumPath] = useState("")
   const [sqft, setSQFT] = useState("")
@@ -59,7 +61,7 @@ const FurtherAdd = () => {
 
       <Header category="Page" title="Further" />
 
-      <div className='text-2xl mb-2'>ADDING FURTHER</div>
+      <div className='text-2xl mb-2'>{title}</div>
       <Link 
       to={pathBack}
       state={{purpose:state.purpose, code: state.code}}
