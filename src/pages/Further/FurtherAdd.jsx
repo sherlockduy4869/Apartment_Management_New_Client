@@ -3,8 +3,6 @@ import { useState } from 'react';
 import axios from "axios";
 import { Header } from '../../components';
 import { Link } from 'react-router-dom';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -14,73 +12,46 @@ const FurtherAdd = () => {
   const { state } = useLocation()
   const pathBack = '/further/' + id
 
-  const [title, setTitle] = useState("")
-  const [image, setImage] = useState("")
-  const [author, setAuthor] = useState("")
-  const [description, setDescription] = useState("")
+  const [numBed, setNumBed] = useState("")
+  const [numPath, setNumPath] = useState("")
+  const [sqft, setSQFT] = useState("")
+  const [type, setType] = useState("")
+  const [yearBuild, setYearBuild] = useState("")
+  const [parking, setParking] = useState("")
+  const [heating, setHeating] = useState("")
+  const [lot, setLot] = useState("")
 
   const [addStatus, setAddStatus] = useState("")
   const [corlorMessage, setColorMessage] = useState("")
 
-  const [errorTitle, setErrorTitle] = useState("")
-  const [errorImage, setErrorImage] = useState("")
-  const [errorAuthor, setErrorAuthor] = useState("")
-  const [errorDescription, setErrorDescription] = useState("")
-
-  const addingNews = (e) => {
+  const addingFurther = (e) => {
 
     e.preventDefault()
 
     const formData = new FormData()
-    const url_add = "http://localhost/admin_api/public/api/v1/news"
+    const url_add = "http://localhost/admin_api/public/api/v1/further"
 
-    formData.append("title_news", title)
-    formData.append("image_news", image)
-    formData.append("author_news", author)
-    formData.append("description_news", description)
-
+    formData.append("id_apartment", id)
+    formData.append("num_beds", numBed)
+    formData.append("num_baths", numPath)
+    formData.append("sqft", sqft)
+    formData.append("type", type)
+    formData.append("year_built", yearBuild)
+    formData.append("parking", parking)
+    formData.append("heating", heating)
+    formData.append("lot", lot)
+    
     axios.post(url_add, formData)
       .then(res => {
+        console.log(res)
         if (!res["data"]["status"]) {
           setColorMessage("#f43f5e")
         }
         setColorMessage("#22c55e")
-        setErrorTitle("")
-        setErrorImage("")
-        setErrorAuthor("")
-        setErrorDescription("")
         setAddStatus(res["data"]["message"])
       })
       .catch(error => {
-
-        if (error['response']['data']['errors']['title_news']) {
-          setErrorTitle(error['response']['data']['errors']['title_news'][0])
-        }
-        else {
-          setErrorTitle("")
-        }
-
-        if (error['response']['data']['errors']['image_news']) {
-          setErrorImage(error['response']['data']['errors']['image_news'][0])
-        }
-        else {
-          setErrorImage("")
-        }
-
-        if (error['response']['data']['errors']['author_news']) {
-          setErrorAuthor(error['response']['data']['errors']['author_news'][0])
-        }
-        else {
-          setErrorAuthor("")
-        }
-
-        if (error['response']['data']['errors']['description_news']) {
-          setErrorDescription(error['response']['data']['errors']['description_news'][0])
-        }
-        else {
-          setErrorDescription("")
-        }
-
+        console.log(error)
       });
   }
   return (
@@ -105,78 +76,100 @@ const FurtherAdd = () => {
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Author
+              Num Beds
             </label>
             <input
-              type="text"
-              onChange={(e) => setAuthor(e.target.value)}
-              placeholder="Author name"
+              type="number"
+              onChange={(e) => setNumBed(e.target.value)}
+              placeholder="Number of beds"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorAuthor}
-            </div>
-
           </div>
           <div class="w-full md:w-1/2 px-3">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Image
+              Num Paths
             </label>
             <input
-              type="text"
-              onChange={(e) => setImage(e.target.value)}
-              placeholder="Image name"
+              type="number"
+              onChange={(e) => setNumPath(e.target.value)}
+              placeholder="Number of paths"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorImage}
-            </div>
-
           </div>
         </div>
 
         <div class="flex flex-wrap -mx-3 mb-6">
-          <div class="w-full px-3">
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Title
+              SQFT
+            </label>
+            <input
+              type="number"
+              onChange={(e) => setSQFT(e.target.value)}
+              placeholder="Sqft"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
+          </div>
+          <div class="w-full md:w-1/2 px-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Type
             </label>
             <input
               type="text"
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title of news"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
-              rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white 
-              focus:border-gray-500"/>
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorTitle}
-            </div>
-
+              onChange={(e) => setType(e.target.value)}
+              placeholder="Type"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
           </div>
         </div>
 
-        <div class="flex flex-wrap -mx-3 mb-4">
-          <div class="w-full md:w-full px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs 
-              font-bold mb-2" for="grid-city">
-              Description
+        <div class="flex flex-wrap -mx-3 mb-6">
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Year Build
             </label>
+            <input
+              type="number"
+              onChange={(e) => setYearBuild(e.target.value)}
+              placeholder="Year build"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
+          </div>
+          <div class="w-full md:w-1/2 px-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Parking
+            </label>
+            <input
+              type="text"
+              onChange={(e) => setParking(e.target.value)}
+              placeholder="Parking"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
+          </div>
+        </div>
 
-            <CKEditor
-              editor={ClassicEditor}
-              data={description}
-              onChange={(event, editor) => {
-                const data_description = editor.getData();
-                setDescription(data_description)
-              }}
-            />
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorDescription}
-            </div>
-
+        <div class="flex flex-wrap -mx-3 mb-6">
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Heating
+            </label>
+            <input
+              type="text"
+              onChange={(e) => setHeating(e.target.value)}
+              placeholder="Heating"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
+          </div>
+          <div class="w-full md:w-1/2 px-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Lot
+            </label>
+            <input
+              type="text"
+              onChange={(e) => setLot(e.target.value)}
+              placeholder="Lot"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
           </div>
         </div>
 
@@ -185,9 +178,9 @@ const FurtherAdd = () => {
             <div className='mb-2' style={{ color: corlorMessage }}>
               {addStatus}
             </div>
-            <button onClick={(e) => addingNews(e)}
+            <button onClick={(e) => addingFurther(e)}
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              ADDING NEWS
+              ADDING FURTHER
             </button>
           </div>
         </div>
