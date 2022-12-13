@@ -39,10 +39,10 @@ const Project = () => {
   /*------------------*/
 
   const deleteProject = async (id) => {
-    const url_delete = "http://localhost/admin_api/public/api/v1/sliders/" + id
+    const url_delete = "http://localhost/admin_api/public/api/v1/project/" + id
     await fetch(url_delete, { method: `DELETE` })
-    setSliderList(sliderList.filter((sliderList) => sliderList.id_slider !== id))
-    setFilterSlider(filterSlider.filter((filterSlider) => filterSlider.id_slider !== id))
+    setProjectList(projectList.filter((projectList) => projectList.id_project !== id))
+    setFilterProject(filterProject.filter((filterProject) => filterProject.id_project !== id))
   }
 
   const columns = [

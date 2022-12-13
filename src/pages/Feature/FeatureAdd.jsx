@@ -94,11 +94,16 @@ const FeatureAdd = () => {
         }
         setColorMessage("#22c55e")
         setAddStatus(res["data"]["message"])
+        let new_data = {
+          label: featureName.label,
+          value: featureName.value
+        }
         console.log(res)
       })
       .catch(error => {
         console.log(error)
       });
+    
   }
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
