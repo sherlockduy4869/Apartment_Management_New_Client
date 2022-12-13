@@ -9,7 +9,7 @@ import {
   News, NewsAdd, NewsEdit, 
   Project, ProjectAdd, 
   ApartForRent, ApartForRentAdd, ApartForRentEdit,
-  Further, FurtherAdd, 
+  Further, FurtherAdd, FurtherEdit,
   Ecommerce, Calendar, Kanban
 } from './pages';
 import './App.css';
@@ -101,6 +101,7 @@ const App = () => {
                 {/* Further  */}
                 <Route path="/further/:id" element={<Further />} />
                 <Route path="/further/add/:id" element={<FurtherAdd />} />
+                <Route path="/further/edit/:id" element={<FurtherEdit />} />
                 {/*----------*/}
 
                 {/*---------*/}

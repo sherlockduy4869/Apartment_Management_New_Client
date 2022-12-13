@@ -125,7 +125,9 @@ const Further = () => {
                   </td>
                   <td class="py-4 px-6">
                     {further['id_further'] !== undefined ? 
-                    (<Link to={`/news/edit/${further['id_further']}`}>
+                    (<Link 
+                      to={`/further/edit/${id}`}
+                      state={{purpose:state.purpose, code: state.code}}>
                       <button 
                         className="text-white py-1 px-2 capitalize rounded-2xl text-md bg-indigo-500">
                         Editing
