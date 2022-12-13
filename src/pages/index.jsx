@@ -16,6 +16,9 @@ export { default as Further } from './Further/Further';
 export { default as FurtherAdd } from './Further/FurtherAdd';
 export { default as FurtherEdit } from './Further/FurtherEdit';
 
+export { default as Feature } from './Feature/Feature';
+export { default as FeatureAdd } from './Feature/FeatureAdd';
+
 export { default as Project } from './Project/Project';
 export { default as ProjectAdd } from './Project/ProjectAdd';
 

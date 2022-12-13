@@ -165,18 +165,22 @@ const ApartForRent = () => {
       name: "More",
       cell: (row) =>
         <span className='text-center'>
-          <Link to={`/further/${row.id_apartment}`} state={{purpose:"/apartforrent", code: row.apartment_code}}>
+          <Link 
+          to={`/further/${row.id_apartment}`} 
+          state={{purpose:"/apartforrent", code: row.apartment_code}}>
             <button
               style={{ background: '#4ade80' }}
               className="text-white py-1 px-2 mb-2 capitalize rounded-2xl text-md mr-1">
               Further
             </button>
           </Link>
-          <Link to={`/utilities/${row.id_apartment}`}>
+          <Link 
+          to={`/feature/${row.id_apartment}`}
+          state={{purpose:"/apartforrent", code: row.apartment_code}}>
             <button
               style={{ background: '#3b82f6' }}
               className="text-white py-1 px-2 capitalize rounded-2xl text-md ">
-              Utilities
+              Feature
             </button>
           </Link>
         </span>,
