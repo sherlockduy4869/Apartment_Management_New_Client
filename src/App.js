@@ -11,6 +11,7 @@ import {
   ApartForRent, ApartForRentAdd, ApartForRentEdit,
   Further, FurtherAdd, FurtherEdit,
   Feature, FeatureAdd,
+  Images, ImagesAdd,
   Ecommerce, Calendar, Kanban
 } from './pages';
 import './App.css';
@@ -108,6 +109,11 @@ const App = () => {
                 {/* Feature  */}
                 <Route path="/feature/:id" element={<Feature />} />
                 <Route path="/feature/add/:id" element={<FeatureAdd />} />
+                {/*----------*/}
+
+                {/* Images  */}
+                <Route path="/images/:id" element={<Images />} />
+                <Route path="/images/add/:id" element={<ImagesAdd />} />
                 {/*----------*/}
 
                 {/*---------*/}

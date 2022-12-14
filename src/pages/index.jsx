@@ -19,6 +19,9 @@ export { default as FurtherEdit } from './Further/FurtherEdit';
 export { default as Feature } from './Feature/Feature';
 export { default as FeatureAdd } from './Feature/FeatureAdd';
 
+export { default as Images } from './Images/Images';
+export { default as ImagesAdd } from './Images/ImagesAdd';
+
 export { default as Project } from './Project/Project';
 export { default as ProjectAdd } from './Project/ProjectAdd';
 
