@@ -16,6 +16,10 @@ export { default as ApartForSell } from './ApartForSell/ApartForSell';
 export { default as ApartForSellAdd } from './ApartForSell/ApartForSellAdd';
 export { default as ApartForSellEdit } from './ApartForSell/ApartForSellEdit';
 
+export { default as ServiceApart } from './ServiceApart/ServiceApart';
+export { default as ServiceApartAdd } from './ServiceApart/ServiceApartAdd';
+export { default as ServiceApartEdit } from './ServiceApart/ServiceApartEdit';
+
 export { default as Further } from './Further/Further';
 export { default as FurtherAdd } from './Further/FurtherAdd';
 export { default as FurtherEdit } from './Further/FurtherEdit';

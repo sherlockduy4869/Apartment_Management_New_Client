@@ -561,7 +561,7 @@ export const links = [
         icon: <AiOutlineShoppingCart />,
       },
       {
-        name: 'Service Apartment',
+        name: 'Service Apart',
         icon: <AiOutlineShoppingCart />,
       }
     ],
