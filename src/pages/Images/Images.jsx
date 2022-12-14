@@ -55,7 +55,7 @@ const Images = () => {
     {
       name: "Image",
       selector: 'image_description',
-      cell: (row) => <div>{row.image_description}</div>,
+      cell: (row) => <img style={{ width: "70%" }} src={row.image_description} alt="image-item" />,
       width: "40%",
       sortable: true,
       style: {

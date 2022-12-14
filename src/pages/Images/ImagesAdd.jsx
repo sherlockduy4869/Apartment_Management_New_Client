@@ -15,35 +15,44 @@ const ImagesAdd = () => {
 
   const title = "ADDING IMAGES FOR " + state.code
 
-
+  const [imagesDescription, setImagesDescription] = useState("")
 
   const [addStatus, setAddStatus] = useState("")
   const [corlorMessage, setColorMessage] = useState("")
+
+  const [errorImage, setErrorImage] = useState("")
   /*----------------*/
 
   const addingImages = (e) => {
 
-    // e.preventDefault()
+    e.preventDefault()
 
-    // const formData = new FormData()
-    // const url_add = "http://localhost/admin_api/public/api/v1/feature"
+    const formData = new FormData()
+    const url_add = "http://localhost/admin_api/public/api/v1/images"
 
-    // formData.append("id_apartment", id)
-    // formData.append("feature_name", featureName.value)
+    formData.append("id_apartment", id)
+    formData.append("image_description", imagesDescription)
 
-    // axios.post(url_add, formData)
-    //   .then(res => {
-    //     if (!res["data"]["status"]) {
-    //       setColorMessage("#f43f5e")
-    //     }
-    //     setColorMessage("#22c55e")
-    //     setAddStatus(res["data"]["message"]) 
-    //     window.location.reload();
-    //     console.log(res)
-    //   })
-    //   .catch(error => {
-    //     console.log(error)
-    //   });
+    axios.post(url_add, formData)
+      .then(res => {
+        if (!res["data"]["status"]) {
+          setColorMessage("#f43f5e")
+        }
+        setColorMessage("#22c55e")
+        setErrorImage("")
+        setAddStatus(res["data"]["message"]) 
+        window.location.reload();
+        console.log(res)
+      })
+      .catch(error => {
+        if (error['response']['data']['errors']['image_description']) {
+          setErrorImage(error['response']['data']['errors']['image_description'][0])
+        }
+        else {
+          setErrorImage("")
+        }
+        console.log(error)
+      });
 
   }
   return (
@@ -71,10 +80,15 @@ const ImagesAdd = () => {
           </div>
           <div class="md:w-2/3">
             <input
-              type="file" multiple="multiple"
+              placeholder='Enter images here'
+              onChange={(e) => setImagesDescription(e.target.value)}
+              type="text"
               class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 
-          px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             />
+            <div style={{ color: "#f43f5e" }}>
+              {errorImage}
+            </div>
           </div>
         </div>
 
