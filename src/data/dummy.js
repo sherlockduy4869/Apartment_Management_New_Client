@@ -555,6 +555,14 @@ export const links = [
       {
         name: 'Apart For Rent',
         icon: <AiOutlineShoppingCart />,
+      },
+      {
+        name: 'Apart For Sell',
+        icon: <AiOutlineShoppingCart />,
+      },
+      {
+        name: 'Service Apartment',
+        icon: <AiOutlineShoppingCart />,
       }
     ],
   },

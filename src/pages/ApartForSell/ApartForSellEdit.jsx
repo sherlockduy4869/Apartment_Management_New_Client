@@ -8,15 +8,14 @@ import { NumericFormat } from 'react-number-format';
 import Select from 'react-select';
 import Cleave from 'cleave.js/react';
 
-
-const ApartForRentEdit = () => {
+const ApartForSellEdit = () => {
 
   const { id } = useParams()
-  const url_apart_by_id = "http://localhost/admin_api/public/api/v1/apartforrent/" + id
+  const url_apart_by_id = "http://localhost/admin_api/public/api/v1/apartforsell/" + id
 
   const [projectList, setProjectList] = useState([])
 
-  /*all property of apart for rent*/
+  /*all property of apart for sell*/
   const [apartCode, setApartCode] = useState("")
   const [image, setImage] = useState("")
   const [note, setNote] = useState("")
@@ -34,30 +33,30 @@ const ApartForRentEdit = () => {
   const [description, setDescription] = useState("")
   /*------------------------------*/
 
-  /*get apartment for rent by id*/
+  /*get apartment for sell by id*/
   useEffect(() => {
-    const getApartForRentByID = async () => {
-      const apartForRentFromServer = await fetchApartForRent()
-      setApartCode(apartForRentFromServer["apartment_code"])
-      setImage(apartForRentFromServer["image"])
-      setNote(apartForRentFromServer["note"])
+    const getApartForSellByID = async () => {
+      const apartForSellFromServer = await fetchApartForSell()
+      setApartCode(apartForSellFromServer["apartment_code"])
+      setImage(apartForSellFromServer["image"])
+      setNote(apartForSellFromServer["note"])
       setProjectName({
-        label: apartForRentFromServer["project_name"],
-        value: apartForRentFromServer["id_project"]
+        label: apartForSellFromServer["project_name"],
+        value: apartForSellFromServer["id_project"]
       })
-      setAddress(apartForRentFromServer["address"])
-      setPrice(numberWithCommas(apartForRentFromServer["price"]))
-      setAvailableFrom(formatDate(apartForRentFromServer["available_from"]))
+      setAddress(apartForSellFromServer["address"])
+      setPrice(numberWithCommas(apartForSellFromServer["price"]))
+      setAvailableFrom(formatDate(apartForSellFromServer["available_from"]))
       setStatus({
-        label: apartForRentFromServer["status"],
-        value: apartForRentFromServer["status"]
+        label: apartForSellFromServer["status"],
+        value: apartForSellFromServer["status"]
       })
-      setDescription(apartForRentFromServer["description"])
+      setDescription(apartForSellFromServer["description"])
     }
-    getApartForRentByID()
+    getApartForSellByID()
   }, [])
 
-  const fetchApartForRent = async () => {
+  const fetchApartForSell = async () => {
     const res = await fetch(url_apart_by_id)
     const data = await res.json()
     return data['data']
@@ -81,7 +80,6 @@ const ApartForRentEdit = () => {
   function formatDate(inputDate) {
 
     const dateArray = inputDate.split('-')
-
     const formatedDate = dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]
 
     return formatedDate
@@ -105,7 +103,7 @@ const ApartForRentEdit = () => {
       available_from: availableFrom,
       note: note,
       address: address,
-      purpose: "for_rent"
+      purpose: "for_sell"
     }
 
     axios.patch(url_apart_by_id, dataSend)
@@ -179,14 +177,14 @@ const ApartForRentEdit = () => {
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
 
-      <Header category="Page" title="Apartment For Rent" />
+      <Header category="Page" title="Apartment For Sell" />
 
-      <div className='text-2xl mb-2'>ADDING APARTMENT FOR RENT</div>
-      <Link to={'/apartforrent'}>
+      <div className='text-2xl mb-2'>ADDING APARTMENT FOR SELL</div>
+      <Link to={'/apartforsell'}>
         <button
           class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
           hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-          Back To Apart For Rent list
+          Back To Apart For Sell list
         </button>
       </Link>
 
@@ -370,4 +368,4 @@ const ApartForRentEdit = () => {
   )
 }
 
-export default ApartForRentEdit
+export default ApartForSellEdit

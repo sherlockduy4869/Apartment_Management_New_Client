@@ -12,6 +12,10 @@ export { default as ApartForRent } from './ApartForRent/ApartForRent';
 export { default as ApartForRentAdd } from './ApartForRent/ApartForRentAdd';
 export { default as ApartForRentEdit } from './ApartForRent/ApartForRentEdit';
 
+export { default as ApartForSell } from './ApartForSell/ApartForSell';
+export { default as ApartForSellAdd } from './ApartForSell/ApartForSellAdd';
+export { default as ApartForSellEdit } from './ApartForSell/ApartForSellEdit';
+
 export { default as Further } from './Further/Further';
 export { default as FurtherAdd } from './Further/FurtherAdd';
 export { default as FurtherEdit } from './Further/FurtherEdit';

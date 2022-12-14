@@ -5,7 +5,6 @@ import { Header } from '../../components';
 import { Link } from 'react-router-dom';
 import { NumericFormat } from 'react-number-format';
 import Select from 'react-select';
-
 import Cleave from 'cleave.js/react';
 
 const ApartForRentAdd = () => {

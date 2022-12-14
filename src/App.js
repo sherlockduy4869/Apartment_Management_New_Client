@@ -9,6 +9,7 @@ import {
   News, NewsAdd, NewsEdit, 
   Project, ProjectAdd, 
   ApartForRent, ApartForRentAdd, ApartForRentEdit,
+  ApartForSell, ApartForSellAdd, ApartForSellEdit,
   Further, FurtherAdd, FurtherEdit,
   Feature, FeatureAdd,
   Images, ImagesAdd,
@@ -98,6 +99,12 @@ const App = () => {
                 <Route path="/apartforrent" element={<ApartForRent />} />
                 <Route path="/apartforrent/add" element={<ApartForRentAdd />} />
                 <Route path="/apartforrent/edit/:id" element={<ApartForRentEdit />} />
+                {/*----------*/}
+
+                {/* Apart For Sell  */}
+                <Route path="/apartforsell" element={<ApartForSell />} />
+                <Route path="/apartforsell/add" element={<ApartForSellAdd />} />
+                <Route path="/apartforsell/edit/:id" element={<ApartForSellEdit />} />
                 {/*----------*/}
 
                 {/* Further  */}
