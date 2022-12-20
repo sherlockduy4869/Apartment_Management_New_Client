@@ -33,6 +33,11 @@ export { default as ImagesAdd } from './Images/ImagesAdd';
 export { default as Project } from './Project/Project';
 export { default as ProjectAdd } from './Project/ProjectAdd';
 
+export { default as Register } from './Auth/Register';
+export { default as Login } from './Auth/Login';
+
 export { default as Calendar } from './Calendar';
+
+export { default as PageNotFound } from './PageNotFound';
 
 
