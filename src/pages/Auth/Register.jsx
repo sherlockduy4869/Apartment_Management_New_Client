@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from "axios";
 
@@ -92,6 +93,15 @@ const Register = () => {
                                 >
                                     Register
                                 </button>
+                                <p className="text-sm font-semibold mt-2 pt-1 mb-0">
+                                    Login Now? 
+                                    <Link to={'/login'}>
+                                        <a
+                                            href="#!"
+                                            className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                                        >Login </a>
+                                    </Link>
+                                </p>
                             </div>
                         </form>
                     </div>
