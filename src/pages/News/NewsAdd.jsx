@@ -11,6 +11,7 @@ const NewsAdd = () => {
   const [title, setTitle] = useState("")
   const [image, setImage] = useState("")
   const [author, setAuthor] = useState("")
+  const [intro, setIntro] = useState("")
   const [description, setDescription] = useState("")
 
   const [addStatus, setAddStatus] = useState("")
@@ -19,6 +20,7 @@ const NewsAdd = () => {
   const [errorTitle, setErrorTitle] = useState("")
   const [errorImage, setErrorImage] = useState("")
   const [errorAuthor, setErrorAuthor] = useState("")
+  const [errorIntro, setErrorIntro] = useState("")
   const [errorDescription, setErrorDescription] = useState("")
 
   const addingNews = (e) => {
@@ -31,6 +33,7 @@ const NewsAdd = () => {
     formData.append("title_news", title)
     formData.append("image_news", image)
     formData.append("author_news", author)
+    formData.append("intro_news", intro)
     formData.append("description_news", description)
 
     axios.post(url_add, formData)
@@ -42,7 +45,9 @@ const NewsAdd = () => {
         setErrorTitle("")
         setErrorImage("")
         setErrorAuthor("")
+        setErrorIntro("")
         setErrorDescription("")
+        
         setAddStatus(res["data"]["message"])
       })
       .catch(error => {
@@ -66,6 +71,13 @@ const NewsAdd = () => {
         }
         else {
           setErrorAuthor("")
+        }
+
+        if (error['response']['data']['errors']['intro_news']) {
+          setErrorIntro(error['response']['data']['errors']['intro_news'][0])
+        }
+        else {
+          setErrorIntro("")
         }
 
         if (error['response']['data']['errors']['description_news']) {
@@ -143,6 +155,30 @@ const NewsAdd = () => {
 
             <div style={{ color: "#f43f5e" }}>
               {errorTitle}
+            </div>
+
+          </div>
+        </div>
+
+        <div class="flex flex-wrap -mx-3 mb-4">
+          <div class="w-full md:w-full px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs 
+              font-bold mb-2" for="grid-city">
+              Intro
+            </label>
+
+            <textarea
+              onChange={(e) => setIntro(e.target.value)}
+              rows="4"
+              placeholder="Intro of news here"
+              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
+              border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
+            dark:bg-gray-700 dark:border-gray-6 dark:placeholder-gray-400 
+            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+            </textarea>
+
+            <div style={{ color: "#f43f5e" }}>
+              {errorIntro}
             </div>
 
           </div>

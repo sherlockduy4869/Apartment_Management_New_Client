@@ -15,6 +15,7 @@ const NewsEdit = () => {
   const [title, setTitle] = useState("")
   const [image, setImage] = useState("")
   const [author, setAuthor] = useState("")
+  const [intro, setIntro] = useState("")
   const [description, setDescription] = useState("")
 
   const [editStatus, setEditStatus] = useState("")
@@ -23,6 +24,7 @@ const NewsEdit = () => {
   const [errorTitle, setErrorTitle] = useState("")
   const [errorImage, setErrorImage] = useState("")
   const [errorAuthor, setErrorAuthor] = useState("")
+  const [errorIntro, setErrorIntro] = useState("")
   const [errorDescription, setErrorDescription] = useState("")
 
   /*get news by id*/
@@ -32,6 +34,7 @@ const NewsEdit = () => {
       setTitle(newsFromServer["title_news"])
       setImage(newsFromServer["image_news"])
       setAuthor(newsFromServer["author_news"])
+      setIntro(newsFromServer["intro_news"])
       setDescription(newsFromServer["description_news"])
     }
     getNews()
@@ -54,6 +57,7 @@ const NewsEdit = () => {
       image_news: image,
       title_news: title,
       author_news: author,
+      intro_news: intro,
       description_news: description
     }
 
@@ -68,6 +72,7 @@ const NewsEdit = () => {
         setErrorTitle("")
         setErrorImage("")
         setErrorAuthor("")
+        setErrorIntro("")
         setErrorDescription("")
 
         setEditStatus(res["data"]["message"])
@@ -93,6 +98,13 @@ const NewsEdit = () => {
         }
         else {
           setErrorAuthor("")
+        }
+
+        if (error['response']['data']['errors']['intro_news']) {
+          setErrorIntro(error['response']['data']['errors']['intro_news'][0])
+        }
+        else {
+          setErrorIntro("")
         }
 
         if (error['response']['data']['errors']['description_news']) {
@@ -173,6 +185,31 @@ const NewsEdit = () => {
 
             <div style={{ color: "#f43f5e" }}>
               {errorTitle}
+            </div>
+
+          </div>
+        </div>
+
+        <div class="flex flex-wrap -mx-3 mb-4">
+          <div class="w-full md:w-full px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs 
+              font-bold mb-2" for="grid-city">
+              Intro
+            </label>
+
+            <textarea
+              value={intro}
+              onChange={(e) => setIntro(e.target.value)}
+              rows="4"
+              placeholder="Intro of news here"
+              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
+              border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
+            dark:bg-gray-700 dark:border-gray-6 dark:placeholder-gray-400 
+            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+            </textarea>
+
+            <div style={{ color: "#f43f5e" }}>
+              {errorIntro}
             </div>
 
           </div>
