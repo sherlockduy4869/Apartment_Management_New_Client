@@ -22,7 +22,8 @@ import PrivateRoute from './pages/PrivateRoute';
 
 
 const App = () => {
-  const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
+  const { setCurrentColor, setCurrentMode, currentMode, activeMenu, 
+          currentColor, themeSettings, setThemeSettings } = useStateContext();
 
   useEffect(() => {
     const currentThemeColor = localStorage.getItem('colorMode');
@@ -37,7 +38,7 @@ const App = () => {
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
       <BrowserRouter>
         <div className="flex relative dark:bg-main-dark-bg">
-          {localStorage.getItem('jwt') === null ?
+            {localStorage.getItem('jwt') === null ?
             "" :
             <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
               <TooltipComponent
@@ -58,15 +59,20 @@ const App = () => {
           }
 
           {localStorage.getItem('jwt') === null ?
-            "" : <> {activeMenu ? (
+            "" : 
+            <> 
+            {activeMenu ? 
+            (
               <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
                 <Sidebar />
               </div>
-            ) : (
+            ) : 
+            (
               <div className="w-0 dark:bg-secondary-dark-bg">
                 <Sidebar />
               </div>
-            )} </>}
+            )} 
+            </>}
 
           <div style={{ overflowX: "hidden" }}
             className=
@@ -90,74 +96,76 @@ const App = () => {
                 </>}
 
               <Routes>
-                {/* dashboard  */}
                 {/* Authenication  */}
-                <Route path="/login" element={localStorage.getItem('jwt') !== null ? <Navigate to="/" /> : <Login />} />
-                <Route path="/register" element={localStorage.getItem('jwt') !== null ? <Navigate to="/" /> : <Register />} />
+                <Route path="/login" 
+                element={localStorage.getItem('jwt') !== null ? <Navigate to="/" /> : <Login />} />
+                <Route path="/register" 
+                element={localStorage.getItem('jwt') !== null ? <Navigate to="/" /> : <Register />} />
                 {/*----------*/}
+
+                {/* dashboard  */}
                 <Route element={<PrivateRoute isLogged={localStorage.getItem('jwt') !== null} />}>
-                  {/* Ecommerce  */}
-                  <Route path="*" element={<Ecommerce />} />
-                  <Route path="/" exact element={<Ecommerce />} />
-                  <Route path="/ecommerce" exact element={<Ecommerce />} />
-                  {/*----------*/}
-
                   {/* pages  */}
-                  {/* Slider  */}
-                  <Route path="/slider" element={<Slider />} />
-                  <Route path="/slider/add" element={<SliderAdd />} />
-                  {/*----------*/}
+                    {/* Ecommerce  */}
+                      <Route path="*" element={<Ecommerce />} />
+                      <Route path="/" exact element={<Ecommerce />} />
+                      <Route path="/ecommerce" exact element={<Ecommerce />} />
+                    {/*----------*/}
 
-                  {/* News  */}
-                  <Route path="/news" element={<News />} />
-                  <Route path="/news/add" element={<NewsAdd />} />
-                  <Route path="/news/edit/:id" element={<NewsEdit />} />
-                  {/*----------*/}
+                    {/* Slider  */}
+                      <Route path="/slider" element={<Slider />} />
+                      <Route path="/slider/add" element={<SliderAdd />} />
+                    {/*----------*/}
 
-                  {/* Project */}
-                  <Route path="/project" element={<Project />} />
-                  <Route path="/project/add" element={<ProjectAdd />} />
-                  {/*----------*/}
+                    {/* News  */}
+                      <Route path="/news" element={<News />} />
+                      <Route path="/news/add" element={<NewsAdd />} />
+                      <Route path="/news/edit/:id" element={<NewsEdit />} />
+                    {/*----------*/}
 
-                  {/* Apart For Rent  */}
-                  <Route path="/apartforrent" element={<ApartForRent />} />
-                  <Route path="/apartforrent/add" element={<ApartForRentAdd />} />
-                  <Route path="/apartforrent/edit/:id" element={<ApartForRentEdit />} />
-                  {/*----------*/}
+                    {/* Project */}
+                      <Route path="/project" element={<Project />} />
+                      <Route path="/project/add" element={<ProjectAdd />} />
+                    {/*----------*/}
 
-                  {/* Apart For Sell  */}
-                  <Route path="/apartforsell" element={<ApartForSell />} />
-                  <Route path="/apartforsell/add" element={<ApartForSellAdd />} />
-                  <Route path="/apartforsell/edit/:id" element={<ApartForSellEdit />} />
-                  {/*----------*/}
+                    {/* Apart For Rent  */}
+                      <Route path="/apartforrent" element={<ApartForRent />} />
+                      <Route path="/apartforrent/add" element={<ApartForRentAdd />} />
+                      <Route path="/apartforrent/edit/:id" element={<ApartForRentEdit />} />
+                    {/*----------*/}
 
-                  {/* Service Apartment  */}
-                  <Route path="/serviceapart" element={<ServiceApart />} />
-                  <Route path="/serviceapart/add" element={<ServiceApartAdd />} />
-                  <Route path="/serviceapart/edit/:id" element={<ServiceApartEdit />} />
-                  {/*----------*/}
+                    {/* Apart For Sell  */}
+                      <Route path="/apartforsell" element={<ApartForSell />} />
+                      <Route path="/apartforsell/add" element={<ApartForSellAdd />} />
+                      <Route path="/apartforsell/edit/:id" element={<ApartForSellEdit />} />
+                    {/*----------*/}
 
-                  {/* Further  */}
-                  <Route path="/further/:id" element={<Further />} />
-                  <Route path="/further/add/:id" element={<FurtherAdd />} />
-                  <Route path="/further/edit/:id" element={<FurtherEdit />} />
-                  {/*----------*/}
+                    {/* Service Apartment  */}
+                      <Route path="/serviceapart" element={<ServiceApart />} />
+                      <Route path="/serviceapart/add" element={<ServiceApartAdd />} />
+                      <Route path="/serviceapart/edit/:id" element={<ServiceApartEdit />} />
+                    {/*----------*/}
 
-                  {/* Feature  */}
-                  <Route path="/feature/:id" element={<Feature />} />
-                  <Route path="/feature/add/:id" element={<FeatureAdd />} />
-                  {/*----------*/}
+                    {/* Further  */}
+                      <Route path="/further/:id" element={<Further />} />
+                      <Route path="/further/add/:id" element={<FurtherAdd />} />
+                      <Route path="/further/edit/:id" element={<FurtherEdit />} />
+                    {/*----------*/}
 
-                  {/* Images  */}
-                  <Route path="/images/:id" element={<Images />} />
-                  <Route path="/images/add/:id" element={<ImagesAdd />} />
-                  {/*----------*/}
+                    {/* Feature  */}
+                      <Route path="/feature/:id" element={<Feature />} />
+                      <Route path="/feature/add/:id" element={<FeatureAdd />} />
+                    {/*----------*/}
 
+                    {/* Images  */}
+                      <Route path="/images/:id" element={<Images />} />
+                      <Route path="/images/add/:id" element={<ImagesAdd />} />
+                    {/*----------*/}
+
+                    {/* apps  */}
+                      <Route path="/kanban" element={<Kanban />} />
+                      <Route path="/calendar" element={<Calendar />} />
                   {/*---------*/}
-
-                  {/* apps  */}
-                  <Route path="/kanban" element={<Kanban />} />
-                  <Route path="/calendar" element={<Calendar />} />
                 </Route>
 
               </Routes>
