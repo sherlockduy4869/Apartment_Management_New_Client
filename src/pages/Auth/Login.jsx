@@ -6,6 +6,9 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const [errorEmail, setErrorEmail] = useState("")
+    const [errorPassword, setErrorPassword] = useState("")
+
     const login = (e) => {
         const formData = new FormData()
 
@@ -18,12 +21,25 @@ const Login = () => {
             .then(res => {
                 if (res['data']['access_token']) {
                     localStorage.setItem('jwt', res['data']['access_token'])
+                    setErrorEmail("")
+                    setErrorPassword("")
                     window.location.reload();
                 }
-                console.log(res)
             })
             .catch(error => {
-                console.log(error)
+                if (error['response']['data']['errors']['email']) {
+                    setErrorEmail(error['response']['data']['errors']['email'][0])
+                }
+                else {
+                    setErrorEmail("")
+                }
+
+                if (error['response']['data']['errors']['password']) {
+                    setErrorPassword(error['response']['data']['errors']['password'][0])
+                }
+                else {
+                    setErrorPassword("")
+                }
             })
     }
 
@@ -63,6 +79,9 @@ const Login = () => {
                                     placeholder="Email address"
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
+                                <div style={{ color: "#f43f5e" }}>
+                                    {errorEmail}
+                                </div>
                             </div>
 
                             <div className="mb-6">
@@ -77,6 +96,9 @@ const Login = () => {
                                     placeholder="Password"
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
+                                <div style={{ color: "#f43f5e" }}>
+                                    {errorPassword}
+                                </div>
                             </div>
 
                             <div className="text-center lg:text-left">
