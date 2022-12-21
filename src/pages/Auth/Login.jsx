@@ -13,13 +13,12 @@ const Login = () => {
         formData.append("email", email)
         formData.append("password", password)
 
-        const url_register = "http://localhost/admin_api/public/api/v1/login"
+        const url_register = "http://localhost/admin_api/public/api/login"
 
-        axios.post(url_register, formData, { withCredentials: 'include' })
+        axios.post(url_register, formData)
             .then(res => {
-                if (res['data']['token']) {
-                    localStorage.setItem('auth_token', res['data']['token'])
-                    localStorage.setItem('auth_name', res['data']['name'])
+                if (res['data']['access_token']) {
+                    localStorage.setItem('jwt', res['data']['access_token'])
                     window.location.reload();
                 }
                 console.log(res)

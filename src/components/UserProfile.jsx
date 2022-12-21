@@ -1,7 +1,5 @@
-import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
 import axios from "axios";
-import { Link } from 'react-router-dom';
 import { Button } from '.';
 import { useStateContext } from '../contexts/ContextProvider';
 import avatar from '../data/avatar.jpg';
@@ -12,12 +10,15 @@ const UserProfile = () => {
   const logout = () => {
     const formData = new FormData()
 
-    const url_register = "http://localhost/admin_api/public/api/v1/logout"
+    const url_register = "http://localhost/admin_api/public/api/logout"
 
-    axios.post(url_register, formData, { withCredentials: 'include' })
+    const config = {
+      headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` }
+    };
+
+    axios.post(url_register, formData, config)
       .then(res => {
-        localStorage.removeItem('auth_token')
-        localStorage.removeItem('auth_name')
+        localStorage.removeItem('jwt')
         window.location.reload();
         console.log(res)
       })
@@ -52,7 +53,7 @@ const UserProfile = () => {
       </div>
       <div className="mt-5">
         <div
-        onClick={logout}>
+          onClick={logout}>
           <Button
             color="white"
             bgColor={currentColor}

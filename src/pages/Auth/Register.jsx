@@ -1,8 +1,6 @@
-import React from 'react'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from "axios";
-
 
 const Register = () => {
 
@@ -10,7 +8,6 @@ const Register = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     
-
     const register = (e) => {
         e.preventDefault()
 
@@ -20,7 +17,7 @@ const Register = () => {
         formData.append("email", email)
         formData.append("password", password)
 
-        const url_register = "http://localhost/admin_api/public/api/v1/register"
+        const url_register = "http://localhost/admin_api/public/api/register"
 
         axios.post(url_register, formData)
             .then(res => {

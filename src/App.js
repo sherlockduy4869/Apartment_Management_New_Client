@@ -37,7 +37,7 @@ const App = () => {
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
       <BrowserRouter>
         <div className="flex relative dark:bg-main-dark-bg">
-          {localStorage.getItem('auth_token') === null ?
+          {localStorage.getItem('jwt') === null ?
             "" :
             <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
               <TooltipComponent
@@ -57,7 +57,7 @@ const App = () => {
             </div>
           }
 
-          {localStorage.getItem('auth_token') === null ?
+          {localStorage.getItem('jwt') === null ?
             "" : <> {activeMenu ? (
               <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
                 <Sidebar />
@@ -77,13 +77,13 @@ const App = () => {
             }
           >
 
-            {localStorage.getItem('auth_token') !== null ?
+            {localStorage.getItem('jwt') !== null ?
               <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
                 <Navbar />
               </div> : ""}
 
             <div>
-              {localStorage.getItem('auth_token') === null ?
+              {localStorage.getItem('jwt') === null ?
                 "" :
                 <>
                   {themeSettings && (<ThemeSettings />)}
@@ -92,10 +92,10 @@ const App = () => {
               <Routes>
                 {/* dashboard  */}
                 {/* Authenication  */}
-                <Route path="/login" element={localStorage.getItem('auth_token') !== null ? <Navigate to="/" /> : <Login />} />
-                <Route path="/register" element={localStorage.getItem('auth_token') !== null ? <Navigate to="/" /> : <Register />} />
+                <Route path="/login" element={localStorage.getItem('jwt') !== null ? <Navigate to="/" /> : <Login />} />
+                <Route path="/register" element={localStorage.getItem('jwt') !== null ? <Navigate to="/" /> : <Register />} />
                 {/*----------*/}
-                <Route element={<PrivateRoute isLogged={localStorage.getItem('auth_token') !== null} />}>
+                <Route element={<PrivateRoute isLogged={localStorage.getItem('jwt') !== null} />}>
                   {/* Ecommerce  */}
                   <Route path="*" element={<Ecommerce />} />
                   <Route path="/" exact element={<Ecommerce />} />
@@ -163,7 +163,7 @@ const App = () => {
               </Routes>
             </div>
 
-            {localStorage.getItem('auth_token') !== null ?
+            {localStorage.getItem('jwt') !== null ?
               <Footer /> : ""}
           </div>
         </div>
