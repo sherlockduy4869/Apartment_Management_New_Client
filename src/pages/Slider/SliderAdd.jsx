@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState } from 'react';
 import axios from "axios";
 import { Header } from '../../components';
@@ -37,6 +36,9 @@ const SliderAdd = () => {
       .catch(error => {
         if (error['response']['data']['errors']['image_slider']) {
           setErrorImage(error['response']['data']['errors']['image_slider'][0])
+        }
+        else {
+          setErrorImage("")
         }
       });
   }

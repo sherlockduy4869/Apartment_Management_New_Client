@@ -34,6 +34,9 @@ const ProjectAdd = () => {
         if (error['response']['data']['errors']['project_name']) {
           setErrorName(error['response']['data']['errors']['project_name'][0])
         }
+        else{
+          setErrorName("")
+        }
       });
   }
   return (

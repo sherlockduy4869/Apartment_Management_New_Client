@@ -38,6 +38,5 @@ export { default as Login } from './Auth/Login';
 
 export { default as Calendar } from './Calendar';
 
-export { default as PageNotFound } from './PageNotFound';
 
 

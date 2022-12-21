@@ -7,7 +7,14 @@ const Register = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    
+    const [passwordConfirm, setPasswordConfirm] = useState('')
+
+    const [registerStatus, setRegisterStatus] = useState("")
+    const [errorName, setErrorName] = useState("")
+    const [errorEmail, setErrorEmail] = useState("")
+    const [errorPassword, setErrorPassword] = useState("")
+    const [corlorMessage, setColorMessage] = useState("")
+
     const register = (e) => {
         e.preventDefault()
 
@@ -16,15 +23,42 @@ const Register = () => {
         formData.append("name", name)
         formData.append("email", email)
         formData.append("password", password)
+        formData.append("password_confirmation", passwordConfirm)
 
         const url_register = "http://localhost/admin_api/public/api/register"
 
         axios.post(url_register, formData)
             .then(res => {
-                console.log(res)
+                if (!res["data"]["status"]) {
+                    setColorMessage("#f43f5e")
+                }
+                setColorMessage("#22c55e")
+                setErrorName("")
+                setErrorEmail("")
+                setErrorPassword("")
+                setRegisterStatus(res["data"]["message"])
             })
-            .catch(error =>{    
-                console.log(error)
+            .catch(error => {
+                if (error['response']['data']['errors']['name']) {
+                    setErrorName(error['response']['data']['errors']['name'][0])
+                }
+                else {
+                    setErrorName("")
+                }
+
+                if (error['response']['data']['errors']['email']) {
+                    setErrorEmail(error['response']['data']['errors']['email'][0])
+                }
+                else {
+                    setErrorEmail("")
+                }
+
+                if (error['response']['data']['errors']['password']) {
+                    setErrorPassword(error['response']['data']['errors']['password'][0])
+                }
+                else {
+                    setErrorPassword("")
+                }
             })
     }
 
@@ -38,8 +72,7 @@ const Register = () => {
                         className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 
                         lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
                         <img
-                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/
-                            bootstrap-login-form/draw2.webp"
+                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
                             className="w-full"
                             alt="Sample image"
                         />
@@ -66,6 +99,9 @@ const Register = () => {
                                     placeholder="Name"
                                     onChange={(e) => setName(e.target.value)}
                                 />
+                                <div style={{ color: "#f43f5e" }}>
+                                    {errorName}
+                                </div>
                             </div>
 
                             <div className="mb-6">
@@ -80,6 +116,9 @@ const Register = () => {
                                     placeholder="Email address"
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
+                                <div style={{ color: "#f43f5e" }}>
+                                    {errorEmail}
+                                </div>
                             </div>
 
                             <div className="mb-6">
@@ -94,9 +133,29 @@ const Register = () => {
                                     placeholder="Password"
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
+                                <div style={{ color: "#f43f5e" }}>
+                                    {errorPassword}
+                                </div>
+                            </div>
+
+                            <div className="mb-6">
+                                <input
+                                    type="password"
+                                    className="form-control block w-full px-4 py-2 text-xl 
+                                    font-normal text-gray-700 bg-white bg-clip-padding 
+                                    border border-solid border-gray-300 rounded transition 
+                                    ease-in-out m-0 focus:text-gray-700 focus:bg-white 
+                                    focus:border-blue-600 focus:outline-none"
+                                    id="exampleFormControlInput2"
+                                    placeholder="Password Confirmation"
+                                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                                />
                             </div>
 
                             <div className="text-center lg:text-left">
+                                <div className='mb-4' style={{ color: corlorMessage }}>
+                                    {registerStatus}
+                                </div>
                                 <button
                                     onClick={register}
                                     type="button"
@@ -110,7 +169,7 @@ const Register = () => {
                                     Register
                                 </button>
                                 <p className="text-sm font-semibold mt-2 pt-1 mb-0">
-                                    Login Now? 
+                                    Login Now?
                                     <Link to={'/login'}>
                                         <a
                                             className="text-red-600 hover:text-red-700 
