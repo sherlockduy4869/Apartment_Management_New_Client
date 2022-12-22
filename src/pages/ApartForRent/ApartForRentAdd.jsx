@@ -8,6 +8,8 @@ import Cleave from 'cleave.js/react';
 
 const ApartForRentAdd = () => {
 
+  const [showElement, setShowElement] = useState(true)
+
   const [projectList, setProjectList] = useState([])
 
   /*get project list*/
@@ -99,6 +101,7 @@ const ApartForRentAdd = () => {
         setErrorImage("")
         setErrorProject("")
         setErrorAddress("")
+        setShowElement(true)
         setAddStatus(res["data"]["message"])
       })
       .catch(error => {
@@ -147,7 +150,9 @@ const ApartForRentAdd = () => {
         </button>
       </Link>
 
-      <form class="w-full max-w-full">
+      <form 
+      onClick={(e) => setShowElement(false)}
+      class="w-full max-w-full">
 
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -308,7 +313,7 @@ const ApartForRentAdd = () => {
         <div class="flex flex-wrap -mx-3 mb-2">
           <div class="w-full md:w-full px-3 mb-6 md:mb-0 text-center">
             <div className='mb-2' style={{ color: corlorMessage }}>
-              {addStatus}
+              {showElement?addStatus:<></>} 
             </div>
             <button onClick={(e) => addingApart(e)}
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

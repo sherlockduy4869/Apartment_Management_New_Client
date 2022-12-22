@@ -45,11 +45,21 @@ const News = () => {
     setFilterNews(filterNews.filter((filterNews) => filterNews.id_news !== id))
   }
 
+  const getDate = (date) =>{
+      const getDate = date.substring(0, 10)
+
+      const dateArray = getDate.split('-')
+
+      const formatedDate = dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0]
+
+      return formatedDate
+  }
+
   const columns = [
     {
       name: "ID",
       selector: (row, index) => index + 1,
-      width: "10%",
+      width: "4%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -70,7 +80,7 @@ const News = () => {
     {
       name: "Image",
       selector: (row) => <img style={{ width: "70%" }} src={row.image_news} alt="news-item" />,
-      width: "30%",
+      width: "25%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -85,6 +95,19 @@ const News = () => {
         {row.author_news}
       </div>,
       width: "20%",
+      style: {
+        padding: "10px 15px",
+        justifyContent: "center",
+      }
+    },
+    {
+      name: "Date",
+      sortable: true,
+      selector: 'created_at',
+      cell: (row) => <div className="py-1 px-2 capitalize font-medium text-md">
+        {getDate(row.created_at)}
+      </div>,
+      width: "11%",
       style: {
         padding: "10px 15px",
         justifyContent: "center",

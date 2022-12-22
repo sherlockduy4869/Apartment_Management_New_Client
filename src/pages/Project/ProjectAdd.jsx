@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 
 const ProjectAdd = () => {
 
+  const [showElement, setShowElement] = useState(true)
+
   const [projectName, setProjectName] = useState("")
 
   const [addStatus, setAddStatus] = useState("")
@@ -28,6 +30,7 @@ const ProjectAdd = () => {
         }
         setColorMessage("#22c55e")
         setErrorName("")
+        setShowElement(true)
         setAddStatus(res["data"]["message"])
       })
       .catch(error => {
@@ -52,7 +55,9 @@ const ProjectAdd = () => {
         </button>
       </Link>
 
-      <form class="w-full max-w-sm">
+      <form 
+      onClick={(e) => setShowElement(false)}
+      class="w-full max-w-sm">
 
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
@@ -79,7 +84,7 @@ const ProjectAdd = () => {
           <div class="md:w-1/3"></div>
           <div class="md:w-2/3">
             <div className='mb-4' style={{ color: corlorMessage }}>
-              {addStatus}
+              {showElement?addStatus:<></>} 
             </div>
             <button
               type="button"

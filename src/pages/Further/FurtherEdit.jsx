@@ -7,6 +7,8 @@ import { useLocation } from "react-router-dom";
 
 const FurtherEdit = () => {
 
+  const [showElement, setShowElement] = useState(true)
+
   const { id } = useParams()
   const { state } = useLocation()
   const pathBack = '/further/' + id
@@ -23,7 +25,7 @@ const FurtherEdit = () => {
   const [heating, setHeating] = useState("")
   const [lot, setLot] = useState("")
 
-  const [addStatus, setAddStatus] = useState("")
+  const [editStatus, setEditStatus] = useState("")
   const [corlorMessage, setColorMessage] = useState("")
 
   /*get further*/
@@ -76,7 +78,8 @@ const FurtherEdit = () => {
             setColorMessage("#f43f5e")
           }
           setColorMessage("#22c55e")
-          setAddStatus(res["data"]["message"])
+          setShowElement(true)
+          setEditStatus(res["data"]["message"])
         })
         .catch(error => {
           console.log(error)
@@ -99,7 +102,9 @@ const FurtherEdit = () => {
         </button>
       </Link>
 
-      <form class="w-full max-w-full">
+      <form 
+      onClick={(e) => setShowElement(false)}
+      class="w-full max-w-full">
 
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -212,7 +217,7 @@ const FurtherEdit = () => {
         <div class="flex flex-wrap -mx-3 mb-2">
           <div class="w-full md:w-full px-3 mb-6 md:mb-0 text-center">
             <div className='mb-2' style={{ color: corlorMessage }}>
-              {addStatus}
+              {showElement?editStatus:<></>} 
             </div>
             <button onClick={(e) => editingFuther(e)}
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

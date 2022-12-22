@@ -9,6 +9,8 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const NewsEdit = () => {
 
+  const [showElement, setShowElement] = useState(true)
+
   const { id } = useParams()
   const url_edit = "http://localhost/admin_api/public/api/v1/news/" + id;
 
@@ -74,6 +76,7 @@ const NewsEdit = () => {
         setErrorAuthor("")
         setErrorIntro("")
         setErrorDescription("")
+        setShowElement(true)
 
         setEditStatus(res["data"]["message"])
       })
@@ -129,7 +132,9 @@ const NewsEdit = () => {
         </button>
       </Link>
 
-      <form class="w-full max-w-full">
+      <form 
+      onClick={(e) => setShowElement(false)}
+      class="w-full max-w-full">
 
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -240,7 +245,7 @@ const NewsEdit = () => {
         <div class="flex flex-wrap -mx-3 mb-2">
           <div class="w-full md:w-full px-3 mb-6 md:mb-0 text-center">
             <div className='mb-2' style={{ color: corlorMessage }}>
-              {editStatus}
+              {showElement?editStatus:<></>} 
             </div>
             <button onClick={(e) => editingNews(e)}
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

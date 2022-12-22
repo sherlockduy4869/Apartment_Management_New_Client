@@ -8,6 +8,8 @@ import { useLocation } from "react-router-dom";
 
 const ImagesAdd = () => {
 
+  const [showElement, setShowElement] = useState(true)
+
   const { id } = useParams()
   const { state } = useLocation()
   const pathBack = '/images/' + id
@@ -40,7 +42,9 @@ const ImagesAdd = () => {
         setColorMessage("#22c55e")
         setErrorImage("")
         setAddStatus(res["data"]["message"]) 
-        window.location.reload();
+
+        setShowElement(true)
+
         console.log(res)
       })
       .catch(error => {
@@ -69,7 +73,9 @@ const ImagesAdd = () => {
         </button>
       </Link>
 
-      <form class="w-full max-w-sm">
+      <form 
+      onClick={(e) => setShowElement(false)}
+      class="w-full max-w-sm">
 
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
@@ -95,7 +101,7 @@ const ImagesAdd = () => {
           <div class="md:w-1/3"></div>
           <div class="md:w-2/3">
             <div className='mb-4' style={{ color: corlorMessage }}>
-              {addStatus}
+              {showElement?addStatus:<></>} 
             </div>
             <button
               type="button"
