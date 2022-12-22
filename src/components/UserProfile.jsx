@@ -18,7 +18,7 @@ const UserProfile = () => {
 
     axios.post(url_register, formData, config)
       .then(res => {
-        localStorage.removeItem('jwt')
+        sessionStorage.removeItem('jwt')
         window.location.reload();
         console.log(res)
       })

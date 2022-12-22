@@ -20,10 +20,14 @@ const Login = () => {
         axios.post(url_register, formData)
             .then(res => {
                 if (res['data']['access_token']) {
-                    localStorage.setItem('jwt', res['data']['access_token'])
+                    sessionStorage.setItem('jwt', res['data']['access_token'])
                     setErrorEmail("")
                     setErrorPassword("")
                     window.location.reload();
+                }
+                if(!res['data']['status']){
+                    setErrorEmail("")
+                    setErrorPassword(res['data']['message'])
                 }
             })
             .catch(error => {

@@ -26,8 +26,8 @@ const App = () => {
           currentColor, themeSettings, setThemeSettings } = useStateContext();
 
   useEffect(() => {
-    const currentThemeColor = localStorage.getItem('colorMode');
-    const currentThemeMode = localStorage.getItem('themeMode');
+    const currentThemeColor = sessionStorage.getItem('colorMode');
+    const currentThemeMode = sessionStorage.getItem('themeMode');
     if (currentThemeColor && currentThemeMode) {
       setCurrentColor(currentThemeColor);
       setCurrentMode(currentThemeMode);
@@ -38,7 +38,7 @@ const App = () => {
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
       <BrowserRouter>
         <div className="flex relative dark:bg-main-dark-bg">
-            {localStorage.getItem('jwt') === null ?
+            {sessionStorage.getItem('jwt') === null ?
             "" :
             <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
               <TooltipComponent
@@ -58,7 +58,7 @@ const App = () => {
             </div>
           }
 
-          {localStorage.getItem('jwt') === null ?
+          {sessionStorage.getItem('jwt') === null ?
             "" : 
             <> 
             {activeMenu ? 
@@ -83,13 +83,13 @@ const App = () => {
             }
           >
 
-            {localStorage.getItem('jwt') !== null ?
+            {sessionStorage.getItem('jwt') !== null ?
               <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
                 <Navbar />
               </div> : ""}
 
             <div>
-              {localStorage.getItem('jwt') === null ?
+              {sessionStorage.getItem('jwt') === null ?
                 "" :
                 <>
                   {themeSettings && (<ThemeSettings />)}
@@ -98,13 +98,13 @@ const App = () => {
               <Routes>
                 {/* Authenication  */}
                 <Route path="/login" 
-                element={localStorage.getItem('jwt') !== null ? <Navigate to="/" /> : <Login />} />
+                element={sessionStorage.getItem('jwt') !== null ? <Navigate to="/" /> : <Login />} />
                 <Route path="/register" 
-                element={localStorage.getItem('jwt') !== null ? <Navigate to="/" /> : <Register />} />
+                element={sessionStorage.getItem('jwt') !== null ? <Navigate to="/" /> : <Register />} />
                 {/*----------*/}
 
                 {/* dashboard  */}
-                <Route element={<PrivateRoute isLogged={localStorage.getItem('jwt') !== null} />}>
+                <Route element={<PrivateRoute isLogged={sessionStorage.getItem('jwt') !== null} />}>
                   {/* pages  */}
                     {/* Ecommerce  */}
                       <Route path="*" element={<Ecommerce />} />
@@ -171,7 +171,7 @@ const App = () => {
               </Routes>
             </div>
 
-            {localStorage.getItem('jwt') !== null ?
+            {sessionStorage.getItem('jwt') !== null ?
               <Footer /> : ""}
           </div>
         </div>
