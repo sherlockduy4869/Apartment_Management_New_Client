@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from "axios";
+import Cookies from 'js-cookie'
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -20,7 +21,7 @@ const Login = () => {
         axios.post(url_register, formData)
             .then(res => {
                 if (res['data']['access_token']) {
-                    sessionStorage.setItem('jwt', res['data']['access_token'])
+                    Cookies.set('jwt', res['data']['access_token'], { expires: 1 })
                     setErrorEmail("")
                     setErrorPassword("")
                     window.location.reload();

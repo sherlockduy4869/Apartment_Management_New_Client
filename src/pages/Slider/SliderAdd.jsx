@@ -11,6 +11,8 @@ const SliderAdd = () => {
   const [note, setNote] = useState("")
   const [status, setStatus] = useState("showing")
 
+  console.log(image, note, status)
+
   const [addStatus, setAddStatus] = useState("")
   const [errorImage, setErrorImage] = useState("")
   const [corlorMessage, setColorMessage] = useState("")

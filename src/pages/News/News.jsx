@@ -105,7 +105,7 @@ const News = () => {
       sortable: true,
       selector: 'created_at',
       cell: (row) => <div className="py-1 px-2 capitalize font-medium text-md">
-        {getDate(row.created_at)}
+        {row.created_at ? getDate(row.created_at) : ""}
       </div>,
       width: "11%",
       style: {

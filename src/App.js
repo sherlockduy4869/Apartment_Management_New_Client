@@ -19,7 +19,7 @@ import {
 import './App.css';
 import { useStateContext } from './contexts/ContextProvider';
 import PrivateRoute from './pages/PrivateRoute';
-
+import Cookies from 'js-cookie'
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, 
@@ -38,7 +38,7 @@ const App = () => {
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
       <BrowserRouter>
         <div className="flex relative dark:bg-main-dark-bg">
-            {sessionStorage.getItem('jwt') === null ?
+            {Cookies.get('jwt') === undefined ?
             "" :
             <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
               <TooltipComponent
@@ -58,7 +58,7 @@ const App = () => {
             </div>
           }
 
-          {sessionStorage.getItem('jwt') === null ?
+          {Cookies.get('jwt') === undefined ?
             "" : 
             <> 
             {activeMenu ? 
@@ -83,13 +83,13 @@ const App = () => {
             }
           >
 
-            {sessionStorage.getItem('jwt') !== null ?
+            {Cookies.get('jwt') !== undefined ?
               <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
                 <Navbar />
               </div> : ""}
 
             <div>
-              {sessionStorage.getItem('jwt') === null ?
+              {Cookies.get('jwt') === undefined ?
                 "" :
                 <>
                   {themeSettings && (<ThemeSettings />)}
@@ -98,13 +98,13 @@ const App = () => {
               <Routes>
                 {/* Authenication  */}
                 <Route path="/login" 
-                element={sessionStorage.getItem('jwt') !== null ? <Navigate to="/" /> : <Login />} />
+                element={Cookies.get('jwt') !== undefined ? <Navigate to="/" /> : <Login />} />
                 <Route path="/register" 
-                element={sessionStorage.getItem('jwt') !== null ? <Navigate to="/" /> : <Register />} />
+                element={Cookies.get('jwt') !== undefined ? <Navigate to="/" /> : <Register />} />
                 {/*----------*/}
 
                 {/* dashboard  */}
-                <Route element={<PrivateRoute isLogged={sessionStorage.getItem('jwt') !== null} />}>
+                <Route element={<PrivateRoute isLogged={Cookies.get('jwt') !== undefined} />}>
                   {/* pages  */}
                     {/* Ecommerce  */}
                       <Route path="*" element={<Ecommerce />} />
@@ -171,7 +171,7 @@ const App = () => {
               </Routes>
             </div>
 
-            {sessionStorage.getItem('jwt') !== null ?
+            {Cookies.get('jwt') !== undefined ?
               <Footer /> : ""}
           </div>
         </div>

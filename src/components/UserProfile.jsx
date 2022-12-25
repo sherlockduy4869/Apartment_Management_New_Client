@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button } from '.';
 import { useStateContext } from '../contexts/ContextProvider';
 import avatar from '../data/avatar.jpg';
+import Cookies from 'js-cookie'
 
 const UserProfile = () => {
   const { currentColor } = useStateContext();
@@ -13,12 +14,12 @@ const UserProfile = () => {
     const url_register = "http://localhost/admin_api/public/api/logout"
 
     const config = {
-      headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` }
+      headers: { Authorization: `Bearer ${Cookies.get('jwt')}` }
     };
 
     axios.post(url_register, formData, config)
       .then(res => {
-        sessionStorage.removeItem('jwt')
+        Cookies.remove('jwt')
         window.location.reload();
         console.log(res)
       })
