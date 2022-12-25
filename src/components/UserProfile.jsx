@@ -20,6 +20,7 @@ const UserProfile = () => {
     axios.post(url_register, formData, config)
       .then(res => {
         Cookies.remove('jwt')
+        localStorage.removeItem('colorMode')
         window.location.reload();
         console.log(res)
       })
