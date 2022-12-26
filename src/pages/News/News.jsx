@@ -59,7 +59,7 @@ const News = () => {
     {
       name: "ID",
       selector: (row, index) => index + 1,
-      width: "4%",
+      width: "10%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -79,8 +79,9 @@ const News = () => {
     },
     {
       name: "Image",
-      selector: (row) => <img style={{ width: "70%" }} src={row.image_news} alt="news-item" />,
-      width: "25%",
+      selector: (row) => <img style={{ width: "70%" }} 
+                          src={row.image_news} alt="news-item" />,
+      width: "23%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -94,7 +95,7 @@ const News = () => {
       cell: (row) => <div className="py-1 px-2 capitalize font-medium text-md">
         {row.author_news}
       </div>,
-      width: "20%",
+      width: "16%",
       style: {
         padding: "10px 15px",
         justifyContent: "center",

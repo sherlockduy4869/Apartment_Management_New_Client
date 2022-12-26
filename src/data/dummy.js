@@ -24,7 +24,7 @@ export const customStyles = {
   },
   rows: {
     style: {
-
+      
     }
   },
   cells: {

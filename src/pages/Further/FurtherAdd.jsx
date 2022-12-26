@@ -25,7 +25,7 @@ const FurtherAdd = () => {
   const [lot, setLot] = useState("")
 
   const [addStatus, setAddStatus] = useState("")
-  const [corlorMessage, setColorMessage] = useState("")
+  const [corlorMessage, setColorMessage] = useState("#22c55e")
 
   const addingFurther = (e) => {
 
@@ -46,17 +46,17 @@ const FurtherAdd = () => {
     
     axios.post(url_add, formData)
       .then(res => {
-        console.log(res)
         if (!res["data"]["status"]) {
           setColorMessage("#f43f5e")
         }
         setColorMessage("#22c55e")
-
         setShowElement(true)
         setAddStatus(res["data"]["message"])
       })
       .catch(error => {
-        console.log(error)
+        setColorMessage("#f43f5e")
+        setShowElement(true)
+        setAddStatus(error['response']['data']['errors']['id_apartment'])
       });
   }
   return (
