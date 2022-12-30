@@ -3,8 +3,11 @@ import { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component'
 import { Link } from 'react-router-dom';
 import { customStyles } from '../../data/dummy';
+import { useStateContext } from './../../contexts/ContextProvider';
 
 const News = () => {
+
+  const { currentColor } = useStateContext();
 
   const [newsList, setNewsList] = useState([])
   const [search, setSearch] = useState("")
@@ -155,8 +158,9 @@ const News = () => {
           actions=
           {<Link to={`/news/add`}>
             <button
-              className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
-            hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded'>
+              style={{ backgroundColor: currentColor }}
+              className='bg-transparent font-semibold 
+            text-white py-1 px-2 rounded'>
               ADD NEWS
             </button>
           </Link>}

@@ -4,8 +4,11 @@ import { Header } from '../../components';
 import { Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useStateContext } from './../../contexts/ContextProvider';
 
 const FurtherEdit = () => {
+
+  const { currentColor } = useStateContext();
 
   const [showElement, setShowElement] = useState(true)
 
@@ -96,8 +99,8 @@ const FurtherEdit = () => {
       state={{purpose:state.purpose, code: state.code}}
       >
         <button
-          class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
-          hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+          style={{ backgroundColor: currentColor }}
+          class="mb-6font-semiboldtext-white py-2 px-4 rounded">
           Back To Further list
         </button>
       </Link>
@@ -219,8 +222,10 @@ const FurtherEdit = () => {
             <div className='mb-2' style={{ color: corlorMessage }}>
               {showElement?editStatus:<></>} 
             </div>
-            <button onClick={(e) => editingFuther(e)}
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button 
+              onClick={(e) => editingFuther(e)}
+              style={{ backgroundColor: currentColor }}
+              class="text-white font-bold py-2 px-4 rounded">
               EDITING FURTHER
             </button>
           </div>

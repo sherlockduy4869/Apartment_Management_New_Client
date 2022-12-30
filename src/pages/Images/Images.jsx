@@ -5,8 +5,11 @@ import { Link } from 'react-router-dom';
 import { customStyles } from '../../data/dummy';
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useStateContext } from './../../contexts/ContextProvider';
 
 const Images = () => {
+
+  const { currentColor } = useStateContext();
 
   const { id } = useParams()
   const { state } = useLocation()
@@ -86,9 +89,8 @@ const Images = () => {
       <Header category="Page" title="Images" />
       <Link to={path}>
         <button
-          class="bg-transparent mb-2 hover:bg-blue-500 text-blue-700 
-        font-semibold hover:text-white py-2 px-4 border border-blue-500 
-        hover:border-transparent rounded">
+          style={{ backgroundColor: currentColor }}
+          class="mb-2 font-semibold text-white py-2 px-4 rounded">
           BACK TO APARTMENT
         </button>
       </Link>
@@ -106,8 +108,8 @@ const Images = () => {
           to={`/images/add/${id}`}
           state={{purpose:state.purpose, code: state.code}}>
             <button
-              className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
-            hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded'>
+              style={{ backgroundColor: currentColor }}
+              className='font-semibold text-white py-1 px-2 rounded'>
               ADD IMAGES
             </button>
           </Link>}

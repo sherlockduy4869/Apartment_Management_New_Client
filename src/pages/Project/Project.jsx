@@ -73,7 +73,7 @@ const Project = () => {
     {
       name: "Image",
       selector: 'project_image',
-      cell: (row) => <div>{row.project_image}</div>,
+      cell: (row) => <img style={{ width: "70%" }} src={row.project_image} alt="project-item" />,
       width: "25%",
       sortable: true,
       style: {

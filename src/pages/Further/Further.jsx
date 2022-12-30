@@ -3,8 +3,11 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useStateContext } from './../../contexts/ContextProvider';
 
 const Further = () => {
+
+  const { currentColor } = useStateContext();
 
   const { id } = useParams()
   const { state } = useLocation()
@@ -37,9 +40,8 @@ const Further = () => {
       <Header category="Page" title="Further" />
       <Link to={path}>
         <button 
-        class="bg-transparent mb-2 hover:bg-blue-500 text-blue-700 
-        font-semibold hover:text-white py-2 px-4 border border-blue-500 
-        hover:border-transparent rounded">
+        style={{ backgroundColor: currentColor }}
+        class="mb-2 font-semiboldtext-white py-2 px-4 rounded">
           BACK TO APARTMENT
         </button>
       </Link>
@@ -52,7 +54,9 @@ const Further = () => {
         to={`/further/add/${id}`}
         state={{purpose:state.purpose, code: state.code}}
         >
-        <button class="bg-transparent mb-2 hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+        <button 
+        style={{ backgroundColor: currentColor }}
+        class="mb-2font-semiboldtext-white py-2 px-4 rounded">
           ADDING
         </button>
         </Link>)}
@@ -128,7 +132,8 @@ const Further = () => {
                       to={`/further/edit/${id}`}
                       state={{purpose:state.purpose, code: state.code}}>
                       <button 
-                        className="text-white py-1 px-2 capitalize rounded-2xl text-md bg-indigo-500">
+                        style={{ backgroundColor: currentColor }}
+                        className="text-white py-1 px-2 capitalize rounded-2xl text-md ">
                         Editing
                       </button>
                     </Link>) : ('')}

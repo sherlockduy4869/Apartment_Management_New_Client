@@ -4,9 +4,11 @@ import { Header } from '../../components';
 import { Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
+import { useStateContext } from './../../contexts/ContextProvider';
 
 const ImagesAdd = () => {
+
+  const { currentColor } = useStateContext();
 
   const [showElement, setShowElement] = useState(true)
 
@@ -67,8 +69,8 @@ const ImagesAdd = () => {
         to={pathBack}
         state={{ purpose: state.purpose, code: state.code }}>
         <button
-          class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
-        hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+          style={{ backgroundColor: currentColor }}
+          class="mb-6 font-semibold text-white py-2 px-4 rounded">
           Back To Images List
         </button>
       </Link>
@@ -106,8 +108,8 @@ const ImagesAdd = () => {
             <button
               type="button"
               onClick={(e) => addingImages(e)}
-              class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline 
-              focus:outline-none text-white font-bold py-2 px-4 rounded">
+              style={{ backgroundColor: currentColor }}
+              class="text-white font-bold py-2 px-4 rounded">
               ADDING
             </button>
           </div>

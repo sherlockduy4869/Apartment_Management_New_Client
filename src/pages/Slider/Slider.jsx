@@ -3,8 +3,11 @@ import { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component'
 import { Link } from 'react-router-dom';
 import { customStyles } from '../../data/dummy';
+import { useStateContext } from './../../contexts/ContextProvider';
 
 const Slider = () => {
+
+  const { currentColor } = useStateContext();
 
   const [sliderList, setSliderList] = useState([])
   const [search, setSearch] = useState("")
@@ -127,8 +130,9 @@ const Slider = () => {
           actions=
           {<Link to={`/slider/add`}>
             <button
-              className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
-          hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded'>
+              style={{ backgroundColor: currentColor }}
+              className='bg-transparent  font-semibold 
+            text-white py-1 px-2 borde rounded'>
               ADD SLIDER
             </button>
           </Link>}

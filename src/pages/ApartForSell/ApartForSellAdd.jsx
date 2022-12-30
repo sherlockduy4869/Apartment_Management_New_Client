@@ -5,8 +5,11 @@ import { Link } from 'react-router-dom';
 import { NumericFormat } from 'react-number-format';
 import Select from 'react-select';
 import Cleave from 'cleave.js/react';
+import { useStateContext } from './../../contexts/ContextProvider';
 
 const ApartForSellAdd = () => {
+
+  const { currentColor } = useStateContext();
 
   const [showElement, setShowElement] = useState(true)
   const [projectList, setProjectList] = useState([])
@@ -143,8 +146,8 @@ const ApartForSellAdd = () => {
       <div className='text-2xl mb-2'>ADDING APARTMENT FOR SELL</div>
       <Link to={'/apartforsell'}>
         <button
-          class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
-          hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+          style={{ backgroundColor: currentColor }}
+          class="mb-6 font-semibold text-white py-2 px-4 rounded">
           Back To Apart For Sell list
         </button>
       </Link>
@@ -314,8 +317,10 @@ const ApartForSellAdd = () => {
             <div className='mb-2' style={{ color: corlorMessage }}>
               {showElement?addStatus:<></>} 
             </div>
-            <button onClick={(e) => addingApart(e)}
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button 
+              style={{ backgroundColor: currentColor }}
+              onClick={(e) => addingApart(e)}
+              class="text-white font-bold py-2 px-4 rounded">
               ADDING APART
             </button>
           </div>

@@ -5,8 +5,11 @@ import { Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Select from 'react-select';
+import { useStateContext } from './../../contexts/ContextProvider';
 
 const FeatureAdd = () => {
+
+  const { currentColor } = useStateContext();
 
   const { id } = useParams()
   const { state } = useLocation()
@@ -110,8 +113,8 @@ const FeatureAdd = () => {
         to={pathBack}
         state={{ purpose: state.purpose, code: state.code }}>
         <button
-          class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
-        hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+          style={{ backgroundColor: currentColor }}
+          class="mb-6 font-semiboldtext-white py-2 px-4 rounded">
           Back To Feature List
         </button>
       </Link>
@@ -140,9 +143,9 @@ const FeatureAdd = () => {
             </div>
             <button
               type="button"
+              style={{ backgroundColor: currentColor }}
               onClick={(e) => addingFeature(e)}
-              class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline 
-              focus:outline-none text-white font-bold py-2 px-4 rounded">
+              class="text-white font-bold py-2 px-4 rounded">
               ADDING
             </button>
           </div>

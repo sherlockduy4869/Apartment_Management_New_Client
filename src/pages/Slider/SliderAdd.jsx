@@ -2,8 +2,11 @@ import { useState } from 'react';
 import axios from "axios";
 import { Header } from '../../components';
 import { Link } from 'react-router-dom';
+import { useStateContext } from './../../contexts/ContextProvider';
 
 const SliderAdd = () => {
+
+  const { currentColor } = useStateContext();
 
   const [showElement, setShowElement] = useState(true)
 
@@ -54,8 +57,9 @@ const SliderAdd = () => {
       <div className='text-2xl mb-2'>ADDING SLIDER</div>
       <Link to={'/slider'}>
         <button
-          class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
-        hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+          style={{ backgroundColor: currentColor }}
+          class="mb-6 bg-transparent font-semibold 
+          text-white py-2 px-4 rounded">
           Back To Slider List
         </button>
       </Link>
@@ -132,10 +136,10 @@ const SliderAdd = () => {
               {showElement?addStatus:<></>} 
             </div>
             <button
+              style={{ backgroundColor: currentColor }}
               type="button"
               onClick={(e) => addingSlider(e)}
-              class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline 
-              focus:outline-none text-white font-bold py-2 px-4 rounded">
+              class="shadow text-white font-bold py-2 px-4 rounded">
               ADDING
             </button>
           </div>

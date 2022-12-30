@@ -4,10 +4,12 @@ import { Header } from '../../components';
 import { Link } from 'react-router-dom';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
+import { useStateContext } from './../../contexts/ContextProvider';
 
 const NewsAdd = () => {
 
+  const { currentColor } = useStateContext();
+  
   const [showElement, setShowElement] = useState(true)
 
   const [title, setTitle] = useState("")
@@ -99,8 +101,9 @@ const NewsAdd = () => {
       <div className='text-2xl mb-2'>ADDING NEWS</div>
       <Link to={'/news'}>
         <button
-          class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
-          hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+          style={{ backgroundColor: currentColor }}
+          class="mb-6 font-semibold 
+          text-white py-2 px-4 rounded">
           Back To News list
         </button>
       </Link>
@@ -216,8 +219,10 @@ const NewsAdd = () => {
             <div className='mb-2' style={{ color: corlorMessage }}>
               {showElement?addStatus:<></>} 
             </div>
-            <button onClick={(e) => addingNews(e)}
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button 
+              style={{ backgroundColor: currentColor }}
+              onClick={(e) => addingNews(e)}
+              class="text-white font-bold py-2 px-4 rounded">
               ADDING NEWS
             </button>
           </div>

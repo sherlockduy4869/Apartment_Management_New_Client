@@ -4,8 +4,11 @@ import { Header } from '../../components';
 import { Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useStateContext } from './../../contexts/ContextProvider';
 
 const FurtherAdd = () => {
+
+  const { currentColor } = useStateContext();
 
   const [showElement, setShowElement] = useState(true)
 
@@ -70,8 +73,8 @@ const FurtherAdd = () => {
       state={{purpose:state.purpose, code: state.code}}
       >
         <button
-          class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
-          hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+          style={{ backgroundColor: currentColor }}
+          class="mb-6font-semiboldtext-white py-2 px-4 rounded">
           Back To Further list
         </button>
       </Link>
@@ -185,8 +188,10 @@ const FurtherAdd = () => {
             <div className='mb-2' style={{ color: corlorMessage }}>
               {showElement?addStatus:<></>} 
             </div>
-            <button onClick={(e) => addingFurther(e)}
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button 
+              style={{ backgroundColor: currentColor }}
+              onClick={(e) => addingFurther(e)}
+              class="text-white font-bold py-2 px-4 rounded">
               ADDING FURTHER
             </button>
           </div>

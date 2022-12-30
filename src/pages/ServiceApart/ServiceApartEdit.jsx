@@ -6,8 +6,11 @@ import { Link } from 'react-router-dom';
 import { NumericFormat } from 'react-number-format';
 import Select from 'react-select';
 import Cleave from 'cleave.js/react';
+import { useStateContext } from './../../contexts/ContextProvider';
 
 const ServiceApartEdit = () => {
+
+  const { currentColor } = useStateContext();
 
   const [showElement, setShowElement] = useState(true)
 
@@ -184,8 +187,8 @@ const ServiceApartEdit = () => {
       <div className='text-2xl mb-2'>ADDING SERVICE APARTMENT</div>
       <Link to={'/serviceapart'}>
         <button
-          class="mb-6 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
-          hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+          style={{ backgroundColor: currentColor }}
+          class="mb-6 font-semibold py-2 px-4 rounded">
           Back To Service Apart list
         </button>
       </Link>
@@ -359,8 +362,10 @@ const ServiceApartEdit = () => {
             <div className='mb-2' style={{ color: corlorMessage }}>
               {showElement?editStatus:<></>} 
             </div>
-            <button onClick={(e) => editingApart(e)}
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button 
+              style={{ backgroundColor: currentColor }}
+              onClick={(e) => editingApart(e)}
+              class="text-white font-bold py-2 px-4 rounded">
               EDITING APART
             </button>
           </div>
