@@ -3,8 +3,11 @@ import { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component'
 import { Link } from 'react-router-dom';
 import { customStyles } from '../../data/dummy';
+import { useStateContext } from './../../contexts/ContextProvider';
 
 const Project = () => {
+
+  const { currentColor } = useStateContext();
 
   const [projectList, setProjectList] = useState([])
   const [search, setSearch] = useState("")
@@ -32,6 +35,7 @@ const Project = () => {
   useEffect(() => {
     const result = projectList.filter(projectList => {
       return projectList.project_name.toLowerCase().match(search.toLowerCase())
+        || projectList.project_status.toLowerCase().match(search.toLowerCase())
     })
     setFilterProject(result)
   }, [search])
@@ -48,7 +52,7 @@ const Project = () => {
     {
       name: "ID",
       selector: (row, index) => index + 1,
-      width: "20%",
+      width: "10%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -56,10 +60,36 @@ const Project = () => {
       }
     },
     {
-      name: "Project Name",
+      name: "Name",
       selector: 'project_name',
       cell: (row) => <div>{row.project_name}</div>,
-      width: "40%",
+      width: "25%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent: "center"
+      }
+    },
+    {
+      name: "Image",
+      selector: 'project_image',
+      cell: (row) => <div>{row.project_image}</div>,
+      width: "25%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent: "center"
+      }
+    },
+    {
+      name: "Status",
+      selector: 'project_status',
+      cell: (row) => <div
+                      style={row.project_status == 'Hot' ? { color: 'red' } : { color: '#404040' }}
+                      >
+                      {row.project_status}
+                    </div>,
+      width: "20%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -72,11 +102,10 @@ const Project = () => {
         <button
           style={{ background: '#ee5e68' }}
           className="text-white py-1 px-2 capitalize rounded-2xl text-md mr-1"
-          onClick={() => 
-          { if (window.confirm('Are you sure to delete this item?')) deleteProject(row.id_project) }}>
+          onClick={() => { if (window.confirm('Are you sure to delete this item?')) deleteProject(row.id_project) }}>
           Delete
         </button>,
-      width: "40%",
+      width: "20%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -101,8 +130,9 @@ const Project = () => {
           actions=
           {<Link to={`/project/add`}>
             <button
-              className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold 
-            hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded'>
+              style={{ backgroundColor: currentColor }}
+              className='bg-transparent font-semibold 
+            text-white py-1 px-2 border border-blue-500 rounded'>
               ADD PROJECT
             </button>
           </Link>}
