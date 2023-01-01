@@ -55,7 +55,7 @@ const FeatureAdd = () => {
     { label: "Cable Television", value: "Cable Television" },
     { label: "Air Condition", value: "Air Condition" },
     { label: "General Power", value: "General Power" },
-    { label: "Convenient Store 24/24", value: "Convenient Store 24/24" },
+    { label: "Store 24/24", value: "Store 24/24" },
     { label: "Fully Furnished", value: "Fully Furnished" },
     { label: "Telephone", value: "Telephone" },
     { label: "Water Heater", value: "Water Heater" },
@@ -114,7 +114,7 @@ const FeatureAdd = () => {
         state={{ purpose: state.purpose, code: state.code }}>
         <button
           style={{ backgroundColor: currentColor }}
-          class="mb-6 font-semiboldtext-white py-2 px-4 rounded">
+          class="mb-6 font-semibold text-white py-2 px-4 rounded">
           Back To Feature List
         </button>
       </Link>

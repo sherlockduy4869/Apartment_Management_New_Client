@@ -126,7 +126,7 @@ const Feature = () => {
           >
             <button
               style={{ backgroundColor: currentColor }}
-              className='font-semiboldtext-white py-1 px-2 rounded'>
+              className='font-semibold text-white py-1 px-2 rounded'>
               ADD FEATURES
             </button>
           </Link>}

@@ -41,7 +41,7 @@ const Further = () => {
       <Link to={path}>
         <button 
         style={{ backgroundColor: currentColor }}
-        class="mb-2 font-semiboldtext-white py-2 px-4 rounded">
+        class="mb-2 font-semibold text-white py-2 px-4 rounded">
           BACK TO APARTMENT
         </button>
       </Link>
@@ -56,7 +56,7 @@ const Further = () => {
         >
         <button 
         style={{ backgroundColor: currentColor }}
-        class="mb-2font-semiboldtext-white py-2 px-4 rounded">
+        class="mb-2font-semibold text-white py-2 px-4 rounded">
           ADDING
         </button>
         </Link>)}

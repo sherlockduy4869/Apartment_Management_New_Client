@@ -46,8 +46,8 @@ const ImagesAdd = () => {
         setAddStatus(res["data"]["message"]) 
 
         setShowElement(true)
-
-        console.log(res)
+        window.location.reload(true)
+        
       })
       .catch(error => {
         if (error['response']['data']['errors']['image_description']) {

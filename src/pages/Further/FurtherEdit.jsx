@@ -100,7 +100,7 @@ const FurtherEdit = () => {
       >
         <button
           style={{ backgroundColor: currentColor }}
-          class="mb-6font-semiboldtext-white py-2 px-4 rounded">
+          class="mb-6 font-semibold text-white py-2 px-4 rounded">
           Back To Further list
         </button>
       </Link>
