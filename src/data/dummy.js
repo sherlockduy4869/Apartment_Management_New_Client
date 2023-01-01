@@ -24,7 +24,7 @@ export const customStyles = {
   },
   rows: {
     style: {
-      
+      borderBottom: '1px solid #e0e1e1',
     }
   },
   cells: {

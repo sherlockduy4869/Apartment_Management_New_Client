@@ -114,8 +114,6 @@ const Feature = () => {
           title={titleFeature}
           columns={columns}
           data={filterFeature}
-          pagination
-          paginationRowsPerPageOptions={[15, 25, 50, 100]}
           fixedHeader
           fixedHeaderScrollHeight='900px'
           highlightOnHover
