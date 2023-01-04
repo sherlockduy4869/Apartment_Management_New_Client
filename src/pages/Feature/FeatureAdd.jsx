@@ -48,7 +48,7 @@ const FeatureAdd = () => {
 
   const dataFeature = [
     { label: "Internet", value: "Internet" },
-    { label: "Refigerator", value: "Refigerator" },
+    { label: "Refrigerator", value: "Refrigerator" },
     { label: "Balcony", value: "Balcony" },
     { label: "Parking", value: "Parking" },
     { label: "Swimming Pool", value: "Swimming Pool" },
