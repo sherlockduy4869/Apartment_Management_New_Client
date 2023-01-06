@@ -24,7 +24,7 @@ const ApartForSell = () => {
   }, [])
 
   const fetchApartForSell = async () => {
-    const url_apart_for_sell_list = "http://localhost/admin_api/public/api/v1/apartforsell"
+    const url_apart_for_sell_list = "https://api.betterhomes.site/public/api/v1/apartforsell"
     const res = await fetch(url_apart_for_sell_list)
     const data = await res.json()
     return data['data']
@@ -62,7 +62,7 @@ const ApartForSell = () => {
   /*------------------*/
 
   const deleteApartForSell = async (id) => {
-    const url_delete = "http://localhost/admin_api/public/api/v1/apartforsell/" + id
+    const url_delete = "https://api.betterhomes.site/public/api/v1/apartforsell/" + id
     await fetch(url_delete, { method: `DELETE` })
     setApartForSellList(
       apartForSellList.filter((apartForSellList) => apartForSellList.id_apartment !== id)

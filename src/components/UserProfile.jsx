@@ -11,7 +11,7 @@ const UserProfile = () => {
   const logout = () => {
     const formData = new FormData()
 
-    const url_register = "http://localhost/admin_api/public/api/logout"
+    const url_register = "https://api.betterhomes.site/public/api/logout"
 
     const config = {
       headers: { Authorization: `Bearer ${Cookies.get('jwt')}` }

@@ -28,7 +28,7 @@ const Further = () => {
   }, [])
 
   const fetchFurther = async () => {
-    const url_further = "http://localhost/admin_api/public/api/v1/further/" + id
+    const url_further = "https://api.betterhomes.site/public/api/v1/further/" + id
     const res = await fetch(url_further)
     const data = await res.json()
     return data['data']

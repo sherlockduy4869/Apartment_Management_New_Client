@@ -35,7 +35,7 @@ const FurtherAdd = () => {
     e.preventDefault()
 
     const formData = new FormData()
-    const url_add = "http://localhost/admin_api/public/api/v1/further"
+    const url_add = "https://api.betterhomes.site/public/api/v1/further"
 
     formData.append("id_apartment", id)
     formData.append("num_beds", numBed)

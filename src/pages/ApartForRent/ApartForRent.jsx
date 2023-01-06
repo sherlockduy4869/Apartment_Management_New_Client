@@ -24,7 +24,7 @@ const ApartForRent = () => {
   }, [])
 
   const fetchApartForRent = async () => {
-    const url_apart_for_rent_list = "http://localhost/admin_api/public/api/v1/apartforrent"
+    const url_apart_for_rent_list = "https://api.betterhomes.site/public/api/v1/apartforrent"
     const res = await fetch(url_apart_for_rent_list)
     const data = await res.json()
     return data['data']
@@ -62,7 +62,7 @@ const ApartForRent = () => {
   /*------------------*/
 
   const deleteApartForRent = async (id) => {
-    const url_delete = "http://localhost/admin_api/public/api/v1/apartforrent/" + id
+    const url_delete = "https://api.betterhomes.site/public/api/v1/apartforrent/" + id
     await fetch(url_delete, { method: `DELETE` })
     setApartForRentList(
       apartForRentList.filter((apartForRentList) => apartForRentList.id_apartment !== id)

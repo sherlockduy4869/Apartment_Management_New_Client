@@ -24,7 +24,7 @@ const Project = () => {
   }, [])
 
   const fetchProject = async () => {
-    const url_project_list = "http://localhost/admin_api/public/api/v1/project"
+    const url_project_list = "https://api.betterhomes.site/public/api/v1/project"
     const res = await fetch(url_project_list)
     const data = await res.json()
     return data['data']
@@ -42,7 +42,7 @@ const Project = () => {
   /*------------------*/
 
   const deleteProject = async (id) => {
-    const url_delete = "http://localhost/admin_api/public/api/v1/project/" + id
+    const url_delete = "https://api.betterhomes.site/public/api/v1/project/" + id
     await fetch(url_delete, { method: `DELETE` })
     setProjectList(projectList.filter((projectList) => projectList.id_project !== id))
     setFilterProject(filterProject.filter((filterProject) => filterProject.id_project !== id))

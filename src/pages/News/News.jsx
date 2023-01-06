@@ -24,7 +24,7 @@ const News = () => {
   }, [])
 
   const fetchNews = async () => {
-    const url_news_list = "http://localhost/admin_api/public/api/v1/news"
+    const url_news_list = "https://api.betterhomes.site/public/api/v1/news"
     const res = await fetch(url_news_list)
     const data = await res.json()
     return data['data']
@@ -42,7 +42,7 @@ const News = () => {
   /*------------------*/
 
   const deleteNews = async (id) => {
-    const url_delete = "http://localhost/admin_api/public/api/v1/news/" + id
+    const url_delete = "https://api.betterhomes.site/public/api/v1/news/" + id
     await fetch(url_delete, { method: `DELETE` })
     setNewsList(newsList.filter((newsList) => newsList.id_news !== id))
     setFilterNews(filterNews.filter((filterNews) => filterNews.id_news !== id))

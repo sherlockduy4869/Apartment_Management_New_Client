@@ -25,7 +25,7 @@ const ProjectAdd = () => {
     e.preventDefault()
 
     const formData = new FormData()
-    const url_add = "http://localhost/admin_api/public/api/v1/project"
+    const url_add = "https://api.betterhomes.site/public/api/v1/project"
 
     formData.append("project_name", projectName)
     formData.append("project_image", projectImage)

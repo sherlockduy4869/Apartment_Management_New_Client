@@ -40,7 +40,7 @@ const FeatureAdd = () => {
   }, [])
 
   const fetchFeature = async () => {
-    const url_features_list = "http://localhost/admin_api/public/api/v1/feature/" + id
+    const url_features_list = "https://api.betterhomes.site/public/api/v1/feature/" + id
     const res = await fetch(url_features_list)
     const data = await res.json()
     return data['data']
@@ -84,7 +84,7 @@ const FeatureAdd = () => {
     e.preventDefault()
 
     const formData = new FormData()
-    const url_add = "http://localhost/admin_api/public/api/v1/feature"
+    const url_add = "https://api.betterhomes.site/public/api/v1/feature"
 
     formData.append("id_apartment", id)
     formData.append("feature_name", featureName.value)

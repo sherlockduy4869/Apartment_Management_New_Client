@@ -15,7 +15,7 @@ const ApartForSellEdit = () => {
   const [showElement, setShowElement] = useState(true)
 
   const { id } = useParams()
-  const url_apart_by_id = "http://localhost/admin_api/public/api/v1/apartforsell/" + id
+  const url_apart_by_id = "https://api.betterhomes.site/public/api/v1/apartforsell/" + id
 
   const [projectList, setProjectList] = useState([])
 
@@ -158,7 +158,7 @@ const ApartForSellEdit = () => {
   }, [])
 
   const fetchProject = async () => {
-    const url_project_list = "http://localhost/admin_api/public/api/v1/project"
+    const url_project_list = "https://api.betterhomes.site/public/api/v1/project"
     const res = await fetch(url_project_list)
     const data = await res.json()
     return data['data']

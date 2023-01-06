@@ -32,7 +32,7 @@ const NewsAdd = () => {
     e.preventDefault()
 
     const formData = new FormData()
-    const url_add = "http://localhost/admin_api/public/api/v1/news"
+    const url_add = "https://api.betterhomes.site/public/api/v1/news"
 
     formData.append("title_news", title)
     formData.append("image_news", image)

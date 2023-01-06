@@ -30,7 +30,7 @@ const Images = () => {
   }, [])
 
   const fetchImages = async () => {
-    const url_images_list = "http://localhost/admin_api/public/api/v1/images/" + id
+    const url_images_list = "https://api.betterhomes.site/public/api/v1/images/" + id
     const res = await fetch(url_images_list)
     const data = await res.json()
     return data['data']
@@ -38,7 +38,7 @@ const Images = () => {
   /*--------------*/
 
   const deleteImage = async (id) => {
-    const url_delete = "http://localhost/admin_api/public/api/v1/images/" + id
+    const url_delete = "https://api.betterhomes.site/public/api/v1/images/" + id
     await fetch(url_delete, { method: `DELETE` })
     setImagesList(imagesList.filter((imagesList) => imagesList.id_image_description !== id))
   }

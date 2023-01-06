@@ -16,7 +16,7 @@ const Login = () => {
         formData.append("email", email)
         formData.append("password", password)
 
-        const url_register = "http://localhost/admin_api/public/api/login"
+        const url_register = "https://api.betterhomes.site/public/api/login"
 
         axios.post(url_register, formData)
             .then(res => {
@@ -24,7 +24,7 @@ const Login = () => {
                     Cookies.set('jwt', res['data']['access_token'], { expires: 1 })
                     setErrorEmail("")
                     setErrorPassword("")
-                    window.location.reload();
+                    window.location.reload()
                 }
                 if(!res['data']['status']){
                     setErrorEmail("")

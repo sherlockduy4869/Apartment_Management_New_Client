@@ -14,7 +14,7 @@ const NewsEdit = () => {
   const [showElement, setShowElement] = useState(true)
 
   const { id } = useParams()
-  const url_edit = "http://localhost/admin_api/public/api/v1/news/" + id;
+  const url_edit = "https://api.betterhomes.site/public/api/v1/news/" + id;
 
   const [title, setTitle] = useState("")
   const [image, setImage] = useState("")

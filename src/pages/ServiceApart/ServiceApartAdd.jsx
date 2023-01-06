@@ -24,7 +24,7 @@ const ServiceApartAdd = () => {
   }, [])
 
   const fetchProject = async () => {
-    const url_project_list = "http://localhost/admin_api/public/api/v1/project"
+    const url_project_list = "https://api.betterhomes.site/public/api/v1/project"
     const res = await fetch(url_project_list)
     const data = await res.json()
     return data['data']
@@ -78,7 +78,7 @@ const ServiceApartAdd = () => {
     e.preventDefault()
 
     const formData = new FormData()
-    const url_add = "http://localhost/admin_api/public/api/v1/serviceapart"
+    const url_add = "https://api.betterhomes.site/public/api/v1/serviceapart"
 
     let price_add = parseInt(price.replaceAll(',', ''));
 

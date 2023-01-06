@@ -107,9 +107,8 @@ const App = () => {
                 <Route element={<PrivateRoute isLogged={Cookies.get('jwt') !== undefined} />}>
                   {/* pages  */}
                     {/* Ecommerce  */}
-                      <Route path="*" element={<Ecommerce />} />
                       <Route path="/" exact element={<Ecommerce />} />
-                      <Route path="/ecommerce" exact element={<Ecommerce />} />
+                      <Route path="/ecommerce" element={<Ecommerce />} />
                     {/*----------*/}
 
                     {/* Slider  */}
@@ -165,9 +164,10 @@ const App = () => {
                     {/* apps  */}
                       <Route path="/kanban" element={<Kanban />} />
                       <Route path="/calendar" element={<Calendar />} />
+                    {/*----------*/}
                   {/*---------*/}
                 </Route>
-
+                <Route path="*" element={<Navigate to="/ecommerce" replace />} />
               </Routes>
             </div>
 

@@ -33,7 +33,7 @@ const Feature = () => {
   }, [])
 
   const fetchFeature = async () => {
-    const url_features_list = "http://localhost/admin_api/public/api/v1/feature/" + id 
+    const url_features_list = "https://api.betterhomes.site/public/api/v1/feature/" + id 
     const res = await fetch(url_features_list)
     const data = await res.json()
     return data['data']
@@ -50,7 +50,7 @@ const Feature = () => {
   /*------------------*/
 
   const deleteFeature = async (id) => {
-    const url_delete = "http://localhost/admin_api/public/api/v1/feature/" + id
+    const url_delete = "https://api.betterhomes.site/public/api/v1/feature/" + id
     await fetch(url_delete, { method: `DELETE` }).then(res => {
       console.log(res)
     })

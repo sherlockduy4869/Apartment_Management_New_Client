@@ -25,7 +25,7 @@ const SliderAdd = () => {
     e.preventDefault()
 
     const formData = new FormData()
-    const url_add = "http://localhost/admin_api/public/api/v1/sliders"
+    const url_add = "https://api.betterhomes.site/public/api/v1/sliders"
 
     formData.append("image_slider", image)
     formData.append("note_slider", note)

@@ -25,7 +25,7 @@ const Register = () => {
         formData.append("password", password)
         formData.append("password_confirmation", passwordConfirm)
 
-        const url_register = "http://localhost/admin_api/public/api/register"
+        const url_register = "https://api.betterhomes.site/public/api/register"
 
         axios.post(url_register, formData)
             .then(res => {

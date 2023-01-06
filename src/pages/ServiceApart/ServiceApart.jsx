@@ -24,7 +24,7 @@ const ServiceApart = () => {
   }, [])
 
   const fetchServiceApart = async () => {
-    const url_service_apart = "http://localhost/admin_api/public/api/v1/serviceapart"
+    const url_service_apart = "https://api.betterhomes.site/public/api/v1/serviceapart"
     const res = await fetch(url_service_apart)
     const data = await res.json()
     return data['data']
@@ -62,7 +62,7 @@ const ServiceApart = () => {
   /*------------------*/
 
   const deleteServiceApart = async (id) => {
-    const url_delete = "http://localhost/admin_api/public/api/v1/serviceapart/" + id
+    const url_delete = "https://api.betterhomes.site/public/api/v1/serviceapart/" + id
     await fetch(url_delete, { method: `DELETE` })
     setServiceApart(
       serviceApart.filter((serviceApart) => serviceApart.id_apartment !== id)
