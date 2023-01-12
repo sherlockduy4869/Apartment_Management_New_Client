@@ -19,9 +19,10 @@ import {
 import './App.css';
 import { useStateContext } from './contexts/ContextProvider';
 import PrivateRoute from './pages/PrivateRoute';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 const App = () => {
+
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, 
           currentColor, themeSettings, setThemeSettings } = useStateContext();
 
