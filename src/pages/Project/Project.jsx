@@ -63,18 +63,7 @@ const Project = () => {
       name: "Name",
       selector: 'project_name',
       cell: (row) => <div>{row.project_name}</div>,
-      width: "25%",
-      sortable: true,
-      style: {
-        padding: "10px 15px",
-        justifyContent: "center"
-      }
-    },
-    {
-      name: "Image",
-      selector: 'project_image',
-      cell: (row) => <img style={{ width: "70%" }} src={row.project_image} alt="project-item" />,
-      width: "25%",
+      width: "40%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -89,7 +78,7 @@ const Project = () => {
                       >
                       {row.project_status}
                     </div>,
-      width: "20%",
+      width: "30%",
       sortable: true,
       style: {
         padding: "10px 15px",

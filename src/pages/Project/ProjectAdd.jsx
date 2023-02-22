@@ -12,12 +12,10 @@ const ProjectAdd = () => {
   const [showElement, setShowElement] = useState(true)
 
   const [projectName, setProjectName] = useState("")
-  const [projectImage, setProjectImage] = useState("")
   const [projectStatus, setProjectStatus] = useState("normal")
 
   const [addStatus, setAddStatus] = useState("")
   const [errorName, setErrorName] = useState("")
-  const [errorImage, setErrorImage] = useState("")
   const [corlorMessage, setColorMessage] = useState("")
 
   const addingProject = (e) => {
@@ -28,7 +26,6 @@ const ProjectAdd = () => {
     const url_add = "https://api.betterhomes.site/public/api/v1/project"
 
     formData.append("project_name", projectName)
-    formData.append("project_image", projectImage)
     formData.append("project_status", projectStatus)
 
     axios.post(url_add, formData)
@@ -38,7 +35,6 @@ const ProjectAdd = () => {
         }
         setColorMessage("#22c55e")
         setErrorName("")
-        setErrorImage("")
         setShowElement(true)
         setAddStatus(res["data"]["message"])
       })
@@ -46,13 +42,6 @@ const ProjectAdd = () => {
         console.log(error)
         if (error['response']['data']['errors']['project_name']) {
           setErrorName(error['response']['data']['errors']['project_name'][0])
-        }
-        else {
-          setErrorName("")
-        }
-
-        if (error['response']['data']['errors']['project_image']) {
-          setErrorName(error['response']['data']['errors']['project_image'][0])
         }
         else {
           setErrorName("")
@@ -98,29 +87,6 @@ const ProjectAdd = () => {
 
           </div>
         </div>
-
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-              Project Image
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <input
-              onChange={(e) => setProjectImage(e.target.value)}
-              type="text"
-              placeholder='Project image'
-              class="bg-gray-200 appearance-none border-2 border-gray-200 
-              rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none 
-              focus:bg-white"/>
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorImage}
-            </div>
-
-          </div>
-        </div>
-
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
             <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
