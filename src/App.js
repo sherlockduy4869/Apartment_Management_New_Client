@@ -1,179 +1,115 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { FiSettings } from 'react-icons/fi';
-import { TooltipComponent } from '@syncfusion/ej2-react-popups';
-import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Navbar, Footer, Sidebar } from "./components";
 import {
-  Login, Register,
-  Slider, SliderAdd,
-  News, NewsAdd, NewsEdit,
-  Project, ProjectAdd,
-  ApartForRent, ApartForRentAdd, ApartForRentEdit,
-  ApartForSell, ApartForSellAdd, ApartForSellEdit,
-  ServiceApart, ServiceApartAdd, ServiceApartEdit,
-  Further, FurtherAdd, FurtherEdit,
-  Feature, FeatureAdd,
-  Images, ImagesAdd,
-  Ecommerce, Calendar, Kanban
-} from './pages';
-import './App.css';
-import { useStateContext } from './contexts/ContextProvider';
-import PrivateRoute from './pages/PrivateRoute';
-import Cookies from 'js-cookie';
+  Login,
+  Register,
+  ApartForRent,
+  ApartForRentAdd,
+  ApartForRentEdit,
+  Ecommerce,
+  Calendar,
+  Kanban,
+} from "./pages";
+import "./App.css";
+import { useStateContext } from "./contexts/ContextProvider";
+import PrivateRoute from "./pages/PrivateRoute";
+import Cookies from "js-cookie";
 
 const App = () => {
-
-  const { setCurrentColor, setCurrentMode, currentMode, activeMenu, 
-          currentColor, themeSettings, setThemeSettings } = useStateContext();
-
-  useEffect(() => {
-    const currentThemeColor = sessionStorage.getItem('colorMode');
-    const currentThemeMode = sessionStorage.getItem('themeMode');
-    if (currentThemeColor && currentThemeMode) {
-      setCurrentColor(currentThemeColor);
-      setCurrentMode(currentThemeMode);
-    }
-  }, []);
+  const {
+    currentMode,
+    activeMenu,
+  } = useStateContext();
 
   return (
-    <div className={currentMode === 'Dark' ? 'dark' : ''}>
+    <div className={currentMode === "Dark" ? "dark" : ""}>
       <BrowserRouter>
         <div className="flex relative dark:bg-main-dark-bg">
-            {Cookies.get('jwt') === undefined ?
-            "" :
-            <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
-              <TooltipComponent
-                content="Settings"
-                position="Top"
-              >
-                <button
-                  type="button"
-                  onClick={() => setThemeSettings(true)}
-                  style={{ background: currentColor, borderRadius: '50%' }}
-                  className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
-                >
-                  <FiSettings />
-                </button>
-
-              </TooltipComponent>
-            </div>
-          }
-
-          {Cookies.get('jwt') === undefined ?
-            "" : 
-            <> 
-            {activeMenu ? 
-            (
+          <>
+            {activeMenu ? (
               <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
                 <Sidebar />
               </div>
-            ) : 
-            (
+            ) : (
               <div className="w-0 dark:bg-secondary-dark-bg">
                 <Sidebar />
               </div>
-            )} 
-            </>}
+            )}
+          </>
 
-          <div style={{ overflowX: "hidden" }}
-            className=
-            {
+          <div
+            style={{ overflowX: "hidden" }}
+            className={
               activeMenu
-                ? 'dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full'
-                : 'bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2'
+                ? "dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full"
+                : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2"
             }
           >
-
-            {Cookies.get('jwt') !== undefined ?
-              <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
-                <Navbar />
-              </div> : ""}
-
+            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
+              <Navbar />
+            </div>
             <div>
-              {Cookies.get('jwt') === undefined ?
-                "" :
-                <>
-                  {themeSettings && (<ThemeSettings />)}
-                </>}
-
               <Routes>
                 {/* Authenication  */}
-                <Route path="/login" 
-                element={Cookies.get('jwt') !== undefined ? <Navigate to="/" /> : <Login />} />
-                <Route path="/register" 
-                element={Cookies.get('jwt') !== undefined ? <Navigate to="/" /> : <Register />} />
+                <Route
+                  path="/login"
+                  element={
+                    Cookies.get("jwt") !== undefined ? (
+                      <Navigate to="/" />
+                    ) : (
+                      <Login />
+                    )
+                  }
+                />
+                <Route
+                  path="/register"
+                  element={
+                    Cookies.get("jwt") !== undefined ? (
+                      <Navigate to="/" />
+                    ) : (
+                      <Register />
+                    )
+                  }
+                />
                 {/*----------*/}
 
                 {/* dashboard  */}
-                <Route element={<PrivateRoute isLogged={Cookies.get('jwt') !== undefined} />}>
+                <Route
+                  element={
+                    <PrivateRoute isLogged={Cookies.get("jwt") !== undefined} />
+                  }
+                >
                   {/* pages  */}
-                    {/* Ecommerce  */}
-                      <Route path="/" exact element={<Ecommerce />} />
-                      <Route path="/ecommerce" element={<Ecommerce />} />
-                    {/*----------*/}
+                  {/* Ecommerce  */}
+                  <Route path="/" exact element={<Ecommerce />} />
+                  <Route path="/data-report" element={<Ecommerce />} />
+                  {/*----------*/}
 
-                    {/* Slider  */}
-                      <Route path="/slider" element={<Slider />} />
-                      <Route path="/slider/add" element={<SliderAdd />} />
-                    {/*----------*/}
+                  {/* Apart For Rent  */}
+                  <Route path="/apart-for-rent" element={<ApartForRent />} />
+                  <Route
+                    path="/apart-for-rent/add"
+                    element={<ApartForRentAdd />}
+                  />
+                  <Route
+                    path="/apart-for-rent/edit/:id"
+                    element={<ApartForRentEdit />}
+                  />
+                  {/*----------*/}
 
-                    {/* News  */}
-                      <Route path="/news" element={<News />} />
-                      <Route path="/news/add" element={<NewsAdd />} />
-                      <Route path="/news/edit/:id" element={<NewsEdit />} />
-                    {/*----------*/}
-
-                    {/* Project */}
-                      <Route path="/project" element={<Project />} />
-                      <Route path="/project/add" element={<ProjectAdd />} />
-                    {/*----------*/}
-
-                    {/* Apart For Rent  */}
-                      <Route path="/apartforrent" element={<ApartForRent />} />
-                      <Route path="/apartforrent/add" element={<ApartForRentAdd />} />
-                      <Route path="/apartforrent/edit/:id" element={<ApartForRentEdit />} />
-                    {/*----------*/}
-
-                    {/* Apart For Sell  */}
-                      <Route path="/apartforsell" element={<ApartForSell />} />
-                      <Route path="/apartforsell/add" element={<ApartForSellAdd />} />
-                      <Route path="/apartforsell/edit/:id" element={<ApartForSellEdit />} />
-                    {/*----------*/}
-
-                    {/* Service Apartment  */}
-                      <Route path="/serviceapart" element={<ServiceApart />} />
-                      <Route path="/serviceapart/add" element={<ServiceApartAdd />} />
-                      <Route path="/serviceapart/edit/:id" element={<ServiceApartEdit />} />
-                    {/*----------*/}
-
-                    {/* Further  */}
-                      <Route path="/further/:id" element={<Further />} />
-                      <Route path="/further/add/:id" element={<FurtherAdd />} />
-                      <Route path="/further/edit/:id" element={<FurtherEdit />} />
-                    {/*----------*/}
-
-                    {/* Feature  */}
-                      <Route path="/feature/:id" element={<Feature />} />
-                      <Route path="/feature/add/:id" element={<FeatureAdd />} />
-                    {/*----------*/}
-
-                    {/* Images  */}
-                      <Route path="/images/:id" element={<Images />} />
-                      <Route path="/images/add/:id" element={<ImagesAdd />} />
-                    {/*----------*/}
-
-                    {/* apps  */}
-                      <Route path="/kanban" element={<Kanban />} />
-                      <Route path="/calendar" element={<Calendar />} />
-                    {/*----------*/}
+                  {/* apps  */}
+                  <Route path="/kanban" element={<Kanban />} />
+                  <Route path="/calendar" element={<Calendar />} />
+                  {/*----------*/}
                   {/*---------*/}
                 </Route>
-                <Route path="*" element={<Navigate to="/ecommerce" replace />} />
+                <Route
+                  path="*"
+                  element={<Navigate to="/data-report" replace />}
+                />
               </Routes>
             </div>
-
-            {Cookies.get('jwt') !== undefined ?
-              <Footer /> : ""}
+            <Footer />
           </div>
         </div>
       </BrowserRouter>

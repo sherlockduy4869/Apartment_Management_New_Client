@@ -1,7 +1,11 @@
 import React from 'react';
 import { AiOutlineCalendar, AiOutlineShoppingCart } from 'react-icons/ai';
-import { FiShoppingBag, FiEdit, FiBarChart, FiCreditCard, FiStar, FiShoppingCart } from 'react-icons/fi';
-import { BsKanban, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
+import {
+  FiShoppingBag, FiBarChart, FiCreditCard, FiStar, FiShoppingCart,
+} from 'react-icons/fi';
+import {
+  BsKanban, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft,
+} from 'react-icons/bs';
 import { MdOutlineSupervisorAccount } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { TiTick } from 'react-icons/ti';
@@ -15,36 +19,35 @@ import product5 from './product5.jpg';
 import product6 from './product6.jpg';
 import product7 from './product7.jpg';
 
-
 export const customStyles = {
   table: {
     style: {
 
-    }
+    },
   },
   rows: {
     style: {
       borderBottom: '1px solid #e0e1e1',
-    }
+    },
   },
   cells: {
     style: {
-      padding: "10px 15px",
-      justifyContent:"center", 
+      padding: '10px 15px',
+      justifyContent: 'center',
       borderRight: '1px solid #e0e1e1',
       borderLeft: '1px solid #e0e1e1',
-      fontSize: '14px'
-    }
+      fontSize: '14px',
+    },
   },
   headCells: {
     style: {
-      justifyContent:"center",
+      justifyContent: 'center',
       border: '1px solid #e0e1e1',
       fontSize: '15px',
       textTransform: 'uppercase',
-      fontWeight : '600'
+      fontWeight: '600',
     },
-  }
+  },
 
 };
 
@@ -78,24 +81,31 @@ export const gridSliderDelete = (props) => (
   </button>
 );
 
-
 export const kanbanGrid = [
-  { headerText: 'To Do',
+  {
+    headerText: 'To Do',
     keyField: 'Open',
-    allowToggle: true },
+    allowToggle: true,
+  },
 
-  { headerText: 'In Progress',
+  {
+    headerText: 'In Progress',
     keyField: 'InProgress',
-    allowToggle: true },
+    allowToggle: true,
+  },
 
-  { headerText: 'Testing',
+  {
+    headerText: 'Testing',
     keyField: 'Testing',
     allowToggle: true,
-    isExpanded: false },
+    isExpanded: false,
+  },
 
-  { headerText: 'Done',
+  {
+    headerText: 'Done',
     keyField: 'Close',
-    allowToggle: true },
+    allowToggle: true,
+  },
 ];
 const gridEmployeeProfile = (props) => (
   <div className="flex items-center gap-2">
@@ -114,68 +124,51 @@ const gridEmployeeCountry = (props) => (
     <span>{props.Country}</span>
   </div>
 );
-export const EditorData = () => (
-  <div>
-    <h3>
-      Try React
-      React has been designed from the start for gradual adoption, and you can use as little or as much React as you need. Whether you want to get a taste of React, add some interactivity to a simple HTML page, or start a complex React-powered app, the links in this section will help you get started.
-
-      Online Playgrounds
-      If you’re interested in playing around with React, you can use an online code playground. Try a Hello World template on CodePen, CodeSandbox, or Stackblitz.
-
-      If you prefer to use your own text editor, you can also download this HTML file, edit it, and open it from the local filesystem in your browser. It does a slow runtime code transformation, so we’d only recommend using this for simple demos.
-
-      Add React to a Website
-      You can add React to an HTML page in one minute. You can then either gradually expand its presence, or keep it contained to a few dynamic widgets.
-
-      Create a New React App
-      When starting a React project, a simple HTML page with script tags might still be the best option. It only takes a minute to set up!
-
-      As your application grows, you might want to consider a more integrated setup. There are several JavaScript toolchains we recommend for larger applications. Each of them can work with little to no configuration and lets you take full advantage of the rich React ecosystem. Learn how.
-
-      Learn React
-      People come to React from different backgrounds and with different learning styles. Whether you prefer a more theoretical or a practical approach, we hope you’ll find this section helpful.
-
-      If you prefer to learn by doing, start with our practical tutorial.
-      If you prefer to learn concepts step by step, start with our guide to main concepts.
-      Like any unfamiliar technology, React does have a learning curve. With practice and some patience, you will get the hang of it.
-
-      First Examples
-      The React homepage contains a few small React examples with a live editor. Even if you don’t know anything about React yet, try changing their code and see how it affects the result.
-
-      React for Beginners
-      If you feel that the React documentation goes at a faster pace than you’re comfortable with, check out this overview of React by Tania Rascia. It introduces the most important React concepts in a detailed, beginner-friendly way. Once you’re done, give the documentation another try!
-
-      React for Designers
-      If you’re coming from a design background, these resources are a great place to get started.
-
-      JavaScript Resources
-      The React documentation assumes some familiarity with programming in the JavaScript language. You don’t have to be an expert, but it’s harder to learn both React and JavaScript at the same time.
-
-      We recommend going through this JavaScript overview to check your knowledge level. It will take you between 30 minutes and an hour but you will feel more confident learning React.
-    </h3>
-  </div>
-);
-const customerGridImage = (props) => (
-  <div className="image flex gap-4">
-    <img
-      className="rounded-full w-10 h-10"
-      src={props.CustomerImage}
-      alt="employee"
-    />
+export function EditorData() {
+  return (
     <div>
-      <p>{props.CustomerName}</p>
-      <p>{props.CustomerEmail}</p>
-    </div>
-  </div>
-);
+      <h3>
+        Try React
+        React has been designed from the start for gradual adoption, and you can use as little or as much React as you need. Whether you want to get a taste of React, add some interactivity to a simple HTML page, or start a complex React-powered app, the links in this section will help you get started.
 
-const customerGridStatus = (props) => (
-  <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
-    <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
-    <p>{props.Status}</p>
-  </div>
-);
+        Online Playgrounds
+        If you’re interested in playing around with React, you can use an online code playground. Try a Hello World template on CodePen, CodeSandbox, or Stackblitz.
+
+        If you prefer to use your own text editor, you can also download this HTML file, edit it, and open it from the local filesystem in your browser. It does a slow runtime code transformation, so we’d only recommend using this for simple demos.
+
+        Add React to a Website
+        You can add React to an HTML page in one minute. You can then either gradually expand its presence, or keep it contained to a few dynamic widgets.
+
+        Create a New React App
+        When starting a React project, a simple HTML page with script tags might still be the best option. It only takes a minute to set up!
+
+        As your application grows, you might want to consider a more integrated setup. There are several JavaScript toolchains we recommend for larger applications. Each of them can work with little to no configuration and lets you take full advantage of the rich React ecosystem. Learn how.
+
+        Learn React
+        People come to React from different backgrounds and with different learning styles. Whether you prefer a more theoretical or a practical approach, we hope you’ll find this section helpful.
+
+        If you prefer to learn by doing, start with our practical tutorial.
+        If you prefer to learn concepts step by step, start with our guide to main concepts.
+        Like any unfamiliar technology, React does have a learning curve. With practice and some patience, you will get the hang of it.
+
+        First Examples
+        The React homepage contains a few small React examples with a live editor. Even if you don’t know anything about React yet, try changing their code and see how it affects the result.
+
+        React for Beginners
+        If you feel that the React documentation goes at a faster pace than you’re comfortable with, check out this overview of React by Tania Rascia. It introduces the most important React concepts in a detailed, beginner-friendly way. Once you’re done, give the documentation another try!
+
+        React for Designers
+        If you’re coming from a design background, these resources are a great place to get started.
+
+        JavaScript Resources
+        The React documentation assumes some familiarity with programming in the JavaScript language. You don’t have to be an expert, but it’s harder to learn both React and JavaScript at the same time.
+
+        We recommend going through this JavaScript overview to check your knowledge level. It will take you between 30 minutes and an hour but you will feel more confident learning React.
+      </h3>
+    </div>
+  );
+}
+
 export const areaPrimaryXAxis = {
   valueType: 'DateTime',
   labelFormat: 'y',
@@ -359,20 +352,26 @@ export const colorMappingData = [
 ];
 
 export const rangeColorMapping = [
-  { label: '1°C to 10°C',
+  {
+    label: '1°C to 10°C',
     start: '1',
     end: '10',
-    colors: colorMappingData[1] },
+    colors: colorMappingData[1],
+  },
 
-  { label: '11°C to 20°C',
+  {
+    label: '11°C to 20°C',
     start: '11',
     end: '20',
-    colors: colorMappingData[2] },
+    colors: colorMappingData[2],
+  },
 
-  { label: '21°C to 30°C',
+  {
+    label: '21°C to 30°C',
     start: '21',
     end: '30',
-    colors: colorMappingData[3] },
+    colors: colorMappingData[3],
+  },
 
 ];
 
@@ -432,7 +431,7 @@ export const links = [
     title: 'Dashboard',
     links: [
       {
-        name: 'ecommerce',
+        name: 'Data Report',
         icon: <FiShoppingBag />,
       },
     ],
@@ -442,29 +441,9 @@ export const links = [
     title: 'Pages',
     links: [
       {
-        name: 'slider',
-        icon: <AiOutlineShoppingCart />,
-      },
-      {
-        name: 'news',
-        icon: <AiOutlineShoppingCart />,
-      },
-      {
-        name: 'project',
-        icon: <AiOutlineShoppingCart />,
-      },
-      {
         name: 'Apart For Rent',
         icon: <AiOutlineShoppingCart />,
       },
-      {
-        name: 'Apart For Sell',
-        icon: <AiOutlineShoppingCart />,
-      },
-      {
-        name: 'Service Apart',
-        icon: <AiOutlineShoppingCart />,
-      }
     ],
   },
   {
@@ -479,7 +458,7 @@ export const links = [
         icon: <BsKanban />,
       },
     ],
-  }
+  },
 ];
 
 export const cartData = [
@@ -802,7 +781,7 @@ export const sliderGrid = [
     template: gridSliderDelete,
     textAlign: 'Center',
     width: '120',
-  }
+  },
 ];
 
 export const customersData = [
@@ -1043,7 +1022,7 @@ export const customersData = [
     Weeks: '34',
     Budget: '$16.5k',
     Location: 'USA',
-  }
+  },
 
 ];
 
@@ -1057,7 +1036,7 @@ export const employeesData = [
     ReportsTo: 'Carson',
     EmployeeImage:
     avatar3,
-  }
+  },
 ];
 
 export const scheduleData = [
@@ -1308,29 +1287,35 @@ export const SparklineAreaData = [
 ];
 
 export const lineCustomSeries = [
-  { dataSource: lineChartData[0],
+  {
+    dataSource: lineChartData[0],
     xName: 'x',
     yName: 'y',
     name: 'Germany',
     width: '2',
     marker: { visible: true, width: 10, height: 10 },
-    type: 'Line' },
+    type: 'Line',
+  },
 
-  { dataSource: lineChartData[1],
+  {
+    dataSource: lineChartData[1],
     xName: 'x',
     yName: 'y',
     name: 'England',
     width: '2',
     marker: { visible: true, width: 10, height: 10 },
-    type: 'Line' },
+    type: 'Line',
+  },
 
-  { dataSource: lineChartData[2],
+  {
+    dataSource: lineChartData[2],
     xName: 'x',
     yName: 'y',
     name: 'India',
     width: '2',
     marker: { visible: true, width: 10, height: 10 },
-    type: 'Line' },
+    type: 'Line',
+  },
 
 ];
 
@@ -1393,7 +1378,8 @@ export const stackedChartData = [
 
 export const stackedCustomSeries = [
 
-  { dataSource: stackedChartData[0],
+  {
+    dataSource: stackedChartData[0],
     xName: 'x',
     yName: 'y',
     name: 'Budget',
@@ -1402,7 +1388,8 @@ export const stackedCustomSeries = [
 
   },
 
-  { dataSource: stackedChartData[1],
+  {
+    dataSource: stackedChartData[1],
     xName: 'x',
     yName: 'y',
     name: 'Expense',

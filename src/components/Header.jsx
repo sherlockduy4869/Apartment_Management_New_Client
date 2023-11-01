@@ -1,4 +1,3 @@
-import React from 'react';
 
 const Header = ({ category, title }) => (
   <div className=" mb-10">
