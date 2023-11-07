@@ -1,6 +1,6 @@
 {
-  "name": "project_syncfusion_dashboard",
-  "homepage": "https://betterhomes.site/",
+  "name": "apartment_management_client",
+  "homepage": "http://localhost:3000/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

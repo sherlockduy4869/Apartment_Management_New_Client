@@ -3,31 +3,9 @@ import axios from "axios";
 import { Button } from '.';
 import { useStateContext } from '../contexts/ContextProvider';
 import avatar from '../data/avatar.jpg';
-import Cookies from 'js-cookie'
 
 const UserProfile = () => {
   const { currentColor } = useStateContext();
-
-  const logout = () => {
-    const formData = new FormData()
-
-    const url_register = "https://api.betterhomes.site/public/api/logout"
-
-    const config = {
-      headers: { Authorization: `Bearer ${Cookies.get('jwt')}` }
-    };
-
-    axios.post(url_register, formData, config)
-      .then(res => {
-        Cookies.remove('jwt')
-        localStorage.removeItem('colorMode')
-        window.location.reload();
-        console.log(res)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
@@ -54,8 +32,7 @@ const UserProfile = () => {
         </div>
       </div>
       <div className="mt-5">
-        <div
-          onClick={logout}>
+        <div>
           <Button
             color="white"
             bgColor={currentColor}

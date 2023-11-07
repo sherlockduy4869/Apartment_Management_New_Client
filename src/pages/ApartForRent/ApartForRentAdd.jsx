@@ -1,336 +1,303 @@
-import { useState, useEffect } from 'react';
-import axios from "axios";
-import { Header } from '../../components';
-import { Link } from 'react-router-dom';
-import { NumericFormat } from 'react-number-format';
-import Select from 'react-select';
-import Cleave from 'cleave.js/react';
-import { useStateContext } from './../../contexts/ContextProvider';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Select from "react-select";
+import { NumericFormat } from "react-number-format";
+
+import { Header } from "../../components";
+import { useStateContext } from "./../../contexts/ContextProvider";
+import {
+  addingApartForRent,
+  getAllStaticValue,
+} from "../../hooks/useApartForRent";
+import * as ROUTES from '../../constants';
 
 const ApartForRentAdd = () => {
-
   const { currentColor } = useStateContext();
+  const [apartForRent, setApartForRent] = useState({
+    apart_code: "",
+    agency_name: "",
+    agency_phone: "",
+    agency_email: "",
+    sqm: 0,
+    house_owner: "",
+    phone_owner: "",
+    price: 0,
+    email_owner: "",
+    note: "",
+  });
 
-  const [showElement, setShowElement] = useState(true)
+  const [areaApart, setAreaApart] = useState([]);
+  const [bedRoom, setBedRoom] = useState([]);
+  const [statusFurniture, setStatusFurniture] = useState([]);
 
-  const [projectList, setProjectList] = useState([])
+  const convertArray = ["sqm", "price"];
 
-  /*get project list*/
+  const handleInput = (event) => {
+    console.log();
+    event.target
+      ? setApartForRent({
+          ...apartForRent,
+          [event.target.name]: convertArray.includes(event.target.name)
+            ? parseFloat(event.target.value.replace(",", ""))
+            : event.target.value,
+        })
+      : setApartForRent({
+          ...apartForRent,
+          [event.value.split(" ")[0]]: event.label,
+        });
+  };
+
+  const handleAddingApart = (event) => {
+    event.preventDefault();
+    addingApartForRent(apartForRent);
+  };
+
+  /* get apartment for rent list */
   useEffect(() => {
-    const getProject = async () => {
-      const projectFromServer = await fetchProject()
-      setProjectList(projectFromServer)
-    }
-    getProject()
-  }, [])
+    const init = async () => {
+      try {
+        const allStaticValue = await getAllStaticValue();
 
-  const fetchProject = async () => {
-    const url_project_list = "https://api.betterhomes.site/public/api/v1/project"
-    const res = await fetch(url_project_list)
-    const data = await res.json()
-    return data['data']
-  }
-  /*--------------*/
+        setAreaApart(allStaticValue.areaApart);
+        setBedRoom(allStaticValue.bedRoom);
+        setStatusFurniture(allStaticValue.statusFurniture);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    init();
+  }, []);
 
-  /*set selection data*/
-  const dataProject = []
-  for (let i = 0; i < projectList.length; i++) {
-    dataProject.push({
-      label: projectList[i].project_name,
-      value: projectList[i].id_project
-    })
-  }
-  const dataStatus = [
-    { label: "Normal", value: "Normal" },
-    { label: "Noticable", value: "Noticable" }
-  ]
-  /*----------------*/
-
-  /*all property of apart for rent*/
-  const [apartCode, setApartCode] = useState("")
-  const [image, setImage] = useState("")
-  const [note, setNote] = useState("")
-  const [projectName, setProjectName] = useState({
-    label: "",
-    value: ""
-  })
-  const [address, setAddress] = useState("")
-  const [price, setPrice] = useState("")
-  const [availableFrom, setAvailableFrom] = useState("")
-  const [status, setStatus] = useState({
-    label: "Normal",
-    value: "Normal"
-  })
-  const [description, setDescription] = useState("")
-  /*------------------------------*/
-
-  const [addStatus, setAddStatus] = useState("")
-  const [corlorMessage, setColorMessage] = useState("")
-
-  /*error area*/
-  const [errorApartCode, setErrorApartCode] = useState("")
-  const [errorImage, setErrorImage] = useState("")
-  const [errorProject, setErrorProject] = useState("")
-  const [errorAddress, setErrorAddress] = useState("")
-  /*---------*/
-
-  const addingApart = (e) => {
-
-    e.preventDefault()
-
-    const formData = new FormData()
-    const url_add = "https://api.betterhomes.site/public/api/v1/apartforrent"
-
-    let price_add = parseInt(price.replaceAll(',', ''));
-
-    formData.append("id_project", projectName.value)
-    formData.append("apartment_code", apartCode)
-    formData.append("price", price_add)
-    formData.append("address", address)
-    formData.append("image", image)
-    formData.append("description", description)
-    formData.append("status", status.value)
-    formData.append("available_from", availableFrom)
-    formData.append("note", note)
-    formData.append("purpose", "for_rent")
-
-    axios.post(url_add, formData)
-      .then(res => {
-        if (!res["data"]["status"]) {
-          setColorMessage("#f43f5e")
-        }
-        setColorMessage("#22c55e")
-        setErrorApartCode("")
-        setErrorImage("")
-        setErrorProject("")
-        setErrorAddress("")
-        setShowElement(true)
-        setAddStatus(res["data"]["message"])
-      })
-      .catch(error => {
-
-        if (error['response']['data']['errors']['apartment_code']) {
-          setErrorApartCode(error['response']['data']['errors']['apartment_code'][0])
-        }
-        else {
-          setErrorApartCode("")
-        }
-
-        if (error['response']['data']['errors']['image']) {
-          setErrorImage(error['response']['data']['errors']['image'][0])
-        }
-        else {
-          setErrorImage("")
-        }
-
-        if (error['response']['data']['errors']['id_project']) {
-          setErrorProject(error['response']['data']['errors']['id_project'][0])
-        }
-        else {
-          setErrorProject("")
-        }
-
-        if (error['response']['data']['errors']['address']) {
-          setErrorAddress(error['response']['data']['errors']['address'][0])
-        }
-        else {
-          setErrorAddress("")
-        }
-
-      });
-  }
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-
       <Header category="Page" title="Apartment For Rent" />
 
-      <div className='text-2xl mb-2'>ADDING APARTMENT FOR RENT</div>
-      <Link to={'/apartforrent'}>
+      <div className="text-2xl mb-2">ADDING APARTMENT FOR RENT</div>
+      <Link to={ROUTES.APART_FOR_RENT}>
         <button
           style={{ backgroundColor: currentColor }}
-          class="mb-6 font-semibold text-white py-2 px-4 rounded">
+          className="mb-6 font-semibold text-white py-2 px-4 rounded"
+        >
           Back To Apart For Rent list
         </button>
       </Link>
 
-      <form 
-      onClick={(e) => setShowElement(false)}
-      class="w-full max-w-full">
-
-        <div class="flex flex-wrap -mx-3 mb-6">
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+      <form className="w-full max-w-full">
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Apart Code
             </label>
             <input
+              name="apart_code"
               type="text"
-              onChange={(e) => setApartCode(e.target.value)}
+              onChange={handleInput}
               placeholder="Apartment Code"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorApartCode}
-            </div>
-
-          </div>
-          <div class="w-full md:w-1/2 px-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Image
-            </label>
-            <input
-              type="text"
-              onChange={(e) => setImage(e.target.value)}
-              placeholder="Image"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
-
-            <div style={{ color: "#f43f5e" }}>
-              {errorImage}
-            </div>
-
-          </div>
-        </div>
-
-        <div class="flex flex-wrap -mx-3 mb-6">
-
-          <div class="w-full md:w-1/2 px-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Note
-            </label>
-            <input
-              type="text"
-              onChange={(e) => setNote(e.target.value)}
-              placeholder="Note"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
-
-          </div>
-
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Project
-            </label>
-            <Select
-              options={dataProject}
-              onChange={setProjectName}
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
 
-            <div style={{ color: "#f43f5e" }}>
-              {errorProject}
-            </div>
+            <div style={{ color: "#f43f5e" }}>{/* {errorApartCode} */}</div>
+          </div>
+          <div className="w-full md:w-1/2 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Agency Name
+            </label>
+            <input
+              name="agency_name"
+              type="text"
+              onChange={handleInput}
+              placeholder="Agency Name"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            />
 
+            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
-        <div class="flex flex-wrap -mx-3 mb-6">
-
-          <div class="w-full md:w-1/2 px-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Address
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Area
             </label>
-            <input
-              type="text"
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="Address"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
-            <div style={{ color: "#f43f5e" }}>
-              {errorAddress}
-            </div>
+            <Select
+              name="area_apart"
+              options={areaApart}
+              onChange={handleInput}
+            />
 
+            <div style={{ color: "#f43f5e" }}>{/* {errorProject} */}</div>
           </div>
 
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          <div className="w-full md:w-1/2 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Agency Phone
+            </label>
+            <input
+              name="agency_phone"
+              type="text"
+              onChange={handleInput}
+              placeholder="Agency Phone"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Bedroom
+            </label>
+            <Select name="bedroom" options={bedRoom} onChange={handleInput} />
+          </div>
+
+          <div className="w-full md:w-1/2 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Agency Email
+            </label>
+            <input
+              name="agency_email"
+              type="text"
+              onChange={handleInput}
+              placeholder="Agency Email"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            />
+
+            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/2 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              SQM
+            </label>
+            <input
+              name="sqm"
+              type="number"
+              onChange={handleInput}
+              placeholder="SQM"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            />
+          </div>
+          <div className="w-full md:w-1/2 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              House Owner
+            </label>
+            <input
+              name="house_owner"
+              type="text"
+              onChange={handleInput}
+              placeholder="House Owner"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            />
+
+            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Status Furniture
+            </label>
+            <Select
+              name="status_furniture"
+              options={statusFurniture}
+              onChange={handleInput}
+            />
+          </div>
+          <div className="w-full md:w-1/2 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Phone Owner
+            </label>
+            <input
+              name="phone_owner"
+              type="text"
+              onChange={handleInput}
+              placeholder="Phone Owner"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            />
+
+            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/2 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Price
             </label>
-
             <NumericFormat
-              className="currency"
-              placeholder='Price'
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              name="price"
+              placeholder="Price"
+              className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
               thousandSeparator=","
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={handleInput}
+            />
+          </div>
+          <div className="w-full md:w-1/2 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Email Owner
+            </label>
+            <input
+              name="email_owner"
+              type="text"
+              onChange={handleInput}
+              placeholder="Email Owner"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
 
+            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
-
         </div>
 
-        <div class="flex flex-wrap -mx-3 mb-6">
-
-          <div class="w-full md:w-1/2 px-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Available From
-            </label>
-            <Cleave
-              placeholder='Available from'
-              onChange={(e) => setAvailableFrom(e.target.value)}
-              options={{
-                date: true,
-                delimiter: '-',
-                datePattern: ['d', 'm', 'Y']
-              }}
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"/>
-
-          </div>
-
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Status
-            </label>
-            <Select
-              options={dataStatus}
-              defaultValue={dataStatus[0]}
-              onChange={setStatus}
-            />
-
-          </div>
-
-        </div>
-
-        <div class="flex flex-wrap -mx-3 mb-4">
-          <div class="w-full md:w-full px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs 
-              font-bold mb-2" for="grid-city">
-              Description
+        <div className="flex flex-wrap -mx-3 mb-4">
+          <div className="w-full md:w-full px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs 
+              font-bold mb-2"
+              htmlFor="grid-city"
+            >
+              Note
             </label>
 
             <textarea
-              onChange={(e) => setDescription(e.target.value)}
+              name="note"
+              onChange={handleInput}
               rows="4"
-              placeholder="Write description here..."
-              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
+              placeholder="Write note here..."
+              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
             border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
             dark:bg-gray-700 dark:border-gray-6 dark:placeholder-gray-400 
-            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
-
-            </textarea>
-
+            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            ></textarea>
           </div>
         </div>
 
-        <div class="flex flex-wrap -mx-3 mb-2">
-          <div class="w-full md:w-full px-3 mb-6 md:mb-0 text-center">
-            <div className='mb-2' style={{ color: corlorMessage }}>
-              {showElement?addStatus:<></>} 
-            </div>
-            <button 
+        <div className="flex flex-wrap -mx-3 mb-2">
+          <div className="w-full md:w-full px-3 mb-6 md:mb-0 text-center">
+            <div className="mb-2">{/* {showElement?addStatus:<></>}  */}</div>
+            <button
               style={{ backgroundColor: currentColor }}
-              onClick={(e) => addingApart(e)}
-              class="text-white font-bold py-2 px-4 rounded">
+              onClick={handleAddingApart}
+              className="text-white font-bold py-2 px-4 rounded"
+            >
               ADDING APART
             </button>
           </div>
         </div>
-
       </form>
-
     </div>
-  )
-}
+  );
+};
 
-export default ApartForRentAdd
+export default ApartForRentAdd;

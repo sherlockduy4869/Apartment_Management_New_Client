@@ -13,13 +13,10 @@ import {
 import "./App.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import PrivateRoute from "./pages/PrivateRoute";
-import Cookies from "js-cookie";
+import * as ROUTES from './constants/routes';
 
 const App = () => {
-  const {
-    currentMode,
-    activeMenu,
-  } = useStateContext();
+  const { currentMode, activeMenu } = useStateContext();
 
   return (
     <div className={currentMode === "Dark" ? "dark" : ""}>
@@ -51,61 +48,40 @@ const App = () => {
             <div>
               <Routes>
                 {/* Authenication  */}
-                <Route
-                  path="/login"
-                  element={
-                    Cookies.get("jwt") !== undefined ? (
-                      <Navigate to="/" />
-                    ) : (
-                      <Login />
-                    )
-                  }
-                />
-                <Route
-                  path="/register"
-                  element={
-                    Cookies.get("jwt") !== undefined ? (
-                      <Navigate to="/" />
-                    ) : (
-                      <Register />
-                    )
-                  }
-                />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
                 {/*----------*/}
 
                 {/* dashboard  */}
-                <Route
-                  element={
-                    <PrivateRoute isLogged={Cookies.get("jwt") !== undefined} />
-                  }
-                >
+                <Route element={<PrivateRoute isLogged={true} />}>
                   {/* pages  */}
                   {/* Ecommerce  */}
-                  <Route path="/" exact element={<Ecommerce />} />
-                  <Route path="/data-report" element={<Ecommerce />} />
+                  <Route path={ROUTES.DEFAULT} exact element={<Ecommerce />} />
+                  <Route path={ROUTES.DATA_REPORT} element={<Ecommerce />} />
                   {/*----------*/}
 
                   {/* Apart For Rent  */}
-                  <Route path="/apart-for-rent" element={<ApartForRent />} />
+                  <Route path={ROUTES.APART_FOR_RENT} element={<ApartForRent />} />
                   <Route
-                    path="/apart-for-rent/add"
+                    path={ROUTES.APART_FOR_RENT_ADD}
                     element={<ApartForRentAdd />}
                   />
                   <Route
-                    path="/apart-for-rent/edit/:id"
+                    path={ROUTES.APART_FOR_RENT_EDIT}
                     element={<ApartForRentEdit />}
                   />
                   {/*----------*/}
 
                   {/* apps  */}
-                  <Route path="/kanban" element={<Kanban />} />
-                  <Route path="/calendar" element={<Calendar />} />
+                  <Route path={ROUTES.KANBAN} element={<Kanban />} />
+                  <Route path={ROUTES.CALENDAR} element={<Calendar />} />
                   {/*----------*/}
+                  
                   {/*---------*/}
                 </Route>
                 <Route
                   path="*"
-                  element={<Navigate to="/data-report" replace />}
+                  element={<Navigate to={ROUTES.DATA_REPORT} replace />}
                 />
               </Routes>
             </div>
