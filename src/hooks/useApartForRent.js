@@ -39,9 +39,12 @@ export const searchApartForRent = async (apartForRentList, search) => {
 export const addingApartForRent = async (apartForRent) => {
   console.log(apartForRent);
 
-  const response = await axios.post(API.REQUEST_ADDING_APART_FOR_RENT, apartForRent);
+  const response = await axios.post(
+    API.REQUEST_ADDING_APART_FOR_RENT,
+    apartForRent
+  );
 
-  if(response.status === 201){
+  if (response.status === 201) {
     return response.data.msg;
   }
 };
@@ -82,7 +85,15 @@ export const getAllStaticValue = async () => {
     return {
       bedRoom,
       areaApart,
-      statusFurniture
-    }
+      statusFurniture,
+    };
+  }
+};
+
+export const getApartForRentDetails = async (apart_code) => {
+  const response = await axios.get(API.REQUEST_GET_APART_FOR_RENT_DETAILS + apart_code);
+
+  if (response.status === 200) {
+    return response.data.data;
   }
 };

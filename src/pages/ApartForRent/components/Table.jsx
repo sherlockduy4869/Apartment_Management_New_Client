@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 import { Header } from "../../../components";
 import { customStyles } from "../../../constants";
-import * as ROUTES from '../../../constants';
+import * as ROUTES from "../../../constants";
+import { numberWithCommas } from "../../../helpers/function";
 
 const Table = ({ filterApartForRent, handleDeleteApartForRent, setSearch }) => {
   const columnTable = [
@@ -86,7 +87,7 @@ const Table = ({ filterApartForRent, handleDeleteApartForRent, setSearch }) => {
       name: "Price",
       cell: (row) => (
         <div>
-          {row.price} <sup>đ</sup>
+          {numberWithCommas(row.price)} <sup>đ</sup>
         </div>
       ),
       width: "15%",
@@ -101,6 +102,21 @@ const Table = ({ filterApartForRent, handleDeleteApartForRent, setSearch }) => {
       sortable: true,
       cell: (row) => (
         <span className="text-center">
+          <Link
+            to={ROUTES.APART_FOR_RENT_DETAILS_ACTION + row.apart_code}
+          >
+            <button
+              style={{ background: "#3b82f6" }}
+              className="text-white mb-2 py-1 px-2 capitalize rounded-2xl text-md "
+            >
+              Details
+            </button>
+          </Link>
+          <Link to={ROUTES.APART_FOR_RENT_EDIT_ACTION + row.apart_code}>
+            <button className="text-white py-1 px-2 capitalize rounded-2xl text-md bg-indigo-500">
+              Editing
+            </button>
+          </Link>
           <button
             style={{ background: "#ee5e68" }}
             className="text-white py-1 px-2 mb-2 capitalize rounded-2xl text-md mr-1"
@@ -111,11 +127,6 @@ const Table = ({ filterApartForRent, handleDeleteApartForRent, setSearch }) => {
           >
             Delete
           </button>
-          <Link to={ROUTES.APART_FOR_RENT_EDIT_ACTION + row.apart_code}>
-            <button className="text-white py-1 px-2 capitalize rounded-2xl text-md bg-indigo-500">
-              Editing
-            </button>
-          </Link>
         </span>
       ),
       width: "17%",

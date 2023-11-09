@@ -3,13 +3,18 @@ import { Navbar, Footer, Sidebar } from "./components";
 import {
   Login,
   Register,
-  ApartForRent,
-  ApartForRentAdd,
-  ApartForRentEdit,
   Ecommerce,
   Calendar,
   Kanban,
 } from "./pages";
+
+import {
+  ApartForRent,
+  ApartForRentAdd,
+  ApartForRentEdit,
+  ApartForRentDetails,
+} from "./pages/ApartForRent";
+
 import "./App.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import PrivateRoute from "./pages/PrivateRoute";
@@ -69,6 +74,10 @@ const App = () => {
                   <Route
                     path={ROUTES.APART_FOR_RENT_EDIT}
                     element={<ApartForRentEdit />}
+                  />
+                  <Route
+                    path={ROUTES.APART_FOR_RENT_DETAILS}
+                    element={<ApartForRentDetails />}
                   />
                   {/*----------*/}
 
