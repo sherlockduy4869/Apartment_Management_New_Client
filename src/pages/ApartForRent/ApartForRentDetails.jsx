@@ -15,7 +15,6 @@ const ApartForRentDetails = () => {
     const init = async () => {
       try {
         const apartForRentDetails = await getApartForRentDetails(apart_code);
-        console.log(apartForRentDetails);
         setApartForRentDetails(apartForRentDetails);
       } catch (error) {
         console.log(error);

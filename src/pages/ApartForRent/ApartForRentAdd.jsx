@@ -5,7 +5,7 @@ import {
   addingApartForRent,
   getAllStaticValue,
 } from "../../hooks/useApartForRent";
-import { Form } from './components';
+import { FormAdd } from './components';
 
 const ApartForRentAdd = () => {
   const { currentColor } = useStateContext();
@@ -14,11 +14,14 @@ const ApartForRentAdd = () => {
     agency_name: "",
     agency_phone: "",
     agency_email: "",
+    area_apart: "",
     sqm: 0,
+    bedroom: "",
     house_owner: "",
     phone_owner: "",
     price: 0,
     email_owner: "",
+    status_furniture: "",
     note: "",
   });
 
@@ -65,7 +68,7 @@ const ApartForRentAdd = () => {
   }, []);
 
   return (
-    <Form
+    <FormAdd
     currentColor = {currentColor}
     areaApart = {areaApart}
     bedRoom = {bedRoom}

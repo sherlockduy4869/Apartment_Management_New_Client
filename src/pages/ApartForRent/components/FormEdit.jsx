@@ -1,23 +1,54 @@
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import { NumericFormat } from "react-number-format";
+import { useState, useEffect } from "react";
 
 import { Header } from "../../../components";
 import * as ROUTES from "../../../constants";
 
-const Form = ({
+const FormEdit = ({
   currentColor,
+  handleInput,
+  handleEditingApart,
+  apartForRentDetails,
   areaApart,
   bedRoom,
   statusFurniture,
-  handleInput,
-  handleAddingApart,
 }) => {
+  const [areaDetails, setAreaDetails] = useState("");
+  const [bedRoomDetails, setBedRoomDetails] = useState("");
+  const [statusFurnitureDetails, setStatusFurnitureDetails] = useState("");
+
+  /* get apartment for rent details */
+  useEffect(() => {
+    const init = async () => {
+      try {
+        setAreaDetails({
+          value: `area_apart ${apartForRentDetails.area_apart}`,
+          label: apartForRentDetails.area_apart,
+        });
+        setBedRoomDetails({
+          value: `bedroom ${apartForRentDetails.bedroom}`,
+          label: apartForRentDetails.bedroom,
+        });
+        setStatusFurnitureDetails({
+          value: `status_furniture ${apartForRentDetails.status_furniture}`,
+          label: apartForRentDetails.status_furniture,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    init();
+  }, [apartForRentDetails]);
+
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="Page" title="Apartment For Rent" />
 
-      <div className="text-2xl mb-2">ADDING APARTMENT FOR RENT</div>
+      <div className="text-2xl mb-2">
+        EDITING APARTMENT FOR RENT: {apartForRentDetails.apart_code}
+      </div>
       <Link to={ROUTES.APART_FOR_RENT}>
         <button
           style={{ backgroundColor: currentColor }}
@@ -34,12 +65,18 @@ const Form = ({
               Apart Code
             </label>
             <input
+              disabled
+              value={
+                apartForRentDetails.apart_code
+                  ? apartForRentDetails.apart_code
+                  : ""
+              }
               name="apart_code"
               type="text"
               onChange={handleInput}
               placeholder="Apartment Code"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
 
             <div style={{ color: "#f43f5e" }}>{/* {errorApartCode} */}</div>
@@ -50,11 +87,16 @@ const Form = ({
             </label>
             <input
               name="agency_name"
+              defaultValue={
+                apartForRentDetails.agency_name
+                  ? apartForRentDetails.agency_name
+                  : ""
+              }
               type="text"
               onChange={handleInput}
               placeholder="Agency Name"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
 
             <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
@@ -69,7 +111,14 @@ const Form = ({
             <Select
               name="area_apart"
               options={areaApart}
-              onChange={handleInput}
+              value={areaDetails}
+              onChange={(event) => {
+                handleInput(event);
+                setAreaDetails({
+                  value: `area_apart ${event.label}`,
+                  label: event.label,
+                });
+              }}
             />
 
             <div style={{ color: "#f43f5e" }}>{/* {errorProject} */}</div>
@@ -81,11 +130,16 @@ const Form = ({
             </label>
             <input
               name="agency_phone"
+              defaultValue={
+                apartForRentDetails.agency_phone
+                  ? apartForRentDetails.agency_phone
+                  : ""
+              }
               type="text"
               onChange={handleInput}
               placeholder="Agency Phone"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
           </div>
         </div>
@@ -95,7 +149,18 @@ const Form = ({
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Bedroom
             </label>
-            <Select name="bedroom" options={bedRoom} onChange={handleInput} />
+            <Select
+              name="bedroom"
+              value={bedRoomDetails}
+              options={bedRoom}
+              onChange={(event) => {
+                handleInput(event);
+                setBedRoomDetails({
+                  value: `bedroom ${event.label}`,
+                  label: event.label,
+                });
+              }}
+            />
           </div>
 
           <div className="w-full md:w-1/2 px-3">
@@ -104,11 +169,16 @@ const Form = ({
             </label>
             <input
               name="agency_email"
+              defaultValue={
+                apartForRentDetails.agency_email
+                  ? apartForRentDetails.agency_email
+                  : ""
+              }
               type="text"
               onChange={handleInput}
               placeholder="Agency Email"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
 
             <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
@@ -122,11 +192,14 @@ const Form = ({
             </label>
             <input
               name="sqm"
+              defaultValue={
+                apartForRentDetails.sqm ? apartForRentDetails.sqm : ""
+              }
               type="number"
               onChange={handleInput}
               placeholder="SQM"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
@@ -135,11 +208,16 @@ const Form = ({
             </label>
             <input
               name="house_owner"
+              defaultValue={
+                apartForRentDetails.house_owner
+                  ? apartForRentDetails.house_owner
+                  : ""
+              }
               type="text"
               onChange={handleInput}
               placeholder="House Owner"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
 
             <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
@@ -154,7 +232,14 @@ const Form = ({
             <Select
               name="status_furniture"
               options={statusFurniture}
-              onChange={handleInput}
+              value={statusFurnitureDetails}
+              onChange={(event) => {
+                handleInput(event);
+                setStatusFurnitureDetails({
+                  value: `status_furniture ${event.label}`,
+                  label: event.label,
+                });
+              }}
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
@@ -163,11 +248,16 @@ const Form = ({
             </label>
             <input
               name="phone_owner"
+              defaultValue={
+                apartForRentDetails.phone_owner
+                  ? apartForRentDetails.phone_owner
+                  : ""
+              }
               type="text"
               onChange={handleInput}
               placeholder="Phone Owner"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
 
             <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
@@ -181,9 +271,10 @@ const Form = ({
             </label>
             <NumericFormat
               name="price"
+              value={apartForRentDetails.price ? apartForRentDetails.price : ""}
               placeholder="Price"
               className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
               thousandSeparator=","
               onChange={handleInput}
             />
@@ -194,11 +285,16 @@ const Form = ({
             </label>
             <input
               name="email_owner"
+              defaultValue={
+                apartForRentDetails.email_owner
+                  ? apartForRentDetails.email_owner
+                  : ""
+              }
               type="text"
               onChange={handleInput}
               placeholder="Email Owner"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
 
             <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
@@ -209,7 +305,7 @@ const Form = ({
           <div className="w-full md:w-full px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs 
-              font-bold mb-2"
+            font-bold mb-2"
               htmlFor="grid-city"
             >
               Note
@@ -217,13 +313,16 @@ const Form = ({
 
             <textarea
               name="note"
+              defaultValue={
+                apartForRentDetails.note ? apartForRentDetails.note : ""
+              }
               onChange={handleInput}
               rows="4"
               placeholder="Write note here..."
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
-            border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
-            dark:bg-gray-700 dark:border-gray-6 dark:placeholder-gray-400 
-            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
+          dark:bg-gray-700 dark:border-gray-6 dark:placeholder-gray-400 
+          dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             ></textarea>
           </div>
         </div>
@@ -233,10 +332,10 @@ const Form = ({
             <div className="mb-2">{/* {showElement?addStatus:<></>}  */}</div>
             <button
               style={{ backgroundColor: currentColor }}
-              onClick={handleAddingApart}
+              onClick={handleEditingApart}
               className="text-white font-bold py-2 px-4 rounded"
             >
-              ADDING APART
+              EDITING APART
             </button>
           </div>
         </div>
@@ -245,4 +344,4 @@ const Form = ({
   );
 };
 
-export default Form;
+export default FormEdit;

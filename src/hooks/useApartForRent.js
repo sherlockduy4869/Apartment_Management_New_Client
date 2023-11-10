@@ -1,5 +1,8 @@
+import { toast } from "react-toastify";
+
 import axios from "../services/axios";
 import * as API from "../constants/apis";
+
 
 export const deleteApartForRent = async (apart_code) => {
   const response = await axios.delete(
@@ -37,10 +40,25 @@ export const searchApartForRent = async (apartForRentList, search) => {
 };
 
 export const addingApartForRent = async (apartForRent) => {
-  console.log(apartForRent);
+  toast.warn("asdhgahsjdghj", {
+    theme: 'light'
+  });
+  
 
-  const response = await axios.post(
-    API.REQUEST_ADDING_APART_FOR_RENT,
+  // const response = await axios.post(
+  //   API.REQUEST_ADDING_APART_FOR_RENT,
+  //   apartForRent
+  // );
+
+  // if (response.status === 201) {
+  //   return response.data.msg;
+  // }
+};
+
+export const editingApartForRent = async (apartForRent, apart_code) => {
+
+  const response = await axios.put(
+    API.REQUEST_EDITING_APART_FOR_RENT + apart_code,
     apartForRent
   );
 

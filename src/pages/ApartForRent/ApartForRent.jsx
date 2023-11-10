@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { Table } from './components';
+import { Table } from "./components";
 import {
   deleteApartForRent,
   fetchAllApartForRent,
@@ -15,11 +15,15 @@ const ApartForRent = () => {
   const handleDeleteApartForRent = async (apart_code) => {
     const apartCode = await deleteApartForRent(apart_code);
     setApartForRentList(
-      apartForRentList.filter((apartForRentList) => apartForRentList.apart_code !== apartCode)
-    )
+      apartForRentList.filter(
+        (apartForRentList) => apartForRentList.apart_code !== apartCode
+      )
+    );
     setFilterApartForRent(
-      filterApartForRent.filter((filterApartForRent) => filterApartForRent.apart_code !== apartCode)
-    )
+      filterApartForRent.filter(
+        (filterApartForRent) => filterApartForRent.apart_code !== apartCode
+      )
+    );
   };
 
   /* get apartment for rent list */
@@ -51,10 +55,10 @@ const ApartForRent = () => {
   /*------------------*/
 
   return (
-    <Table 
-    filterApartForRent = {filterApartForRent}
-    handleDeleteApartForRent = {handleDeleteApartForRent}
-    setSearch = {setSearch}
+    <Table
+      filterApartForRent={filterApartForRent}
+      handleDeleteApartForRent={handleDeleteApartForRent}
+      setSearch={setSearch}
     />
   );
 };

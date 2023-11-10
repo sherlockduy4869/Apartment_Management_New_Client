@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { Navbar, Footer, Sidebar } from "./components";
+import { Navbar, Footer, Sidebar, Notification } from "./components";
 import {
   Login,
   Register,
@@ -19,6 +19,7 @@ import "./App.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import PrivateRoute from "./pages/PrivateRoute";
 import * as ROUTES from './constants/routes';
+
 
 const App = () => {
   const { currentMode, activeMenu } = useStateContext();
@@ -98,6 +99,7 @@ const App = () => {
           </div>
         </div>
       </BrowserRouter>
+      <Notification/>
     </div>
   );
 };
