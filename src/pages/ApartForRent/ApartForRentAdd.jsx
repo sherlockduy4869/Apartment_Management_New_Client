@@ -32,7 +32,6 @@ const ApartForRentAdd = () => {
   const convertArray = ["sqm", "price"];
 
   const handleInput = (event) => {
-    console.log();
     event.target
       ? setApartForRent({
           ...apartForRent,

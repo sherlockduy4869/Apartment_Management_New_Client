@@ -1,10 +1,9 @@
-import { MdOutlineCancel } from 'react-icons/md';
-import axios from "axios";
-import { Button } from '.';
-import { useStateContext } from '../contexts/ContextProvider';
-import avatar from '../data/avatar.jpg';
+import { MdOutlineCancel } from "react-icons/md";
+import { Button } from ".";
+import { useStateContext } from "../contexts/ContextProvider";
+import avatar from "../data/avatar.jpg";
 
-const UserProfile = () => {
+const UserProfile = ({ userProfile }) => {
   const { currentColor } = useStateContext();
 
   return (
@@ -26,9 +25,15 @@ const UserProfile = () => {
           alt="user-profile"
         />
         <div>
-          <p className="font-semibold text-xl dark:text-gray-200"> Michael Roberts </p>
-          <p className="text-gray-500 text-sm dark:text-gray-400">  Administrator   </p>
-          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> info@shop.com </p>
+          <p className="font-semibold text-xl dark:text-gray-200">
+            {userProfile ? userProfile.name : ''}
+          </p>
+          <p className="text-gray-500 text-sm dark:text-gray-400">
+            {userProfile ? userProfile.role : ''}
+          </p>
+          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400">
+            {userProfile ? userProfile.email : ''}
+          </p>
         </div>
       </div>
       <div className="mt-5">
@@ -43,7 +48,6 @@ const UserProfile = () => {
         </div>
       </div>
     </div>
-
   );
 };
 
