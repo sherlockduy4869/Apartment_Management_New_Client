@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import { Table } from "./components";
 import {
   deleteApartForRent,
@@ -51,7 +50,8 @@ const ApartForRent = () => {
       }
     };
     init();
-  }, [search]);
+  }, [apartForRentList, search]);
+
   /*------------------*/
 
   return (

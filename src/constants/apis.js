@@ -2,6 +2,7 @@
 
 const BASE_AUTHENTICATION = '/account/'
 export const REQUEST_LOGIN = BASE_AUTHENTICATION + 'login';
+export const REQUEST_LOGOUT = BASE_AUTHENTICATION + 'logout';
 
 /*------------------------------------------------------------------------*/
 

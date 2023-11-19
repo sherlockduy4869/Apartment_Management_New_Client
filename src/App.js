@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Navbar, Footer, Sidebar, Notification } from "./components";
-import { Login, Register, Ecommerce, Calendar, Kanban } from "./pages";
+import { Login, Ecommerce, Calendar, Kanban } from "./pages";
 
 import {
   ApartForRent,
@@ -11,15 +11,28 @@ import {
 
 import "./App.css";
 import { useStateContext } from "./contexts/ContextProvider";
-import PrivateRoute from "./pages/PrivateRoute";
 import * as ROUTES from "./constants/routes";
+
+import { isTokenNotExpired, getTimeReload } from "./hooks/useAuth";
 
 const App = () => {
   const { currentMode, activeMenu } = useStateContext();
 
-  const a = 1;
+  const userProfile = JSON.parse(localStorage.getItem("user"));
 
-  if (a === 1) {
+  const token = userProfile ? userProfile.accessToken : "";
+
+  const isNotExpire = userProfile ? isTokenNotExpired(token) : false;
+
+  const isAllowLogin = isNotExpire && token !== "";
+
+  const timeReload = getTimeReload(token);
+
+  if (isAllowLogin) {
+    setTimeout(() => {
+      window.location.reload();
+    }, timeReload);
+
     return (
       <div className={currentMode === "Dark" ? "dark" : ""}>
         <BrowserRouter>
@@ -49,15 +62,9 @@ const App = () => {
               </div>
               <div>
                 <Routes>
-                  {/* Authenication  */}
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  {/*----------*/}
-
                   {/* dashboard  */}
-                  <Route element={<PrivateRoute isLogged={true} />}>
+                  <Route>
                     {/* pages  */}
-                    {/* Ecommerce  */}
                     <Route
                       path={ROUTES.DEFAULT}
                       exact
@@ -112,9 +119,9 @@ const App = () => {
           {/* Authenication  */}
           <Route path={ROUTES.LOGIN} element={<Login />} />
           {/*----------*/}
-
           <Route path="*" element={<Navigate to={ROUTES.LOGIN} replace />} />
         </Routes>
+        <Notification />
       </BrowserRouter>
     );
   }

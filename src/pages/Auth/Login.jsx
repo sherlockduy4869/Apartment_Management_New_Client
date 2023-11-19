@@ -3,6 +3,7 @@ import { useState } from "react";
 import { login } from "../../hooks/useAuth";
 
 const Login = () => {
+
   const [account, setAccount] = useState({
     email: "",
     password: "",
@@ -19,7 +20,7 @@ const Login = () => {
     event.preventDefault();
     const isLogin = await login(account);
     if(isLogin){
-        
+      window.location.reload();
     }
   };
 
@@ -41,7 +42,7 @@ const Login = () => {
             />
           </div>
           <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <form>
+            <form onSubmit={handleLogin}>
               <div
                 className="flex items-center my-4 before:flex-1 before:border-t 
                                 before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t 
@@ -82,8 +83,7 @@ const Login = () => {
 
               <div className="text-center lg:text-left">
                 <button
-                  onClick={handleLogin}
-                  type="button"
+                  type="submit"
                   className="inline-block px-7 py-3 bg-blue-600 text-white 
                                     font-medium text-sm leading-snug uppercase rounded shadow-md 
                                     hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 

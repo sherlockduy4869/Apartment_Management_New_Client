@@ -9,7 +9,7 @@ const Notification = () => {
     pauseOnHover={false}
     transition={Slide}
     closeOnClick={true}
-    limit={3}
+    limit={1}
     />
   )
 }

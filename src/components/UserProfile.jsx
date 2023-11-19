@@ -2,9 +2,17 @@ import { MdOutlineCancel } from "react-icons/md";
 import { Button } from ".";
 import { useStateContext } from "../contexts/ContextProvider";
 import avatar from "../data/avatar.jpg";
+import { logout } from "../hooks/useAuth";
 
 const UserProfile = ({ userProfile }) => {
   const { currentColor } = useStateContext();
+
+  const handleLogout = async() => {
+    const statusLogout = await logout();
+    if(statusLogout){
+      window.location.reload();
+    }
+  };
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
@@ -26,18 +34,18 @@ const UserProfile = ({ userProfile }) => {
         />
         <div>
           <p className="font-semibold text-xl dark:text-gray-200">
-            {userProfile ? userProfile.name : ''}
+            {userProfile ? userProfile.name : ""}
           </p>
           <p className="text-gray-500 text-sm dark:text-gray-400">
-            {userProfile ? userProfile.role : ''}
+            {userProfile ? userProfile.role : ""}
           </p>
           <p className="text-gray-500 text-sm font-semibold dark:text-gray-400">
-            {userProfile ? userProfile.email : ''}
+            {userProfile ? userProfile.email : ""}
           </p>
         </div>
       </div>
       <div className="mt-5">
-        <div>
+        <div onClick={handleLogout}>
           <Button
             color="white"
             bgColor={currentColor}
