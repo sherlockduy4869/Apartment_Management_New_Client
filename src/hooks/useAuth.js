@@ -6,9 +6,8 @@ import * as API from "../constants";
 export const login = async (account) => {
   try {
     const response = await axios.post(API.REQUEST_LOGIN, account);
-
     if (response.status === 201) {
-      const user = response.data.user;
+      const user = response?.data?.user;
       localStorage.setItem("user", JSON.stringify(user));
       return true;
     }
@@ -52,22 +51,5 @@ export const isTokenNotExpired = (token) => {
     });
     toast.clearWaitingQueue();
     return false;
-  }
-};
-
-export const getTimeReload = (token) => {
-  try {
-    const decoded = jwt.decode(token);
-
-    const timeReload = decoded ? decoded.exp - Date.now() / 1000 : 0;
-
-    if (timeReload > 0) {
-      return timeReload;
-    }
-  } catch (err) {
-    toast.error("An error is happening !", {
-      theme: "light",
-    });
-    toast.clearWaitingQueue();
   }
 };

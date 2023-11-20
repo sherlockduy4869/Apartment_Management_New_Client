@@ -31,6 +31,7 @@ export const fetchAllApartForRent = async () => {
       return response.data.data;
     }
   } catch (err) {
+    console.log(err)
     const message = Array.isArray(err.response?.data?.message)
       ? err.response?.data?.message[0]
       : err.response?.data?.message;
@@ -148,6 +149,7 @@ export const getAllStaticValue = async () => {
       };
     }
   } catch (err) {
+    console.log(err)
     const message = Array.isArray(err.response?.data?.message)
       ? err.response?.data?.message[0]
       : err.response?.data?.message;

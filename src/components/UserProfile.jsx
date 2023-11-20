@@ -4,13 +4,13 @@ import { useStateContext } from "../contexts/ContextProvider";
 import avatar from "../data/avatar.jpg";
 import { logout } from "../hooks/useAuth";
 
-const UserProfile = ({ userProfile }) => {
+const UserProfile = ({ userProfile, setIsReload, isReload }) => {
   const { currentColor } = useStateContext();
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     const statusLogout = await logout();
-    if(statusLogout){
-      window.location.reload();
+    if (statusLogout) {
+      setIsReload(!isReload);
     }
   };
 

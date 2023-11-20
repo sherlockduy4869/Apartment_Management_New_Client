@@ -11,30 +11,26 @@ import {
 
 import { ApartAdding } from "./pages/ApartAdding";
 
+import { useState } from "react";
+
 import "./App.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import * as ROUTES from "./constants/routes";
 
-import { isTokenNotExpired, getTimeReload } from "./hooks/useAuth";
+import { isTokenNotExpired } from "./hooks/useAuth";
 
 const App = () => {
   const { currentMode, activeMenu } = useStateContext();
 
   const userProfile = JSON.parse(localStorage.getItem("user"));
 
-  const token = userProfile ? userProfile.accessToken : "";
+  const token = userProfile?.accessToken;
 
-  const isNotExpire = userProfile ? isTokenNotExpired(token) : false;
+  const isLogin = userProfile ? isTokenNotExpired(token) : false;
 
-  const isAllowLogin = isNotExpire && token !== "";
+  const [isReload, setIsReload] = useState(false);
 
-  const timeReload = getTimeReload(token);
-
-  if (isAllowLogin) {
-    setTimeout(() => {
-      window.location.reload();
-    }, timeReload);
-
+  if (isLogin) {
     return (
       <div className={currentMode === "Dark" ? "dark" : ""}>
         <BrowserRouter>
@@ -60,7 +56,7 @@ const App = () => {
               }
             >
               <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
-                <Navbar />
+                <Navbar setIsReload={setIsReload} isReload={isReload} />
               </div>
               <div>
                 <Routes>
@@ -126,7 +122,10 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           {/* Authenication  */}
-          <Route path={ROUTES.LOGIN} element={<Login />} />
+          <Route
+            path={ROUTES.LOGIN}
+            element={<Login setIsReload={setIsReload} isReload={isReload} />}
+          />
           {/*----------*/}
           <Route path="*" element={<Navigate to={ROUTES.LOGIN} replace />} />
         </Routes>
