@@ -5,6 +5,8 @@ export const DATA_REPORT = '/data-report/';
 
 export const LOGIN = '/login';
 
+export const APART_ADDING = '/apart-adding'
+
 /*--------------------------APART-FOR-RENT--------------------------------*/
 export const BASED_APART_FOR_RENT = '/apart-for-rent/'
 export const APART_FOR_RENT = BASED_APART_FOR_RENT;

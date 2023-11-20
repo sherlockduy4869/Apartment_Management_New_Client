@@ -9,6 +9,8 @@ import {
   ApartForRentDetails,
 } from "./pages/ApartForRent";
 
+import { ApartAdding } from "./pages/ApartAdding";
+
 import "./App.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import * as ROUTES from "./constants/routes";
@@ -71,6 +73,13 @@ const App = () => {
                       element={<Ecommerce />}
                     />
                     <Route path={ROUTES.DATA_REPORT} element={<Ecommerce />} />
+                    {/*----------*/}
+
+                    {/* Apart For Rent  */}
+                    <Route
+                      path={ROUTES.APART_ADDING}
+                      element={<ApartAdding />}
+                    />
                     {/*----------*/}
 
                     {/* Apart For Rent  */}

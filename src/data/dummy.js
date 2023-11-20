@@ -402,6 +402,10 @@ export const links = [
     title: 'Pages',
     links: [
       {
+        name: 'Apart Adding',
+        icon: <AiOutlineShoppingCart />,
+      },
+      {
         name: 'Apart For Rent',
         icon: <AiOutlineShoppingCart />,
       },

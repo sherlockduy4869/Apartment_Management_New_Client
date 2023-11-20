@@ -18,7 +18,7 @@ const FormAdd = ({
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="Page" title="Apartment For Rent" />
 
-      <div className="text-2xl mb-2">ADDING APARTMENT FOR RENT</div>
+      <div className="text-xl mb-2">ADDING APARTMENT FOR RENT</div>
       <Link to={ROUTES.APART_FOR_RENT}>
         <button
           style={{ backgroundColor: currentColor }}
