@@ -21,7 +21,7 @@ const ApartForRentDetails = () => {
       }
     };
     init();
-  }, []);
+  }, [apart_code]);
 
   return (
     <FormDetails

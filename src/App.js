@@ -17,10 +17,12 @@ import "./App.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import * as ROUTES from "./constants/routes";
 
-import { isTokenNotExpired } from "./hooks/useAuth";
+import useAuth from "./hooks/useAuth";
 
 const App = () => {
   const { currentMode, activeMenu } = useStateContext();
+  
+  const { isTokenNotExpired } = useAuth();
 
   const userProfile = JSON.parse(localStorage.getItem("user"));
 

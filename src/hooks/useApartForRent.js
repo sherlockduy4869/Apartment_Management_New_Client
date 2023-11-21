@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 
 import axios from "../services/axios";
 import * as API from "../constants/apis";
+import * as ROUTES from "../constants/routes";
 
 export const deleteApartForRent = async (apart_code) => {
   try {
@@ -10,7 +11,15 @@ export const deleteApartForRent = async (apart_code) => {
     );
 
     if (response.status === 201) {
-      return response.data.data;
+      const message = response.data.message;
+      const apartCode = response.data.data;
+
+      toast.success(`${message}`, {
+        theme: "light",
+      });
+      toast.clearWaitingQueue();
+
+      return apartCode;
     }
   } catch (err) {
     const message = Array.isArray(err.response?.data?.message)
@@ -28,10 +37,11 @@ export const fetchAllApartForRent = async () => {
     const response = await axios.get(API.REQUEST_GET_ALL_APART_FOR_RENT);
 
     if (response.status === 200) {
-      return response.data.data;
+      const listApartForRent = response.data.data;
+
+      return listApartForRent;
     }
   } catch (err) {
-    console.log(err)
     const message = Array.isArray(err.response?.data?.message)
       ? err.response?.data?.message[0]
       : err.response?.data?.message;
@@ -66,7 +76,7 @@ export const searchApartForRent = async (apartForRentList, search) => {
   }
 };
 
-export const addingApartForRent = async (apartForRent) => {
+export const addingApartForRent = async (apartForRent, navigate) => {
   try {
     const response = await axios.post(
       API.REQUEST_ADDING_APART_FOR_RENT,
@@ -74,7 +84,14 @@ export const addingApartForRent = async (apartForRent) => {
     );
 
     if (response.status === 201) {
-      return response.data.msg;
+      const message = response.data.message;
+
+      toast.success(`${message}`, {
+        theme: "light",
+      });
+      toast.clearWaitingQueue();
+
+      navigate(ROUTES.APART_FOR_RENT);
     }
   } catch (err) {
     const message = Array.isArray(err.response?.data?.message)
@@ -87,7 +104,11 @@ export const addingApartForRent = async (apartForRent) => {
   }
 };
 
-export const editingApartForRent = async (apartForRent, apart_code) => {
+export const editingApartForRent = async (
+  apartForRent,
+  apart_code,
+  navigate
+) => {
   try {
     const response = await axios.put(
       API.REQUEST_EDITING_APART_FOR_RENT + apart_code,
@@ -95,7 +116,13 @@ export const editingApartForRent = async (apartForRent, apart_code) => {
     );
 
     if (response.status === 201) {
-      return response.data.msg;
+      const message = response.data.message;
+
+      toast.success(`${message}`, {
+        theme: "light",
+      });
+
+      navigate(ROUTES.APART_FOR_RENT);
     }
   } catch (err) {
     const message = Array.isArray(err.response?.data?.message)
@@ -149,7 +176,7 @@ export const getAllStaticValue = async () => {
       };
     }
   } catch (err) {
-    console.log(err)
+    console.log(err);
     const message = Array.isArray(err.response?.data?.message)
       ? err.response?.data?.message[0]
       : err.response?.data?.message;

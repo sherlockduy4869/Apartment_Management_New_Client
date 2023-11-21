@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 
-const Login = ({setIsReload, isReload}) => {
+const Login = ({ setIsReload, isReload }) => {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [account, setAccount] = useState({
     email: "",
@@ -19,11 +20,9 @@ const Login = ({setIsReload, isReload}) => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    const isLogin = await login(account);
-
+    const isLogin = await login(account, navigate);
     if (isLogin) {
-      setIsReload(!isReload)
-      navigate("/");
+      setIsReload(!isReload);
     }
   };
 

@@ -5,7 +5,7 @@ const Notification = () => {
   return (
     <ToastContainer 
     position="bottom-right"
-    autoClose="3000"
+    autoClose="2500"
     pauseOnHover={false}
     transition={Slide}
     closeOnClick={true}

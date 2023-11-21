@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { useStateContext } from "./../../contexts/ContextProvider";
 import {
   addingApartForRent,
@@ -8,6 +8,7 @@ import {
 import { FormAdd } from './components';
 
 const ApartForRentAdd = () => {
+  const navigate = useNavigate();
   const { currentColor } = useStateContext();
   const [apartForRent, setApartForRent] = useState({
     apart_code: "",
@@ -45,9 +46,9 @@ const ApartForRentAdd = () => {
         });
   };
 
-  const handleAddingApart = (event) => {
+  const handleAddingApart = async (event) => {
     event.preventDefault();
-    addingApartForRent(apartForRent);
+    await addingApartForRent(apartForRent, navigate);
   };
 
   /* get apartment for rent list */
@@ -55,7 +56,6 @@ const ApartForRentAdd = () => {
     const init = async () => {
       try {
         const allStaticValue = await getAllStaticValue();
-
         setAreaApart(allStaticValue.areaApart);
         setBedRoom(allStaticValue.bedRoom);
         setStatusFurniture(allStaticValue.statusFurniture);

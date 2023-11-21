@@ -2,13 +2,17 @@ import { MdOutlineCancel } from "react-icons/md";
 import { Button } from ".";
 import { useStateContext } from "../contexts/ContextProvider";
 import avatar from "../data/avatar.jpg";
-import { logout } from "../hooks/useAuth";
+import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = ({ userProfile, setIsReload, isReload }) => {
   const { currentColor } = useStateContext();
 
+  const navigate = useNavigate();
+
+  const { logout } = useAuth();
   const handleLogout = async () => {
-    const statusLogout = await logout();
+    const statusLogout = await logout(navigate);
     if (statusLogout) {
       setIsReload(!isReload);
     }

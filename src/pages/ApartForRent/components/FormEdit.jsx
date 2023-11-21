@@ -87,7 +87,7 @@ const FormEdit = ({
             </label>
             <input
               name="agency_name"
-              defaultValue={
+              value={
                 apartForRentDetails.agency_name
                   ? apartForRentDetails.agency_name
                   : ""
