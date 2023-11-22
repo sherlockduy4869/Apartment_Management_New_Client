@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as ROUTES from '../constants/routes';
 
 const instance = axios.create({
   baseURL: "http://localhost:3001/api/v1",
@@ -23,7 +24,7 @@ instance.interceptors.response.use(
   },
   (error) => {
     if (error.response.status === 401) {
-      window.location.href = '/login';
+      window.location.href = ROUTES.LOGIN;
     }
     return Promise.reject(error);
   }

@@ -9,6 +9,13 @@ import {
   ApartForRentDetails,
 } from "./pages/ApartForRent";
 
+import {
+  ApartForSell,
+  ApartForSellAdd,
+  ApartForSellDetails,
+  ApartForSellEdit,
+} from "./pages/ApartForSell";
+
 import { ApartAdding } from "./pages/ApartAdding";
 
 import { useState } from "react";
@@ -21,7 +28,7 @@ import useAuth from "./hooks/useAuth";
 
 const App = () => {
   const { currentMode, activeMenu } = useStateContext();
-  
+
   const { isTokenNotExpired } = useAuth();
 
   const userProfile = JSON.parse(localStorage.getItem("user"));
@@ -73,7 +80,7 @@ const App = () => {
                     <Route path={ROUTES.DATA_REPORT} element={<Ecommerce />} />
                     {/*----------*/}
 
-                    {/* Apart For Rent  */}
+                    {/* Apartment Adding  */}
                     <Route
                       path={ROUTES.APART_ADDING}
                       element={<ApartAdding />}
@@ -96,6 +103,25 @@ const App = () => {
                     <Route
                       path={ROUTES.APART_FOR_RENT_DETAILS}
                       element={<ApartForRentDetails />}
+                    />
+                    {/*----------*/}
+
+                    {/* Apart For Sell  */}
+                    <Route
+                      path={ROUTES.APART_FOR_SELL}
+                      element={<ApartForSell />}
+                    />
+                    <Route
+                      path={ROUTES.APART_FOR_SELL_ADD}
+                      element={<ApartForSellAdd />}
+                    />
+                    <Route
+                      path={ROUTES.APART_FOR_SELL_DETAILS}
+                      element={<ApartForSellDetails />}
+                    />
+                    <Route
+                      path={ROUTES.APART_FOR_SELL_EDIT}
+                      element={<ApartForSellEdit />}
                     />
                     {/*----------*/}
 

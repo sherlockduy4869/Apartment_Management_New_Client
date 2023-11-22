@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Header } from "../../components";
 import "../../assets/ApartAdding.css";
 import { FaPlus } from "react-icons/fa";
+import * as ROUTES from "../../constants/routes";
 
 const ApartAdding = () => {
   return (
@@ -10,13 +11,13 @@ const ApartAdding = () => {
       <div className="adding_apart_block">
         <div className="adding_apart_area">
           <div className="block_adding mb-4">
-            <Link to={"/"}>
+            <Link to={ROUTES.APART_FOR_RENT_ADD}>
               <FaPlus color="#7b74ec" />
               <span>Apart For Rent</span>
             </Link>
           </div>
           <div className="block_adding mb-4">
-            <Link to={"/"}>
+            <Link to={ROUTES.APART_FOR_SELL_ADD}>
               <FaPlus color="#5c8af0" />
               <span>Apart For Sell</span>
             </Link>

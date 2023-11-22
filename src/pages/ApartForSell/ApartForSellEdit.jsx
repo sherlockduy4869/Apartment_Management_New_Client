@@ -5,25 +5,24 @@ import { useStateContext } from "./../../contexts/ContextProvider";
 import { FormEdit } from "./components";
 import { useNavigate } from "react-router-dom";
 import {
-  editingApartForRent,
-  getApartForRentDetails,
+  editingApartForSell,
+  getApartForSellDetails,
   getAllStaticValue,
-} from "../../hooks/useApartForRent";
+} from "../../hooks/useApartForSell";
 
-const ApartForRentEdit = () => {
+const ApartForSellEdit = () => {
   const { currentColor } = useStateContext();
 
   const navigate = useNavigate();
 
   const { apart_code } = useParams();
 
-  const [apartForRentDetails, setApartForRentDetails] = useState({});
+  const [apartForSellDetails, setApartForSellDetails] = useState({});
 
   const [areaApart, setAreaApart] = useState([]);
   const [bedRoom, setBedRoom] = useState([]);
-  const [statusFurniture, setStatusFurniture] = useState([]);
 
-  const [apartForRent, setApartForRent] = useState({
+  const [apartForSell, setApartForSell] = useState({
     apart_code: "",
     agency_name: "",
     agency_phone: "",
@@ -32,55 +31,55 @@ const ApartForRentEdit = () => {
     sqm: 0,
     bedroom: "",
     house_owner: "",
+    usd_price: 0,
     phone_owner: "",
-    price: 0,
+    vnd_price: 0,
     email_owner: "",
-    status_furniture: "",
     note: "",
   });
 
-  const convertArray = ["sqm", "price"];
+  const convertArray = ["sqm", "vnd_price", "usd_price"];
 
   const handleInput = (event) => {
     event.target
-      ? setApartForRent({
-          ...apartForRent,
+      ? setApartForSell({
+          ...apartForSell,
           [event.target.name]: convertArray.includes(event.target.name)
             ? parseFloat(event.target.value.replace(",", ""))
             : event.target.value,
         })
-      : setApartForRent({
-          ...apartForRent,
+      : setApartForSell({
+          ...apartForSell,
           [event.value.split(" ")[0]]: event.label,
         });
 
     event.target
-      ? setApartForRentDetails({
-          ...apartForRent,
+      ? setApartForSellDetails({
+          ...apartForSell,
           [event.target.name]: convertArray.includes(event.target.name)
             ? parseFloat(event.target.value.replace(",", ""))
             : event.target.value,
         })
-      : setApartForRentDetails({
-          ...apartForRent,
+      : setApartForSellDetails({
+          ...apartForSell,
           [event.value.split(" ")[0]]: event.label,
         });
   };
 
   const handleEditingApart = async (event) => {
     event.preventDefault();
-    await editingApartForRent(apartForRent, apart_code, navigate);
+    await editingApartForSell(apartForSell, apart_code, navigate);
   };
 
-  /* get apartment for rent details */
+  /* get apartment for sell details */
   useEffect(() => {
     const init = async () => {
       try {
-        const apartDetails = await getApartForRentDetails(apart_code);
+        const apartDetails = await getApartForSellDetails(apart_code);
         const allStaticValue = await getAllStaticValue();
 
-        setApartForRentDetails(apartDetails);
-        setApartForRent({
+        setApartForSellDetails(apartDetails);
+        setApartForSell({
           apart_code: apartDetails.apart_code ? apartDetails.apart_code : "",
           agency_name: apartDetails.agency_name ? apartDetails.agency_name : "",
           agency_phone: apartDetails.agency_phone
@@ -94,16 +93,13 @@ const ApartForRentEdit = () => {
           bedroom: apartDetails.bedroom ? apartDetails.bedroom : "",
           house_owner: apartDetails.house_owner ? apartDetails.house_owner : "",
           phone_owner: apartDetails.phone_owner ? apartDetails.phone_owner : "",
-          price: apartDetails.price ? apartDetails.price : 0,
+          vnd_price: apartDetails.vnd_price ? apartDetails.vnd_price : 0,
+          usd_price: apartDetails.usd_price ? apartDetails.usd_price : 0,
           email_owner: apartDetails.email_owner ? apartDetails.email_owner : "",
-          status_furniture: apartDetails.status_furniture
-            ? apartDetails.status_furniture
-            : "",
           note: apartDetails.note ? apartDetails.note : "",
         });
         setAreaApart(allStaticValue.areaApart);
         setBedRoom(allStaticValue.bedRoom);
-        setStatusFurniture(allStaticValue.statusFurniture);
       } catch (error) {
         console.log(error);
       }
@@ -116,12 +112,11 @@ const ApartForRentEdit = () => {
       currentColor={currentColor}
       handleInput={handleInput}
       handleEditingApart={handleEditingApart}
-      apartForRentDetails={apartForRentDetails}
+      apartForSellDetails={apartForSellDetails}
       areaApart={areaApart}
       bedRoom={bedRoom}
-      statusFurniture={statusFurniture}
     />
   );
 };
 
-export default ApartForRentEdit;
+export default ApartForSellEdit;

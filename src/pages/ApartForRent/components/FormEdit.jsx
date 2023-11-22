@@ -130,7 +130,7 @@ const FormEdit = ({
             </label>
             <input
               name="agency_phone"
-              defaultValue={
+              value={
                 apartForRentDetails.agency_phone
                   ? apartForRentDetails.agency_phone
                   : ""
@@ -169,7 +169,7 @@ const FormEdit = ({
             </label>
             <input
               name="agency_email"
-              defaultValue={
+              value={
                 apartForRentDetails.agency_email
                   ? apartForRentDetails.agency_email
                   : ""
@@ -192,7 +192,7 @@ const FormEdit = ({
             </label>
             <input
               name="sqm"
-              defaultValue={
+              value={
                 apartForRentDetails.sqm ? apartForRentDetails.sqm : ""
               }
               type="number"
@@ -208,7 +208,7 @@ const FormEdit = ({
             </label>
             <input
               name="house_owner"
-              defaultValue={
+              value={
                 apartForRentDetails.house_owner
                   ? apartForRentDetails.house_owner
                   : ""
@@ -248,7 +248,7 @@ const FormEdit = ({
             </label>
             <input
               name="phone_owner"
-              defaultValue={
+              value={
                 apartForRentDetails.phone_owner
                   ? apartForRentDetails.phone_owner
                   : ""
@@ -285,7 +285,7 @@ const FormEdit = ({
             </label>
             <input
               name="email_owner"
-              defaultValue={
+              value={
                 apartForRentDetails.email_owner
                   ? apartForRentDetails.email_owner
                   : ""
@@ -313,7 +313,7 @@ const FormEdit = ({
 
             <textarea
               name="note"
-              defaultValue={
+              value={
                 apartForRentDetails.note ? apartForRentDetails.note : ""
               }
               onChange={handleInput}
@@ -329,7 +329,6 @@ const FormEdit = ({
 
         <div className="flex flex-wrap -mx-3 mb-2">
           <div className="w-full md:w-full px-3 mb-6 md:mb-0 text-center">
-            <div className="mb-2">{/* {showElement?addStatus:<></>}  */}</div>
             <button
               style={{ backgroundColor: currentColor }}
               onClick={handleEditingApart}

@@ -23,6 +23,7 @@ export const customStyles = {
       fontSize: "15px",
       textTransform: "uppercase",
       fontWeight: "600",
+      height: "150px",
     },
   },
 };

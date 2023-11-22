@@ -1,16 +1,30 @@
 import { Link } from "react-router-dom";
+import Select from "react-select";
+import { NumericFormat } from "react-number-format";
 
 import { Header } from "../../../components";
 import * as ROUTES from "../../../constants";
 
-const FormDetails = ({ currentColor, apartForRentDetails }) => {
+const FormAdd = ({
+  currentColor,
+  areaApart,
+  bedRoom,
+  handleInput,
+  handleAddingApart,
+}) => {
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Apartment For Rent" />
+      <Header category="Page" title="Apartment For Sell" />
 
-      <div className="text-2xl mb-2">
-        APARTMENT FOR RENT DETAILS: <b>{apartForRentDetails.apart_code}</b>
-      </div>
+      <div className="text-xl mb-2">ADDING APARTMENT FOR SELL</div>
+      <Link to={ROUTES.APART_FOR_SELL}>
+        <button
+          style={{ backgroundColor: currentColor }}
+          className="mb-6 font-semibold text-white py-2 px-4 rounded"
+        >
+          Back To Apart For Sell list
+        </button>
+      </Link>
 
       <form className="w-full max-w-full">
         <div className="flex flex-wrap -mx-3 mb-6">
@@ -19,13 +33,10 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
               Apart Code
             </label>
             <input
-              disabled
-              value={
-                apartForRentDetails.apart_code
-                  ? apartForRentDetails.apart_code
-                  : ""
-              }
+              name="apart_code"
               type="text"
+              onChange={handleInput}
+              placeholder="Apartment Code"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -37,13 +48,10 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
               Agency Name
             </label>
             <input
-              disabled
-              value={
-                apartForRentDetails.agency_name
-                  ? apartForRentDetails.agency_name
-                  : ""
-              }
+              name="agency_name"
               type="text"
+              onChange={handleInput}
+              placeholder="Agency Name"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -57,16 +65,10 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Area
             </label>
-            <input
-              disabled
-              value={
-                apartForRentDetails.area_apart
-                  ? apartForRentDetails.area_apart
-                  : ""
-              }
-              type="text"
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            <Select
+              name="area_apart"
+              options={areaApart}
+              onChange={handleInput}
             />
 
             <div style={{ color: "#f43f5e" }}>{/* {errorProject} */}</div>
@@ -77,13 +79,10 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
               Agency Phone
             </label>
             <input
-              disabled
-              value={
-                apartForRentDetails.agency_phone
-                  ? apartForRentDetails.agency_phone
-                  : ""
-              }
+              name="agency_phone"
               type="text"
+              onChange={handleInput}
+              placeholder="Agency Phone"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -95,15 +94,7 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Bedroom
             </label>
-            <input
-              disabled
-              value={
-                apartForRentDetails.bedroom ? apartForRentDetails.bedroom : ""
-              }
-              type="text"
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
-            />
+            <Select name="bedroom" options={bedRoom} onChange={handleInput} />
           </div>
 
           <div className="w-full md:w-1/2 px-3">
@@ -111,13 +102,10 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
               Agency Email
             </label>
             <input
-              disabled
-              value={
-                apartForRentDetails.agency_email
-                  ? apartForRentDetails.agency_email
-                  : ""
-              }
+              name="agency_email"
               type="text"
+              onChange={handleInput}
+              placeholder="Agency Email"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -132,9 +120,10 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
               SQM
             </label>
             <input
-              disabled
-              value={apartForRentDetails.sqm ? apartForRentDetails.sqm : ""}
-              type="text"
+              name="sqm"
+              type="number"
+              onChange={handleInput}
+              placeholder="SQM"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -144,13 +133,10 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
               House Owner
             </label>
             <input
-              disabled
-              value={
-                apartForRentDetails.house_owner
-                  ? apartForRentDetails.house_owner
-                  : ""
-              }
+              name="house_owner"
               type="text"
+              onChange={handleInput}
+              placeholder="House Owner"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -162,18 +148,15 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Status Furniture
+              USD Price
             </label>
-            <input
-              disabled
-              value={
-                apartForRentDetails.status_furniture
-                  ? apartForRentDetails.status_furniture
-                  : ""
-              }
-              type="text"
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+            <NumericFormat
+              name="usd_price"
+              placeholder="Price"
+              className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+              thousandSeparator=","
+              onChange={handleInput}
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
@@ -181,13 +164,10 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
               Phone Owner
             </label>
             <input
-              disabled
-              value={
-                apartForRentDetails.phone_owner
-                  ? apartForRentDetails.phone_owner
-                  : ""
-              }
+              name="phone_owner"
               type="text"
+              onChange={handleInput}
+              placeholder="Phone Owner"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -199,14 +179,15 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Price
+              VND Price
             </label>
-            <input
-              disabled
-              value={apartForRentDetails.price ? apartForRentDetails.price : ""}
-              type="text"
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+            <NumericFormat
+              name="vnd_price"
+              placeholder="Price"
+              className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+              thousandSeparator=","
+              onChange={handleInput}
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
@@ -214,13 +195,10 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
               Email Owner
             </label>
             <input
-              disabled
-              value={
-                apartForRentDetails.email_owner
-                  ? apartForRentDetails.email_owner
-                  : ""
-              }
+              name="email_owner"
               type="text"
+              onChange={handleInput}
+              placeholder="Email Owner"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -240,9 +218,10 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             </label>
 
             <textarea
-              disabled
-              value={apartForRentDetails.note ? apartForRentDetails.note : ""}
+              name="note"
+              onChange={handleInput}
               rows="4"
+              placeholder="Write note here..."
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
             border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
             dark:bg-gray-700 dark:border-gray-6 dark:placeholder-gray-400 
@@ -253,14 +232,14 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
 
         <div className="flex flex-wrap -mx-3 mb-2">
           <div className="w-full md:w-full px-3 mb-6 md:mb-0 text-center">
-            <Link to={ROUTES.APART_FOR_RENT}>
-              <button
-                style={{ backgroundColor: currentColor }}
-                className="font-semibold text-white py-2 px-4 rounded"
-              >
-                Back To Apart For Rent list
-              </button>
-            </Link>
+            <button
+              style={{ backgroundColor: currentColor }}
+              onClick={handleAddingApart}
+              className="text-white font-bold py-2 px-4 rounded"
+            >
+              ADDING APART
+            </button>
+            
           </div>
         </div>
       </form>
@@ -268,4 +247,4 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
   );
 };
 
-export default FormDetails;
+export default FormAdd;

@@ -231,7 +231,6 @@ const FormAdd = ({
 
         <div className="flex flex-wrap -mx-3 mb-2">
           <div className="w-full md:w-full px-3 mb-6 md:mb-0 text-center">
-            <div className="mb-2">{/* {showElement?addStatus:<></>}  */}</div>
             <button
               style={{ backgroundColor: currentColor }}
               onClick={handleAddingApart}

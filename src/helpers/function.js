@@ -3,9 +3,11 @@ export function numberWithCommas(x) {
 }
 
 export function formatDate(inputDate) {
-  const dateArray = inputDate.split("-");
+
+  const dateArray = inputDate.substring(0,10).split("-");
 
   const formatedDate = `${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`;
 
   return formatedDate;
 }
+
