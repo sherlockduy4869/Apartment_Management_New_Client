@@ -25,7 +25,16 @@ export const APART_FOR_SELL_EDIT = BASED_APART_FOR_SELL + 'edit/:apart_code';
 export const APART_FOR_SELL_DETAILS = BASED_APART_FOR_SELL + ':apart_code';
 export const APART_FOR_SELL_EDIT_ACTION = BASED_APART_FOR_SELL + 'edit/';
 export const APART_FOR_SELL_DETAILS_ACTION = BASED_APART_FOR_SELL;
+/*-------------------------------------------------------------------------*/
 
+/*--------------------------APART-UNDER-CONSTRUCTION--------------------------------*/
+export const BASED_APART_UNDER_CONSTRUCTION = '/apart-under-construction/'
+export const APART_UNDER_CONSTRUCTION = BASED_APART_UNDER_CONSTRUCTION;
+export const APART_UNDER_CONSTRUCTION_ADD = BASED_APART_UNDER_CONSTRUCTION + 'add';
+export const APART_UNDER_CONSTRUCTION_EDIT = BASED_APART_UNDER_CONSTRUCTION + 'edit/:apart_code';
+export const APART_UNDER_CONSTRUCTION_DETAILS = BASED_APART_UNDER_CONSTRUCTION + ':apart_code';
+export const APART_UNDER_CONSTRUCTION_EDIT_ACTION = BASED_APART_UNDER_CONSTRUCTION + 'edit/';
+export const APART_UNDER_CONSTRUCTION_DETAILS_ACTION = BASED_APART_UNDER_CONSTRUCTION;
 /*-------------------------------------------------------------------------*/
 
 export const CALENDAR = '/calendar';

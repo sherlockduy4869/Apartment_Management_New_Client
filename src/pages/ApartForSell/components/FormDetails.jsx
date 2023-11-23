@@ -29,8 +29,6 @@ const FormDetails = ({ currentColor, apartForSellDetails }) => {
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorApartCode} */}</div>
           </div>
           <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -47,8 +45,6 @@ const FormDetails = ({ currentColor, apartForSellDetails }) => {
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -68,8 +64,6 @@ const FormDetails = ({ currentColor, apartForSellDetails }) => {
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorProject} */}</div>
           </div>
 
           <div className="w-full md:w-1/2 px-3">
@@ -121,8 +115,6 @@ const FormDetails = ({ currentColor, apartForSellDetails }) => {
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -154,8 +146,6 @@ const FormDetails = ({ currentColor, apartForSellDetails }) => {
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -191,8 +181,6 @@ const FormDetails = ({ currentColor, apartForSellDetails }) => {
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -228,8 +216,6 @@ const FormDetails = ({ currentColor, apartForSellDetails }) => {
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 

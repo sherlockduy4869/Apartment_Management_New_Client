@@ -16,6 +16,13 @@ import {
   ApartForSellEdit,
 } from "./pages/ApartForSell";
 
+import {
+  ApartUnderConstruction,
+  ApartUnderConstructionAdd,
+  ApartUnderConstructionDetails,
+  ApartUnderConstructionEdit,
+} from "./pages/ApartUnderConstruction";
+
 import { ApartAdding } from "./pages/ApartAdding";
 
 import { useState } from "react";
@@ -122,6 +129,25 @@ const App = () => {
                     <Route
                       path={ROUTES.APART_FOR_SELL_EDIT}
                       element={<ApartForSellEdit />}
+                    />
+                    {/*----------*/}
+
+                    {/* Apart Under Construction  */}
+                    <Route
+                      path={ROUTES.APART_UNDER_CONSTRUCTION}
+                      element={<ApartUnderConstruction />}
+                    />
+                    <Route
+                      path={ROUTES.APART_UNDER_CONSTRUCTION_ADD}
+                      element={<ApartUnderConstructionAdd />}
+                    />
+                    <Route
+                      path={ROUTES.APART_UNDER_CONSTRUCTION_DETAILS}
+                      element={<ApartUnderConstructionDetails />}
+                    />
+                    <Route
+                      path={ROUTES.APART_UNDER_CONSTRUCTION_EDIT}
+                      element={<ApartUnderConstructionEdit />}
                     />
                     {/*----------*/}
 

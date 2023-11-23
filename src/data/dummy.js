@@ -413,6 +413,10 @@ export const links = [
         name: 'Apart For Sell',
         icon: <AiOutlineShoppingCart />,
       },
+      {
+        name: 'Apart Under Construction',
+        icon: <AiOutlineShoppingCart />,
+      },
     ],
   },
   {

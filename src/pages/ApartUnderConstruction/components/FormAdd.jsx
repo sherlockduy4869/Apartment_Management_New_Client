@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import Select from "react-select";
 import { NumericFormat } from "react-number-format";
 
-
 import { Header } from "../../../components";
 import * as ROUTES from "../../../constants";
 
@@ -10,21 +9,20 @@ const FormAdd = ({
   currentColor,
   areaApart,
   bedRoom,
-  statusFurniture,
   handleInput,
   handleAddingApart,
 }) => {
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Apartment For Rent" />
+      <Header category="Page" title="Apartment Under Construction" />
 
-      <div className="text-xl mb-2">ADDING APARTMENT FOR RENT</div>
-      <Link to={ROUTES.APART_FOR_RENT}>
+      <div className="text-xl mb-2">ADDING APARTMENT UNDER CONSTRUCTION</div>
+      <Link to={ROUTES.APART_UNDER_CONSTRUCTION}>
         <button
           style={{ backgroundColor: currentColor }}
           className="mb-6 font-semibold text-white py-2 px-4 rounded"
         >
-          Back To Apart For Rent list
+          Back To Apart Under Construction list
         </button>
       </Link>
 
@@ -140,11 +138,14 @@ const FormAdd = ({
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Status Furniture
+              USD Price
             </label>
-            <Select
-              name="status_furniture"
-              options={statusFurniture}
+            <NumericFormat
+              name="usd_price"
+              placeholder="Price"
+              className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+              thousandSeparator=","
               onChange={handleInput}
             />
           </div>
@@ -166,10 +167,10 @@ const FormAdd = ({
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Price
+              VND Price
             </label>
             <NumericFormat
-              name="price"
+              name="vnd_price"
               placeholder="Price"
               className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"

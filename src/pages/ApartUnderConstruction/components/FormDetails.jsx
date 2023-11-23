@@ -1,32 +1,16 @@
 import { Link } from "react-router-dom";
-import Select from "react-select";
-import { NumericFormat } from "react-number-format";
-
 
 import { Header } from "../../../components";
 import * as ROUTES from "../../../constants";
 
-const FormAdd = ({
-  currentColor,
-  areaApart,
-  bedRoom,
-  statusFurniture,
-  handleInput,
-  handleAddingApart,
-}) => {
+const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Apartment For Rent" />
+      <Header category="Page" title="Apartment Under Construction" />
 
-      <div className="text-xl mb-2">ADDING APARTMENT FOR RENT</div>
-      <Link to={ROUTES.APART_FOR_RENT}>
-        <button
-          style={{ backgroundColor: currentColor }}
-          className="mb-6 font-semibold text-white py-2 px-4 rounded"
-        >
-          Back To Apart For Rent list
-        </button>
-      </Link>
+      <div className="text-2xl mb-2">
+        APARTMENT UNDER CONSTRUCTION DETAILS: <b>{apartUnderConstructionDetails.apart_code}</b>
+      </div>
 
       <form className="w-full max-w-full">
         <div className="flex flex-wrap -mx-3 mb-6">
@@ -35,10 +19,13 @@ const FormAdd = ({
               Apart Code
             </label>
             <input
-              name="apart_code"
+              disabled
+              value={
+                apartUnderConstructionDetails.apart_code
+                  ? apartUnderConstructionDetails.apart_code
+                  : ""
+              }
               type="text"
-              onChange={handleInput}
-              placeholder="Apartment Code"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -48,10 +35,13 @@ const FormAdd = ({
               Agency Name
             </label>
             <input
-              name="agency_name"
+              disabled
+              value={
+                apartUnderConstructionDetails.agency_name
+                  ? apartUnderConstructionDetails.agency_name
+                  : ""
+              }
               type="text"
-              onChange={handleInput}
-              placeholder="Agency Name"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -63,10 +53,16 @@ const FormAdd = ({
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Area
             </label>
-            <Select
-              name="area_apart"
-              options={areaApart}
-              onChange={handleInput}
+            <input
+              disabled
+              value={
+                apartUnderConstructionDetails.area_apart
+                  ? apartUnderConstructionDetails.area_apart
+                  : ""
+              }
+              type="text"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
           </div>
 
@@ -75,10 +71,13 @@ const FormAdd = ({
               Agency Phone
             </label>
             <input
-              name="agency_phone"
+              disabled
+              value={
+                apartUnderConstructionDetails.agency_phone
+                  ? apartUnderConstructionDetails.agency_phone
+                  : ""
+              }
               type="text"
-              onChange={handleInput}
-              placeholder="Agency Phone"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -90,7 +89,15 @@ const FormAdd = ({
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Bedroom
             </label>
-            <Select name="bedroom" options={bedRoom} onChange={handleInput} />
+            <input
+              disabled
+              value={
+                apartUnderConstructionDetails.bedroom ? apartUnderConstructionDetails.bedroom : ""
+              }
+              type="text"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            />
           </div>
 
           <div className="w-full md:w-1/2 px-3">
@@ -98,10 +105,13 @@ const FormAdd = ({
               Agency Email
             </label>
             <input
-              name="agency_email"
+              disabled
+              value={
+                apartUnderConstructionDetails.agency_email
+                  ? apartUnderConstructionDetails.agency_email
+                  : ""
+              }
               type="text"
-              onChange={handleInput}
-              placeholder="Agency Email"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -114,10 +124,9 @@ const FormAdd = ({
               SQM
             </label>
             <input
-              name="sqm"
-              type="number"
-              onChange={handleInput}
-              placeholder="SQM"
+              disabled
+              value={apartUnderConstructionDetails.sqm ? apartUnderConstructionDetails.sqm : ""}
+              type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -127,10 +136,13 @@ const FormAdd = ({
               House Owner
             </label>
             <input
-              name="house_owner"
+              disabled
+              value={
+                apartUnderConstructionDetails.house_owner
+                  ? apartUnderConstructionDetails.house_owner
+                  : ""
+              }
               type="text"
-              onChange={handleInput}
-              placeholder="House Owner"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -140,12 +152,18 @@ const FormAdd = ({
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Status Furniture
+              USD Price
             </label>
-            <Select
-              name="status_furniture"
-              options={statusFurniture}
-              onChange={handleInput}
+            <input
+              disabled
+              value={
+                apartUnderConstructionDetails.usd_price
+                  ? apartUnderConstructionDetails.usd_price
+                  : ""
+              }
+              type="text"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
@@ -153,10 +171,13 @@ const FormAdd = ({
               Phone Owner
             </label>
             <input
-              name="phone_owner"
+              disabled
+              value={
+                apartUnderConstructionDetails.phone_owner
+                  ? apartUnderConstructionDetails.phone_owner
+                  : ""
+              }
               type="text"
-              onChange={handleInput}
-              placeholder="Phone Owner"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -166,15 +187,18 @@ const FormAdd = ({
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Price
+              VND Price
             </label>
-            <NumericFormat
-              name="price"
-              placeholder="Price"
-              className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+            <input
+              disabled
+              value={
+                apartUnderConstructionDetails.vnd_price
+                  ? apartUnderConstructionDetails.vnd_price
+                  : ""
+              }
+              type="text"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
-              thousandSeparator=","
-              onChange={handleInput}
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
@@ -182,10 +206,13 @@ const FormAdd = ({
               Email Owner
             </label>
             <input
-              name="email_owner"
+              disabled
+              value={
+                apartUnderConstructionDetails.email_owner
+                  ? apartUnderConstructionDetails.email_owner
+                  : ""
+              }
               type="text"
-              onChange={handleInput}
-              placeholder="Email Owner"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
@@ -203,10 +230,9 @@ const FormAdd = ({
             </label>
 
             <textarea
-              name="note"
-              onChange={handleInput}
+              disabled
+              value={apartUnderConstructionDetails.note ? apartUnderConstructionDetails.note : ""}
               rows="4"
-              placeholder="Write note here..."
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
             border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
             dark:bg-gray-700 dark:border-gray-6 dark:placeholder-gray-400 
@@ -217,14 +243,14 @@ const FormAdd = ({
 
         <div className="flex flex-wrap -mx-3 mb-2">
           <div className="w-full md:w-full px-3 mb-6 md:mb-0 text-center">
-            <button
-              style={{ backgroundColor: currentColor }}
-              onClick={handleAddingApart}
-              className="text-white font-bold py-2 px-4 rounded"
-            >
-              ADDING APART
-            </button>
-            
+            <Link to={ROUTES.APART_UNDER_CONSTRUCTION}>
+              <button
+                style={{ backgroundColor: currentColor }}
+                className="font-semibold text-white py-2 px-4 rounded"
+              >
+                Back To Apart Under Construction list
+              </button>
+            </Link>
           </div>
         </div>
       </form>
@@ -232,4 +258,4 @@ const FormAdd = ({
   );
 };
 
-export default FormAdd;
+export default FormDetails;
