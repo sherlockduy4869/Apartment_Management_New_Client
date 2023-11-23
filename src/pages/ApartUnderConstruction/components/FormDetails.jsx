@@ -152,13 +152,13 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              USD Price
+              Status Apart
             </label>
             <input
               disabled
               value={
-                apartUnderConstructionDetails.usd_price
-                  ? apartUnderConstructionDetails.usd_price
+                apartUnderConstructionDetails.status_apart
+                  ? apartUnderConstructionDetails.status_apart
                   : ""
               }
               type="text"
@@ -183,42 +183,6 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
             />
           </div>
         </div>
-
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              VND Price
-            </label>
-            <input
-              disabled
-              value={
-                apartUnderConstructionDetails.vnd_price
-                  ? apartUnderConstructionDetails.vnd_price
-                  : ""
-              }
-              type="text"
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
-            />
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Email Owner
-            </label>
-            <input
-              disabled
-              value={
-                apartUnderConstructionDetails.email_owner
-                  ? apartUnderConstructionDetails.email_owner
-                  : ""
-              }
-              type="text"
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
-            />
-          </div>
-        </div>
-
         <div className="flex flex-wrap -mx-3 mb-4">
           <div className="w-full md:w-full px-3 mb-6 md:mb-0">
             <label

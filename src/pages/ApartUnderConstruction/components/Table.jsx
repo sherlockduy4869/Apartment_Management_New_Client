@@ -6,40 +6,16 @@ import { customStyles } from "../../../constants";
 import * as ROUTES from "../../../constants";
 import { numberWithCommas, formatDate } from "../../../helpers/function";
 
-const Table = ({ filterApartUnderConstruction, handleDeleteApartUnderConstruction, setSearch }) => {
+const Table = ({
+  filterApartUnderConstruction,
+  handleDeleteApartUnderConstruction,
+  setSearch,
+}) => {
   const columnTable = [
     {
       name: <div>STT</div>,
       selector: (row, index) => index + 1,
       width: "8%",
-      sortable: true,
-      style: {
-        padding: "10px 15px",
-        justifyContent: "center",
-      },
-    },
-    {
-      name: <div>House Owner</div>,
-      selector: (row) => `${row.house_owner} ${row.phone_owner}`,
-      cell: (row) => (
-        <div>
-          <div>
-            <b>{row.house_owner}</b>
-          </div>{" "}
-          - <div>{row.phone_owner}</div>
-        </div>
-      ),
-      width: "11%",
-      sortable: true,
-      style: {
-        padding: "10px 15px",
-        justifyContent: "center",
-      },
-    },
-    {
-      name: <div>Area</div>,
-      cell: (row) => <div>{row.area_apart}</div>,
-      width: "10%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -53,13 +29,38 @@ const Table = ({ filterApartUnderConstruction, handleDeleteApartUnderConstructio
         <div>
           <div>
             <b>{row.apart_code}</b>
-          </div>
+          </div>{" "}
+          - <div>{row.agency_name}</div>
+        </div>
+      ),
+      width: "16%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent: "center",
+      },
+    },
+    {
+      name: <div>Area</div>,
+      cell: (row) => <div>{row.area_apart}</div>,
+      width: "16%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent: "center",
+      },
+    },
+    {
+      name: <div>House Owner</div>,
+      selector: (row) => `${row.house_owner}`,
+      cell: (row) => (
+        <div>
           <div>
-            <span>{row.agency_name}</span>
+            <b>{row.house_owner}</b>
           </div>
         </div>
       ),
-      width: "11%",
+      width: "16%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -79,7 +80,7 @@ const Table = ({ filterApartUnderConstruction, handleDeleteApartUnderConstructio
           </div>
         </div>
       ),
-      width: "12%",
+      width: "16%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -87,41 +88,16 @@ const Table = ({ filterApartUnderConstruction, handleDeleteApartUnderConstructio
       },
     },
     {
-      name: <div>Price</div>,
-      selector: (row) => `${row.vnd_price} ${row.usd_price}`,
+      name: <div>Status Apart</div>,
+      selector: (row) => `${row.status_apart}`,
       cell: (row) => (
         <div>
           <div>
-            <span>
-              {numberWithCommas(row.vnd_price)} <sup>đ</sup>
-            </span>
-            / <span>${numberWithCommas(row.usd_price)}</span>
+            <span>{row.status_apart}</span>
           </div>
         </div>
       ),
-      width: "11%",
-      sortable: true,
-      style: {
-        padding: "10px 15px",
-        justifyContent: "center",
-      },
-    },
-    {
-      name: <div>Date</div>,
-      selector: (row) => `${row.created_at}`,
-      cell: (row) => <div>{formatDate(row.created_at)}</div>,
-      width: "11%",
-      sortable: true,
-      style: {
-        padding: "10px 15px",
-        justifyContent: "center",
-      },
-    },
-    {
-      name: <div>Note</div>,
-      selector: (row) => `${row.note}`,
-      cell: (row) => <div>{row.note}</div>,
-      width: "14%",
+      width: "16%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -132,7 +108,9 @@ const Table = ({ filterApartUnderConstruction, handleDeleteApartUnderConstructio
       name: <div>Customize</div>,
       cell: (row) => (
         <span className="text-center">
-          <Link to={ROUTES.APART_UNDER_CONSTRUCTION_DETAILS_ACTION + row.apart_code}>
+          <Link
+            to={ROUTES.APART_UNDER_CONSTRUCTION_DETAILS_ACTION + row.apart_code}
+          >
             <button
               style={{ background: "#3b82f6" }}
               className="text-white mb-2 py-1 px-2 capitalize rounded-2xl text-md "
@@ -140,7 +118,9 @@ const Table = ({ filterApartUnderConstruction, handleDeleteApartUnderConstructio
               Details
             </button>
           </Link>
-          <Link to={ROUTES.APART_UNDER_CONSTRUCTION_EDIT_ACTION + row.apart_code}>
+          <Link
+            to={ROUTES.APART_UNDER_CONSTRUCTION_EDIT_ACTION + row.apart_code}
+          >
             <button className="text-white mb-2 py-1 px-2 capitalize rounded-2xl text-md bg-indigo-500">
               Editing
             </button>

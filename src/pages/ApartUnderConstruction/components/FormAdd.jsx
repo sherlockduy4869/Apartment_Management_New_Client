@@ -9,6 +9,7 @@ const FormAdd = ({
   currentColor,
   areaApart,
   bedRoom,
+  statusApart,
   handleInput,
   handleAddingApart,
 }) => {
@@ -138,14 +139,11 @@ const FormAdd = ({
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              USD Price
+              Status Apart
             </label>
-            <NumericFormat
-              name="usd_price"
-              placeholder="Price"
-              className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
-              thousandSeparator=","
+            <Select
+              name="status_apart"
+              options={statusApart}
               onChange={handleInput}
             />
           </div>
@@ -163,36 +161,6 @@ const FormAdd = ({
             />
           </div>
         </div>
-
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              VND Price
-            </label>
-            <NumericFormat
-              name="vnd_price"
-              placeholder="Price"
-              className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
-              thousandSeparator=","
-              onChange={handleInput}
-            />
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Email Owner
-            </label>
-            <input
-              name="email_owner"
-              type="text"
-              onChange={handleInput}
-              placeholder="Email Owner"
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
-            />
-          </div>
-        </div>
-
         <div className="flex flex-wrap -mx-3 mb-4">
           <div className="w-full md:w-full px-3 mb-6 md:mb-0">
             <label
@@ -225,7 +193,6 @@ const FormAdd = ({
             >
               ADDING APART
             </button>
-            
           </div>
         </div>
       </form>

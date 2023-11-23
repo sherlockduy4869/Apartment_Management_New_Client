@@ -38,7 +38,6 @@ export const fetchAllApartUnderConstruction = async () => {
 
     if (response.status === 200) {
       const listApartUnderConstruction = response.data.data;
-
       return listApartUnderConstruction;
     }
   } catch (err) {
@@ -61,14 +60,13 @@ export const searchApartUnderConstruction = async (apartUnderConstructionList, s
         apartUnderConstruction.area_apart.toLowerCase().match(search.toLowerCase()) ||
         apartUnderConstruction.house_owner.toLowerCase().match(search.toLowerCase()) ||
         apartUnderConstruction.phone_owner.toLowerCase().match(search) ||
-        apartUnderConstruction.email_owner.toLowerCase().match(search.toLowerCase()) ||
         apartUnderConstruction.bedroom.toLowerCase().match(search.toLowerCase()) ||
-        apartUnderConstruction.sqm.toString().match(search.toLowerCase()) ||
-        apartUnderConstruction.status_furniture.toLowerCase().match(search.toLowerCase())
+        apartUnderConstruction.status_apart.toLowerCase().match(search.toLowerCase())
     );
 
     return result;
   } catch (err) {
+    console.log(err)
     toast.error("An error is happening !", {
       theme: "light",
     });
@@ -138,7 +136,7 @@ export const editingApartUnderConstruction = async (
 export const getAllStaticValue = async () => {
   try {
     const response = await axios.get(
-      API.REQUEST_GET_ALL_STATIC_VALUE_APART_FOR_RENT
+      API.REQUEST_GET_ALL_STATIC_VALUE_APART_UNDER_CONSTRUCTION
     );
 
     if (response.status === 200) {
@@ -146,12 +144,12 @@ export const getAllStaticValue = async () => {
 
       const bedRoom = [];
       const areaApart = [];
-      const statusFurniture = [];
+      const statusApart = [];
 
-      for (const key in allStaticValue.StatusFurniture) {
-        statusFurniture.push({
-          label: allStaticValue.StatusFurniture[key],
-          value: `status_furniture ${key}`,
+      for (const key in allStaticValue.StatusApartUnderConstruction) {
+        statusApart.push({
+          label: allStaticValue.StatusApartUnderConstruction[key],
+          value: `status_apart ${key}`,
         });
       }
 
@@ -172,7 +170,7 @@ export const getAllStaticValue = async () => {
       return {
         bedRoom,
         areaApart,
-        statusFurniture,
+        statusApart,
       };
     }
   } catch (err) {

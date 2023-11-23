@@ -23,7 +23,7 @@ const ApartAdding = () => {
             </Link>
           </div>
           <div className="block_adding mb-4">
-            <Link to={"/"}>
+            <Link to={ROUTES.APART_UNDER_CONSTRUCTION_ADD}>
               <FaPlus color="#e45d99" />
               <span>Apart UC</span>
             </Link>

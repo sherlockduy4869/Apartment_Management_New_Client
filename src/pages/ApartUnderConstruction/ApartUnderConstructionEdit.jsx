@@ -17,10 +17,12 @@ const ApartUnderConstructionEdit = () => {
 
   const { apart_code } = useParams();
 
-  const [apartUnderConstructionDetails, setApartUnderConstructionDetails] = useState({});
+  const [apartUnderConstructionDetails, setApartUnderConstructionDetails] =
+    useState({});
 
   const [areaApart, setAreaApart] = useState([]);
   const [bedRoom, setBedRoom] = useState([]);
+  const [statusApart, setStatusApart] = useState([]);
 
   const [apartUnderConstruction, setApartUnderConstruction] = useState({
     apart_code: "",
@@ -31,14 +33,12 @@ const ApartUnderConstructionEdit = () => {
     sqm: 0,
     bedroom: "",
     house_owner: "",
-    usd_price: 0,
     phone_owner: "",
-    vnd_price: 0,
-    email_owner: "",
+    status_apart: "",
     note: "",
   });
 
-  const convertArray = ["sqm", "vnd_price", "usd_price"];
+  const convertArray = ["sqm"];
 
   const handleInput = (event) => {
     event.target
@@ -68,7 +68,11 @@ const ApartUnderConstructionEdit = () => {
 
   const handleEditingApart = async (event) => {
     event.preventDefault();
-    await editingApartUnderConstruction(apartUnderConstruction, apart_code, navigate);
+    await editingApartUnderConstruction(
+      apartUnderConstruction,
+      apart_code,
+      navigate
+    );
   };
 
   /* get apartment under construction details */
@@ -94,18 +98,22 @@ const ApartUnderConstructionEdit = () => {
           house_owner: apartDetails.house_owner ? apartDetails.house_owner : "",
           phone_owner: apartDetails.phone_owner ? apartDetails.phone_owner : "",
           vnd_price: apartDetails.vnd_price ? apartDetails.vnd_price : 0,
-          usd_price: apartDetails.usd_price ? apartDetails.usd_price : 0,
-          email_owner: apartDetails.email_owner ? apartDetails.email_owner : "",
+          status_apart: apartDetails.status_apart
+            ? apartDetails.status_apart
+            : "",
           note: apartDetails.note ? apartDetails.note : "",
         });
         setAreaApart(allStaticValue.areaApart);
         setBedRoom(allStaticValue.bedRoom);
+        setStatusApart(allStaticValue.statusApart);
       } catch (error) {
         console.log(error);
       }
     };
     init();
   }, [apart_code]);
+
+  console.log(statusApart);
 
   return (
     <FormEdit
@@ -115,6 +123,7 @@ const ApartUnderConstructionEdit = () => {
       apartUnderConstructionDetails={apartUnderConstructionDetails}
       areaApart={areaApart}
       bedRoom={bedRoom}
+      statusApart={statusApart}
     />
   );
 };

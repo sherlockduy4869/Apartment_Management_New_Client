@@ -28,8 +28,9 @@ const ApartUnderConstructionAdd = () => {
 
   const [areaApart, setAreaApart] = useState([]);
   const [bedRoom, setBedRoom] = useState([]);
+  const [statusApart, setStatusApart] = useState([]);
 
-  const convertArray = ["sqm", "vnd_price", "usd_price"];
+  const convertArray = ["sqm"];
 
   const handleInput = (event) => {
     event.target
@@ -57,6 +58,7 @@ const ApartUnderConstructionAdd = () => {
         const allStaticValue = await getAllStaticValue();
         setAreaApart(allStaticValue.areaApart);
         setBedRoom(allStaticValue.bedRoom);
+        setStatusApart(allStaticValue.statusApart);
       } catch (error) {
         console.log(error);
       }
@@ -69,6 +71,7 @@ const ApartUnderConstructionAdd = () => {
     currentColor = {currentColor}
     areaApart = {areaApart}
     bedRoom = {bedRoom}
+    statusApart = {statusApart}
     handleInput = {handleInput}
     handleAddingApart = {handleAddingApart}
     />
