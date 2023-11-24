@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 
 import { FormDetails } from "./components";
 import { useStateContext } from "./../../contexts/ContextProvider";
-import { getApartDetails } from "../../hooks/useApartUnderConstruction";
+import { getApartDetails } from "../../hooks/useApartManagement";
 
-const ApartUnderConstructionDetails = () => {
+const ApartManagementDetails = () => {
   const { currentColor } = useStateContext();
   const { apart_code } = useParams();
   const [apartDetails, setApartDetails] = useState({});
@@ -30,4 +30,4 @@ const ApartUnderConstructionDetails = () => {
   );
 };
 
-export default ApartUnderConstructionDetails;
+export default ApartManagementDetails;

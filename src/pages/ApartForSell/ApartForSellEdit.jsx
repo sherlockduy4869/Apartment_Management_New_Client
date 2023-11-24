@@ -5,8 +5,8 @@ import { useStateContext } from "./../../contexts/ContextProvider";
 import { FormEdit } from "./components";
 import { useNavigate } from "react-router-dom";
 import {
-  editingApartForSell,
-  getApartForSellDetails,
+  editingApart,
+  getApartDetails,
   getAllStaticValue,
 } from "../../hooks/useApartForSell";
 
@@ -17,12 +17,12 @@ const ApartForSellEdit = () => {
 
   const { apart_code } = useParams();
 
-  const [apartForSellDetails, setApartForSellDetails] = useState({});
+  const [apartDetails, setApartDetails] = useState({});
 
   const [areaApart, setAreaApart] = useState([]);
   const [bedRoom, setBedRoom] = useState([]);
 
-  const [apartForSell, setApartForSell] = useState({
+  const [apartInfor, setApartInfor] = useState({
     apart_code: "",
     agency_name: "",
     agency_phone: "",
@@ -42,44 +42,43 @@ const ApartForSellEdit = () => {
 
   const handleInput = (event) => {
     event.target
-      ? setApartForSell({
-          ...apartForSell,
+      ? setApartInfor({
+          ...apartInfor,
           [event.target.name]: convertArray.includes(event.target.name)
             ? parseFloat(event.target.value.replace(",", ""))
             : event.target.value,
         })
-      : setApartForSell({
-          ...apartForSell,
+      : setApartInfor({
+          ...apartInfor,
           [event.value.split(" ")[0]]: event.label,
         });
 
     event.target
-      ? setApartForSellDetails({
-          ...apartForSell,
+      ? setApartDetails({
+          ...apartInfor,
           [event.target.name]: convertArray.includes(event.target.name)
             ? parseFloat(event.target.value.replace(",", ""))
             : event.target.value,
         })
-      : setApartForSellDetails({
-          ...apartForSell,
+      : setApartDetails({
+          ...apartInfor,
           [event.value.split(" ")[0]]: event.label,
         });
   };
 
   const handleEditingApart = async (event) => {
     event.preventDefault();
-    await editingApartForSell(apartForSell, apart_code, navigate);
+    await editingApart(apartInfor, apart_code, navigate);
   };
 
-  /* get apartment for sell details */
   useEffect(() => {
     const init = async () => {
       try {
-        const apartDetails = await getApartForSellDetails(apart_code);
+        const apartDetails = await getApartDetails(apart_code);
         const allStaticValue = await getAllStaticValue();
 
-        setApartForSellDetails(apartDetails);
-        setApartForSell({
+        setApartDetails(apartDetails);
+        setApartInfor({
           apart_code: apartDetails.apart_code ? apartDetails.apart_code : "",
           agency_name: apartDetails.agency_name ? apartDetails.agency_name : "",
           agency_phone: apartDetails.agency_phone
@@ -112,7 +111,7 @@ const ApartForSellEdit = () => {
       currentColor={currentColor}
       handleInput={handleInput}
       handleEditingApart={handleEditingApart}
-      apartForSellDetails={apartForSellDetails}
+      apartDetails={apartDetails}
       areaApart={areaApart}
       bedRoom={bedRoom}
     />

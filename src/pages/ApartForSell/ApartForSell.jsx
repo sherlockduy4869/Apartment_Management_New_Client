@@ -1,37 +1,36 @@
 import { useState, useEffect } from "react";
 import { Table } from "./components";
 import {
-  deleteApartForSell,
-  fetchAllApartForSell,
-  searchApartForSell,
+  deleteApart,
+  fetchAllApart,
+  searchApart,
 } from "../../hooks/useApartForSell";
 
 const ApartForSell = () => {
-  const [apartForSellList, setApartForSellList] = useState([]);
+  const [apartList, setApartList] = useState([]);
   const [search, setSearch] = useState("");
-  const [filterApartForSell, setFilterApartForSell] = useState([]);
+  const [filterApart, setFilterApart] = useState([]);
 
-  const handleDeleteApartForSell = async (apart_code) => {
-    const apartCode = await deleteApartForSell(apart_code);
-    setApartForSellList(
-      apartForSellList.filter(
-        (apartForSellList) => apartForSellList.apart_code !== apartCode
+  const handleDeleteApart = async (apart_code) => {
+    const apartCode = await deleteApart(apart_code);
+    setApartList(
+      apartList.filter(
+        (apart) => apart.apart_code !== apartCode
       )
     );
-    setFilterApartForSell(
-      filterApartForSell.filter(
-        (filterApartForSell) => filterApartForSell.apart_code !== apartCode
+    setFilterApart(
+      filterApart.filter(
+        (filterApart) => filterApart.apart_code !== apartCode
       )
     );
   };
 
-  /* get apartment for sell list */
   useEffect(() => {
     const init = async () => {
       try {
-        const apartForSellList = await fetchAllApartForSell();
-        setApartForSellList(apartForSellList);
-        setFilterApartForSell(apartForSellList);
+        const apartList = await fetchAllApart();
+        setApartList(apartList);
+        setFilterApart(apartList);
       } catch (error) {
         console.log(error);
       }
@@ -39,25 +38,22 @@ const ApartForSell = () => {
     init();
   }, []);
 
-  /* filtering apartment for sell list */
   useEffect(() => {
     const init = async () => {
       try {
-        const result = await searchApartForSell(apartForSellList, search);
-        setFilterApartForSell(result);
+        const result = await searchApart(apartList, search);
+        setFilterApart(result);
       } catch (error) {
         console.log(error);
       }
     };
     init();
-  }, [apartForSellList, search]);
-
-  /*------------------*/
+  }, [apartList, search]);
 
   return (
     <Table
-      filterApartForSell={filterApartForSell}
-      handleDeleteApartForSell={handleDeleteApartForSell}
+      filterApart={filterApart}
+      handleDeleteApart={handleDeleteApart}
       setSearch={setSearch}
     />
   );

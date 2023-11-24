@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStateContext } from "./../../contexts/ContextProvider";
 import {
-  addingApartUnderConstruction,
+  addingApart,
   getAllStaticValue,
 } from "../../hooks/useApartUnderConstruction";
 import { FormAdd } from './components';
@@ -10,7 +10,7 @@ import { FormAdd } from './components';
 const ApartUnderConstructionAdd = () => {
   const navigate = useNavigate();
   const { currentColor } = useStateContext();
-  const [apartUnderConstruction, setApartUnderConstruction] = useState({
+  const [apartInfor, setApartInfor] = useState({
     apart_code: "",
     agency_name: "",
     agency_phone: "",
@@ -34,24 +34,23 @@ const ApartUnderConstructionAdd = () => {
 
   const handleInput = (event) => {
     event.target
-      ? setApartUnderConstruction({
-          ...apartUnderConstruction,
+      ? setApartInfor({
+          ...apartInfor,
           [event.target.name]: convertArray.includes(event.target.name)
             ? parseFloat(event.target.value.replace(",", ""))
             : event.target.value,
         })
-      : setApartUnderConstruction({
-          ...apartUnderConstruction,
+      : setApartInfor({
+          ...apartInfor,
           [event.value.split(" ")[0]]: event.label,
         });
   };
 
   const handleAddingApart = async (event) => {
     event.preventDefault();
-    await addingApartUnderConstruction(apartUnderConstruction, navigate);
+    await addingApart(apartInfor, navigate);
   };
 
-  /* get apartment under construction list */
   useEffect(() => {
     const init = async () => {
       try {

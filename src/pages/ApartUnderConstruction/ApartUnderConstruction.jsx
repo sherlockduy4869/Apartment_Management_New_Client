@@ -1,37 +1,36 @@
 import { useState, useEffect } from "react";
 import { Table } from "./components";
 import {
-  deleteApartUnderConstruction,
-  fetchAllApartUnderConstruction,
-  searchApartUnderConstruction,
+  deleteApart,
+  fetchAllApart,
+  searchApart,
 } from "../../hooks/useApartUnderConstruction";
 
 const ApartUnderConstruction = () => {
-  const [apartUnderConstructionList, setApartUnderConstructionList] = useState([]);
+  const [apartList, setApartList] = useState([]);
   const [search, setSearch] = useState("");
-  const [filterApartUnderConstruction, setFilterApartUnderConstruction] = useState([]);
+  const [filterApart, setFilterApart] = useState([]);
 
-  const handleDeleteApartUnderConstruction = async (apart_code) => {
-    const apartCode = await deleteApartUnderConstruction(apart_code);
-    setApartUnderConstructionList(
-      apartUnderConstructionList.filter(
-        (apartUnderConstructionList) => apartUnderConstructionList.apart_code !== apartCode
+  const handleDeleteApart = async (apart_code) => {
+    const apartCode = await deleteApart(apart_code);
+    setApartList(
+      apartList.filter(
+        (apartList) => apartList.apart_code !== apartCode
       )
     );
-    setFilterApartUnderConstruction(
-      filterApartUnderConstruction.filter(
-        (filterApartUnderConstruction) => filterApartUnderConstruction.apart_code !== apartCode
+    setFilterApart(
+      filterApart.filter(
+        (filterApart) => filterApart.apart_code !== apartCode
       )
     );
   };
 
-  /* get apartment under construction list */
   useEffect(() => {
     const init = async () => {
       try {
-        const apartUnderConstructionList = await fetchAllApartUnderConstruction();
-        setApartUnderConstructionList(apartUnderConstructionList);
-        setFilterApartUnderConstruction(apartUnderConstructionList);
+        const apartList = await fetchAllApart();
+        setApartList(apartList);
+        setFilterApart(apartList);
       } catch (error) {
         console.log(error);
       }
@@ -39,25 +38,22 @@ const ApartUnderConstruction = () => {
     init();
   }, []);
 
-  /* filtering apartment under construction list */
   useEffect(() => {
     const init = async () => {
       try {
-        const result = await searchApartUnderConstruction(apartUnderConstructionList, search);
-        setFilterApartUnderConstruction(result);
+        const result = await searchApart(apartList, search);
+        setFilterApart(result);
       } catch (error) {
         console.log(error);
       }
     };
     init();
-  }, [apartUnderConstructionList, search]);
-
-  /*------------------*/
+  }, [apartList, search]);
 
   return (
     <Table
-      filterApartUnderConstruction={filterApartUnderConstruction}
-      handleDeleteApartUnderConstruction={handleDeleteApartUnderConstruction}
+      filterApart={filterApart}
+      handleDeleteApart={handleDeleteApart}
       setSearch={setSearch}
     />
   );

@@ -37,6 +37,16 @@ export const APART_UNDER_CONSTRUCTION_EDIT_ACTION = BASED_APART_UNDER_CONSTRUCTI
 export const APART_UNDER_CONSTRUCTION_DETAILS_ACTION = BASED_APART_UNDER_CONSTRUCTION;
 /*-------------------------------------------------------------------------*/
 
+/*--------------------------APART-MANAGEMENT--------------------------------*/
+export const BASED_APART_MANAGEMENT = '/apart-management/'
+export const APART_MANAGEMENT = BASED_APART_MANAGEMENT;
+export const APART_MANAGEMENT_ADD = BASED_APART_MANAGEMENT + 'add';
+export const APART_MANAGEMENT_EDIT = BASED_APART_MANAGEMENT + 'edit/:apart_code';
+export const APART_MANAGEMENT_DETAILS = BASED_APART_MANAGEMENT + ':apart_code';
+export const APART_MANAGEMENT_EDIT_ACTION = BASED_APART_MANAGEMENT + 'edit/';
+export const APART_MANAGEMENT_DETAILS_ACTION = BASED_APART_MANAGEMENT;
+/*-------------------------------------------------------------------------*/
+
 export const CALENDAR = '/calendar';
 
 export const KANBAN = '/kanban';

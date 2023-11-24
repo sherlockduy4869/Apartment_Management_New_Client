@@ -107,7 +107,7 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
       cell: (row) => (
         <span className="text-center">
           <Link
-            to={ROUTES.APART_FOR_RENT_DETAILS_ACTION + row.apart_code}
+            to={ROUTES.APART_MANAGEMENT_DETAILS_ACTION + row.apart_code}
           >
             <button
               style={{ background: "#3b82f6" }}
@@ -116,7 +116,7 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
               Details
             </button>
           </Link>
-          <Link to={ROUTES.APART_FOR_RENT_EDIT_ACTION + row.apart_code}>
+          <Link to={ROUTES.APART_MANAGEMENT_EDIT_ACTION + row.apart_code}>
             <button className="text-white mb-2 py-1 px-2 capitalize rounded-2xl text-md bg-indigo-500">
               Editing
             </button>
@@ -143,11 +143,11 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Apartment For Rent" />
+      <Header category="Page" title="Apartment Management" />
 
       <div>
         <DataTable
-          title="LIST OF APARTMENT FOR RENT"
+          title="LIST OF APARTMENT MANAGEMENT"
           columns={columnTable}
           data={filterApart}
           pagination

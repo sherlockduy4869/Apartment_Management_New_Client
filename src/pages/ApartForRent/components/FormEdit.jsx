@@ -10,7 +10,7 @@ const FormEdit = ({
   currentColor,
   handleInput,
   handleEditingApart,
-  apartForRentDetails,
+  apartDetails,
   areaApart,
   bedRoom,
   statusFurniture,
@@ -19,42 +19,41 @@ const FormEdit = ({
   const [bedRoomDetails, setBedRoomDetails] = useState("");
   const [statusFurnitureDetails, setStatusFurnitureDetails] = useState("");
 
-  /* get apartment for rent details */
   useEffect(() => {
     const init = async () => {
       try {
         setAreaDetails({
-          value: `area_apart ${apartForRentDetails.area_apart}`,
-          label: apartForRentDetails.area_apart,
+          value: `area_apart ${apartDetails.area_apart}`,
+          label: apartDetails.area_apart,
         });
         setBedRoomDetails({
-          value: `bedroom ${apartForRentDetails.bedroom}`,
-          label: apartForRentDetails.bedroom,
+          value: `bedroom ${apartDetails.bedroom}`,
+          label: apartDetails.bedroom,
         });
         setStatusFurnitureDetails({
-          value: `status_furniture ${apartForRentDetails.status_furniture}`,
-          label: apartForRentDetails.status_furniture,
+          value: `status_furniture ${apartDetails.status_furniture}`,
+          label: apartDetails.status_furniture,
         });
       } catch (error) {
         console.log(error);
       }
     };
     init();
-  }, [apartForRentDetails]);
+  }, [apartDetails]);
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="Page" title="Apartment For Rent" />
 
       <div className="text-2xl mb-2">
-        EDITING APARTMENT FOR RENT: {apartForRentDetails.apart_code}
+        EDITING APARTMENT FOR RENT: {apartDetails.apart_code}
       </div>
       <Link to={ROUTES.APART_FOR_RENT}>
         <button
           style={{ backgroundColor: currentColor }}
           className="mb-6 font-semibold text-white py-2 px-4 rounded"
         >
-          Back To Apart For Rent list
+          Back To Apart For Rent List
         </button>
       </Link>
 
@@ -66,11 +65,7 @@ const FormEdit = ({
             </label>
             <input
               disabled
-              value={
-                apartForRentDetails.apart_code
-                  ? apartForRentDetails.apart_code
-                  : ""
-              }
+              value={apartDetails.apart_code ? apartDetails.apart_code : ""}
               name="apart_code"
               type="text"
               onChange={handleInput}
@@ -78,8 +73,6 @@ const FormEdit = ({
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
             px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorApartCode} */}</div>
           </div>
           <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -87,19 +80,13 @@ const FormEdit = ({
             </label>
             <input
               name="agency_name"
-              value={
-                apartForRentDetails.agency_name
-                  ? apartForRentDetails.agency_name
-                  : ""
-              }
+              value={apartDetails.agency_name ? apartDetails.agency_name : ""}
               type="text"
               onChange={handleInput}
               placeholder="Agency Name"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
             px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -120,8 +107,6 @@ const FormEdit = ({
                 });
               }}
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorProject} */}</div>
           </div>
 
           <div className="w-full md:w-1/2 px-3">
@@ -130,11 +115,7 @@ const FormEdit = ({
             </label>
             <input
               name="agency_phone"
-              value={
-                apartForRentDetails.agency_phone
-                  ? apartForRentDetails.agency_phone
-                  : ""
-              }
+              value={apartDetails.agency_phone ? apartDetails.agency_phone : ""}
               type="text"
               onChange={handleInput}
               placeholder="Agency Phone"
@@ -169,19 +150,13 @@ const FormEdit = ({
             </label>
             <input
               name="agency_email"
-              value={
-                apartForRentDetails.agency_email
-                  ? apartForRentDetails.agency_email
-                  : ""
-              }
+              value={apartDetails.agency_email ? apartDetails.agency_email : ""}
               type="text"
               onChange={handleInput}
               placeholder="Agency Email"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
             px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -192,9 +167,7 @@ const FormEdit = ({
             </label>
             <input
               name="sqm"
-              value={
-                apartForRentDetails.sqm ? apartForRentDetails.sqm : ""
-              }
+              value={apartDetails.sqm ? apartDetails.sqm : ""}
               type="number"
               onChange={handleInput}
               placeholder="SQM"
@@ -208,19 +181,13 @@ const FormEdit = ({
             </label>
             <input
               name="house_owner"
-              value={
-                apartForRentDetails.house_owner
-                  ? apartForRentDetails.house_owner
-                  : ""
-              }
+              value={apartDetails.house_owner ? apartDetails.house_owner : ""}
               type="text"
               onChange={handleInput}
               placeholder="House Owner"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
             px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -248,19 +215,13 @@ const FormEdit = ({
             </label>
             <input
               name="phone_owner"
-              value={
-                apartForRentDetails.phone_owner
-                  ? apartForRentDetails.phone_owner
-                  : ""
-              }
+              value={apartDetails.phone_owner ? apartDetails.phone_owner : ""}
               type="text"
               onChange={handleInput}
               placeholder="Phone Owner"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
             px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -271,7 +232,7 @@ const FormEdit = ({
             </label>
             <NumericFormat
               name="price"
-              value={apartForRentDetails.price ? apartForRentDetails.price : ""}
+              value={apartDetails.price ? apartDetails.price : ""}
               placeholder="Price"
               className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
             px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -285,19 +246,13 @@ const FormEdit = ({
             </label>
             <input
               name="email_owner"
-              value={
-                apartForRentDetails.email_owner
-                  ? apartForRentDetails.email_owner
-                  : ""
-              }
+              value={apartDetails.email_owner ? apartDetails.email_owner : ""}
               type="text"
               onChange={handleInput}
               placeholder="Email Owner"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
             px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -313,9 +268,7 @@ const FormEdit = ({
 
             <textarea
               name="note"
-              value={
-                apartForRentDetails.note ? apartForRentDetails.note : ""
-              }
+              value={apartDetails.note ? apartDetails.note : ""}
               onChange={handleInput}
               rows="4"
               placeholder="Write note here..."

@@ -5,8 +5,8 @@ import { useStateContext } from "./../../contexts/ContextProvider";
 import { FormEdit } from "./components";
 import { useNavigate } from "react-router-dom";
 import {
-  editingApartUnderConstruction,
-  getApartUnderConstructionDetails,
+  editingApart,
+  getApartDetails,
   getAllStaticValue,
 } from "../../hooks/useApartUnderConstruction";
 
@@ -17,14 +17,14 @@ const ApartUnderConstructionEdit = () => {
 
   const { apart_code } = useParams();
 
-  const [apartUnderConstructionDetails, setApartUnderConstructionDetails] =
+  const [apartDetails, setApartDetails] =
     useState({});
 
   const [areaApart, setAreaApart] = useState([]);
   const [bedRoom, setBedRoom] = useState([]);
   const [statusApart, setStatusApart] = useState([]);
 
-  const [apartUnderConstruction, setApartUnderConstruction] = useState({
+  const [apartInfor, setApartInfor] = useState({
     apart_code: "",
     agency_name: "",
     agency_phone: "",
@@ -42,48 +42,47 @@ const ApartUnderConstructionEdit = () => {
 
   const handleInput = (event) => {
     event.target
-      ? setApartUnderConstruction({
-          ...apartUnderConstruction,
+      ? setApartInfor({
+          ...apartInfor,
           [event.target.name]: convertArray.includes(event.target.name)
             ? parseFloat(event.target.value.replace(",", ""))
             : event.target.value,
         })
-      : setApartUnderConstruction({
-          ...apartUnderConstruction,
+      : setApartInfor({
+          ...apartInfor,
           [event.value.split(" ")[0]]: event.label,
         });
 
     event.target
-      ? setApartUnderConstructionDetails({
-          ...apartUnderConstruction,
+      ? setApartDetails({
+          ...apartInfor,
           [event.target.name]: convertArray.includes(event.target.name)
             ? parseFloat(event.target.value.replace(",", ""))
             : event.target.value,
         })
-      : setApartUnderConstructionDetails({
-          ...apartUnderConstruction,
+      : setApartDetails({
+          ...apartInfor,
           [event.value.split(" ")[0]]: event.label,
         });
   };
 
   const handleEditingApart = async (event) => {
     event.preventDefault();
-    await editingApartUnderConstruction(
-      apartUnderConstruction,
+    await editingApart(
+      apartInfor,
       apart_code,
       navigate
     );
   };
 
-  /* get apartment under construction details */
   useEffect(() => {
     const init = async () => {
       try {
-        const apartDetails = await getApartUnderConstructionDetails(apart_code);
+        const apartDetails = await getApartDetails(apart_code);
         const allStaticValue = await getAllStaticValue();
 
-        setApartUnderConstructionDetails(apartDetails);
-        setApartUnderConstruction({
+        setApartDetails(apartDetails);
+        setApartInfor({
           apart_code: apartDetails.apart_code ? apartDetails.apart_code : "",
           agency_name: apartDetails.agency_name ? apartDetails.agency_name : "",
           agency_phone: apartDetails.agency_phone
@@ -120,7 +119,7 @@ const ApartUnderConstructionEdit = () => {
       currentColor={currentColor}
       handleInput={handleInput}
       handleEditingApart={handleEditingApart}
-      apartUnderConstructionDetails={apartUnderConstructionDetails}
+      apartDetails={apartDetails}
       areaApart={areaApart}
       bedRoom={bedRoom}
       statusApart={statusApart}

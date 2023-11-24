@@ -4,9 +4,9 @@ import {
   deleteApart,
   fetchAllApart,
   searchApart,
-} from "../../hooks/useApartForRent";
+} from "../../hooks/useApartManagement";
 
-const ApartForRent = () => {
+const ApartManagement = () => {
   const [apartList, setApartList] = useState([]);
   const [search, setSearch] = useState("");
   const [filterApart, setFilterApart] = useState([]);
@@ -59,4 +59,4 @@ const ApartForRent = () => {
   );
 };
 
-export default ApartForRent;
+export default ApartManagement;

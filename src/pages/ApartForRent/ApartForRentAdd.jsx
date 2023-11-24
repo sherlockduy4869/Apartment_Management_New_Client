@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStateContext } from "./../../contexts/ContextProvider";
 import {
-  addingApartForRent,
+  addingApart,
   getAllStaticValue,
 } from "../../hooks/useApartForRent";
 import { FormAdd } from './components';
@@ -10,7 +10,7 @@ import { FormAdd } from './components';
 const ApartForRentAdd = () => {
   const navigate = useNavigate();
   const { currentColor } = useStateContext();
-  const [apartForRent, setApartForRent] = useState({
+  const [apartInfor, setApartInfor] = useState({
     apart_code: "",
     agency_name: "",
     agency_phone: "",
@@ -34,24 +34,23 @@ const ApartForRentAdd = () => {
 
   const handleInput = (event) => {
     event.target
-      ? setApartForRent({
-          ...apartForRent,
+      ? setApartInfor({
+          ...apartInfor,
           [event.target.name]: convertArray.includes(event.target.name)
             ? parseFloat(event.target.value.replace(",", ""))
             : event.target.value,
         })
-      : setApartForRent({
-          ...apartForRent,
+      : setApartInfor({
+          ...apartInfor,
           [event.value.split(" ")[0]]: event.label,
         });
   };
 
   const handleAddingApart = async (event) => {
     event.preventDefault();
-    await addingApartForRent(apartForRent, navigate);
+    await addingApart(apartInfor, navigate);
   };
 
-  /* get apartment for rent list */
   useEffect(() => {
     const init = async () => {
       try {

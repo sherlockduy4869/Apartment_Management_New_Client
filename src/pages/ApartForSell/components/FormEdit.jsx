@@ -10,46 +10,44 @@ const FormEdit = ({
   currentColor,
   handleInput,
   handleEditingApart,
-  apartForSellDetails,
+  apartDetails,
   areaApart,
   bedRoom,
-  statusFurniture,
 }) => {
   const [areaDetails, setAreaDetails] = useState("");
   const [bedRoomDetails, setBedRoomDetails] = useState("");
 
-  /* get apartment for sell details */
   useEffect(() => {
     const init = async () => {
       try {
         setAreaDetails({
-          value: `area_apart ${apartForSellDetails.area_apart}`,
-          label: apartForSellDetails.area_apart,
+          value: `area_apart ${apartDetails.area_apart}`,
+          label: apartDetails.area_apart,
         });
         setBedRoomDetails({
-          value: `bedroom ${apartForSellDetails.bedroom}`,
-          label: apartForSellDetails.bedroom,
+          value: `bedroom ${apartDetails.bedroom}`,
+          label: apartDetails.bedroom,
         });
       } catch (error) {
         console.log(error);
       }
     };
     init();
-  }, [apartForSellDetails]);
+  }, [apartDetails]);
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="Page" title="Apartment For Sell" />
 
       <div className="text-2xl mb-2">
-        EDITING APARTMENT FOR SELL: {apartForSellDetails.apart_code}
+        EDITING APARTMENT FOR SELL: {apartDetails.apart_code}
       </div>
       <Link to={ROUTES.APART_FOR_SELL}>
         <button
           style={{ backgroundColor: currentColor }}
           className="mb-6 font-semibold text-white py-2 px-4 rounded"
         >
-          Back To Apart For Sell list
+          Back To Apart For Sell List
         </button>
       </Link>
 
@@ -61,11 +59,7 @@ const FormEdit = ({
             </label>
             <input
               disabled
-              value={
-                apartForSellDetails.apart_code
-                  ? apartForSellDetails.apart_code
-                  : ""
-              }
+              value={apartDetails.apart_code ? apartDetails.apart_code : ""}
               name="apart_code"
               type="text"
               onChange={handleInput}
@@ -80,11 +74,7 @@ const FormEdit = ({
             </label>
             <input
               name="agency_name"
-              value={
-                apartForSellDetails.agency_name
-                  ? apartForSellDetails.agency_name
-                  : ""
-              }
+              value={apartDetails.agency_name ? apartDetails.agency_name : ""}
               type="text"
               onChange={handleInput}
               placeholder="Agency Name"
@@ -119,11 +109,7 @@ const FormEdit = ({
             </label>
             <input
               name="agency_phone"
-              value={
-                apartForSellDetails.agency_phone
-                  ? apartForSellDetails.agency_phone
-                  : ""
-              }
+              value={apartDetails.agency_phone ? apartDetails.agency_phone : ""}
               type="text"
               onChange={handleInput}
               placeholder="Agency Phone"
@@ -158,11 +144,7 @@ const FormEdit = ({
             </label>
             <input
               name="agency_email"
-              value={
-                apartForSellDetails.agency_email
-                  ? apartForSellDetails.agency_email
-                  : ""
-              }
+              value={apartDetails.agency_email ? apartDetails.agency_email : ""}
               type="text"
               onChange={handleInput}
               placeholder="Agency Email"
@@ -179,7 +161,7 @@ const FormEdit = ({
             </label>
             <input
               name="sqm"
-              value={apartForSellDetails.sqm ? apartForSellDetails.sqm : ""}
+              value={apartDetails.sqm ? apartDetails.sqm : ""}
               type="number"
               onChange={handleInput}
               placeholder="SQM"
@@ -193,11 +175,7 @@ const FormEdit = ({
             </label>
             <input
               name="house_owner"
-              value={
-                apartForSellDetails.house_owner
-                  ? apartForSellDetails.house_owner
-                  : ""
-              }
+              value={apartDetails.house_owner ? apartDetails.house_owner : ""}
               type="text"
               onChange={handleInput}
               placeholder="House Owner"
@@ -214,11 +192,7 @@ const FormEdit = ({
             </label>
             <NumericFormat
               name="usd_price"
-              value={
-                apartForSellDetails.usd_price
-                  ? apartForSellDetails.usd_price
-                  : ""
-              }
+              value={apartDetails.usd_price ? apartDetails.usd_price : ""}
               placeholder="Price"
               className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
             px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -232,11 +206,7 @@ const FormEdit = ({
             </label>
             <input
               name="phone_owner"
-              value={
-                apartForSellDetails.phone_owner
-                  ? apartForSellDetails.phone_owner
-                  : ""
-              }
+              value={apartDetails.phone_owner ? apartDetails.phone_owner : ""}
               type="text"
               onChange={handleInput}
               placeholder="Phone Owner"
@@ -253,11 +223,7 @@ const FormEdit = ({
             </label>
             <NumericFormat
               name="vnd_price"
-              value={
-                apartForSellDetails.vnd_price
-                  ? apartForSellDetails.vnd_price
-                  : ""
-              }
+              value={apartDetails.vnd_price ? apartDetails.vnd_price : ""}
               placeholder="Price"
               className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
             px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -271,11 +237,7 @@ const FormEdit = ({
             </label>
             <input
               name="email_owner"
-              value={
-                apartForSellDetails.email_owner
-                  ? apartForSellDetails.email_owner
-                  : ""
-              }
+              value={apartDetails.email_owner ? apartDetails.email_owner : ""}
               type="text"
               onChange={handleInput}
               placeholder="Email Owner"
@@ -297,7 +259,7 @@ const FormEdit = ({
 
             <textarea
               name="note"
-              value={apartForSellDetails.note ? apartForSellDetails.note : ""}
+              value={apartDetails.note ? apartDetails.note : ""}
               onChange={handleInput}
               rows="4"
               placeholder="Write note here..."

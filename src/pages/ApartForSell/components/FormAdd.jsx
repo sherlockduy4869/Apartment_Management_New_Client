@@ -22,7 +22,7 @@ const FormAdd = ({
           style={{ backgroundColor: currentColor }}
           className="mb-6 font-semibold text-white py-2 px-4 rounded"
         >
-          Back To Apart For Sell list
+          Back To Apart For Sell List
         </button>
       </Link>
 

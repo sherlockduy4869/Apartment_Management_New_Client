@@ -3,19 +3,18 @@ import { useParams } from "react-router-dom";
 
 import { FormDetails } from "./components";
 import { useStateContext } from "./../../contexts/ContextProvider";
-import { getApartForRentDetails } from "../../hooks/useApartForRent";
+import { getApartDetails } from "../../hooks/useApartForRent";
 
 const ApartForRentDetails = () => {
   const { currentColor } = useStateContext();
   const { apart_code } = useParams();
-  const [apartForRentDetails, setApartForRentDetails] = useState({});
+  const [apartDetails, setApartDetails] = useState({});
 
-  /* get apartment for rent details */
   useEffect(() => {
     const init = async () => {
       try {
-        const apartForRentDetails = await getApartForRentDetails(apart_code);
-        setApartForRentDetails(apartForRentDetails);
+        const apartDetails = await getApartDetails(apart_code);
+        setApartDetails(apartDetails);
       } catch (error) {
         console.log(error);
       }
@@ -26,7 +25,7 @@ const ApartForRentDetails = () => {
   return (
     <FormDetails
       currentColor={currentColor}
-      apartForRentDetails={apartForRentDetails}
+      apartDetails={apartDetails}
     />
   );
 };

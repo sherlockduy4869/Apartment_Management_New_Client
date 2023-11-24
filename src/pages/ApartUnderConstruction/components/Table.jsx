@@ -7,8 +7,8 @@ import * as ROUTES from "../../../constants";
 import { numberWithCommas, formatDate } from "../../../helpers/function";
 
 const Table = ({
-  filterApartUnderConstruction,
-  handleDeleteApartUnderConstruction,
+  filterApart,
+  handleDeleteApart,
   setSearch,
 }) => {
   const columnTable = [
@@ -130,7 +130,7 @@ const Table = ({
             className="text-white py-1 px-2 mb-2 capitalize rounded-2xl text-md"
             onClick={() => {
               if (window.confirm("Are you sure to delete this item?"))
-                handleDeleteApartUnderConstruction(row.apart_code);
+                handleDeleteApart(row.apart_code);
             }}
           >
             Delete
@@ -153,7 +153,7 @@ const Table = ({
         <DataTable
           title="LIST OF APARTMENT UNDER CONSTRUCTION"
           columns={columnTable}
-          data={filterApartUnderConstruction}
+          data={filterApart}
           pagination
           fixedHeader
           fixedHeaderScrollHeight="900px"

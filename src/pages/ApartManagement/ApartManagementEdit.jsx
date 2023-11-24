@@ -8,9 +8,9 @@ import {
   editingApart,
   getApartDetails,
   getAllStaticValue,
-} from "../../hooks/useApartForRent";
+} from "../../hooks/useApartManagement";
 
-const ApartForRentEdit = () => {
+const ApartManagementEdit = () => {
   const { currentColor } = useStateContext();
 
   const navigate = useNavigate();
@@ -123,4 +123,4 @@ const ApartForRentEdit = () => {
   );
 };
 
-export default ApartForRentEdit;
+export default ApartManagementEdit;

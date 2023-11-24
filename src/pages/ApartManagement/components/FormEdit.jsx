@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Select from "react-select";
+import { NumericFormat } from "react-number-format";
 import { useState, useEffect } from "react";
 
 import { Header } from "../../../components";
@@ -12,11 +13,11 @@ const FormEdit = ({
   apartDetails,
   areaApart,
   bedRoom,
-  statusApart,
+  statusFurniture,
 }) => {
   const [areaDetails, setAreaDetails] = useState("");
   const [bedRoomDetails, setBedRoomDetails] = useState("");
-  const [statusApartDetails, setStatusApartDetails] = useState("");
+  const [statusFurnitureDetails, setStatusFurnitureDetails] = useState("");
 
   useEffect(() => {
     const init = async () => {
@@ -29,9 +30,9 @@ const FormEdit = ({
           value: `bedroom ${apartDetails.bedroom}`,
           label: apartDetails.bedroom,
         });
-        setStatusApartDetails({
-          value: `status_apart ${apartDetails.status_apart}`,
-          label: apartDetails.status_apart,
+        setStatusFurnitureDetails({
+          value: `status_furniture ${apartDetails.status_furniture}`,
+          label: apartDetails.status_furniture,
         });
       } catch (error) {
         console.log(error);
@@ -42,17 +43,17 @@ const FormEdit = ({
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Apartment Under Construction" />
+      <Header category="Page" title="Apartment Management" />
 
       <div className="text-2xl mb-2">
-        EDITING APARTMENT UNDER CONSTRUCTION: {apartDetails.apart_code}
+        EDITING APARTMENT MANAGEMENT: {apartDetails.apart_code}
       </div>
-      <Link to={ROUTES.APART_UNDER_CONSTRUCTION}>
+      <Link to={ROUTES.APART_MANAGEMENT}>
         <button
           style={{ backgroundColor: currentColor }}
           className="mb-6 font-semibold text-white py-2 px-4 rounded"
         >
-          Back To Apart Under Construction List
+          Back To Apart Management List
         </button>
       </Link>
 
@@ -64,11 +65,7 @@ const FormEdit = ({
             </label>
             <input
               disabled
-              value={
-                apartDetails.apart_code
-                  ? apartDetails.apart_code
-                  : ""
-              }
+              value={apartDetails.apart_code ? apartDetails.apart_code : ""}
               name="apart_code"
               type="text"
               onChange={handleInput}
@@ -83,11 +80,7 @@ const FormEdit = ({
             </label>
             <input
               name="agency_name"
-              value={
-                apartDetails.agency_name
-                  ? apartDetails.agency_name
-                  : ""
-              }
+              value={apartDetails.agency_name ? apartDetails.agency_name : ""}
               type="text"
               onChange={handleInput}
               placeholder="Agency Name"
@@ -122,11 +115,7 @@ const FormEdit = ({
             </label>
             <input
               name="agency_phone"
-              value={
-                apartDetails.agency_phone
-                  ? apartDetails.agency_phone
-                  : ""
-              }
+              value={apartDetails.agency_phone ? apartDetails.agency_phone : ""}
               type="text"
               onChange={handleInput}
               placeholder="Agency Phone"
@@ -161,11 +150,7 @@ const FormEdit = ({
             </label>
             <input
               name="agency_email"
-              value={
-                apartDetails.agency_email
-                  ? apartDetails.agency_email
-                  : ""
-              }
+              value={apartDetails.agency_email ? apartDetails.agency_email : ""}
               type="text"
               onChange={handleInput}
               placeholder="Agency Email"
@@ -196,11 +181,7 @@ const FormEdit = ({
             </label>
             <input
               name="house_owner"
-              value={
-                apartDetails.house_owner
-                  ? apartDetails.house_owner
-                  : ""
-              }
+              value={apartDetails.house_owner ? apartDetails.house_owner : ""}
               type="text"
               onChange={handleInput}
               placeholder="House Owner"
@@ -211,18 +192,18 @@ const FormEdit = ({
         </div>
 
         <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-              Status Apart
+              Status Furniture
             </label>
             <Select
-              name="status_apart"
-              options={statusApart}
-              value={statusApartDetails}
+              name="status_furniture"
+              options={statusFurniture}
+              value={statusFurnitureDetails}
               onChange={(event) => {
                 handleInput(event);
-                setStatusApartDetails({
-                  value: `status_apart ${event.label}`,
+                setStatusFurnitureDetails({
+                  value: `status_furniture ${event.label}`,
                   label: event.label,
                 });
               }}
@@ -234,14 +215,41 @@ const FormEdit = ({
             </label>
             <input
               name="phone_owner"
-              value={
-                apartDetails.phone_owner
-                  ? apartDetails.phone_owner
-                  : ""
-              }
+              value={apartDetails.phone_owner ? apartDetails.phone_owner : ""}
               type="text"
               onChange={handleInput}
               placeholder="Phone Owner"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/2 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Price
+            </label>
+            <NumericFormat
+              name="price"
+              value={apartDetails.price ? apartDetails.price : ""}
+              placeholder="Price"
+              className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+              thousandSeparator=","
+              onChange={handleInput}
+            />
+          </div>
+          <div className="w-full md:w-1/2 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+              Email Owner
+            </label>
+            <input
+              name="email_owner"
+              value={apartDetails.email_owner ? apartDetails.email_owner : ""}
+              type="text"
+              onChange={handleInput}
+              placeholder="Email Owner"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
             px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />

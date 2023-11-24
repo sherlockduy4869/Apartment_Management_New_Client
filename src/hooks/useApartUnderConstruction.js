@@ -4,7 +4,7 @@ import axios from "../services/axios";
 import * as API from "../constants/apis";
 import * as ROUTES from "../constants/routes";
 
-export const deleteApartUnderConstruction = async (apart_code) => {
+export const deleteApart = async (apart_code) => {
   try {
     const response = await axios.delete(
       API.REQUEST_DELETING_APART_UNDER_CONSTRUCTION + apart_code
@@ -32,13 +32,13 @@ export const deleteApartUnderConstruction = async (apart_code) => {
   }
 };
 
-export const fetchAllApartUnderConstruction = async () => {
+export const fetchAllApart = async () => {
   try {
     const response = await axios.get(API.REQUEST_GET_ALL_APART_UNDER_CONSTRUCTION);
 
     if (response.status === 200) {
-      const listApartUnderConstruction = response.data.data;
-      return listApartUnderConstruction;
+      const listApart = response.data.data;
+      return listApart;
     }
   } catch (err) {
     const message = Array.isArray(err.response?.data?.message)
@@ -51,17 +51,17 @@ export const fetchAllApartUnderConstruction = async () => {
   }
 };
 
-export const searchApartUnderConstruction = async (apartUnderConstructionList, search) => {
+export const searchApart = async (apartList, search) => {
   try {
-    const result = await apartUnderConstructionList.filter(
-      (apartUnderConstruction) =>
-        apartUnderConstruction.apart_code.toLowerCase().match(search.toLowerCase()) ||
-        apartUnderConstruction.agency_name.toLowerCase().match(search.toLowerCase()) ||
-        apartUnderConstruction.area_apart.toLowerCase().match(search.toLowerCase()) ||
-        apartUnderConstruction.house_owner.toLowerCase().match(search.toLowerCase()) ||
-        apartUnderConstruction.phone_owner.toLowerCase().match(search) ||
-        apartUnderConstruction.bedroom.toLowerCase().match(search.toLowerCase()) ||
-        apartUnderConstruction.status_apart.toLowerCase().match(search.toLowerCase())
+    const result = await apartList.filter(
+      (apart) =>
+        apart.apart_code.toLowerCase().match(search.toLowerCase()) ||
+        apart.agency_name.toLowerCase().match(search.toLowerCase()) ||
+        apart.area_apart.toLowerCase().match(search.toLowerCase()) ||
+        apart.house_owner.toLowerCase().match(search.toLowerCase()) ||
+        apart.phone_owner.toLowerCase().match(search) ||
+        apart.bedroom.toLowerCase().match(search.toLowerCase()) ||
+        apart.status_apart.toLowerCase().match(search.toLowerCase())
     );
 
     return result;
@@ -74,11 +74,11 @@ export const searchApartUnderConstruction = async (apartUnderConstructionList, s
   }
 };
 
-export const addingApartUnderConstruction = async (apartUnderConstruction, navigate) => {
+export const addingApart = async (apartInfor, navigate) => {
   try {
     const response = await axios.post(
       API.REQUEST_ADDING_APART_UNDER_CONSTRUCTION,
-      apartUnderConstruction
+      apartInfor
     );
 
     if (response.status === 201) {
@@ -102,15 +102,15 @@ export const addingApartUnderConstruction = async (apartUnderConstruction, navig
   }
 };
 
-export const editingApartUnderConstruction = async (
-  apartUnderConstruction,
+export const editingApart = async (
+  apartInfor,
   apart_code,
   navigate
 ) => {
   try {
     const response = await axios.put(
       API.REQUEST_EDITING_APART_UNDER_CONSTRUCTION + apart_code,
-      apartUnderConstruction
+      apartInfor
     );
 
     if (response.status === 201) {
@@ -185,7 +185,7 @@ export const getAllStaticValue = async () => {
   }
 };
 
-export const getApartUnderConstructionDetails = async (apart_code) => {
+export const getApartDetails = async (apart_code) => {
   try {
     const response = await axios.get(
       API.REQUEST_GET_APART_UNDER_CONSTRUCTION_DETAILS + apart_code

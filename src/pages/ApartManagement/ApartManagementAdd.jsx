@@ -4,10 +4,10 @@ import { useStateContext } from "./../../contexts/ContextProvider";
 import {
   addingApart,
   getAllStaticValue,
-} from "../../hooks/useApartForSell";
+} from "../../hooks/useApartManagement";
 import { FormAdd } from './components';
 
-const ApartForSellAdd = () => {
+const ApartManagementAdd = () => {
   const navigate = useNavigate();
   const { currentColor } = useStateContext();
   const [apartInfor, setApartInfor] = useState({
@@ -19,17 +19,18 @@ const ApartForSellAdd = () => {
     sqm: 0,
     bedroom: "",
     house_owner: "",
-    usd_price: 0,
     phone_owner: "",
-    vnd_price: 0,
+    price: 0,
     email_owner: "",
+    status_furniture: "",
     note: "",
   });
 
   const [areaApart, setAreaApart] = useState([]);
   const [bedRoom, setBedRoom] = useState([]);
+  const [statusFurniture, setStatusFurniture] = useState([]);
 
-  const convertArray = ["sqm", "vnd_price", "usd_price"];
+  const convertArray = ["sqm", "price"];
 
   const handleInput = (event) => {
     event.target
@@ -49,13 +50,14 @@ const ApartForSellAdd = () => {
     event.preventDefault();
     await addingApart(apartInfor, navigate);
   };
-  
+
   useEffect(() => {
     const init = async () => {
       try {
         const allStaticValue = await getAllStaticValue();
         setAreaApart(allStaticValue.areaApart);
         setBedRoom(allStaticValue.bedRoom);
+        setStatusFurniture(allStaticValue.statusFurniture);
       } catch (error) {
         console.log(error);
       }
@@ -68,10 +70,11 @@ const ApartForSellAdd = () => {
     currentColor = {currentColor}
     areaApart = {areaApart}
     bedRoom = {bedRoom}
+    statusFurniture = {statusFurniture}
     handleInput = {handleInput}
     handleAddingApart = {handleAddingApart}
     />
   );
 };
 
-export default ApartForSellAdd;
+export default ApartManagementAdd;

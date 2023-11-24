@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { Header } from "../../../components";
 import * as ROUTES from "../../../constants";
 
-const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
+const FormDetails = ({ currentColor, apartDetails }) => {
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="Page" title="Apartment Under Construction" />
 
       <div className="text-2xl mb-2">
-        APARTMENT UNDER CONSTRUCTION DETAILS: <b>{apartUnderConstructionDetails.apart_code}</b>
+        APARTMENT UNDER CONSTRUCTION DETAILS: <b>{apartDetails.apart_code}</b>
       </div>
 
       <form className="w-full max-w-full">
@@ -20,11 +20,7 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartUnderConstructionDetails.apart_code
-                  ? apartUnderConstructionDetails.apart_code
-                  : ""
-              }
+              value={apartDetails.apart_code ? apartDetails.apart_code : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -36,11 +32,7 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartUnderConstructionDetails.agency_name
-                  ? apartUnderConstructionDetails.agency_name
-                  : ""
-              }
+              value={apartDetails.agency_name ? apartDetails.agency_name : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -55,11 +47,7 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartUnderConstructionDetails.area_apart
-                  ? apartUnderConstructionDetails.area_apart
-                  : ""
-              }
+              value={apartDetails.area_apart ? apartDetails.area_apart : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -72,11 +60,7 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartUnderConstructionDetails.agency_phone
-                  ? apartUnderConstructionDetails.agency_phone
-                  : ""
-              }
+              value={apartDetails.agency_phone ? apartDetails.agency_phone : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -91,9 +75,7 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartUnderConstructionDetails.bedroom ? apartUnderConstructionDetails.bedroom : ""
-              }
+              value={apartDetails.bedroom ? apartDetails.bedroom : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -106,11 +88,7 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartUnderConstructionDetails.agency_email
-                  ? apartUnderConstructionDetails.agency_email
-                  : ""
-              }
+              value={apartDetails.agency_email ? apartDetails.agency_email : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -125,7 +103,7 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
             </label>
             <input
               disabled
-              value={apartUnderConstructionDetails.sqm ? apartUnderConstructionDetails.sqm : ""}
+              value={apartDetails.sqm ? apartDetails.sqm : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -137,11 +115,7 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartUnderConstructionDetails.house_owner
-                  ? apartUnderConstructionDetails.house_owner
-                  : ""
-              }
+              value={apartDetails.house_owner ? apartDetails.house_owner : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -156,11 +130,7 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartUnderConstructionDetails.status_apart
-                  ? apartUnderConstructionDetails.status_apart
-                  : ""
-              }
+              value={apartDetails.status_apart ? apartDetails.status_apart : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -172,11 +142,7 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartUnderConstructionDetails.phone_owner
-                  ? apartUnderConstructionDetails.phone_owner
-                  : ""
-              }
+              value={apartDetails.phone_owner ? apartDetails.phone_owner : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -195,7 +161,7 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
 
             <textarea
               disabled
-              value={apartUnderConstructionDetails.note ? apartUnderConstructionDetails.note : ""}
+              value={apartDetails.note ? apartDetails.note : ""}
               rows="4"
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
             border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
@@ -212,7 +178,7 @@ const FormDetails = ({ currentColor, apartUnderConstructionDetails }) => {
                 style={{ backgroundColor: currentColor }}
                 className="font-semibold text-white py-2 px-4 rounded"
               >
-                Back To Apart Under Construction list
+                Back To Apart Under Construction List
               </button>
             </Link>
           </div>

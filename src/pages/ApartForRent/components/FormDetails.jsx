@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { Header } from "../../../components";
 import * as ROUTES from "../../../constants";
 
-const FormDetails = ({ currentColor, apartForRentDetails }) => {
+const FormDetails = ({ currentColor, apartDetails }) => {
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="Page" title="Apartment For Rent" />
 
       <div className="text-2xl mb-2">
-        APARTMENT FOR RENT DETAILS: <b>{apartForRentDetails.apart_code}</b>
+        APARTMENT FOR RENT DETAILS: <b>{apartDetails.apart_code}</b>
       </div>
 
       <form className="w-full max-w-full">
@@ -21,16 +21,14 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             <input
               disabled
               value={
-                apartForRentDetails.apart_code
-                  ? apartForRentDetails.apart_code
+                apartDetails.apart_code
+                  ? apartDetails.apart_code
                   : ""
               }
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorApartCode} */}</div>
           </div>
           <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -39,16 +37,14 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             <input
               disabled
               value={
-                apartForRentDetails.agency_name
-                  ? apartForRentDetails.agency_name
+                apartDetails.agency_name
+                  ? apartDetails.agency_name
                   : ""
               }
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -60,16 +56,14 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             <input
               disabled
               value={
-                apartForRentDetails.area_apart
-                  ? apartForRentDetails.area_apart
+                apartDetails.area_apart
+                  ? apartDetails.area_apart
                   : ""
               }
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorProject} */}</div>
           </div>
 
           <div className="w-full md:w-1/2 px-3">
@@ -79,8 +73,8 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             <input
               disabled
               value={
-                apartForRentDetails.agency_phone
-                  ? apartForRentDetails.agency_phone
+                apartDetails.agency_phone
+                  ? apartDetails.agency_phone
                   : ""
               }
               type="text"
@@ -98,7 +92,7 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             <input
               disabled
               value={
-                apartForRentDetails.bedroom ? apartForRentDetails.bedroom : ""
+                apartDetails.bedroom ? apartDetails.bedroom : ""
               }
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
@@ -113,16 +107,14 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             <input
               disabled
               value={
-                apartForRentDetails.agency_email
-                  ? apartForRentDetails.agency_email
+                apartDetails.agency_email
+                  ? apartDetails.agency_email
                   : ""
               }
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -133,7 +125,7 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             </label>
             <input
               disabled
-              value={apartForRentDetails.sqm ? apartForRentDetails.sqm : ""}
+              value={apartDetails.sqm ? apartDetails.sqm : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -146,16 +138,14 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             <input
               disabled
               value={
-                apartForRentDetails.house_owner
-                  ? apartForRentDetails.house_owner
+                apartDetails.house_owner
+                  ? apartDetails.house_owner
                   : ""
               }
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -167,8 +157,8 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             <input
               disabled
               value={
-                apartForRentDetails.status_furniture
-                  ? apartForRentDetails.status_furniture
+                apartDetails.status_furniture
+                  ? apartDetails.status_furniture
                   : ""
               }
               type="text"
@@ -183,16 +173,14 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             <input
               disabled
               value={
-                apartForRentDetails.phone_owner
-                  ? apartForRentDetails.phone_owner
+                apartDetails.phone_owner
+                  ? apartDetails.phone_owner
                   : ""
               }
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -203,7 +191,7 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             </label>
             <input
               disabled
-              value={apartForRentDetails.price ? apartForRentDetails.price : ""}
+              value={apartDetails.price ? apartDetails.price : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -216,16 +204,14 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
             <input
               disabled
               value={
-                apartForRentDetails.email_owner
-                  ? apartForRentDetails.email_owner
+                apartDetails.email_owner
+                  ? apartDetails.email_owner
                   : ""
               }
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
             />
-
-            <div style={{ color: "#f43f5e" }}>{/* {errorImage} */}</div>
           </div>
         </div>
 
@@ -241,7 +227,7 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
 
             <textarea
               disabled
-              value={apartForRentDetails.note ? apartForRentDetails.note : ""}
+              value={apartDetails.note ? apartDetails.note : ""}
               rows="4"
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg 
             border border-gray-300 focus:ring-blue-50 focus:border-blue-500 
@@ -258,7 +244,7 @@ const FormDetails = ({ currentColor, apartForRentDetails }) => {
                 style={{ backgroundColor: currentColor }}
                 className="font-semibold text-white py-2 px-4 rounded"
               >
-                Back To Apart For Rent list
+                Back To Apart For Rent List
               </button>
             </Link>
           </div>

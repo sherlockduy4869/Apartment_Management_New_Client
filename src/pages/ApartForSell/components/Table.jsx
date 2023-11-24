@@ -6,7 +6,7 @@ import { customStyles } from "../../../constants";
 import * as ROUTES from "../../../constants";
 import { numberWithCommas, formatDate } from "../../../helpers/function";
 
-const Table = ({ filterApartForSell, handleDeleteApartForSell, setSearch }) => {
+const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
   const columnTable = [
     {
       name: <div>STT</div>,
@@ -150,7 +150,7 @@ const Table = ({ filterApartForSell, handleDeleteApartForSell, setSearch }) => {
             className="text-white py-1 px-2 mb-2 capitalize rounded-2xl text-md"
             onClick={() => {
               if (window.confirm("Are you sure to delete this item?"))
-                handleDeleteApartForSell(row.apart_code);
+                handleDeleteApart(row.apart_code);
             }}
           >
             Delete
@@ -173,7 +173,7 @@ const Table = ({ filterApartForSell, handleDeleteApartForSell, setSearch }) => {
         <DataTable
           title="LIST OF APARTMENT FOR SELL"
           columns={columnTable}
-          data={filterApartForSell}
+          data={filterApart}
           pagination
           fixedHeader
           fixedHeaderScrollHeight="900px"

@@ -389,7 +389,7 @@ export const LinePrimaryYAxis = {
 
 export const links = [
   {
-    title: 'Dashboard',
+    title: 'Data',
     links: [
       {
         name: 'Data Report',
@@ -416,6 +416,28 @@ export const links = [
       {
         name: 'Apart Under Construction',
         icon: <AiOutlineShoppingCart />,
+      },
+      {
+        name: 'Apart Management',
+        icon: <AiOutlineShoppingCart />,
+      },
+    ],
+  },
+  {
+    title: 'Employee',
+    links: [
+      {
+        name: 'Account',
+        icon: <FiShoppingBag />,
+      },
+    ],
+  },
+  {
+    title: 'History',
+    links: [
+      {
+        name: 'History',
+        icon: <FiShoppingBag />,
       },
     ],
   },
