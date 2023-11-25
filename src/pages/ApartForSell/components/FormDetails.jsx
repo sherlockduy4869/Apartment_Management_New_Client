@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { NumericFormat } from "react-number-format";
 
 import { Header } from "../../../components";
 import * as ROUTES from "../../../constants";
@@ -128,12 +129,12 @@ const FormDetails = ({ currentColor, apartDetails }) => {
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               USD Price
             </label>
-            <input
+            <NumericFormat
               disabled
               value={apartDetails.usd_price ? apartDetails.usd_price : ""}
-              type="text"
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+              className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+              thousandSeparator=","
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
@@ -155,12 +156,12 @@ const FormDetails = ({ currentColor, apartDetails }) => {
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               VND Price
             </label>
-            <input
+            <NumericFormat
               disabled
               value={apartDetails.vnd_price ? apartDetails.vnd_price : ""}
-              type="text"
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+              className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+              thousandSeparator=","
             />
           </div>
           <div className="w-full md:w-1/2 px-3">

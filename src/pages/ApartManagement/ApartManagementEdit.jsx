@@ -21,32 +21,51 @@ const ApartManagementEdit = () => {
 
   const [areaApart, setAreaApart] = useState([]);
   const [bedRoom, setBedRoom] = useState([]);
-  const [statusFurniture, setStatusFurniture] = useState([]);
 
   const [apartInfor, setApartInfor] = useState({
     apart_code: "",
-    agency_name: "",
-    agency_phone: "",
-    agency_email: "",
     area_apart: "",
-    sqm: 0,
-    bedroom: "",
     house_owner: "",
-    phone_owner: "",
-    price: 0,
-    email_owner: "",
-    status_furniture: "",
-    note: "",
+    door_pass: "",
+    bedroom: "",
+    wifi_pass: "",
+    management_fee: 0,
+    electric_code: "",
+    internet_code: "",
+    internet_note: "",
+    mechanical_key_office: "",
+    pn1_office: "",
+    pn2_office: "",
+    pn3_office: "",
+    pn4_office: "",
+    balcony_office: "",
+    mailbox_office: "",
+    mechanical_key_customer: "",
+    pn1_customer: "",
+    pn2_customer: "",
+    pn3_customer: "",
+    pn4_customer: "",
+    balcony_customer: "",
+    mailbox_customer: "",
+    note_for_key: "",
+    elevator_card_office: "",
+    big_magnetic_card_office: "",
+    small_magnetic_card_office: "",
+    elevator_card_customer: "",
+    big_magnetic_card_customer: "",
+    small_magnetic_card_customer: "",
+    air_condition_remote: "",
+    other_note: "",
   });
 
-  const convertArray = ["sqm", "price"];
+  const convertArray = ["management_fee"];
 
   const handleInput = (event) => {
     event.target
       ? setApartInfor({
           ...apartInfor,
           [event.target.name]: convertArray.includes(event.target.name)
-            ? parseFloat(event.target.value.replace(",", ""))
+            ? parseFloat(event.target.value.replaceAll(",", ""))
             : event.target.value,
         })
       : setApartInfor({
@@ -58,7 +77,7 @@ const ApartManagementEdit = () => {
       ? setApartDetails({
           ...apartInfor,
           [event.target.name]: convertArray.includes(event.target.name)
-            ? parseFloat(event.target.value.replace(",", ""))
+            ? parseFloat(event.target.value.replaceAll(",", ""))
             : event.target.value,
         })
       : setApartDetails({
@@ -81,28 +100,41 @@ const ApartManagementEdit = () => {
         setApartDetails(apartDetails);
         setApartInfor({
           apart_code: apartDetails.apart_code ? apartDetails.apart_code : "",
-          agency_name: apartDetails.agency_name ? apartDetails.agency_name : "",
-          agency_phone: apartDetails.agency_phone
-            ? apartDetails.agency_phone
-            : "",
-          agency_email: apartDetails.agency_email
-            ? apartDetails.agency_email
-            : "",
           area_apart: apartDetails.area_apart ? apartDetails.area_apart : "",
-          sqm: apartDetails.sqm ? apartDetails.sqm : 0,
-          bedroom: apartDetails.bedroom ? apartDetails.bedroom : "",
           house_owner: apartDetails.house_owner ? apartDetails.house_owner : "",
-          phone_owner: apartDetails.phone_owner ? apartDetails.phone_owner : "",
-          price: apartDetails.price ? apartDetails.price : 0,
-          email_owner: apartDetails.email_owner ? apartDetails.email_owner : "",
-          status_furniture: apartDetails.status_furniture
-            ? apartDetails.status_furniture
-            : "",
-          note: apartDetails.note ? apartDetails.note : "",
+          door_pass: apartDetails.door_pass ? apartDetails.door_pass : "",
+          bedroom: apartDetails.bedroom ? apartDetails.bedroom : "",
+          wifi_pass: apartDetails.wifi_pass ? apartDetails.wifi_pass : "",
+          management_fee: apartDetails.management_fee ? apartDetails.management_fee : 0,
+          electric_code: apartDetails.electric_code ? apartDetails.electric_code : "",
+          internet_code: apartDetails.internet_code ? apartDetails.internet_code : "",
+          internet_note: apartDetails.internet_note ? apartDetails.internet_note : "",
+          mechanical_key_office: apartDetails.mechanical_key_office ? apartDetails.mechanical_key_office : "",
+          pn1_office: apartDetails.pn1_office ? apartDetails.pn1_office : "",
+          pn2_office: apartDetails.pn2_office ? apartDetails.pn2_office : "",
+          pn3_office: apartDetails.pn3_office ? apartDetails.pn3_office : "",
+          pn4_office: apartDetails.pn4_office ? apartDetails.pn4_office : "",
+          balcony_office: apartDetails.balcony_office ? apartDetails.balcony_office : "",
+          mailbox_office: apartDetails.mailbox_office ? apartDetails.mailbox_office : "",
+          mechanical_key_customer: apartDetails.mechanical_key_customer ? apartDetails.mechanical_key_customer : "",
+          pn1_customer: apartDetails.pn1_customer ? apartDetails.pn1_customer : "",
+          pn2_customer: apartDetails.pn2_customer ? apartDetails.pn2_customer : "",
+          pn3_customer: apartDetails.pn3_customer ? apartDetails.pn3_customer : "",
+          pn4_customer: apartDetails.pn4_customer ? apartDetails.pn4_customer : "",
+          balcony_customer: apartDetails.balcony_customer ? apartDetails.balcony_customer : "",
+          mailbox_customer: apartDetails.mailbox_customer ? apartDetails.mailbox_customer : "",
+          note_for_key: apartDetails.note_for_key ? apartDetails.note_for_key : "",
+          elevator_card_office: apartDetails.elevator_card_office ? apartDetails.elevator_card_office : "",
+          big_magnetic_card_office: apartDetails.big_magnetic_card_office ? apartDetails.big_magnetic_card_office : "",
+          small_magnetic_card_office: apartDetails.small_magnetic_card_office ? apartDetails.small_magnetic_card_office : "",
+          elevator_card_customer: apartDetails.elevator_card_customer ? apartDetails.elevator_card_customer : "",
+          big_magnetic_card_customer: apartDetails.big_magnetic_card_customer ? apartDetails.big_magnetic_card_customer : "",
+          small_magnetic_card_customer: apartDetails.small_magnetic_card_customer ? apartDetails.small_magnetic_card_customer : "",
+          air_condition_remote: apartDetails.air_condition_remote ? apartDetails.air_condition_remote : "",
+          other_note: apartDetails.other_note ? apartDetails.other_note : "",
         });
         setAreaApart(allStaticValue.areaApart);
         setBedRoom(allStaticValue.bedRoom);
-        setStatusFurniture(allStaticValue.statusFurniture);
       } catch (error) {
         console.log(error);
       }
@@ -118,7 +150,6 @@ const ApartManagementEdit = () => {
       apartDetails={apartDetails}
       areaApart={areaApart}
       bedRoom={bedRoom}
-      statusFurniture={statusFurniture}
     />
   );
 };

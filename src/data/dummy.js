@@ -424,7 +424,7 @@ export const links = [
     ],
   },
   {
-    title: 'Employee',
+    title: 'User',
     links: [
       {
         name: 'Account',

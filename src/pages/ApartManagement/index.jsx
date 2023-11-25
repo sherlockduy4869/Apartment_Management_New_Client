@@ -1,4 +1,4 @@
-export { default as ApartForRent } from './ApartForRent';
-export { default as ApartForRentAdd } from './ApartForRentAdd';
-export { default as ApartForRentDetails } from './ApartForRentDetails';
-export { default as ApartForRentEdit } from './ApartForRentEdit';
+export { default as ApartManagement } from './ApartManagement';
+export { default as ApartManagementAdd } from './ApartManagementAdd';
+export { default as ApartManagementDetails } from './ApartManagementDetails';
+export { default as ApartManagementEdit } from './ApartManagementEdit';

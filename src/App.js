@@ -23,6 +23,13 @@ import {
   ApartUnderConstructionEdit,
 } from "./pages/ApartUnderConstruction";
 
+import {
+  ApartManagement,
+  ApartManagementAdd,
+  ApartManagementDetails,
+  ApartManagementEdit,
+} from "./pages/ApartManagement";
+
 import { ApartAdding } from "./pages/ApartAdding";
 
 import { useState } from "react";
@@ -148,6 +155,25 @@ const App = () => {
                     <Route
                       path={ROUTES.APART_UNDER_CONSTRUCTION_EDIT}
                       element={<ApartUnderConstructionEdit />}
+                    />
+                    {/*----------*/}
+
+                    {/* Apart For Sell  */}
+                    <Route
+                      path={ROUTES.APART_MANAGEMENT}
+                      element={<ApartManagement />}
+                    />
+                    <Route
+                      path={ROUTES.APART_MANAGEMENT_ADD}
+                      element={<ApartManagementAdd />}
+                    />
+                    <Route
+                      path={ROUTES.APART_MANAGEMENT_DETAILS}
+                      element={<ApartManagementDetails />}
+                    />
+                    <Route
+                      path={ROUTES.APART_MANAGEMENT_EDIT}
+                      element={<ApartManagementEdit />}
                     />
                     {/*----------*/}
 

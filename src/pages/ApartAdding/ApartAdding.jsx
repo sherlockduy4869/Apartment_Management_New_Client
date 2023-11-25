@@ -29,7 +29,7 @@ const ApartAdding = () => {
             </Link>
           </div>
           <div className="block_adding mb-4">
-            <Link to={"/"}>
+            <Link to={ROUTES.APART_MANAGEMENT_ADD}>
               <FaPlus color="#7b74ec" />
               <span>Apart Management</span>
             </Link>

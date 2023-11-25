@@ -110,6 +110,7 @@ export const editingApart = async (
   navigate
 ) => {
   try {
+    console.log(apartInfor.price)
     const response = await axios.put(
       API.REQUEST_EDITING_APART_FOR_RENT + apart_code,
       apartInfor

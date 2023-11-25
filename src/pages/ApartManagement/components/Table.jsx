@@ -11,7 +11,7 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
     {
       name: <div>STT</div>,
       selector: (row, index) => index + 1,
-      width: "8%",
+      width: "7%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -20,25 +20,15 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
     },
     {
       name: <div>Apart Info</div>,
-      selector: row => `${ row.apart_code } ${ row.agency_name }`,
+      selector: (row) => `${row.apart_code} ${row.area_apart}`,
       cell: (row) => (
         <div>
-          <div>{row.apart_code}</div>
-          <div>{row.agency_name}</div>
+          <div><b>{row.apart_code}</b></div>
+          <div>{row.area_apart}</div>
         </div>
+        
       ),
-      width: "15%",
-      sortable: true,
-      style: {
-        padding: "10px 15px",
-        justifyContent: "center",
-      },
-    },
-    {
-      name: <div>Area</div>,
-      selector: row => `${ row.area_apart }`,
-      cell: (row) => <div>{row.area_apart}</div>,
-      width: "15%",
+      width: "9%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -47,19 +37,9 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
     },
     {
       name: <div>Owner</div>,
-      selector: row => `${ row.house_owner } ${ row.phone_owner } ${ row.email_owner }`,
-      cell: (row) => (
-        <div>
-          <div>
-            <b>{row.house_owner}</b>
-          </div>
-          <div>
-            <span>{row.phone_owner}</span>
-            <span>{row.email_owner}</span>
-          </div>
-        </div>
-      ),
-      width: "15%",
+      selector: (row) => `${row.house_owner}`,
+      cell: (row) => <div>{row.house_owner}</div>,
+      width: "9.5%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -67,20 +47,10 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
       },
     },
     {
-      name: <div>Apart Details</div>,
-      selector: row => `${ row.bedroom } ${ row.sqm } ${ row.status_furniture }`,
-      cell: (row) => (
-        <div>
-          <div>
-            <span>{row.bedroom} - </span>
-            <span>
-              {row.sqm} m<sup>2</sup>
-            </span>
-            <div>{row.status_furniture}</div>
-          </div>
-        </div>
-      ),
-      width: "15%",
+      name: <div>Bedroom</div>,
+      selector: (row) => `${row.bedroom}`,
+      cell: (row) => <div>{row.bedroom}</div>,
+      width: "11.5%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -88,14 +58,69 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
       },
     },
     {
-      name: <div>Price</div>,
-      selector: row => `${ row.price }`,
+      name: <div>Fee</div>,
+      selector: (row) => `${row.management_fee}`,
       cell: (row) => (
         <div>
-          {numberWithCommas(row.price)} <sup>đ</sup>
+          {numberWithCommas(row.management_fee)} <sup>đ</sup>
         </div>
       ),
-      width: "15%",
+      width: "8%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent: "center",
+      },
+    },
+    {
+      name: <div>Electric Code</div>,
+      selector: (row) => `${row.electric_code}`,
+      cell: (row) => <div>{row.electric_code}</div>,
+      width: "10.5%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent: "center",
+      },
+    },
+    {
+      name: <div>Door Pass</div>,
+      selector: (row) => `${row.door_pass}`,
+      cell: (row) => <div>{row.door_pass}</div>,
+      width: "8.5%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent: "center",
+      },
+    },
+    {
+      name: <div>Internet Code</div>,
+      selector: (row) => `${row.internet_code}`,
+      cell: (row) => <div>{row.internet_code}</div>,
+      width: "10.75%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent: "center",
+      },
+    },
+    {
+      name: <div>Wifi Pass</div>,
+      selector: (row) => `${row.wifi_pass}`,
+      cell: (row) => <div>{row.wifi_pass}</div>,
+      width: "8%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent: "center",
+      },
+    },
+    {
+      name: <div>Note</div>,
+      selector: (row) => `${row.other_note}`,
+      cell: (row) => <div>{row.other_note}</div>,
+      width: "8%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -106,9 +131,7 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
       name: <div>Customize</div>,
       cell: (row) => (
         <span className="text-center">
-          <Link
-            to={ROUTES.APART_MANAGEMENT_DETAILS_ACTION + row.apart_code}
-          >
+          <Link to={ROUTES.APART_MANAGEMENT_DETAILS_ACTION + row.apart_code}>
             <button
               style={{ background: "#3b82f6" }}
               className="text-white mb-2 py-1 px-2 capitalize rounded-2xl text-md "
@@ -126,14 +149,14 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
             className="text-white py-1 px-2 mb-2 capitalize rounded-2xl text-md"
             onClick={() => {
               if (window.confirm("Are you sure to delete this item?"))
-              handleDeleteApart(row.apart_code);
+                handleDeleteApart(row.apart_code);
             }}
           >
             Delete
           </button>
         </span>
       ),
-      width: "17%",
+      width: "10.25%",
       style: {
         padding: "10px 15px",
         justifyContent: "center",

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { NumericFormat } from "react-number-format";
 
 import { Header } from "../../../components";
 import * as ROUTES from "../../../constants";
@@ -20,11 +21,7 @@ const FormDetails = ({ currentColor, apartDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartDetails.apart_code
-                  ? apartDetails.apart_code
-                  : ""
-              }
+              value={apartDetails.apart_code ? apartDetails.apart_code : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -36,11 +33,7 @@ const FormDetails = ({ currentColor, apartDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartDetails.agency_name
-                  ? apartDetails.agency_name
-                  : ""
-              }
+              value={apartDetails.agency_name ? apartDetails.agency_name : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -55,11 +48,7 @@ const FormDetails = ({ currentColor, apartDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartDetails.area_apart
-                  ? apartDetails.area_apart
-                  : ""
-              }
+              value={apartDetails.area_apart ? apartDetails.area_apart : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -72,11 +61,7 @@ const FormDetails = ({ currentColor, apartDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartDetails.agency_phone
-                  ? apartDetails.agency_phone
-                  : ""
-              }
+              value={apartDetails.agency_phone ? apartDetails.agency_phone : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -91,9 +76,7 @@ const FormDetails = ({ currentColor, apartDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartDetails.bedroom ? apartDetails.bedroom : ""
-              }
+              value={apartDetails.bedroom ? apartDetails.bedroom : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -106,11 +89,7 @@ const FormDetails = ({ currentColor, apartDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartDetails.agency_email
-                  ? apartDetails.agency_email
-                  : ""
-              }
+              value={apartDetails.agency_email ? apartDetails.agency_email : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -137,11 +116,7 @@ const FormDetails = ({ currentColor, apartDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartDetails.house_owner
-                  ? apartDetails.house_owner
-                  : ""
-              }
+              value={apartDetails.house_owner ? apartDetails.house_owner : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -172,11 +147,7 @@ const FormDetails = ({ currentColor, apartDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartDetails.phone_owner
-                  ? apartDetails.phone_owner
-                  : ""
-              }
+              value={apartDetails.phone_owner ? apartDetails.phone_owner : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -189,12 +160,12 @@ const FormDetails = ({ currentColor, apartDetails }) => {
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
               Price
             </label>
-            <input
+            <NumericFormat
               disabled
               value={apartDetails.price ? apartDetails.price : ""}
-              type="text"
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
-              px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+              className="currency appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
+            px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
+              thousandSeparator=","
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
@@ -203,11 +174,7 @@ const FormDetails = ({ currentColor, apartDetails }) => {
             </label>
             <input
               disabled
-              value={
-                apartDetails.email_owner
-                  ? apartDetails.email_owner
-                  : ""
-              }
+              value={apartDetails.email_owner ? apartDetails.email_owner : ""}
               type="text"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
               px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"

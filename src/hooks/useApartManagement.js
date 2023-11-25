@@ -7,7 +7,7 @@ import * as ROUTES from "../constants/routes";
 export const deleteApart = async (apart_code) => {
   try {
     const response = await axios.delete(
-      API.REQUEST_DELETING_APART_FOR_RENT + apart_code
+      API.REQUEST_DELETING_APART_MANAGEMENT + apart_code
     );
 
     if (response.status === 201) {
@@ -34,7 +34,7 @@ export const deleteApart = async (apart_code) => {
 
 export const fetchAllApart = async () => {
   try {
-    const response = await axios.get(API.REQUEST_GET_ALL_APART_FOR_RENT);
+    const response = await axios.get(API.REQUEST_GET_ALL_APART_MANAGEMENT);
 
     if (response.status === 200) {
       const listApart = response.data.data;
@@ -57,18 +57,20 @@ export const searchApart = async (apartList, search) => {
     const result = await apartList.filter(
       (apart) =>
         apart.apart_code.toLowerCase().match(search.toLowerCase()) ||
-        apart.agency_name.toLowerCase().match(search.toLowerCase()) ||
-        apart.area_apart.toLowerCase().match(search.toLowerCase()) ||
         apart.house_owner.toLowerCase().match(search.toLowerCase()) ||
-        apart.phone_owner.toLowerCase().match(search) ||
-        apart.email_owner.toLowerCase().match(search.toLowerCase()) ||
+        apart.area_apart.toLowerCase().match(search.toLowerCase()) ||
         apart.bedroom.toLowerCase().match(search.toLowerCase()) ||
-        apart.sqm.toString().match(search.toLowerCase()) ||
-        apart.status_furniture.toLowerCase().match(search.toLowerCase())
+        apart.management_fee.toString().match(search) ||
+        apart.electric_code.toLowerCase().match(search.toLowerCase()) ||
+        apart.door_pass.toLowerCase().match(search.toLowerCase()) ||
+        apart.internet_code.toLowerCase().match(search.toLowerCase()) ||
+        apart.wifi_pass.toLowerCase().match(search.toLowerCase()) || 
+        apart.other_note.toLowerCase().match(search.toLowerCase())
     );
 
     return result;
   } catch (err) {
+    console.log(err)
     toast.error("An error is happening !", {
       theme: "light",
     });
@@ -79,7 +81,7 @@ export const searchApart = async (apartList, search) => {
 export const addingApart = async (apartInfor, navigate) => {
   try {
     const response = await axios.post(
-      API.REQUEST_ADDING_APART_FOR_RENT,
+      API.REQUEST_ADDING_APART_MANAGEMENT,
       apartInfor
     );
 
@@ -91,7 +93,7 @@ export const addingApart = async (apartInfor, navigate) => {
       });
       toast.clearWaitingQueue();
 
-      navigate(ROUTES.APART_FOR_RENT);
+      navigate(ROUTES.APART_MANAGEMENT);
     }
   } catch (err) {
     const message = Array.isArray(err.response?.data?.message)
@@ -111,7 +113,7 @@ export const editingApart = async (
 ) => {
   try {
     const response = await axios.put(
-      API.REQUEST_EDITING_APART_FOR_RENT + apart_code,
+      API.REQUEST_EDITING_APART_MANAGEMENT + apart_code,
       apartInfor
     );
 
@@ -122,7 +124,7 @@ export const editingApart = async (
         theme: "light",
       });
 
-      navigate(ROUTES.APART_FOR_RENT);
+      navigate(ROUTES.APART_MANAGEMENT);
     }
   } catch (err) {
     const message = Array.isArray(err.response?.data?.message)
@@ -190,7 +192,7 @@ export const getAllStaticValue = async () => {
 export const getApartDetails = async (apart_code) => {
   try {
     const response = await axios.get(
-      API.REQUEST_GET_APART_FOR_RENT_DETAILS + apart_code
+      API.REQUEST_GET_APART_MANAGEMENT_DETAILS + apart_code
     );
 
     if (response.status === 200) {

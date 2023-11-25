@@ -12,32 +12,51 @@ const ApartManagementAdd = () => {
   const { currentColor } = useStateContext();
   const [apartInfor, setApartInfor] = useState({
     apart_code: "",
-    agency_name: "",
-    agency_phone: "",
-    agency_email: "",
     area_apart: "",
-    sqm: 0,
-    bedroom: "",
     house_owner: "",
-    phone_owner: "",
-    price: 0,
-    email_owner: "",
-    status_furniture: "",
-    note: "",
+    door_pass: "",
+    bedroom: "",
+    wifi_pass: "",
+    management_fee: 0,
+    electric_code: "",
+    internet_code: "",
+    internet_note: "",
+    mechanical_key_office: "",
+    pn1_office: "",
+    pn2_office: "",
+    pn3_office: "",
+    pn4_office: "",
+    balcony_office: "",
+    mailbox_office: "",
+    mechanical_key_customer: "",
+    pn1_customer: "",
+    pn2_customer: "",
+    pn3_customer: "",
+    pn4_customer: "",
+    balcony_customer: "",
+    mailbox_customer: "",
+    note_for_key: "",
+    elevator_card_office: "",
+    big_magnetic_card_office: "",
+    small_magnetic_card_office: "",
+    elevator_card_customer: "",
+    big_magnetic_card_customer: "",
+    small_magnetic_card_customer: "",
+    air_condition_remote: "",
+    other_note: ""
   });
 
   const [areaApart, setAreaApart] = useState([]);
   const [bedRoom, setBedRoom] = useState([]);
-  const [statusFurniture, setStatusFurniture] = useState([]);
 
-  const convertArray = ["sqm", "price"];
+  const convertArray = ["management_fee"];
 
   const handleInput = (event) => {
     event.target
       ? setApartInfor({
           ...apartInfor,
           [event.target.name]: convertArray.includes(event.target.name)
-            ? parseFloat(event.target.value.replace(",", ""))
+            ? parseFloat(event.target.value.replaceAll(",", ""))
             : event.target.value,
         })
       : setApartInfor({
@@ -57,7 +76,6 @@ const ApartManagementAdd = () => {
         const allStaticValue = await getAllStaticValue();
         setAreaApart(allStaticValue.areaApart);
         setBedRoom(allStaticValue.bedRoom);
-        setStatusFurniture(allStaticValue.statusFurniture);
       } catch (error) {
         console.log(error);
       }
@@ -70,7 +88,6 @@ const ApartManagementAdd = () => {
     currentColor = {currentColor}
     areaApart = {areaApart}
     bedRoom = {bedRoom}
-    statusFurniture = {statusFurniture}
     handleInput = {handleInput}
     handleAddingApart = {handleAddingApart}
     />

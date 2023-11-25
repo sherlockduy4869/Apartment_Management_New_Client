@@ -20,7 +20,7 @@ export const customStyles = {
     style: {
       justifyContent: "center",
       border: "1px solid #e0e1e1",
-      fontSize: "15px",
+      fontSize: "14px",
       textTransform: "uppercase",
       fontWeight: "600",
       height: "150px",

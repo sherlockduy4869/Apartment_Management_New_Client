@@ -36,7 +36,7 @@ const ApartForSellAdd = () => {
       ? setApartInfor({
           ...apartInfor,
           [event.target.name]: convertArray.includes(event.target.name)
-            ? parseFloat(event.target.value.replace(",", ""))
+            ? parseFloat(event.target.value.replaceAll(",", ""))
             : event.target.value,
         })
       : setApartInfor({

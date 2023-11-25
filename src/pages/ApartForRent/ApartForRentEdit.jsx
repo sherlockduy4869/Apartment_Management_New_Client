@@ -39,14 +39,14 @@ const ApartForRentEdit = () => {
     note: "",
   });
 
-  const convertArray = ["sqm", "price"];
+  const convertArray = ["price"];
 
   const handleInput = (event) => {
     event.target
       ? setApartInfor({
           ...apartInfor,
           [event.target.name]: convertArray.includes(event.target.name)
-            ? parseFloat(event.target.value.replace(",", ""))
+            ? parseFloat(event.target.value.replaceAll(",", ""))
             : event.target.value,
         })
       : setApartInfor({
@@ -58,7 +58,7 @@ const ApartForRentEdit = () => {
       ? setApartDetails({
           ...apartInfor,
           [event.target.name]: convertArray.includes(event.target.name)
-            ? parseFloat(event.target.value.replace(",", ""))
+            ? parseFloat(event.target.value.replaceAll(",", ""))
             : event.target.value,
         })
       : setApartDetails({
