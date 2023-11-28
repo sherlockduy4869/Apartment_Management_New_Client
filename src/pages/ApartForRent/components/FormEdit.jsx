@@ -68,7 +68,6 @@ const FormEdit = ({
               value={apartDetails.apart_code ? apartDetails.apart_code : ""}
               name="apart_code"
               type="text"
-              onChange={handleInput}
               placeholder="Apartment Code"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 
             px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500"
@@ -169,6 +168,7 @@ const FormEdit = ({
               name="sqm"
               value={apartDetails.sqm ? apartDetails.sqm : ""}
               type="number"
+              onWheel={(e) => e.target.blur()}
               onChange={handleInput}
               placeholder="SQM"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 

@@ -10,7 +10,6 @@ import { MdOutlineSupervisorAccount } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { TiTick } from 'react-icons/ti';
 import { GrLocation } from 'react-icons/gr';
-import avatar from './avatar.jpg';
 
 export const gridSlider = (props) => (
   <div>
@@ -394,6 +393,7 @@ export const links = [
       {
         name: 'Data Report',
         icon: <FiShoppingBag />,
+        url: ''
       },
     ],
   },
@@ -407,6 +407,10 @@ export const links = [
       },
       {
         name: 'Apart For Rent',
+        icon: <AiOutlineShoppingCart />,
+      },
+      {
+        name: 'Apart Rented No Tax Area',
         icon: <AiOutlineShoppingCart />,
       },
       {

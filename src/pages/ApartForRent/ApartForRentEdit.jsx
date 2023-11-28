@@ -24,7 +24,6 @@ const ApartForRentEdit = () => {
   const [statusFurniture, setStatusFurniture] = useState([]);
 
   const [apartInfor, setApartInfor] = useState({
-    apart_code: "",
     agency_name: "",
     agency_phone: "",
     agency_email: "",
@@ -80,7 +79,6 @@ const ApartForRentEdit = () => {
 
         setApartDetails(apartDetails);
         setApartInfor({
-          apart_code: apartDetails.apart_code ? apartDetails.apart_code : "",
           agency_name: apartDetails.agency_name ? apartDetails.agency_name : "",
           agency_phone: apartDetails.agency_phone
             ? apartDetails.agency_phone

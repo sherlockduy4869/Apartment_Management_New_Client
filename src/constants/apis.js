@@ -42,3 +42,13 @@ export const REQUEST_ADDING_APART_MANAGEMENT = APART_MANAGEMENT_BASE_URL;
 export const REQUEST_EDITING_APART_MANAGEMENT = APART_MANAGEMENT_BASE_URL;
 export const REQUEST_GET_APART_MANAGEMENT_DETAILS = APART_MANAGEMENT_BASE_URL;
 /*-------------------------------------------------------------------------*/
+
+/*--------------------------APART-RENTED-NO-TAX--------------------------------*/
+const APART_RENTED_NO_TAX_BASE_URL = '/apart-rented-no-tax/'
+export const REQUEST_GET_ALL_APART_RENTED_NO_TAX = APART_RENTED_NO_TAX_BASE_URL;
+export const REQUEST_DELETING_APART_RENTED_NO_TAX = APART_RENTED_NO_TAX_BASE_URL;
+export const REQUEST_ADDING_APART_RENTED_NO_TAX= APART_RENTED_NO_TAX_BASE_URL;
+export const REQUEST_EDITING_APART_RENTED_NO_TAX = APART_RENTED_NO_TAX_BASE_URL;
+export const REQUEST_GET_APART_RENTED_NO_TAX_DETAILS = APART_RENTED_NO_TAX_BASE_URL;
+export const REQUEST_GET_APART_RENTED_NO_TAX_DETAILS_EDITING = APART_RENTED_NO_TAX_BASE_URL + 'get-apart-edit/';
+/*-------------------------------------------------------------------------*/

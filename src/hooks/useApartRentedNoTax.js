@@ -3,11 +3,12 @@ import { toast } from "react-toastify";
 import axios from "../services/axios";
 import * as API from "../constants/apis";
 import * as ROUTES from "../constants/routes";
+import { getReversedDate, formatDate } from "../helpers/function";
 
 export const deleteApart = async (apart_code) => {
   try {
     const response = await axios.delete(
-      API.REQUEST_DELETING_APART_FOR_SELL + apart_code
+      API.REQUEST_DELETING_APART_RENTED_NO_TAX + apart_code
     );
 
     if (response.status === 201) {
@@ -34,7 +35,7 @@ export const deleteApart = async (apart_code) => {
 
 export const fetchAllApart = async () => {
   try {
-    const response = await axios.get(API.REQUEST_GET_ALL_APART_FOR_SELL);
+    const response = await axios.get(API.REQUEST_GET_ALL_APART_RENTED_NO_TAX);
     if (response.status === 200) {
       const listApart = response.data.data;
       return listApart;
@@ -54,21 +55,21 @@ export const searchApart = async (apartList, search) => {
   try {
     const result = await apartList.filter(
       (apart) =>
-        apart.house_owner.toLowerCase().match(search.toLowerCase()) ||
-        apart.phone_owner.toLowerCase().match(search.toLowerCase()) ||
-        apart.area_apart.toLowerCase().match(search.toLowerCase()) ||
         apart.apart_code.toLowerCase().match(search.toLowerCase()) ||
-        apart.agency_name.toLowerCase().match(search) ||
-        apart.bedroom.toLowerCase().match(search.toLowerCase()) ||
-        apart.sqm.toString().match(search.toLowerCase()) ||
-        apart.vnd_price.toString().match(search.toLowerCase()) ||
-        apart.usd_price.toString().match(search.toLowerCase()) ||
-        apart.created_at.toString().match(search.toLowerCase()) ||
-        apart.note.toLowerCase().match(search.toLowerCase())
+        apart.agency_name.toLowerCase().match(search.toLowerCase()) ||
+        apart.area_apart.toLowerCase().match(search.toLowerCase()) ||
+        apart.house_owner.toLowerCase().match(search.toLowerCase()) ||
+        apart.phone_owner.toLowerCase().match(search) ||
+        apart.email_owner.toLowerCase().match(search.toLowerCase()) ||
+        apart.fee_per_month.toString().match(search.toLowerCase()) ||
+        apart.owner_recieved.toString().match(search.toLowerCase()) ||
+        formatDate(apart.start_date).match(search.toLowerCase()) ||
+        formatDate(apart.end_date).match(search.toLowerCase())
     );
 
     return result;
   } catch (err) {
+    console.log(err);
     toast.error("An error is happening !", {
       theme: "light",
     });
@@ -78,8 +79,12 @@ export const searchApart = async (apartList, search) => {
 
 export const addingApart = async (apartInfor, navigate) => {
   try {
+
+    apartInfor.start_date = getReversedDate(apartInfor.start_date);
+    apartInfor.end_date = getReversedDate(apartInfor.end_date);
+
     const response = await axios.post(
-      API.REQUEST_ADDING_APART_FOR_SELL,
+      API.REQUEST_ADDING_APART_RENTED_NO_TAX,
       apartInfor
     );
 
@@ -91,7 +96,7 @@ export const addingApart = async (apartInfor, navigate) => {
       });
       toast.clearWaitingQueue();
 
-      navigate(ROUTES.APART_FOR_SELL);
+      navigate(ROUTES.APART_RENTED_NO_TAX);
     }
   } catch (err) {
     const message = Array.isArray(err.response?.data?.message)
@@ -104,14 +109,14 @@ export const addingApart = async (apartInfor, navigate) => {
   }
 };
 
-export const editingApart = async (
-  apartInfor,
-  apart_code,
-  navigate
-) => {
+export const editingApart = async (apartInfor, apart_code, navigate) => {
   try {
+
+    apartInfor.start_date = getReversedDate(apartInfor.start_date);
+    apartInfor.end_date = getReversedDate(apartInfor.end_date);
+
     const response = await axios.put(
-      API.REQUEST_EDITING_APART_FOR_SELL + apart_code,
+      API.REQUEST_EDITING_APART_RENTED_NO_TAX + apart_code,
       apartInfor
     );
 
@@ -122,57 +127,7 @@ export const editingApart = async (
         theme: "light",
       });
 
-      navigate(ROUTES.APART_FOR_SELL);
-    }
-  } catch (err) {
-    const message = Array.isArray(err.response?.data?.message)
-      ? err.response?.data?.message[0]
-      : err.response?.data?.message;
-    toast.error(`${message}`, {
-      theme: "light",
-    });
-    toast.clearWaitingQueue();
-  }
-};
-
-export const getAllStaticValue = async () => {
-  try {
-    const response = await axios.get(
-      API.REQUEST_GET_ALL_STATIC_VALUE_APART_FOR_RENT
-    );
-
-    if (response.status === 200) {
-      const allStaticValue = response.data.data;
-
-      const bedRoom = [];
-      const areaApart = [];
-      const statusFurniture = [];
-      for (const key in allStaticValue.StatusFurniture) {
-        statusFurniture.push({
-          label: allStaticValue.StatusFurniture[key],
-          value: `status_furniture ${key}`,
-        });
-      }
-
-      for (const key in allStaticValue.BedRoom) {
-        bedRoom.push({
-          label: allStaticValue.BedRoom[key],
-          value: `bedroom ${key}`,
-        });
-      }
-
-      for (const key in allStaticValue.AreaApart) {
-        areaApart.push({
-          label: allStaticValue.AreaApart[key],
-          value: `area_apart ${key}`,
-        });
-      }
-
-      return {
-        bedRoom,
-        areaApart,
-        statusFurniture,
-      };
+      navigate(ROUTES.APART_RENTED_NO_TAX);
     }
   } catch (err) {
     const message = Array.isArray(err.response?.data?.message)
@@ -188,10 +143,33 @@ export const getAllStaticValue = async () => {
 export const getApartDetails = async (apart_code) => {
   try {
     const response = await axios.get(
-      API.REQUEST_GET_APART_FOR_SELL_DETAILS + apart_code
+      API.REQUEST_GET_APART_RENTED_NO_TAX_DETAILS + apart_code
     );
 
     if (response.status === 200) {
+      return response.data.data;
+    }
+  } catch (err) {
+    const message = Array.isArray(err.response?.data?.message)
+      ? err.response?.data?.message[0]
+      : err.response?.data?.message;
+    toast.error(`${message}`, {
+      theme: "light",
+    });
+    toast.clearWaitingQueue();
+  }
+};
+
+export const getApartDetailsEditing = async (apart_code) => {
+  try {
+    const response = await axios.get(
+      API.REQUEST_GET_APART_RENTED_NO_TAX_DETAILS_EDITING + apart_code
+    );
+
+    if (response.status === 200) {
+      const apartInfor = response.data.data;
+      apartInfor.start_date = formatDate(apartInfor.start_date);
+      apartInfor.end_date = formatDate(apartInfor.end_date);
       return response.data.data;
     }
   } catch (err) {

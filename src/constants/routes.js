@@ -47,6 +47,18 @@ export const APART_MANAGEMENT_EDIT_ACTION = BASED_APART_MANAGEMENT + 'edit/';
 export const APART_MANAGEMENT_DETAILS_ACTION = BASED_APART_MANAGEMENT;
 /*-------------------------------------------------------------------------*/
 
+/*--------------------------APART-RENTED-NO-TAX--------------------------------*/
+export const BASED_APART_RENTED_NO_TAX = '/apart-rented-no-tax-area/'
+export const APART_RENTED_NO_TAX_AREA = BASED_APART_RENTED_NO_TAX;
+
+export const APART_RENTED_NO_TAX = BASED_APART_RENTED_NO_TAX + 'list';
+export const APART_RENTED_NO_TAX_ADD = APART_RENTED_NO_TAX_AREA + 'add';
+export const APART_RENTED_NO_TAX_EDIT = APART_RENTED_NO_TAX_AREA + 'edit/:apart_code';
+export const APART_RENTED_NO_TAX_DETAILS = APART_RENTED_NO_TAX_AREA + ':apart_code';
+export const APART_RENTED_NO_TAX_EDIT_ACTION = APART_RENTED_NO_TAX_AREA + 'edit/';
+export const APART_RENTED_NO_TAX_DETAILS_ACTION = APART_RENTED_NO_TAX_AREA;
+/*-------------------------------------------------------------------------*/
+
 export const CALENDAR = '/calendar';
 
 export const KANBAN = '/kanban';

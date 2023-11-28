@@ -115,6 +115,7 @@ const FormAdd = ({
             <input
               name="sqm"
               type="number"
+              onWheel={(e) => e.target.blur()}
               onChange={handleInput}
               placeholder="SQM"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 

@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { Header } from "../../../components";
 import { customStyles } from "../../../constants";
 import * as ROUTES from "../../../constants";
-import { numberWithCommas } from "../../../helpers/function";
+import { numberWithCommas, formatDate } from "../../../helpers/function";
 
 const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
   const columnTable = [
     {
       name: <div>STT</div>,
       selector: (row, index) => index + 1,
-      width: "7%",
+      width: "8%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -20,15 +20,25 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
     },
     {
       name: <div>Apart Info</div>,
-      selector: (row) => `${row.apart_code} ${row.area_apart}`,
+      selector: (row) => `${row.apart_code} ${row.agency_name}`,
       cell: (row) => (
         <div>
-          <div><b>{row.apart_code}</b></div>
-          <div>{row.area_apart}</div>
+          <div>{row.apart_code}</div>
+          <div>{row.agency_name}</div>
         </div>
-        
       ),
-      width: "9%",
+      width: "10%",
+      sortable: true,
+      style: {
+        padding: "10px 15px",
+        justifyContent: "center",
+      },
+    },
+    {
+      name: <div>Area</div>,
+      selector: (row) => `${row.area_apart}`,
+      cell: (row) => <div>{row.area_apart}</div>,
+      width: "10%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -37,35 +47,20 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
     },
     {
       name: <div>Owner</div>,
-      selector: (row) => `${row.house_owner}`,
-      cell: (row) => <div>{row.house_owner}</div>,
-      width: "9.5%",
-      sortable: true,
-      style: {
-        padding: "10px 15px",
-        justifyContent: "center",
-      },
-    },
-    {
-      name: <div>Bedroom</div>,
-      selector: (row) => `${row.bedroom}`,
-      cell: (row) => <div>{row.bedroom}</div>,
-      width: "11%",
-      sortable: true,
-      style: {
-        padding: "10px 15px",
-        justifyContent: "center",
-      },
-    },
-    {
-      name: <div>Fee</div>,
-      selector: (row) => `${row.management_fee}`,
+      selector: (row) =>
+        `${row.house_owner} ${row.phone_owner} ${row.email_owner}`,
       cell: (row) => (
         <div>
-          {numberWithCommas(row.management_fee)} <sup>đ</sup>
+          <div>
+            <b>{row.house_owner}</b>
+          </div>
+          <div>
+            <span>{row.phone_owner}</span>
+            <span>{row.email_owner}</span>
+          </div>
         </div>
       ),
-      width: "8%",
+      width: "14%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -73,10 +68,16 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
       },
     },
     {
-      name: <div>Electric Code</div>,
-      selector: (row) => `${row.electric_code}`,
-      cell: (row) => <div>{row.electric_code}</div>,
-      width: "10.5%",
+      name: <div>Fee/Month</div>,
+      selector: (row) => `${row.fee_per_month}`,
+      cell: (row) => (
+        <div>
+          <div>
+            {numberWithCommas(row.fee_per_month)} <sup>đ</sup>
+          </div>
+        </div>
+      ),
+      width: "13.5%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -84,10 +85,14 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
       },
     },
     {
-      name: <div>Door Pass</div>,
-      selector: (row) => `${row.door_pass}`,
-      cell: (row) => <div>{row.door_pass}</div>,
-      width: "8.5%",
+      name: <div>Owner Recieve</div>,
+      selector: (row) => `${row.owner_recieved}`,
+      cell: (row) => (
+        <div>
+          {numberWithCommas(row.owner_recieved)} <sup>đ</sup>
+        </div>
+      ),
+      width: "12%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -95,10 +100,14 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
       },
     },
     {
-      name: <div>Internet Code</div>,
-      selector: (row) => `${row.internet_code}`,
-      cell: (row) => <div>{row.internet_code}</div>,
-      width: "10.75%",
+      name: <div>Duration</div>,
+      selector: (row) => `${row.start_date} ${row.end_date}`,
+      cell: (row) => (
+        <div>
+          {formatDate(row.start_date)} <br /> {formatDate(row.end_date)}
+        </div>
+      ),
+      width: "12.5%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -106,21 +115,10 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
       },
     },
     {
-      name: <div>Wifi Pass</div>,
-      selector: (row) => `${row.wifi_pass}`,
-      cell: (row) => <div>{row.wifi_pass}</div>,
-      width: "8%",
-      sortable: true,
-      style: {
-        padding: "10px 15px",
-        justifyContent: "center",
-      },
-    },
-    {
-      name: <div>Note</div>,
-      selector: (row) => `${row.other_note}`,
-      cell: (row) => <div>{row.other_note}</div>,
-      width: "8.25%",
+      name: <div>Payment Terms</div>,
+      selector: (row) => `${row.payment_term}`,
+      cell: (row) => <div>{row.payment_term} Month(s)</div>,
+      width: "10%",
       sortable: true,
       style: {
         padding: "10px 15px",
@@ -131,7 +129,7 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
       name: <div>Customize</div>,
       cell: (row) => (
         <span className="text-center">
-          <Link to={ROUTES.APART_MANAGEMENT_DETAILS_ACTION + row.apart_code}>
+          <Link to={ROUTES.APART_RENTED_NO_TAX_DETAILS_ACTION + row.apart_code}>
             <button
               style={{ background: "#3b82f6" }}
               className="text-white mb-2 py-1 px-2 capitalize rounded-2xl text-md "
@@ -139,7 +137,7 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
               Details
             </button>
           </Link>
-          <Link to={ROUTES.APART_MANAGEMENT_EDIT_ACTION + row.apart_code}>
+          <Link to={ROUTES.APART_RENTED_NO_TAX_EDIT_ACTION + row.apart_code}>
             <button className="text-white mb-2 py-1 px-2 capitalize rounded-2xl text-md bg-indigo-500">
               Editing
             </button>
@@ -156,7 +154,7 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
           </button>
         </span>
       ),
-      width: "9.5%",
+      width: "10%",
       style: {
         padding: "10px 15px",
         justifyContent: "center",
@@ -166,11 +164,11 @@ const Table = ({ filterApart, handleDeleteApart, setSearch }) => {
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Apartment Management" />
+      <Header category="Page" title="Apartment Rented No Tax" />
 
       <div>
         <DataTable
-          title="LIST OF APARTMENT MANAGEMENT"
+          title="LIST OF APARTMENT RENTED NO TAX"
           columns={columnTable}
           data={filterApart}
           pagination

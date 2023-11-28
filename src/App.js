@@ -30,6 +30,14 @@ import {
   ApartManagementEdit,
 } from "./pages/ApartManagement";
 
+import {
+  ApartRentedNoTax,
+  ApartRentedNoTaxAdd,
+  ApartRentedNoTaxDetails,
+  ApartRentedNoTaxEdit,
+  ApartRentedNoTaxArea,
+} from "./pages/ApartRentedNoTax";
+
 import { ApartAdding } from "./pages/ApartAdding";
 
 import { useState } from "react";
@@ -174,6 +182,30 @@ const App = () => {
                     <Route
                       path={ROUTES.APART_MANAGEMENT_EDIT}
                       element={<ApartManagementEdit />}
+                    />
+                    {/*----------*/}
+
+                    {/* Apart Rented No Tax  */}
+                    <Route
+                      path={ROUTES.APART_RENTED_NO_TAX}
+                      element={<ApartRentedNoTax />}
+                    />
+                    <Route
+                      path={ROUTES.APART_RENTED_NO_TAX_ADD}
+                      element={<ApartRentedNoTaxAdd />}
+                    />
+                    <Route
+                      path={ROUTES.APART_RENTED_NO_TAX_DETAILS}
+                      element={<ApartRentedNoTaxDetails />}
+                    />
+                    <Route
+                      path={ROUTES.APART_RENTED_NO_TAX_EDIT}
+                      element={<ApartRentedNoTaxEdit />}
+                    />
+
+                    <Route
+                      path={ROUTES.APART_RENTED_NO_TAX_AREA}
+                      element={<ApartRentedNoTaxArea />}
                     />
                     {/*----------*/}
 
