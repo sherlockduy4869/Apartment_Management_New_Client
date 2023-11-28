@@ -4,6 +4,14 @@ export const REQUEST_LOGIN = BASE_AUTHENTICATION + 'login';
 export const REQUEST_LOGOUT = BASE_AUTHENTICATION + 'logout';
 /*------------------------------------------------------------------------*/
 
+/*--------------------------USER_MANAGEMENT--------------------------------*/
+const BASE_USER_MANAGEMENT = '/account/'
+export const REQUEST_ADDING_USER = BASE_USER_MANAGEMENT;
+export const REQUEST_GET_ALL_USER = BASE_USER_MANAGEMENT;
+export const REQUEST_DELETING_USER = BASE_USER_MANAGEMENT;
+export const REQUEST_GET_ALL_STATIC_VALUE_USER = BASE_USER_MANAGEMENT + 'static-value';
+/*------------------------------------------------------------------------*/
+
 /*--------------------------APART-FOR-RENT--------------------------------*/
 const APART_FOR_RENT_BASE_URL = '/apart-for-rent/'
 export const REQUEST_GET_ALL_APART_FOR_RENT = APART_FOR_RENT_BASE_URL;

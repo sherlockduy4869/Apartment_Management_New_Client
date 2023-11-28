@@ -38,6 +38,12 @@ import {
   ApartRentedNoTaxArea,
 } from "./pages/ApartRentedNoTax";
 
+import {
+  UserManagement,
+  UserManagementAdd,
+  UserManagementList
+} from "./pages/User";
+
 import { ApartAdding } from "./pages/ApartAdding";
 
 import { useState } from "react";
@@ -209,7 +215,13 @@ const App = () => {
                     />
                     {/*----------*/}
 
-                    {/* apps  */}
+                    {/* User  */}
+                    <Route path={ROUTES.USER_MANAGEMENT} element={<UserManagement />} />
+                    <Route path={ROUTES.USER_ADDING} element={<UserManagementAdd />} />
+                    <Route path={ROUTES.USER_LIST} element={<UserManagementList />} />
+                    {/*----------*/}
+
+                    {/* Apps  */}
                     <Route path={ROUTES.KANBAN} element={<Kanban />} />
                     <Route path={ROUTES.CALENDAR} element={<Calendar />} />
                     {/*----------*/}

@@ -17,12 +17,12 @@ const FormAdd = ({
       <Header category="Page" title="Apartment Rented No Tax" />
 
       <div className="text-xl mb-2">ADDING APARTMENT RENTED NO TAX</div>
-      <Link to={ROUTES.APART_RENTED_NO_TAX}>
+      <Link to={ROUTES.APART_RENTED_NO_TAX_AREA}>
         <button
           style={{ backgroundColor: currentColor }}
           className="mb-6 font-semibold text-white py-2 px-4 rounded"
         >
-          Back To Apart Rented No Tax List
+          Back To Apart Adding
         </button>
       </Link>
 

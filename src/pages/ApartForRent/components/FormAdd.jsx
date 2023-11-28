@@ -19,12 +19,12 @@ const FormAdd = ({
       <Header category="Page" title="Apartment For Rent" />
 
       <div className="text-xl mb-2">ADDING APARTMENT FOR RENT</div>
-      <Link to={ROUTES.APART_FOR_RENT}>
+      <Link to={ROUTES.APART_ADDING}>
         <button
           style={{ backgroundColor: currentColor }}
           className="mb-6 font-semibold text-white py-2 px-4 rounded"
         >
-          Back To Apart For Rent List
+          Back To Apart Adding
         </button>
       </Link>
 

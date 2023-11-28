@@ -22,7 +22,7 @@ export const customStyles = {
       border: "1px solid #e0e1e1",
       fontSize: "12px",
       textTransform: "uppercase",
-      fontWeight: "600",
+      fontWeight: "800",
       height: "150px",
     },
   },
