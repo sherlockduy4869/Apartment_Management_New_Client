@@ -1,0 +1,12 @@
+.data_report_area{
+    display: flex;
+    justify-content: space-around;
+}
+
+@media only screen and (max-width: 768px) {
+    .data_report_area{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

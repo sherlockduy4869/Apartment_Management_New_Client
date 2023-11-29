@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Navbar, Footer, Sidebar, Notification } from "./components";
-import { Login, Ecommerce, Calendar, Kanban } from "./pages";
+import { Login, Calendar, Kanban } from "./pages";
 
 import {
   ApartForRent,
@@ -49,6 +49,10 @@ import {
   UserProfileEditInfor,
   UserProfileEditPassword
 } from "./pages/UserProfile";
+
+import {
+  DataReport,
+} from "./pages/DataReport";
 
 import { ApartAdding } from "./pages/ApartAdding";
 
@@ -109,9 +113,9 @@ const App = () => {
                     <Route
                       path={ROUTES.DEFAULT}
                       exact
-                      element={<Ecommerce />}
+                      element={<DataReport />}
                     />
-                    <Route path={ROUTES.DATA_REPORT} element={<Ecommerce />} />
+                    <Route path={ROUTES.DATA_REPORT} element={<DataReport />} />
                     {/*----------*/}
 
                     {/* Apartment Adding  */}

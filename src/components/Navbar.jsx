@@ -45,7 +45,7 @@ const Navbar = ({ setIsReload, isReload }) => {
   }, []);
 
   useEffect(() => {
-    if (screenSize <= 900) {
+    if (screenSize <= 1020) {
       setActiveMenu(false);
     } else {
       setActiveMenu(true);

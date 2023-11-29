@@ -3,7 +3,7 @@ import { FaSellcast, FaKey, FaShoppingCart } from "react-icons/fa";
 import { IoMdConstruct } from "react-icons/io";
 
 import { Header } from "../../components";
-import "../../assets/ApartAdding.css";
+import "../../assets/ApartAdding.module.css";
 import * as ROUTES from "../../constants/routes";
 
 const ApartAdding = () => {
