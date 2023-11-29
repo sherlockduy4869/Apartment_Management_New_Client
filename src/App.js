@@ -42,7 +42,13 @@ import {
   UserManagement,
   UserManagementAdd,
   UserManagementList
-} from "./pages/User";
+} from "./pages/UserManagement";
+
+import {
+  UserProfile,
+  UserProfileEditInfor,
+  UserProfileEditPassword
+} from "./pages/UserProfile";
 
 import { ApartAdding } from "./pages/ApartAdding";
 
@@ -215,10 +221,16 @@ const App = () => {
                     />
                     {/*----------*/}
 
-                    {/* User  */}
+                    {/* User Management */}
                     <Route path={ROUTES.USER_MANAGEMENT} element={<UserManagement />} />
                     <Route path={ROUTES.USER_ADDING} element={<UserManagementAdd />} />
                     <Route path={ROUTES.USER_LIST} element={<UserManagementList />} />
+                    {/*----------*/}
+
+                    {/* User Profile */}
+                    <Route path={ROUTES.USER_PROFILE} element={<UserProfile />} />
+                    <Route path={ROUTES.USER_PROFILE_EDIT_INFOR} element={<UserProfileEditInfor />} />
+                    <Route path={ROUTES.USER_PROFILE_EDIT_PASSWORD} element={<UserProfileEditPassword />} />
                     {/*----------*/}
 
                     {/* Apps  */}

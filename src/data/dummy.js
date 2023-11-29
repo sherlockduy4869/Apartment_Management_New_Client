@@ -1,10 +1,11 @@
-import { AiOutlineCalendar, AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineCalendar } from "react-icons/ai";
 import {
   FiBarChart,
   FiCreditCard,
   FiStar,
-  FiShoppingCart,
+  FiShoppingCart
 } from "react-icons/fi";
+import { FaBookOpen, FaShoppingCart } from "react-icons/fa";
 import {
   BsKanban,
   BsBoxSeam,
@@ -425,7 +426,7 @@ export const links = [
       },
       {
         name: "Apart For Rent",
-        icon: <AiOutlineShoppingCart />,
+        icon: <FaShoppingCart />,
       },
       {
         name: "Apart Rented No Tax Area",
@@ -451,6 +452,10 @@ export const links = [
       {
         name: "User Management",
         icon: <FaUser />,
+      },
+      {
+        name: "User Profile",
+        icon: <FaBookOpen />,
       },
     ],
   },

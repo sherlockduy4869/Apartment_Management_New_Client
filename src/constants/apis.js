@@ -10,6 +10,9 @@ export const REQUEST_ADDING_USER = BASE_USER_MANAGEMENT;
 export const REQUEST_GET_ALL_USER = BASE_USER_MANAGEMENT;
 export const REQUEST_DELETING_USER = BASE_USER_MANAGEMENT;
 export const REQUEST_GET_ALL_STATIC_VALUE_USER = BASE_USER_MANAGEMENT + 'static-value';
+export const REQUEST_GET_USER_BY_EMAIL = BASE_USER_MANAGEMENT + 'get-user-by-email/';
+export const REQUEST_EDIT_USER_INFOR = BASE_USER_MANAGEMENT + 'edit-user-infor/';
+export const REQUEST_CHANGE_PASSWORD = BASE_USER_MANAGEMENT + 'change-password';
 /*------------------------------------------------------------------------*/
 
 /*--------------------------APART-FOR-RENT--------------------------------*/

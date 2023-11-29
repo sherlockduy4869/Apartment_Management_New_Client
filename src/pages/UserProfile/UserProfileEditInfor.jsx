@@ -1,21 +1,17 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { useStateContext } from "./../../contexts/ContextProvider";
-import { addingUser, getAllStaticValue } from "../../hooks/useUser";
-import { FormAdd } from "./components";
+import { FormEditInfor } from "./components";
 
-const UserManagementAdd = () => {
-  const navigate = useNavigate();
+import { getUserByEmail, editUserInfor } from "../../hooks/useUserProfille";
+
+const UserProfileEditInfor = () => {
   const { currentColor } = useStateContext();
+
   const [userInfor, setUserInfor] = useState({
     name: "",
     email: "",
-    password: "",
-    role: "",
   });
-
-  const [listRole, setListRole] = useState([]);
 
   const handleInput = (event) => {
     event.target
@@ -29,16 +25,19 @@ const UserManagementAdd = () => {
         });
   };
 
-  const handleAddingUser = async (event) => {
+  const handleEditingUserInfor = async (event) => {
     event.preventDefault();
-    await addingUser(userInfor, navigate);
+    await editUserInfor(userInfor);
   };
 
   useEffect(() => {
     const init = async () => {
       try {
-        const allStaticValue = await getAllStaticValue();
-        setListRole(allStaticValue.role);
+        const userInforDetails = await getUserByEmail();
+        setUserInfor({
+          name: userInforDetails?.name,
+          email: userInforDetails?.email,
+        })
       } catch (error) {
         console.log(error);
       }
@@ -47,13 +46,13 @@ const UserManagementAdd = () => {
   }, []);
 
   return (
-    <FormAdd
+    <FormEditInfor
       currentColor={currentColor}
       handleInput={handleInput}
-      handleAddingUser={handleAddingUser}
-      listRole={listRole}
+      handleEditingUserInfor={handleEditingUserInfor}
+      userInfor={userInfor}
     />
   );
 };
 
-export default UserManagementAdd;
+export default UserProfileEditInfor;

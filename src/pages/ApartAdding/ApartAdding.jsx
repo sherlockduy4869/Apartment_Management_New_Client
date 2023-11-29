@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
+import { FaSellcast, FaKey, FaShoppingCart } from "react-icons/fa";
+import { IoMdConstruct } from "react-icons/io";
+
 import { Header } from "../../components";
 import "../../assets/ApartAdding.css";
-import { FaSellcast, FaKey } from "react-icons/fa";
-import { IoMdConstruct } from "react-icons/io";
-import { FiShoppingCart } from "react-icons/fi";
 import * as ROUTES from "../../constants/routes";
 
 const ApartAdding = () => {
@@ -14,7 +14,7 @@ const ApartAdding = () => {
         <div className="adding_apart_area">
           <div className="block_adding mb-4">
             <Link to={ROUTES.APART_FOR_RENT_ADD}>
-              <FiShoppingCart color="#7b74ec" />
+              <FaShoppingCart color="#7b74ec" />
               <span>Apart For Rent</span>
             </Link>
           </div>

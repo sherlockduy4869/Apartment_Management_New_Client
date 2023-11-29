@@ -10,7 +10,10 @@ export const APART_ADDING = "/apart-adding";
 export const USER_MANAGEMENT = "/user-management/";
 export const USER_ADDING = USER_MANAGEMENT + "add";
 export const USER_LIST = USER_MANAGEMENT + "list";
+
 export const USER_PROFILE = "/user-profile/";
+export const USER_PROFILE_EDIT_INFOR = USER_PROFILE + "edit-infor";
+export const USER_PROFILE_EDIT_PASSWORD = USER_PROFILE + "edit-password";
 /*-------------------------------------------------------------------------*/
 
 /*--------------------------APART-FOR-RENT--------------------------------*/

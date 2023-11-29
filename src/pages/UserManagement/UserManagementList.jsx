@@ -4,7 +4,7 @@ import {
   deleteUser,
   fetchAllUser,
   searchUser,
-} from "../../hooks/useUser";
+} from "../../hooks/useUserManagement";
 
 const UserManagementList = () => {
   const [listUser, setListUser] = useState([]);
