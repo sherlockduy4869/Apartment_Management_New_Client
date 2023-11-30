@@ -1,0 +1,11 @@
+.pagination_area{
+    display: flex;
+    justify-content: space-between;
+}
+
+.select_items_per_page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

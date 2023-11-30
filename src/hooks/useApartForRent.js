@@ -32,9 +32,14 @@ export const deleteApart = async (apart_code) => {
   }
 };
 
-export const fetchAllApart = async () => {
+export const fetchAllApart = async (itemsPerPage, currentPage) => {
   try {
-    const response = await axios.get(API.REQUEST_GET_ALL_APART_FOR_RENT);
+
+    const response = await axios.get(
+      API.REQUEST_GET_ALL_APART_FOR_RENT +
+        `${itemsPerPage}` +
+        `/${currentPage}`
+    );
 
     if (response.status === 200) {
       const listApart = response.data.data;
@@ -104,13 +109,9 @@ export const addingApart = async (apartInfor, navigate) => {
   }
 };
 
-export const editingApart = async (
-  apartInfor,
-  apart_code,
-  navigate
-) => {
+export const editingApart = async (apartInfor, apart_code, navigate) => {
   try {
-    console.log(apartInfor.price)
+    console.log(apartInfor.price);
     const response = await axios.put(
       API.REQUEST_EDITING_APART_FOR_RENT + apart_code,
       apartInfor
@@ -148,6 +149,14 @@ export const getAllStaticValue = async () => {
       const bedRoom = [];
       const areaApart = [];
       const statusFurniture = [];
+      const listItemsPerPage = [];
+
+      for (const key in allStaticValue.DisplayItemsPerPage) {
+        listItemsPerPage.push({
+          label: allStaticValue.DisplayItemsPerPage[key],
+          value: allStaticValue.DisplayItemsPerPage[key],
+        });
+      }
 
       for (const key in allStaticValue.StatusFurniture) {
         statusFurniture.push({
@@ -174,7 +183,30 @@ export const getAllStaticValue = async () => {
         bedRoom,
         areaApart,
         statusFurniture,
+        listItemsPerPage,
       };
+    }
+  } catch (err) {
+    console.log(err);
+    const message = Array.isArray(err.response?.data?.message)
+      ? err.response?.data?.message[0]
+      : err.response?.data?.message;
+    toast.error(`${message}`, {
+      theme: "light",
+    });
+    toast.clearWaitingQueue();
+  }
+};
+
+export const getTotallNumApart = async () => {
+  try {
+    const response = await axios.get(
+      API.REQUEST_GET_TOTAL_NUM_APART
+    );
+
+    if (response.status === 200) {
+        const totalNumApart = response.data.data;
+        return totalNumApart;
     }
   } catch (err) {
     console.log(err);
